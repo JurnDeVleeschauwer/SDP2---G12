@@ -1,6 +1,6 @@
 package exceptions;
 
-public class SdgException extends Exception{
+public class SdgException extends RuntimeException{
 	
 	   /**
 	 * 

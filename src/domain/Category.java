@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -11,7 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import exceptions.CategoryException;
-import persistence.CategoryMapper;
+import persistence.GenericMapper;
+import persistence.GenericMapperJpa;
 
 @Entity
 @Table
@@ -29,7 +31,7 @@ public class Category implements Serializable{
 	private boolean showCategory;
 	
 	@Transient
-	private CategoryMapper categoryMapper = new CategoryMapper(); 
+	private GenericMapperJpa<Category> categoryMapper = new GenericMapperJpa<Category>(Category.class); 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -108,16 +110,28 @@ public class Category implements Serializable{
 	
 	public void addCategory(Category c) {
 		
-		categoryMapper.addCategory(c);
+		categoryMapper.insert(c);
 		
 	}
 	
 	
 	public void removeCategory(Category c) {
 		
-		categoryMapper.removeCategory(c); 
+		categoryMapper.delete(c);
 	}
 	
+	public Category getCategory(int categoryId) {
+		return categoryMapper.get(categoryId);
+	}
+	
+	public void updateCategory(Category category) {
+		categoryMapper.update(category); 
+	}
+
+	public void deleteCategory(Category category) {
+		categoryMapper.delete(category);
+		
+	}
 	
 	
 

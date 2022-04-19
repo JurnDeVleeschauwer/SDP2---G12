@@ -16,7 +16,7 @@ import exceptions.SdgException;
 
 @Entity
 @Table(name = "sdg")
-public class SdgComp implements Serializable, SdgInterface {
+public class SdgComp extends SdgAbstract implements Serializable  {
 	
 	
 	
@@ -27,12 +27,14 @@ public class SdgComp implements Serializable, SdgInterface {
 	private List<SdgChild> sdgs = new ArrayList<>(); 
 	
 	
+	@Override
 	public void add(SdgChild sdg) throws SdgException {
 		sdgs.add(sdg);
 
 		
 	}
 	
+	@Override
 	public void remove(SdgChild sdg) throws SdgException {
 
 		sdgs.remove(sdg);
@@ -40,10 +42,17 @@ public class SdgComp implements Serializable, SdgInterface {
 		
 	}
 	
+	
+	@Override
 	public SdgChild getChild(SdgChild sdg) throws SdgException {
 		
 	 return sdgs.stream().filter((currentSdg) -> currentSdg == sdg).collect(Collectors.toList()).get(0);
 		
+	}
+	
+	
+	public int getId() {
+		return id; 
 	}
 	
 	

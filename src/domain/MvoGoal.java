@@ -1,13 +1,20 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import persistence.MvoMapper;
+import persistence.GenericMapperJpa;
 
 @Entity
+@Table
 public class MvoGoal implements Serializable {
 	/**
 	 * 
@@ -16,24 +23,31 @@ public class MvoGoal implements Serializable {
 	@Id
 	private int id;
 	private int value;
-	private int sdgID;
+	@OneToOne(targetEntity = Datasource.class,  cascade = CascadeType.ALL)
 	private int datasourceID;
-	/*private int categoryID;*/
+	
+	@OneToMany(targetEntity = SdgComp.class, cascade = CascadeType.ALL)
+	private int sdgID;
 	private String icon;
 	private String mvoName;
 	
+	@Transient
+	private GenericMapperJpa<MvoGoal> mvoGoalMapper = new GenericMapperJpa<MvoGoal>(MvoGoal.class);
 
-	public MvoGoal(int id, int value, int sdgId, int datasourceID, String icon, String mvoName) {
+	public MvoGoal(int id, int value, SdgComp sdgComp, Datasource datasource, String icon, String mvoName) {
 		
 		setId(id);
-		setDatasourceID(datasourceID);
+		setDatasourceID(datasource);
 		setMvoName(mvoName);
 		setIcon(icon);
 		setValue(value);
-		setSdgID(sdgId);
+		setSdgID(sdgComp);
 		
 	}
 	
+	protected MvoGoal() {
+		
+	}
 	
 	public int getId() {
 		return id;
@@ -55,16 +69,17 @@ public class MvoGoal implements Serializable {
 		return sdgID;
 	}
 
-	public void setSdgID(int sdgID) {
-		this.sdgID = sdgID;
+	public void setSdgID(SdgComp sdgComp) {
+		this.sdgID = sdgComp.getId();
 	}
 
 	public int getDatasourceID() {
 		return datasourceID;
 	}
 
-	public void setDatasourceID(int datasourceID) {
-		this.datasourceID = datasourceID;
+	public void setDatasourceID(Datasource datasource) {
+		this.datasourceID = datasource.getId();
+		
 	}
 
 	public String getIcon() {
@@ -83,9 +98,41 @@ public class MvoGoal implements Serializable {
 		this.mvoName = mvoName;
 	}
 	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(datasourceID, icon, mvoName, sdgID, value);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MvoGoal other = (MvoGoal) obj;
+		return datasourceID == other.datasourceID && Objects.equals(icon, other.icon)
+				&& Objects.equals(mvoName, other.mvoName) && sdgID == other.sdgID && value == other.value;
+	}
+	
+	
 	public void addMvoGoal(MvoGoal g) {
 		
-		MvoMapper.add(g); 
+		mvoGoalMapper.insert(g); 
+	}
+	
+	public void removeMvoGoal(MvoGoal g) {
+		mvoGoalMapper.delete(g);
+	}
+	
+	public MvoGoal getMvoGoal(MvoGoal g) {
+		return mvoGoalMapper.get(g); 
+	}
+	
+	public void updateMvoGoal(MvoGoal g) {
+		mvoGoalMapper.update(g); 
 	}
 	
 

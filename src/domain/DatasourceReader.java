@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ReadDatasource {
+public class DatasourceReader {
 
 
 	public static <T> List<T> readFile(File file) throws FileNotFoundException {

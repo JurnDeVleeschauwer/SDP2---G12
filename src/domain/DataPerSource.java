@@ -1,9 +1,12 @@
 package domain;
 
 import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,13 +15,20 @@ import javax.persistence.Transient;
 @Entity
 public class DataPerSource<T> {
 
+	@Transient
 	private List<String> months = new ArrayList<>(); 
+	
+	@Transient
 	private List<T> data;
-	@Id
-	private int id;
 	
 	@Transient
 	private File f; 
+	
+	@Id
+	private int id;
+	private Map<String, Integer> dataSet = new HashMap<>(); 
+	
+
 	
 	public DataPerSource() {
 		populateMonths(months);
@@ -46,7 +56,13 @@ public class DataPerSource<T> {
 	public void populateData() throws FileNotFoundException {
 		
 		
-		data = ReadDatasource.readFile(f);
+		data = DatasourceReader.readFile(f);
+		
+		
+	}
+	
+	
+	public void populateDataSet(List<String> months, List<T> data)  {
 		
 		
 	}

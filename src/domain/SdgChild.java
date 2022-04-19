@@ -6,15 +6,32 @@ import javax.persistence.Entity;
 
 
 @Entity
-public class SdgChild implements SdgInterface, Serializable{
+public class SdgChild extends SdgAbstract implements Serializable{
 
 	
 	
-	public SdgChild(String name, int id, String description, String icon, int categoryID, int target) {
+	/**
+	 * 
+	 */
+	
+	
+	private static final long serialVersionUID = 1L;
+	private String name;
+	
+	private String id;
+	private String description;
+	private String icon;
+	private int categoryID;
+	private int target;
+	
+	
+	
+	public SdgChild(String name, String id, String description, String icon, int categoryID, int target) {
 
 		
 		
 	}
+	
 	
 
 }

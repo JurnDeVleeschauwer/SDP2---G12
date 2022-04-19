@@ -1,6 +1,6 @@
 package ui;
 
-import domain.DomainController;
+import domain.CategoryController;
 
 public class StartUp {
 
@@ -14,7 +14,7 @@ public class StartUp {
 	
 	
 	static void run() {
-		DomainController dc = new DomainController();
+		CategoryController dc = new CategoryController();
 		MultiLanguageApp app = new MultiLanguageApp(); 
 		
 		int languageChoice = app.chooseLanguage();
