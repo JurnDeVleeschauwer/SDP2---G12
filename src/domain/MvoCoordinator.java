@@ -27,7 +27,7 @@ public class MvoCoordinator implements Serializable {
 	private String password;
 
 	@Transient
-	private GenericMapperJpa<MvoCoordinator> MvoCoordinatorMapper = new GenericMapperJpa<MvoCoordinator>(MvoCoordinator.class); 
+	private GenericMapperJpa<MvoCoordinator> mvoCoordinatorMapper = new GenericMapperJpa<MvoCoordinator>(MvoCoordinator.class); 
 	
 	
 	public MvoCoordinator(String username, String password) {
@@ -66,14 +66,20 @@ public class MvoCoordinator implements Serializable {
 	}
 	
 	
-	public void updateMvoUser(MvoCoordinator mc) {
-		
-		MvoCoordinatorMapper.update(mc); 
+	
+	
+	public void updateMvoCoordinator(MvoCoordinator mvoCoordinatorToUpdate) {
+		mvoCoordinatorMapper.update(mvoCoordinatorToUpdate); 
+
+	}
+
+	public void deleteMvoCoordinator(MvoCoordinator mvoCoordinator) {
+		mvoCoordinatorMapper.insert(mvoCoordinator);
 		
 	}
-	
-	public void insertMvoUser(MvoCoordinator mc) {
-		MvoCoordinatorMapper.insert(mc);
+
+	public MvoCoordinator getMvoCoordinator(int mvoCoordinatorId) {
+		return mvoCoordinatorMapper.get(mvoCoordinatorMapper);
 	}
 	
 	

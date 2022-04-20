@@ -127,12 +127,17 @@ public class MvoGoal implements Serializable {
 		mvoGoalMapper.delete(g);
 	}
 	
-	public MvoGoal getMvoGoal(MvoGoal g) {
-		return mvoGoalMapper.get(g); 
+	public MvoGoal getMvoGoal(int mvoGoalId) {
+		return mvoGoalMapper.get(mvoGoalId); 
 	}
 	
 	public void updateMvoGoal(MvoGoal g) {
 		mvoGoalMapper.update(g); 
+	}
+
+	public void deleteMvoGoal(MvoGoal mvoGoal) {
+		mvoGoalMapper.delete(mvoGoal);
+		
 	}
 	
 

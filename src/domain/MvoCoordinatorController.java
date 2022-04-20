@@ -2,7 +2,7 @@ package domain;
 
 public class MvoCoordinatorController {
 	
-	/*
+	
 	private MvoCoordinator mvoCoord;
 	
 	public MvoCoordinatorController() {
@@ -28,6 +28,6 @@ public class MvoCoordinatorController {
 		mvoCoord.deleteMvoCoordinator(MvoCoordinator); 
 	}
 	
-	*/
+	
 
 }
