@@ -13,6 +13,7 @@ import domain.CategoryController;
  */
 public class HoofdPaneel extends BorderPane {
     private CategoryController dc;
+    private AanmeldPaneel aanmelden;
 
 
     /**
@@ -21,18 +22,27 @@ public class HoofdPaneel extends BorderPane {
      */
     public HoofdPaneel(CategoryController dc) {
         this.dc = dc;
-
+        
+        createPanelen();
         voegComponentenToe();
     }
 
     private void voegComponentenToe() {
+    	setCenter(aanmelden);
     }
 
     /**
      * 
      */
     public void createPanelen() {
-
+        this.aanmelden = new AanmeldPaneel(dc, this);
+    }
+    
+    /**
+     * toon AanmeldPaneel
+     */
+    public void toonAanmeldPaneel() {
+        setCenter(aanmelden);
     }
 
  
