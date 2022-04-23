@@ -14,6 +14,7 @@ import domain.CategoryController;
 public class HoofdPaneel extends BorderPane {
     private CategoryController dc;
     private AanmeldPaneel aanmelden;
+    private CategorieenPaneel categoriePaneel;
 
 
     /**
@@ -28,7 +29,7 @@ public class HoofdPaneel extends BorderPane {
     }
 
     private void voegComponentenToe() {
-    	setCenter(aanmelden);
+    	setCenter(categoriePaneel);
     }
 
     /**
@@ -36,6 +37,7 @@ public class HoofdPaneel extends BorderPane {
      */
     public void createPanelen() {
         this.aanmelden = new AanmeldPaneel(dc, this);
+        this.categoriePaneel=new CategorieenPaneel(this);
     }
     
     /**
@@ -44,7 +46,9 @@ public class HoofdPaneel extends BorderPane {
     public void toonAanmeldPaneel() {
         setCenter(aanmelden);
     }
-
+    public void toonCategoriePaneell() {
+        setCenter(categoriePaneel);
+    }
  
 
 }

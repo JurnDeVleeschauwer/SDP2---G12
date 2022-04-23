@@ -6,18 +6,20 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
 public class CategorieenPaneel extends GridPane {
 
 	private final HoofdPaneel hoofdPaneel;
+//	private final DomeinController domeinController;
 
-	public CategorieenPaneel(HoofdPaneel hoofdPaneel) {
+	public CategorieenPaneel(HoofdPaneel hoofdPaneel/* , DomeinController domeinController */) {
 		this.hoofdPaneel = hoofdPaneel;
-		// Domeincontroller TODO
+		// this.domeinController=domeinController
 
 		configureerGrid();
-		voegComponentenToe();
+		update();
 	}
 
 	private void configureerGrid() {
@@ -34,15 +36,46 @@ public class CategorieenPaneel extends GridPane {
 		getColumnConstraints().addAll(col1, col2);
 	}
 
-	Button categorieWijzigenButton = new Button("Categorie wijzigen");
-	Button categorieVerwijderenButton = new Button("Categorie verwijderen");
+	private void update() {
+		this.getChildren().clear();
 
-	private void voegComponentenToe() {
 
-		categorieWijzigenButton.setOnAction(this::wijzigCategorie);
-		categorieVerwijderenButton.setOnAction(this::verwijderCategorie);
-		add(categorieWijzigenButton, 0, 2, 1, 1);
-		add(categorieVerwijderenButton, 1, 2, 1, 1);
+		HBox categorieenBox = new HBox();
+		categorieenBox.setSpacing(30);
+		
+		/*for (List<String> lijstCategorieen: domeinController.getCategorieeen()) {
+			MenuItem verwijderCategorieMenuItem = new MenuItem("Verwijderen");
+			MenuItem wijzigCategorieMenuItem = new MenuItem("Wijzigen");
+			verwijderCategorieMenuItem.setOnAction(this::wijzigCategorie);
+			wijzigCategorieMenuItem.setOnAction(this::verwijderCategorie);
+			
+			MenuButton categorieMenuButton = new MenuButton(lijstCategorieen.get(0),null,verwijderCategorieMenuItem,wijzigCategorieMenuItem);
+			
+			
+		
+			categorieenBox.getChildren().add(categorieMenuButton);
+			
+		}*/
+		
+		
+
+
+		
+//		deletecat.setOnAction(new EventHandler<ActionEvent>() {
+//			
+//			@Override
+//			public void handle(ActionEvent arg0) {
+//				System.out.println("deleted");
+//		
+//			}
+//		});
+
+
+		
+		add(categorieenBox,0,2,1,1);
+		
+		
+		
 	}
 
 	public void wijzigCategorie(ActionEvent event) {
@@ -52,6 +85,5 @@ public class CategorieenPaneel extends GridPane {
 	public void verwijderCategorie(ActionEvent event) {
 
 	}
-	
-	
+
 }
