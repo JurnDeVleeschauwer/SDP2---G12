@@ -1,6 +1,7 @@
 package ui;
 
 import domain.CategoryController;
+import domain.DomeinController;
 import gui.HoofdPaneel;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -28,7 +29,7 @@ public class StartUp extends Application{
 	
 	@Override
 	public void start(Stage stage) {
-    	CategoryController dc = new CategoryController();
+    	DomeinController dc = new DomeinController();
         
 
         HoofdPaneel root = new HoofdPaneel(dc);
