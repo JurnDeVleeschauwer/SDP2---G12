@@ -1,6 +1,7 @@
 package gui;
 
 import domain.CategoryController;
+import domain.DomeinController;
 //import i18n.UITextHelper;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
@@ -22,17 +23,17 @@ import javafx.scene.text.Text;
   */
 public class AanmeldPaneel extends GridPane
 {
-    private final CategoryController domeinController;
+    private final DomeinController domeinController;
     private final HoofdPaneel hoofdPaneel;
 
     /**
      * 
-     * @param domeinController
+     * @param dc
      * @param hoofdPaneel
      */
-    public AanmeldPaneel(CategoryController domeinController, HoofdPaneel hoofdPaneel)
+    public AanmeldPaneel(DomeinController dc, HoofdPaneel hoofdPaneel)
     {
-        this.domeinController = domeinController;
+        domeinController = dc;
         this.hoofdPaneel = hoofdPaneel;
 
         

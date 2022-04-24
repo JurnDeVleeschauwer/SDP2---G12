@@ -1,22 +1,29 @@
 package gui;
 
+import domain.DomeinController;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 
 public class CategorieenPaneel extends GridPane {
 
 	private final HoofdPaneel hoofdPaneel;
-//	private final DomeinController domeinController;
+	private final DomeinController domeinController;
 
-	public CategorieenPaneel(HoofdPaneel hoofdPaneel/* , DomeinController domeinController */) {
+	public CategorieenPaneel(HoofdPaneel hoofdPaneel , DomeinController domeinController ) {
 		this.hoofdPaneel = hoofdPaneel;
-		// this.domeinController=domeinController
+		 this.domeinController=domeinController;
 
 		configureerGrid();
 		update();
@@ -40,14 +47,12 @@ public class CategorieenPaneel extends GridPane {
 		this.getChildren().clear();
 
 
-		HBox categorieenBox = new HBox();
-		categorieenBox.setSpacing(30);
 		
 		/*for (List<String> lijstCategorieen: domeinController.getCategorieeen()) {
 			MenuItem verwijderCategorieMenuItem = new MenuItem("Verwijderen");
 			MenuItem wijzigCategorieMenuItem = new MenuItem("Wijzigen");
-			verwijderCategorieMenuItem.setOnAction(this::wijzigCategorie);
-			wijzigCategorieMenuItem.setOnAction(this::verwijderCategorie);
+			verwijderCategorieMenuItem.setOnAction(this::verwijderCategorie);
+			wijzigCategorieMenuItem.setOnAction(this::wijzigCategorie);
 			
 			MenuButton categorieMenuButton = new MenuButton(lijstCategorieen.get(0),null,verwijderCategorieMenuItem,wijzigCategorieMenuItem);
 			
@@ -70,19 +75,58 @@ public class CategorieenPaneel extends GridPane {
 //			}
 //		});
 
-
+//
+//		MenuItem verwijderCategorieMenuItem = new MenuItem("Verwijderen");
+//		MenuItem wijzigCategorieMenuItem = new MenuItem("Wijzigen");
+//		verwijderCategorieMenuItem.setOnAction(this::verwijderCategorie);
+//		wijzigCategorieMenuItem.setOnAction(this::wijzigCategorie);
+//		
+//		MenuItem verwijderCategorieMenuItem2 = new MenuItem("Verwijderen");
+//		MenuItem wijzigCategorieMenuItem2 = new MenuItem("Wijzigen");
+//		verwijderCategorieMenuItem2.setOnAction(this::verwijderCategorie);
+//		wijzigCategorieMenuItem2.setOnAction(this::wijzigCategorie);
+//
+//		
+//		MenuButton categorieMenuButton = new MenuButton("testje",null,verwijderCategorieMenuItem,wijzigCategorieMenuItem);
+//
+//		MenuButton categorieMenuButton2 = new MenuButton("testje2",null,verwijderCategorieMenuItem2,wijzigCategorieMenuItem2);
+//		categorieenBox.getChildren().add(categorieMenuButton2);
+//
+//		categorieenBox.getChildren().add(categorieMenuButton);
+//
+//		VBox vboxtest = new VBox();
+//		Label testlabel=new Label("test");
+//		Button testbutton = new Button("click");
+//		testbutton.setOnAction((event)->{
+//			System.out.println( ((Node) event.getSource()).getParent().getParent().getChildrenUnmodifiable().indexOf(((Node) event.getSource()).getParent()) );
+//		});
+//		vboxtest.getChildren().addAll(testlabel,testbutton);
+//		categorieenBox.getChildren().add(vboxtest);
+//		
+//		
+//
+//		
+		HBox categorieenHBox = new CategorieenHBox(domeinController, hoofdPaneel);
 		
-		add(categorieenBox,0,2,1,1);
+		
+		add(categorieenHBox,0,2,1,1);
 		
 		
 		
 	}
 
 	public void wijzigCategorie(ActionEvent event) {
-
+		System.out.println(this.getChildren().indexOf(event.getSource()));
+		System.out.println(event.getSource());
+		MenuItem item = (MenuItem) event.getSource();
+		System.out.println(item);
+		
+		
 	}
 
 	public void verwijderCategorie(ActionEvent event) {
+		System.out.println(this.getChildren().indexOf(event.getSource()));
+		System.out.println(event.getSource());
 
 	}
 
