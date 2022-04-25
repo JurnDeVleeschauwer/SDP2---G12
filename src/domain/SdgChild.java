@@ -2,7 +2,13 @@ package domain;
 
 import java.io.Serializable;
 
+import javax.annotation.processing.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -18,17 +24,26 @@ public class SdgChild extends SdgAbstract implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String name;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
 	private String description;
 	private String icon;
+	
+	@ManyToOne(targetEntity = Category.class, cascade = CascadeType.PERSIST )
 	private int categoryID;
 	private int target;
+	@ManyToOne(targetEntity = SdgComp.class, cascade = CascadeType.MERGE)
+	private int sdgCompID; 
 	
 	
-	
-	public SdgChild(String name, String id, String description, String icon, int categoryID, int target) {
-
-		
+	public SdgChild(String name, String id, String description, String icon, Category category, SdgComp sdgComp, int target) {
+		setName(name);
+		setId(id);
+		setDescription(description);
+		setCategoryID(category);
+		setTarget(target); 
+		setSdgCompID(sdgComp); 
 		
 	}
 
@@ -88,8 +103,8 @@ public class SdgChild extends SdgAbstract implements Serializable{
 
 
 
-	public void setCategoryID(int categoryID) {
-		this.categoryID = categoryID;
+	public void setCategoryID(Category cat) {
+		this.categoryID = cat.getId(); 
 	}
 
 
@@ -104,6 +119,12 @@ public class SdgChild extends SdgAbstract implements Serializable{
 		this.target = target;
 	}
 	
+	public int getSdgCompID() {
+		return sdgCompID;
+	}
 	
+	public void setSdgCompID(SdgComp sdgComp) {
+		this.sdgCompID = sdgComp.getId();
+	}
 
 }

@@ -2,32 +2,32 @@ package domain;
 
 public class DatasourceController {
 
-	private Datasource datasource;
+	private DatasourceManager datasourceManager;
 	
 	public DatasourceController() {
-		datasource = new Datasource();
+		datasourceManager = new DatasourceManager();
 	}
 
 	public void addDatasource(String name, String yAxis, String xAxis, int year, int expectedGoal) {
 
 		Datasource data = new Datasource(name, yAxis, xAxis, year, expectedGoal );
-		datasource.addDatasource(data);
+		datasourceManager.addDatasource(data);
 	}
 
 	public void updateDatasource(int DatasourceId) {
 
 		Datasource datasourceToUpdate = getDatasource(DatasourceId);
 
-		datasource.updateDatasource(datasourceToUpdate);
+		datasourceManager.updateDatasource(datasourceToUpdate);
 	}
 
 	public Datasource getDatasource(int DatasourceId) {
 
-		return datasource.getDatasource(DatasourceId);
+		return datasourceManager.getDatasource(DatasourceId);
 	}
 
 	public void deleteDatasource(Datasource Datasource) {
-		datasource.deleteDatasource(Datasource);
+		datasourceManager.deleteDatasource(Datasource);
 	}
 
 }

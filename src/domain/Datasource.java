@@ -16,7 +16,6 @@ import persistence.GenericMapperJpa;
 @Table
 public class Datasource implements Serializable {
 	
-	private GenericMapperJpa<Datasource> datasourceMapper = new GenericMapperJpa<Datasource>(Datasource.class);
 	
 	
 	/**
@@ -115,26 +114,6 @@ public class Datasource implements Serializable {
 				&& Objects.equals(xAxis, other.xAxis) && Objects.equals(yAxis, other.yAxis) && year == other.year;
 	}
 
-	public void addDatasource(Datasource data) {
-		datasourceMapper.insert(data);
-		
-	}
-
-	public void updateDatasource(Datasource datasourceToUpdate) {
-		
-		datasourceMapper.update(datasourceToUpdate);
-	}
-
-	public Datasource getDatasource(int datasourceId) {
-		return datasourceMapper.get(datasourceId);
-	}
-
-	public void deleteDatasource(Datasource datasource) {
-		datasourceMapper.delete(datasource);
-		
-	}
-	
-	
 
 	
 	

@@ -68,19 +68,7 @@ public class MvoCoordinator implements Serializable {
 	
 	
 	
-	public void updateMvoCoordinator(MvoCoordinator mvoCoordinatorToUpdate) {
-		mvoCoordinatorMapper.update(mvoCoordinatorToUpdate); 
 
-	}
-
-	public void deleteMvoCoordinator(MvoCoordinator mvoCoordinator) {
-		mvoCoordinatorMapper.insert(mvoCoordinator);
-		
-	}
-
-	public MvoCoordinator getMvoCoordinator(int mvoCoordinatorId) {
-		return mvoCoordinatorMapper.get(mvoCoordinatorMapper);
-	}
 	
 	
 }

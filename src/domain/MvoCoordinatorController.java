@@ -3,10 +3,10 @@ package domain;
 public class MvoCoordinatorController {
 	
 	
-	private MvoCoordinator mvoCoord;
+	private MvoCoordinatorManager mvoCoord;
 	
 	public MvoCoordinatorController() {
-		mvoCoord = new MvoCoordinator(); 
+		mvoCoord = new MvoCoordinatorManager(); 
 	}
 	
 	

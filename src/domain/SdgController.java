@@ -11,11 +11,9 @@ public class SdgController {
 		sdg = new SdgComp(); 
 	}
 	
-	public void addSdg(int id, String name, List<SdgChild> sdgs) {
+	public void addSdg(int id, String name, List<SdgChild> sdgs, Category category) {
 		
-		
-		
-		SdgComp sdgComp = new SdgComp(id, name, sdgs); 
+		SdgComp sdgComp = new SdgComp(id, name, sdgs, category); 
 		sdg.addSdgJpa(sdgComp); 
 	}
 	

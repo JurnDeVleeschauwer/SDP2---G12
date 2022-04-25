@@ -1,7 +1,7 @@
 package domain;
 
 import java.io.Serializable;
-
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -108,31 +108,9 @@ public class Category implements Serializable{
 	}
 
 	
-	public void addCategory(Category c) {
-		
-		categoryMapper.insert(c);
-		
-	}
-	
-	
-	public void removeCategory(Category c) {
-		
-		categoryMapper.delete(c);
-	}
-	
-	public Category getCategory(int categoryId) {
-		return categoryMapper.get(categoryId);
-	}
-	
-	public void updateCategory(Category category) {
-		categoryMapper.update(category); 
-	}
 
-	public void deleteCategory(Category category) {
-		categoryMapper.delete(category);
-		
-	}
 	
+
 	
 
 }

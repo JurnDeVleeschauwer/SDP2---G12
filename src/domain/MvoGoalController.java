@@ -3,33 +3,33 @@ package domain;
 public class MvoGoalController {
 	
 	
-	private MvoGoal goal;
+	private MvoGoalChild goal;
 	
 	public MvoGoalController() {
-		goal = new MvoGoal(); 
+		goal = new MvoGoalChild(); 
 	}
 	
 	public void addMvoGoal(int id, int value, SdgComp sdgComp, Datasource datasource, String icon, String mvoName) {
 		
-		MvoGoal goal = new MvoGoal( id,  value,  sdgComp,  datasource,  icon,  mvoName); 
+		MvoGoalChild goal = new MvoGoalChild( id,  value,  sdgComp,  datasource,  icon,  mvoName); 
 		goal.addMvoGoal(goal);
 	}
 	
 	public void updateMvoGoal(int MvoGoalId) {
 		
-		MvoGoal MvoGoalToUpdate = getMvoGoal(MvoGoalId); 
+		MvoGoalChild MvoGoalToUpdate = getMvoGoal(MvoGoalId); 
 		
 		goal.updateMvoGoal(MvoGoalToUpdate);
 	}
 	
 	
-	public MvoGoal getMvoGoal(int MvoGoalId) {
+	public MvoGoalChild getMvoGoal(int MvoGoalId) {
 		
 		return goal.getMvoGoal(MvoGoalId);
 	}
 	
 	
-	public void deleteMvoGoal(MvoGoal MvoGoal) {
+	public void deleteMvoGoal(MvoGoalChild MvoGoal) {
 		goal.deleteMvoGoal(MvoGoal); 
 	}
 	

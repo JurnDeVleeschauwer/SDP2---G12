@@ -14,27 +14,33 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import exceptions.MvoGoalException;
 import exceptions.SdgException;
 import persistence.GenericMapperJpa;
 
 
 @Entity
 @Table(name = "sdg")
-public class SdgComp extends SdgAbstract implements Serializable  {
+public class MvoGoalComp extends MvoGoalAbstract implements Serializable  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Transient
-	private GenericMapperJpa<SdgAbstract> sdgMapper = new GenericMapperJpa<>(SdgAbstract.class); 
+	private GenericMapperJpa<MvoGoalAbstract> mvoGoalMapper = new GenericMapperJpa<>(MvoGoalAbstract.class); 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private List<SdgChild> sdgs = new ArrayList<>(); 
+	private List<MvoGoalChild> mvoGoals = new ArrayList<>(); 
 	
 	@ManyToOne(targetEntity = Category.class, cascade = CascadeType.PERSIST)
 	private int categoryID;  
 
 	
-	public SdgComp(int id, String name, List<SdgChild> sdgs, Category cat) {
+	public MvoGoalComp(int id, String name, List<MvoGoalChild> sdgs, Category cat) {
 		setId(id);
 		setName(name);
 		setSdgs(sdgs);
@@ -42,32 +48,32 @@ public class SdgComp extends SdgAbstract implements Serializable  {
 		
 	}
 	
-	public SdgComp() {
+	public MvoGoalComp() {
 		
 	}
 
 
 	
 	@Override
-	public void add(SdgAbstract sdg) throws SdgException {
-		sdgs.add((SdgChild) sdg);
+	public void add(MvoGoalAbstract mvoGoal) throws MvoGoalException {
+		mvoGoals.add((MvoGoalChild) mvoGoal);
 
 		
 	}
 	
 	@Override
-	public void remove(SdgAbstract sdg) throws SdgException {
+	public void remove(MvoGoalAbstract mvoGoal) throws MvoGoalException {
 		
-		sdgs.remove(sdg);
+		mvoGoals.remove(mvoGoal);
 
 		
 	}
 	
 	
 	@Override
-	public SdgChild getChild(SdgAbstract sdg) throws SdgException {
+	public MvoGoalChild getChild(MvoGoalAbstract sdg) throws MvoGoalException {
 		
-	 return sdgs.stream().filter((currentSdg) -> currentSdg == sdg).collect(Collectors.toList()).get(0);
+	 return mvoGoals.stream().filter((currentSdg) -> currentSdg == sdg).collect(Collectors.toList()).get(0);
 		
 	}
 	
@@ -85,12 +91,12 @@ public class SdgComp extends SdgAbstract implements Serializable  {
 		this.name = name;
 	}
 
-	public List<SdgChild> getSdgs() {
-		return sdgs;
+	public List<MvoGoalChild> getSdgs() {
+		return mvoGoals;
 	}
 
-	public void setSdgs(List<SdgChild> sdgs) {
-		this.sdgs = sdgs;
+	public void setSdgs(List<MvoGoalChild> mvoGoals) {
+		this.mvoGoals = mvoGoals;
 	}
 
 	public void setId(int id) {
@@ -98,18 +104,18 @@ public class SdgComp extends SdgAbstract implements Serializable  {
 	}
 
 	
-	public void addSdgJpa(SdgComp comp) {
-		sdgMapper.insert(comp);
+	public void addSdgJpa(MvoGoalComp comp) {
+		mvoGoalMapper.insert(comp);
 		
 	}
 	
-	public void deleteSdg(SdgComp sdgComp) {
-		sdgMapper.delete(sdgComp);
+	public void deleteSdg(MvoGoalComp sdgComp) {
+		mvoGoalMapper.delete(sdgComp);
 		
 	}
 	
-	public SdgComp getSdgJpa(int sdgId) {
-		return (SdgComp) sdgMapper.get(sdgId); 
+	public MvoGoalComp getSdgJpa(int sdgId) {
+		return (MvoGoalComp) mvoGoalMapper.get(sdgId); 
 		
 	}
 	
