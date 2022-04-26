@@ -27,15 +27,15 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int value;
-	@OneToOne(targetEntity = Datasource.class,  cascade = CascadeType.ALL)
-	private int datasourceID;
+	@OneToOne(cascade = CascadeType.PERSIST)
+	private Datasource datasource; 
 	
-	@OneToMany(targetEntity = SdgComp.class, cascade = CascadeType.ALL)
-	private int sdgID;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sdgcomp")
+	private SdgComp sdgComp;
 	private String icon;
 	private String mvoName;
-	@ManyToOne(targetEntity = Category.class, cascade = CascadeType.PERSIST)
-	private int categoryID;
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Category category;
 	@Transient
 	private GenericMapperJpa<MvoGoalChild> mvoGoalMapper = new GenericMapperJpa<MvoGoalChild>(MvoGoalChild.class);
 
@@ -70,20 +70,20 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 		this.value = value;
 	}
 
-	public int getSdgID() {
-		return sdgID;
+	public SdgComp getSdgID() {
+		return sdgComp;
 	}
 
 	public void setSdgID(SdgComp sdgComp) {
-		this.sdgID = sdgComp.getId();
+		this.sdgComp = sdgComp;
 	}
 
-	public int getDatasourceID() {
-		return datasourceID;
+	public Datasource getDatasource() {
+		return datasource;
 	}
 
 	public void setDatasourceID(Datasource datasource) {
-		this.datasourceID = datasource.getId();
+		this.datasource = datasource;
 		
 	}
 
@@ -106,7 +106,7 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(datasourceID, icon, mvoName, sdgID, value);
+		return Objects.hash(datasource, icon, mvoName, sdgComp, value);
 	}
 
 	@Override
@@ -118,8 +118,8 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		MvoGoalChild other = (MvoGoalChild) obj;
-		return datasourceID == other.datasourceID && Objects.equals(icon, other.icon)
-				&& Objects.equals(mvoName, other.mvoName) && sdgID == other.sdgID && value == other.value;
+		return datasource == other.datasource && Objects.equals(icon, other.icon)
+				&& Objects.equals(mvoName, other.mvoName) && sdgComp == other.sdgComp && value == other.value;
 	}
 	
 	

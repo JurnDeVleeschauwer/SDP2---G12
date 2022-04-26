@@ -37,9 +37,7 @@ public class DatasourceManager {
 		datasourceMapper.delete(category);
 		
 	}
-	
-
-	
+		
 	public List<Datasource> getAllDatasources() {
 		return datasources; 
 	}
@@ -49,6 +47,7 @@ public class DatasourceManager {
 		datasources.addAll(datasourceMapper.findAll()); 
 
 	}
+	
 
 	
 	

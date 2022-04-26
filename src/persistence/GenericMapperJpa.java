@@ -34,7 +34,6 @@ public class GenericMapperJpa<T> implements GenericMapper<T> {
 
     @Override
     public List<T> findAll() {
-        //return em.createNamedQuery(type.getName()+".findAll", type).getResultList();
         return em.createQuery("select entity from " + type.getName() + " entity", type).getResultList();
     }
 
@@ -57,6 +56,7 @@ public class GenericMapperJpa<T> implements GenericMapper<T> {
     @Override
     public void insert(T object) {
         em.persist(object);
+        em.flush();
     }
 
     @Override

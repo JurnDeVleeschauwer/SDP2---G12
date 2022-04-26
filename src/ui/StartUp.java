@@ -1,6 +1,9 @@
 package ui;
 
 import domain.CategoryController;
+import domain.MvoCoordinator;
+import domain.MvoCoordinatorController;
+import persistence.GenericMapperJpa;
 
 public class StartUp {
 
@@ -14,12 +17,31 @@ public class StartUp {
 	
 	
 	static void run() {
-		CategoryController dc = new CategoryController();
+		
+		/*
+		 * Vergeet Deze 3 niet voor elke transactie (Was ze zelf vergeten)
+		 * GenericMapperJpa.startTransaction();
+		 *	GenericMapperJpa.commitTransaction();
+		 *	GenericMapperJpa.closePersistency(); 
+		 */ 
+		
+		MvoCoordinatorController mvoC = new MvoCoordinatorController();
 		MultiLanguageApp app = new MultiLanguageApp(); 
 		
-		int languageChoice = app.chooseLanguage();
+		  GenericMapperJpa.startTransaction();
+		  
+			MvoCoordinator coord = mvoC.login("YorbEen", "123123"); 
+			System.out.println(coord.getUsername() + "" + coord.getPassword());
+
+		  
+		 GenericMapperJpa.commitTransaction();
+		 GenericMapperJpa.closePersistency(); 
 		
-		System.out.println(app.translate(languageChoice, "LangTest"));
+
+		
+		// int languageChoice = app.chooseLanguage();
+		
+
 		
 	}
 

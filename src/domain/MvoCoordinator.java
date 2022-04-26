@@ -13,7 +13,7 @@ import javax.persistence.Transient;
 import persistence.GenericMapperJpa;
 
 @Entity
-@Table(name = "MvoAccount")
+@Table(name = "mvoaccount")
 public class MvoCoordinator implements Serializable {
 	
 	/**
@@ -40,12 +40,31 @@ public class MvoCoordinator implements Serializable {
 		
 	}
 	
-	private void setUsername(String username) {
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+
+	
+	
+	public void setUsername(String username) {
 		this.username = username;
 	}
 	
-	private void setPassword(String password) {
+	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 
 	@Override
@@ -64,9 +83,8 @@ public class MvoCoordinator implements Serializable {
 		MvoCoordinator other = (MvoCoordinator) obj;
 		return Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
-	
-	
-	
+
+
 	
 
 	

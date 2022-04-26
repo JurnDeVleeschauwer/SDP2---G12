@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -28,17 +29,19 @@ public class SdgComp extends SdgAbstract implements Serializable  {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	
+	@OneToMany(mappedBy = "sdgchild")
 	private List<SdgChild> sdgs = new ArrayList<>(); 
 	
-	@ManyToOne(targetEntity = Category.class, cascade = CascadeType.PERSIST)
-	private int categoryID;  
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Category category;  
 
 	
 	public SdgComp(int id, String name, List<SdgChild> sdgs, Category cat) {
 		setId(id);
 		setName(name);
 		setSdgs(sdgs);
-		setCategoryID(cat);
+		setCategory(cat);
 		
 	}
 	
@@ -113,12 +116,12 @@ public class SdgComp extends SdgAbstract implements Serializable  {
 		
 	}
 	
-	public int getCategoryID() {
-		return categoryID;
+	public Category getCategory() {
+		return category;
 	}
 	
-	public void setCategoryID(Category cat) {
-		this.categoryID = cat.getId(); 
+	public void setCategory(Category cat) {
+		this.category = cat;
 	}
 	
 }

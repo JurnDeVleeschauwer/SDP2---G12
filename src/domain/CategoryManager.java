@@ -47,7 +47,5 @@ public class CategoryManager {
 		categoryMapper.insert(c);
 		
 	}
-	
-	
 
 }

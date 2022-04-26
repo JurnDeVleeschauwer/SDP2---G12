@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import persistence.GenericMapperJpa;
+import persistence.MvoCoordinatorMapper;
 
 public class MvoCoordinatorManager {
 	
 	private List<MvoCoordinator> mvoCoordinator; 
-	private GenericMapperJpa<MvoCoordinator> mvoCoordinatorMapper = new GenericMapperJpa<>(MvoCoordinator.class); 
+	private MvoCoordinatorMapper<MvoCoordinator> mvoCoordinatorMapper = new MvoCoordinatorMapper<MvoCoordinator>(MvoCoordinator.class); 
 	
 	
 	public MvoCoordinatorManager() {
@@ -21,12 +22,23 @@ public class MvoCoordinatorManager {
 	}
 
 	public void deleteMvoCoordinator(MvoCoordinator mvoCoordinator) {
-		mvoCoordinatorMapper.insert(mvoCoordinator);
+		mvoCoordinatorMapper.delete(mvoCoordinator);
 		
 	}
 
 	public MvoCoordinator getMvoCoordinator(int mvoCoordinatorId) {
-		return mvoCoordinatorMapper.get(mvoCoordinatorMapper);
+		return (MvoCoordinator) mvoCoordinatorMapper.get(mvoCoordinatorId);
 	}
+
+	public MvoCoordinator getMvoCoordinator(String username, String password) {
+		return mvoCoordinatorMapper.get(username, password ); 
+	}
+	
+	public void createMvoCoordinator(MvoCoordinator mvoCoordinator) {
+	
+		mvoCoordinatorMapper.insert(mvoCoordinator); 
+
+	}
+	
 
 }

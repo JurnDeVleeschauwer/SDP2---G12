@@ -102,22 +102,6 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable  {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	
-	public void addSdgJpa(MvoGoalComp comp) {
-		mvoGoalMapper.insert(comp);
-		
-	}
-	
-	public void deleteSdg(MvoGoalComp sdgComp) {
-		mvoGoalMapper.delete(sdgComp);
-		
-	}
-	
-	public MvoGoalComp getSdgJpa(int sdgId) {
-		return (MvoGoalComp) mvoGoalMapper.get(sdgId); 
-		
-	}
 	
 	public int getCategoryID() {
 		return categoryID;
