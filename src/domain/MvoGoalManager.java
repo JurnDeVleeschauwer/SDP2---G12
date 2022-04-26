@@ -7,12 +7,12 @@ import persistence.GenericMapperJpa;
 
 public class MvoGoalManager {
 	
-	private List<MvoGoalComp> mvoGoals;
-	private GenericMapperJpa<MvoGoalComp> mvoGoalMapper = new GenericMapperJpa<MvoGoalComp>(MvoGoalComp.class); 
+	private List<MvoGoalAbstract> mvoGoals;
+	private GenericMapperJpa<MvoGoalAbstract> mvoGoalMapper = new GenericMapperJpa<MvoGoalAbstract>(MvoGoalAbstract.class); 
 
 	
 	public MvoGoalManager() {
-		mvoGoals = new ArrayList<MvoGoalComp>(); 
+		mvoGoals = new ArrayList<MvoGoalAbstract>(); 
 	}
 	
 	
@@ -21,22 +21,24 @@ public class MvoGoalManager {
 	}
 	
 	
-	public void addSdgJpa(MvoGoalComp comp) {
+	public void updateMvoGoal(MvoGoalAbstract comp) {
+		mvoGoalMapper.update(comp); 
+	}
+	
+	public void addMvoGoal(MvoGoalAbstract comp) {
 		mvoGoalMapper.insert(comp);
 		
 	}
 	
-	public void deleteSdg(MvoGoalComp sdgComp) {
-		mvoGoalMapper.delete(sdgComp);
+	public void deleteMvoGoal(MvoGoalAbstract comp) {
+		mvoGoalMapper.delete(comp);
 		
 	}
 	
-	public MvoGoalComp getSdgJpa(int sdgId) {
-		return (MvoGoalComp) mvoGoalMapper.get(sdgId); 
+	public MvoGoalComp getMvoGoal(int mvoGoalId) {
+		return (MvoGoalComp) mvoGoalMapper.get(mvoGoalId); 
 		
 	}
 	
-	public void closePersistency() {
-		GenericMapperJpa.closePersistency();
-	}
+
 }

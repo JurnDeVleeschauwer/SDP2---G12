@@ -17,13 +17,13 @@ public class MvoGoalController {
 	
 	public void updateMvoGoal(int MvoGoalId) {
 		
-		MvoGoalChild MvoGoalToUpdate = getMvoGoal(MvoGoalId); 
+		MvoGoalAbstract MvoGoalToUpdate = getMvoGoal(MvoGoalId); 
 		
 		mvoGoalManager.updateMvoGoal(MvoGoalToUpdate);
 	}
 	
 	
-	public MvoGoalChild getMvoGoal(int MvoGoalId) {
+	public MvoGoalAbstract getMvoGoal(int MvoGoalId) {
 		
 		return mvoGoalManager.getMvoGoal(MvoGoalId);
 	}

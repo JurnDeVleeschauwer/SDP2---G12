@@ -2,37 +2,38 @@ package domain;
 
 import java.util.List;
 
+import persistence.GenericMapperJpa;
+
 public class SdgController {
 	
-	
-	private SdgAbstract sdg;
+	SdgManager sdgManager = new SdgManager(); 
 	
 	public SdgController() {
-		sdg = new SdgComp(); 
+		sdgManager = new SdgManager(); 
 	}
 	
 	public void addSdg(int id, String name, List<SdgChild> sdgs, Category category) {
 		
 		SdgComp sdgComp = new SdgComp(id, name, sdgs, category); 
-		sdg.addSdgJpa(sdgComp); 
+		sdgManager.addSdgJpa(sdgComp); 
 	}
 	
 	public void updateSdg(int sdgId) {
 		
 		SdgComp sdgCompToUpdate = getSdg(sdgId); 
 		
-		sdg.updateSdg(sdgCompToUpdate);
+		sdgManager.updateSdg(sdgCompToUpdate);
 	}
 	
 	
 	public SdgComp getSdg(int categoryId) {
 		
-		return sdg.getSdgJpa(categoryId);
+		return sdgManager.getSdgJpa(categoryId);
 	}
 	
 	
 	public void deleteSdg(SdgComp sdgComp) {
-		((SdgComp) sdg).deleteSdg(sdgComp); 
+		 sdgManager.deleteSdg(sdgComp); 
 	}
 	
 	

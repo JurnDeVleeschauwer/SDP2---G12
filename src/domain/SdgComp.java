@@ -22,15 +22,13 @@ import persistence.GenericMapperJpa;
 @Entity
 @Table(name = "sdg")
 public class SdgComp extends SdgAbstract implements Serializable  {
-	@Transient
-	private GenericMapperJpa<SdgAbstract> sdgMapper = new GenericMapperJpa<>(SdgAbstract.class); 
-	
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	
-	@OneToMany(mappedBy = "sdgchild")
+	@OneToMany(mappedBy = "sdgchild", cascade = CascadeType.MERGE)
 	private List<SdgChild> sdgs = new ArrayList<>(); 
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
@@ -101,20 +99,7 @@ public class SdgComp extends SdgAbstract implements Serializable  {
 	}
 
 	
-	public void addSdgJpa(SdgComp comp) {
-		sdgMapper.insert(comp);
-		
-	}
-	
-	public void deleteSdg(SdgComp sdgComp) {
-		sdgMapper.delete(sdgComp);
-		
-	}
-	
-	public SdgComp getSdgJpa(int sdgId) {
-		return (SdgComp) sdgMapper.get(sdgId); 
-		
-	}
+
 	
 	public Category getCategory() {
 		return category;
