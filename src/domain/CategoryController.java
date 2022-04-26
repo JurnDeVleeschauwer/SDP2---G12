@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 public class CategoryController {
 	
 	
@@ -33,6 +35,8 @@ public class CategoryController {
 		cm.deleteCategory(category); 
 	}
 	
-	
+	public List<Category> getAll() {
+		return cm.getAllCategories(); 
+	}
 
 }

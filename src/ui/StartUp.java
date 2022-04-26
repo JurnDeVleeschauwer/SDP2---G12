@@ -1,6 +1,8 @@
 package ui;
 
 import domain.CategoryController;
+import domain.Datasource;
+import domain.DatasourceReader;
 import domain.MvoCoordinator;
 import domain.MvoCoordinatorController;
 import persistence.GenericMapperJpa;
@@ -28,14 +30,7 @@ public class StartUp {
 		MvoCoordinatorController mvoC = new MvoCoordinatorController();
 		MultiLanguageApp app = new MultiLanguageApp(); 
 		
-		  GenericMapperJpa.startTransaction();
-		  
-			MvoCoordinator coord = mvoC.login("YorbEen", "123123"); 
-			System.out.println(coord.getUsername() + "" + coord.getPassword());
-
-		  
-		 GenericMapperJpa.commitTransaction();
-		 GenericMapperJpa.closePersistency(); 
+		DatasourceReader r = new DatasourceReader(); 
 		
 
 		

@@ -13,6 +13,7 @@ public class CategoryManager {
 	
 	public CategoryManager() {
 		categories = new ArrayList<>();
+		populateList();
 	}
 	
 	public void removeCategory(Category c) {
