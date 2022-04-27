@@ -4,7 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
 	<class>domain.Category</class>
-<<<<<<< HEAD
+
 	<!-- <class>domain.CategoryController</class>
 	<class>domain.DataPerSource</class>
 	<class>domain.Datasource</class>
@@ -18,11 +18,7 @@
 	<class>domain.SdgChild</class>
 	<class>domain.SdgComp</class>
 	<class>domain.SdgController</class>-->
-	
-	
-=======
 	<class>domain.MvoCoordinator</class>
->>>>>>> master
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/fluvius?serverTimezone=UTC"/>

@@ -52,7 +52,7 @@ public class CategorieenHBox extends HBox{
 
 		public void wijzigCategorie(ActionEvent event) {
 
-			categoryController.wijzigCategorie(this.getChildren().indexOf(((Node) event.getSource()).getParent()));			// this.getChildren().indexOf(((Node) event.getSource()).getParent() geeft index van de categorie waarin de button geklikt werd
+			//categoryController.wijzigCategorie(this.getChildren().indexOf(((Node) event.getSource()).getParent()));			// this.getChildren().indexOf(((Node) event.getSource()).getParent() geeft index van de categorie waarin de button geklikt werd
 
 			
 			
@@ -66,7 +66,7 @@ public class CategorieenHBox extends HBox{
 			
 			Optional<ButtonType> result = alert.showAndWait();
 			if(result.isPresent() && result.get()==ButtonType.OK) {
-				categoryController.verwijderCategorie(this.getChildren().indexOf(((Node) event.getSource()).getParent()));			// this.getChildren().indexOf(((Node) event.getSource()).getParent() geeft index van de categorie waarin de button geklikt werd
+				//categoryController.verwijderCategorie(this.getChildren().indexOf(((Node) event.getSource()).getParent()));			// this.getChildren().indexOf(((Node) event.getSource()).getParent() geeft index van de categorie waarin de button geklikt werd
 
 			}
 

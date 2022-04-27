@@ -37,7 +37,7 @@ public class HoofdPaneel extends BorderPane {
      * 
      */
     public void createPanelen() {
-        this.aanmelden = new AanmeldPaneel(categorieController, this);
+       // this.aanmelden = new AanmeldPaneel(categorieController, this);
         this.categoriePaneel=new CategorieenPaneel(this, new CategoryController());
     }
     
