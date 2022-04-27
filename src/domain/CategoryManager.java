@@ -31,7 +31,7 @@ public class CategoryManager {
 
 	public void deleteCategory(int index) {
 		categoryMapper.delete(categories.get(index));
-		
+		updateList();
 	}
 	
 	public void populateList() {
@@ -47,6 +47,16 @@ public class CategoryManager {
 	
 	public List<Category> getAllCategories() {
 		return categories; 
+	}
+	
+	public List<List<String>> getCategoriesAsStringList() {
+		List<List<String>> lijst = new ArrayList<>();
+		
+		for(Category category : categories) {
+			lijst.add(category.getAsStringList());
+		}
+		
+		return lijst; 
 	}
 	
 	public void addCategory(Category c) {

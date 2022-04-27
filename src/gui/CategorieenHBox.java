@@ -75,8 +75,8 @@ public class CategorieenHBox extends HBox{
 			
 			Optional<ButtonType> result = alert.showAndWait();
 			if(result.isPresent() && result.get()==ButtonType.OK) {
-				//categoryController.verwijderCategorie(this.getChildren().indexOf(((Node) event.getSource()).getParent()));			// this.getChildren().indexOf(((Node) event.getSource()).getParent() geeft index van de categorie waarin de button geklikt werd
-
+				categoryController.deleteCategory(this.getChildren().indexOf(((Node) event.getSource()).getParent()));			// this.getChildren().indexOf(((Node) event.getSource()).getParent() geeft index van de categorie waarin de button geklikt werd
+				update();
 			}
 
 

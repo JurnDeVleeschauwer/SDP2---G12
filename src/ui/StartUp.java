@@ -36,10 +36,9 @@ public class StartUp extends Application{
 	
 	@Override
 	public void start(Stage stage) {
-    	CategoryController categoryController= new CategoryController();
-        
 
-        HoofdPaneel root = new HoofdPaneel(categoryController);
+
+        HoofdPaneel root = new HoofdPaneel();
 
         Scene scene = new Scene(root, 800, 800);
 

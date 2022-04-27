@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -51,6 +52,17 @@ public class Category implements Serializable{
 	//Getters, Setters, HashEqual
 	public String getName() {
 		return name;
+	}
+	
+	public List<String> getAsStringList(){
+		List<String> lijst = new ArrayList<>();
+		lijst.add(name);
+		lijst.add(icon);
+		lijst.add(Integer.toString(id));
+		lijst.add(Boolean.toString(showCategory));
+		
+		return lijst;
+		
 	}
 
 

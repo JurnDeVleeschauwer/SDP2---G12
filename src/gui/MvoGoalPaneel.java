@@ -56,7 +56,7 @@ import javafx.scene.layout.GridPane;
 		private void maakGrid() {
 			getChildren().clear();
 			
-			MvoGoalComp mvoGoal = new MvoGoalComp(1, "gerge", new ArrayList<>(), new Category("rfezrg", "rfezger", 2, true));//(MvoGoalComp) mvoGoalController.getMvoGoal(this.id);
+			MvoGoalComp mvoGoal = new MvoGoalComp(1, "gerge", new ArrayList<>(), new Category("rfezrg", "rfezger", true));//(MvoGoalComp) mvoGoalController.getMvoGoal(this.id);
 			
 			add( new Label(Integer.toString(mvoGoal.getId())), 1, 1);
 			add( new Label(mvoGoal.getCategory().toString()), 2, 1);

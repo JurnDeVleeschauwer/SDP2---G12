@@ -57,7 +57,7 @@ import javafx.scene.layout.GridPane;
 		private void maakGrid() {
 			getChildren().clear();
 			
-			SdgComp sdg = new SdgComp(1, "gerge", new ArrayList<>(), new Category("rfezrg", "rfezger", 2, true));//(SdgComp) sdgController.getSdg(this.id);
+			SdgComp sdg = new SdgComp(1, "gerge", new ArrayList<>(), new Category("rfezrg", "rfezger", true));//(SdgComp) sdgController.getSdg(this.id);
 			
 			Label id = new Label(Integer.toString(sdg.getId()));
 			add(id, 1, 1);

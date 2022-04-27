@@ -15,7 +15,7 @@ import domain.CategoryController;
  *
  */
 public class HoofdPaneel extends BorderPane {
-    private final CategoryController categorieController;
+    private CategoryController categorieController;
     private AanmeldPaneel aanmelden;
     private CategorieenPaneel categoriePaneel;
     private MvoGoalPaneel mvoGoalPaneel;
@@ -28,8 +28,7 @@ public class HoofdPaneel extends BorderPane {
      * 
      * @param CategoryController
      */
-    public HoofdPaneel(CategoryController categorieController) {
-        this.categorieController = categorieController;
+    public HoofdPaneel() {
         
         createPanelen();
         voegComponentenToe();
@@ -38,6 +37,7 @@ public class HoofdPaneel extends BorderPane {
     private void voegComponentenToe() {
     	setCenter(mvoGoalPaneel);
     	toonSdgPaneel(1);
+    	toonCategoriePaneell();
     }
 
     /**

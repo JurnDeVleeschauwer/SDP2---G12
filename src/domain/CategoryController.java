@@ -41,19 +41,9 @@ public class CategoryController {
 	}
 
 	public List<List<String>> getCategorieen() { //om GUI te testen
-		List<List<String>>	lijstCategorieen = new ArrayList<>();
-		List<String> categorie1=new ArrayList<>();
-		categorie1.add("Eerste categorie");
-		categorie1.add("foto1");
-		
-		List<String> categorie2=new ArrayList<>();
-		
-		categorie2.add("tweede categorie");
-		categorie2.add("foto2");
-		
-		lijstCategorieen.add(categorie1);
-		lijstCategorieen.add(categorie2);
-		return lijstCategorieen;
+
+
+		return cm.getCategoriesAsStringList();
 
 	}
 
