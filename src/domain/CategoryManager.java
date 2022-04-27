@@ -39,6 +39,12 @@ public class CategoryManager {
 
 	}
 	
+	public void updateList() {
+		categories.clear();
+		categories.addAll(categoryMapper.findAll()); 
+
+	}
+	
 	public List<Category> getAllCategories() {
 		return categories; 
 	}
@@ -46,7 +52,7 @@ public class CategoryManager {
 	public void addCategory(Category c) {
 		
 		categoryMapper.insert(c);
-		
+		updateList();
 	}
 
 }

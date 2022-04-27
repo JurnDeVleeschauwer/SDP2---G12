@@ -38,10 +38,9 @@ public class Category implements Serializable{
 	
 	//Constructors
 	
-	public Category(String name, String icon, int id,  boolean showCategory)  {
+	public Category(String name, String icon,  boolean showCategory)  {
 		setName(name);
 		setIcon(icon);
-		setId(id);
 		setShowCategory(showCategory);
 	}
 	

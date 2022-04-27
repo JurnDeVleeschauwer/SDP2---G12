@@ -12,9 +12,9 @@ public class CategoryController {
 		cm = new CategoryManager(); 
 	}
 	
-	public void addCategory(String name, String icon, int id,  boolean showCategory) {
+	public void addCategory(String name, String icon,  boolean showCategory) {
 		
-		Category cat = new Category(name, icon, id, showCategory); 
+		Category cat = new Category(name, icon,  showCategory); 
 		cm.addCategory(cat);
 	}
 	

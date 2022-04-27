@@ -46,8 +46,17 @@ public class CategorieenHBox extends HBox{
 			
 		}
 		
+		Button categorieAanmakenButton = new Button("Nieuwe categorie maken");
 		
+		categorieAanmakenButton.setOnAction(e->{
+			List<String> resultaat=CategorieAanmakenPopup.display();
+			if(!resultaat.isEmpty()) {
+				categoryController.addCategory(resultaat.get(0),resultaat.get(1),true);
+				update();
+			}
+		});
 		
+		this.getChildren().add(categorieAanmakenButton);
 	}
 
 		public void wijzigCategorie(ActionEvent event) {

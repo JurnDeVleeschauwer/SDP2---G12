@@ -29,8 +29,8 @@ public class DomeinController {
 	}
 
 	public void verwijderCategorie(int indexOf) {
-		categoryController.getCategory(indexOf);
-		categoryController.deleteCategory(categoryController.getCategory(indexOf));
+		//categoryController.getCategory(indexOf);
+		//categoryController.deleteCategory(categoryController.getCategory(indexOf));
 
 	}
 
