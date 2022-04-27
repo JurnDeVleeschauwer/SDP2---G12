@@ -29,8 +29,8 @@ public class CategoryManager {
 		categoryMapper.update(category); 
 	}
 
-	public void deleteCategory(Category category) {
-		categoryMapper.delete(category);
+	public void deleteCategory(int index) {
+		categoryMapper.delete(categories.get(index));
 		
 	}
 	

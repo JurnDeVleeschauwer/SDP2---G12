@@ -53,7 +53,7 @@ public class CategorieenHBox extends HBox{
 		public void wijzigCategorie(ActionEvent event) {
 
 			//categoryController.wijzigCategorie(this.getChildren().indexOf(((Node) event.getSource()).getParent()));			// this.getChildren().indexOf(((Node) event.getSource()).getParent() geeft index van de categorie waarin de button geklikt werd
-
+			System.out.println(this.getChildren().indexOf(((Node) event.getSource()).getParent()));
 			
 			
 		}

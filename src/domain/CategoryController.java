@@ -32,8 +32,8 @@ public class CategoryController {
 	}
 	
 	
-	public void deleteCategory(Category category) {
-		cm.deleteCategory(category); 
+	public void deleteCategory(int index) {
+		cm.deleteCategory(index); 
 	}
 	
 	public List<Category> getAll() {

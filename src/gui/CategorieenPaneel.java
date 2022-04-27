@@ -115,19 +115,7 @@ public class CategorieenPaneel extends GridPane {
 		
 	}
 
-	public void wijzigCategorie(ActionEvent event) {
-		System.out.println(this.getChildren().indexOf(event.getSource()));
-		System.out.println(event.getSource());
-		MenuItem item = (MenuItem) event.getSource();
-		System.out.println(item);
-		
-		
-	}
 
-	public void verwijderCategorie(ActionEvent event) {
-		System.out.println(this.getChildren().indexOf(event.getSource()));
-		System.out.println(event.getSource());
 
-	}
 
 }
