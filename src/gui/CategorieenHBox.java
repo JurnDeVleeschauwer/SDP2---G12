@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import domain.CategoryController;
 import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -12,8 +13,14 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class CategorieenHBox extends HBox{
 
@@ -24,6 +31,7 @@ public class CategorieenHBox extends HBox{
 		
 		this.categoryController=categoryController;
 		this.hoofdPaneel=hoofdPaneel;
+		this.setSpacing(40);
 		update();
 		
 	}
@@ -32,14 +40,25 @@ public class CategorieenHBox extends HBox{
 		this.getChildren().clear();
 
 		for (List<String> lijstCategorieen: categoryController.getCategorieen()) {
-		
+			
 			VBox categorieVBox = new VBox();
+			categorieVBox.setBorder( new Border(new BorderStroke(Color.BLACK, 
+		            BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)) );
+		    categorieVBox.setPadding(new Insets(5, 10, 20, 10));
 			Label categorieLabel = new Label(lijstCategorieen.get(0));// naam op 0e index van lijst
 			Button verwijderCategorieButton = new Button("Verwijder categorie");
 			Button wijzigCategorieButton = new Button("Wijzig categorie");
 			
 			verwijderCategorieButton.setOnAction(this::verwijderCategorie);
-			wijzigCategorieButton.setOnAction(this::wijzigCategorie);
+			wijzigCategorieButton.setOnAction(e->{
+				List<String> resultaat=CategorieWijzigenPopup.display(lijstCategorieen.get(0),lijstCategorieen.get(1));
+				if(resultaat!=null) {
+					
+					categoryController.updateCategory( this.getChildren().indexOf(((Node) e.getSource()).getParent()) , resultaat);
+					update();
+				}
+				
+			});
 			
 			categorieVBox.getChildren().addAll(categorieLabel,verwijderCategorieButton,wijzigCategorieButton);
 			this.getChildren().add(categorieVBox);
@@ -59,13 +78,7 @@ public class CategorieenHBox extends HBox{
 		this.getChildren().add(categorieAanmakenButton);
 	}
 
-		public void wijzigCategorie(ActionEvent event) {
 
-			//categoryController.wijzigCategorie(this.getChildren().indexOf(((Node) event.getSource()).getParent()));			// this.getChildren().indexOf(((Node) event.getSource()).getParent() geeft index van de categorie waarin de button geklikt werd
-			System.out.println(this.getChildren().indexOf(((Node) event.getSource()).getParent()));
-			
-			
-		}
 
 		public void verwijderCategorie(ActionEvent event) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);

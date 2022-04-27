@@ -24,9 +24,12 @@ public class CategoryManager {
 	public Category getCategory(int categoryId) {
 		return categoryMapper.get(categoryId);
 	}
-	
+	public Category getCategoryByIndex(int index) {
+		return categories.get(index);
+	}
 	public void updateCategory(Category category) {
 		categoryMapper.update(category); 
+		updateList();
 	}
 
 	public void deleteCategory(int index) {

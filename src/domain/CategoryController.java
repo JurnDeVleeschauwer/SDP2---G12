@@ -18,17 +18,18 @@ public class CategoryController {
 		cm.addCategory(cat);
 	}
 	
-	public void updateCategory(int categoryId) {
+	public void updateCategory(int index,List<String> categorie) {
 		
-		Category categoryToUpdate = getCategory(categoryId); 
-		
+		Category categoryToUpdate = getCategory(index); 
+		categoryToUpdate.setName(categorie.get(0));
+		categoryToUpdate.setIcon(categorie.get(1));
 		cm.updateCategory(categoryToUpdate);
 	}
 	
 	
-	public Category getCategory(int categoryId) {
+	public Category getCategory(int index) {
 		
-		return cm.getCategory(categoryId);
+		return cm.getCategoryByIndex(index);
 	}
 	
 	
