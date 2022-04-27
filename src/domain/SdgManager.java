@@ -35,5 +35,9 @@ public class SdgManager {
 		sdgMapper.update(sdg); 
 		
 	}
+	
+	public List<SdgAbstract> getAll() {
+		return sdgs; 
+	}
 
 }

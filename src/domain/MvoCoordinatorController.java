@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 public class MvoCoordinatorController {
 	
 	
@@ -58,5 +60,8 @@ public class MvoCoordinatorController {
 		
 	}
 	
+	public List<MvoCoordinator> getAll() {
+		return mvoCoord.getAll(); 
+	}
 
 }

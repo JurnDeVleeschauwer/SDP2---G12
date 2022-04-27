@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 public class MvoGoalController {
 	
 	
@@ -33,6 +35,9 @@ public class MvoGoalController {
 		mvoGoalManager.deleteMvoGoal(MvoGoal); 
 	}
 	
+	public List<MvoGoalAbstract> getAll() {
+		return mvoGoalManager.getAll(); 
+	}
 	
 
 }

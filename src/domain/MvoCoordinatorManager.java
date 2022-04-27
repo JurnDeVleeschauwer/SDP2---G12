@@ -40,5 +40,10 @@ public class MvoCoordinatorManager {
 
 	}
 	
+	
+	public List<MvoCoordinator> getAll() {
+		return mvoCoordinator; 
+	}
+	
 
 }

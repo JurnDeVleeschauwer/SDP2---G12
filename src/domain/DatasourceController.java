@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 public class DatasourceController {
 
 	private DatasourceManager datasourceManager;
@@ -28,6 +30,10 @@ public class DatasourceController {
 
 	public void deleteDatasource(Datasource Datasource) {
 		datasourceManager.deleteDatasource(Datasource);
+	}
+	
+	public List<Datasource> getDatasources() {
+		return datasourceManager.getAllDatasources(); 
 	}
 
 }

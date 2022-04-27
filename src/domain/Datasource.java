@@ -114,6 +114,11 @@ public class Datasource implements Serializable {
 				&& Objects.equals(xAxis, other.xAxis) && Objects.equals(yAxis, other.yAxis) && year == other.year;
 	}
 
+	
+	@Override
+	public String toString() {
+		return String.format("name: %s, yAxis: %s, xAxis: %s, Year: %d, Expectedgoal: %d", getName(), getyAxis(), getxAxis(), getYear(), getExpectedGoal()); 
+	}
 
 	
 	

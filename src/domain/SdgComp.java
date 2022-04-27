@@ -97,9 +97,6 @@ public class SdgComp extends SdgAbstract implements Serializable  {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	
-
 	
 	public Category getCategory() {
 		return category;
@@ -107,6 +104,21 @@ public class SdgComp extends SdgAbstract implements Serializable  {
 	
 	public void setCategory(Category cat) {
 		this.category = cat;
+	}
+	
+	@Override
+	public String toString() {
+		String res = "";
+		
+		res += String.format("Id: %d, name: %s%n, Category: %s%n", getId(), getName(), getCategory().toString());
+		
+		
+		for(SdgChild child : sdgs) {
+			res += child.toString(); 
+			res += System.lineSeparator(); 
+			
+		}
+		return res; 
 	}
 	
 }
