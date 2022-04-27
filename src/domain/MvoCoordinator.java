@@ -83,6 +83,11 @@ public class MvoCoordinator implements Serializable {
 		MvoCoordinator other = (MvoCoordinator) obj;
 		return Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("Username: %d, Password: *", getUsername()); 
+	}
 
 
 	

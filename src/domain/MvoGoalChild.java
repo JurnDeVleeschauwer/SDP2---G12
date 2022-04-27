@@ -42,11 +42,11 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 	public MvoGoalChild(int id, int value, SdgComp sdgComp, Datasource datasource, String icon, String mvoName) {
 		
 		setId(id);
-		setDatasourceID(datasource);
+		setDatasource(datasource);
 		setMvoName(mvoName);
 		setIcon(icon);
 		setValue(value);
-		setSdgID(sdgComp);
+		setSdg(sdgComp);
 		
 	}
 	
@@ -70,11 +70,11 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 		this.value = value;
 	}
 
-	public SdgComp getSdgID() {
+	public SdgComp getSdg() {
 		return sdgComp;
 	}
 
-	public void setSdgID(SdgComp sdgComp) {
+	public void setSdg(SdgComp sdgComp) {
 		this.sdgComp = sdgComp;
 	}
 
@@ -82,7 +82,7 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 		return datasource;
 	}
 
-	public void setDatasourceID(Datasource datasource) {
+	public void setDatasource(Datasource datasource) {
 		this.datasource = datasource;
 		
 	}
@@ -145,5 +145,11 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 		
 	}
 	
-
+	@Override
+	public String toString() {
+		
+		//int id, int value, SdgComp sdgComp, Datasource datasource, String icon, String mvoName
+		return String.format("id: %d, value: %d%n, SdgCompId: %s%n, Datasource: %s, Icon: %s, MvoName: %s",
+				getId(), getValue(), getSdg().toString(), getDatasource().toString(), getIcon(), getMvoName() ); 
+	}
 }

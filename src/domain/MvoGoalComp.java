@@ -36,15 +36,15 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable  {
 	private String name;
 	private List<MvoGoalChild> mvoGoals = new ArrayList<>(); 
 	
-	@ManyToOne(targetEntity = Category.class, cascade = CascadeType.PERSIST)
-	private int categoryID;  
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Category category;   
 
 	
 	public MvoGoalComp(int id, String name, List<MvoGoalChild> sdgs, Category cat) {
 		setId(id);
 		setName(name);
 		setSdgs(sdgs);
-		setCategoryID(cat);
+		setCategory(cat);
 		
 	}
 	
@@ -103,12 +103,45 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable  {
 		this.id = id;
 	}
 	
-	public int getCategoryID() {
-		return categoryID;
+	public Category getCategory() {
+		return category;
 	}
 	
-	public void setCategoryID(Category cat) {
-		this.categoryID = cat.getId(); 
+	
+	public GenericMapperJpa<MvoGoalAbstract> getMvoGoalMapper() {
+		return mvoGoalMapper;
+	}
+
+	public void setMvoGoalMapper(GenericMapperJpa<MvoGoalAbstract> mvoGoalMapper) {
+		this.mvoGoalMapper = mvoGoalMapper;
+	}
+
+	public List<MvoGoalChild> getMvoGoals() {
+		return mvoGoals;
+	}
+
+	public void setMvoGoals(List<MvoGoalChild> mvoGoals) {
+		this.mvoGoals = mvoGoals;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	@Override
+	public String toString() {
+		 String res = ""; 
+	
+		 
+		 res += String.format("Id: %d%n, Category: %s%n, Name: %s%n", getId(), getName(), getCategory().toString());
+		 
+		 for(MvoGoalChild child :mvoGoals) {
+			 res += mvoGoals.toString(); 
+			 
+		 }
+		 
+		 return res; 
+		 
 	}
 	
 }

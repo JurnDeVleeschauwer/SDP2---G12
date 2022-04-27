@@ -109,7 +109,10 @@ public class Category implements Serializable{
 
 	
 
-	
+	@Override
+	public String toString() {
+		return String.format("Name: %s, id: %d", getName(), getId());
+	}
 
 	
 

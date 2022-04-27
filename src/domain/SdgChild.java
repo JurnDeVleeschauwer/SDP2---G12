@@ -128,5 +128,11 @@ public class SdgChild extends SdgAbstract implements Serializable{
 	public void setSdgComp(SdgComp sdgComp) {
 		this.sdgComp = sdgComp;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return String.format("id: %s, icon: %s, description: %s", getId(), getIcon(), getDescription());
+	}
 
 }

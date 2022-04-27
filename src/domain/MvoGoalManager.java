@@ -39,6 +39,12 @@ public class MvoGoalManager {
 		return (MvoGoalComp) mvoGoalMapper.get(mvoGoalId); 
 		
 	}
+
+
+	public List<MvoGoalAbstract> getAll() {
+		
+		return mvoGoals;
+	}
 	
 
 }

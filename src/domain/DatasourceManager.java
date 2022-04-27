@@ -49,6 +49,9 @@ public class DatasourceManager {
 	}
 	
 
+	public List<Datasource> getDatasources() {
+		return datasources; 
+	}
 	
 	
 
