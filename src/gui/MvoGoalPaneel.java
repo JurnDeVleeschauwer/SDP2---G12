@@ -58,14 +58,10 @@ import javafx.scene.layout.GridPane;
 			
 			MvoGoalComp mvoGoal = new MvoGoalComp(1, "gerge", new ArrayList<>(), new Category("rfezrg", "rfezger", 2, true));//(MvoGoalComp) mvoGoalController.getMvoGoal(this.id);
 			
-			Label id = new Label(Integer.toString(mvoGoal.getId()));
-			add(id, 1, 1);
-			Label categoryid = new Label(Integer.toString(mvoGoal.getCategoryID()));
-			add(categoryid, 2, 1);
-			Label naam = new Label(mvoGoal.getName());
-			add(naam, 3, 1);
-			Label sdgs = new Label(mvoGoal.getSdgs().toString());
-			add(sdgs, 4, 1);
+			add( new Label(Integer.toString(mvoGoal.getId())), 1, 1);
+			add( new Label(mvoGoal.getCategory().toString()), 2, 1);
+			add( new Label(mvoGoal.getName()), 3, 1);;
+			add( new Label(mvoGoal.getSdgs().toString()), 4, 1);
 			
 			
 			

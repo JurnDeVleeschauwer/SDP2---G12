@@ -70,7 +70,7 @@ import javafx.scene.layout.GridPane;
 			
 			add( new Label(Integer.toString(mvoGoal.getId())), 1, 1);
 			add(MvoId, 1, 2);
-			add( new Label(Integer.toString(mvoGoal.getCategoryID())), 2, 1);
+			add( new Label(mvoGoal.getCategory().toString()), 2, 1);
 			add(catgoryId, 2, 2);
 			add( new Label(mvoGoal.getName()), 3, 1);;
 			add(Naam, 3, 2);
