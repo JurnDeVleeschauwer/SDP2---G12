@@ -1,12 +1,19 @@
 package ui;
 
 import domain.CategoryController;
+
 import domain.DomeinController;
 import gui.HoofdPaneel;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.*;
+import domain.Datasource;
+import domain.DatasourceReader;
+import domain.MvoCoordinator;
+import domain.MvoCoordinatorController;
+import persistence.GenericMapperJpa;
+
 
 public class StartUp extends Application{
 
@@ -39,6 +46,28 @@ public class StartUp extends Application{
         stage.setScene(scene);
         stage.setTitle("Fluvius");
         stage.show();
+	}
+	
+	static void run() {
+		
+		/*
+		 * Vergeet Deze 3 niet voor elke transactie (Was ze zelf vergeten)
+		 * GenericMapperJpa.startTransaction();
+		 *	GenericMapperJpa.commitTransaction();
+		 *	GenericMapperJpa.closePersistency(); 
+		 */ 
+		
+		MvoCoordinatorController mvoC = new MvoCoordinatorController();
+		MultiLanguageApp app = new MultiLanguageApp(); 
+		
+		DatasourceReader r = new DatasourceReader(); 
+		
+
+		
+		// int languageChoice = app.chooseLanguage();
+		
+
+
 		
 	}
 

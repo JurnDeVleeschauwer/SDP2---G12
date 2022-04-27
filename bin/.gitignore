@@ -1,3 +1,5 @@
-/gui/
-/ui/
 /domain/
+/ui/
+/exceptions/
+/optellingTest.txt
+/persistence/

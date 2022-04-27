@@ -15,9 +15,12 @@ public class DatasourceReader {
 		FileReader reader = new FileReader(file);
 		Scanner s = new Scanner(reader);
 		List<T> dataToProcess = new ArrayList<>(); 
+
 		while(s.hasNext()) {
 			dataToProcess.add((T) s); 
 		}
+		
+		
 		
 		
 		return dataToProcess; 

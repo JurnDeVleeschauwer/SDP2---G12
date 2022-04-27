@@ -1,0 +1,33 @@
+BEGIN: Electriciteitverbruik per dag 
+Monday: 1
+Dinsdag: 2
+Wednesday: 3
+Donderdag: 4
+Friday: 5 
+Saturday: 6 
+Sunday: 7 
+
+Monday: 1
+Dinsdag: 2
+Wednesday: 3
+Donderdag: 4
+Friday: 5 
+Saturday: 6 
+Sunday: 7 
+
+Monday: 1
+Dinsdag: 2
+Wednesday: 3
+Donderdag: 4
+Friday: 5 
+Saturday: 6 
+Sunday: 7 
+
+Monday: 1
+Dinsdag: 2
+Wednesday: 3
+Donderdag: 4
+Friday: 5 
+Saturday: 6 
+Sunday: 7 
+

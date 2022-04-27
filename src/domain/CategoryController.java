@@ -1,38 +1,42 @@
 package domain;
 
+import java.util.List;
+
 public class CategoryController {
 	
 	
-	private Category c;
+	private CategoryManager cm; 
 	
 	public CategoryController() {
-		c = new Category(); 
+		cm = new CategoryManager(); 
 	}
 	
 	public void addCategory(String name, String icon, int id,  boolean showCategory) {
 		
 		Category cat = new Category(name, icon, id, showCategory); 
-		c.addCategory(cat);
+		cm.addCategory(cat);
 	}
 	
 	public void updateCategory(int categoryId) {
 		
 		Category categoryToUpdate = getCategory(categoryId); 
 		
-		c.updateCategory(categoryToUpdate);
+		cm.updateCategory(categoryToUpdate);
 	}
 	
 	
 	public Category getCategory(int categoryId) {
 		
-		return c.getCategory(categoryId);
+		return cm.getCategory(categoryId);
 	}
 	
 	
 	public void deleteCategory(Category category) {
-		c.deleteCategory(category); 
+		cm.deleteCategory(category); 
 	}
 	
-	
+	public List<Category> getAll() {
+		return cm.getAllCategories(); 
+	}
 
 }

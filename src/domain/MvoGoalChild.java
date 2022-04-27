@@ -5,7 +5,10 @@ import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -15,26 +18,28 @@ import persistence.GenericMapperJpa;
 
 @Entity
 @Table
-public class MvoGoal implements Serializable {
+public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 	/**
-	 * 
+	 * int => Object 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int value;
-	@OneToOne(targetEntity = Datasource.class,  cascade = CascadeType.ALL)
-	private int datasourceID;
+	@OneToOne(cascade = CascadeType.PERSIST)
+	private Datasource datasource; 
 	
-	@OneToMany(targetEntity = SdgComp.class, cascade = CascadeType.ALL)
-	private int sdgID;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "sdgcomp")
+	private SdgComp sdgComp;
 	private String icon;
 	private String mvoName;
-	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Category category;
 	@Transient
-	private GenericMapperJpa<MvoGoal> mvoGoalMapper = new GenericMapperJpa<MvoGoal>(MvoGoal.class);
+	private GenericMapperJpa<MvoGoalChild> mvoGoalMapper = new GenericMapperJpa<MvoGoalChild>(MvoGoalChild.class);
 
-	public MvoGoal(int id, int value, SdgComp sdgComp, Datasource datasource, String icon, String mvoName) {
+	public MvoGoalChild(int id, int value, SdgComp sdgComp, Datasource datasource, String icon, String mvoName) {
 		
 		setId(id);
 		setDatasourceID(datasource);
@@ -45,7 +50,7 @@ public class MvoGoal implements Serializable {
 		
 	}
 	
-	protected MvoGoal() {
+	protected MvoGoalChild() {
 		
 	}
 	
@@ -65,20 +70,20 @@ public class MvoGoal implements Serializable {
 		this.value = value;
 	}
 
-	public int getSdgID() {
-		return sdgID;
+	public SdgComp getSdgID() {
+		return sdgComp;
 	}
 
 	public void setSdgID(SdgComp sdgComp) {
-		this.sdgID = sdgComp.getId();
+		this.sdgComp = sdgComp;
 	}
 
-	public int getDatasourceID() {
-		return datasourceID;
+	public Datasource getDatasource() {
+		return datasource;
 	}
 
 	public void setDatasourceID(Datasource datasource) {
-		this.datasourceID = datasource.getId();
+		this.datasource = datasource;
 		
 	}
 
@@ -101,7 +106,7 @@ public class MvoGoal implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(datasourceID, icon, mvoName, sdgID, value);
+		return Objects.hash(datasource, icon, mvoName, sdgComp, value);
 	}
 
 	@Override
@@ -112,27 +117,32 @@ public class MvoGoal implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MvoGoal other = (MvoGoal) obj;
-		return datasourceID == other.datasourceID && Objects.equals(icon, other.icon)
-				&& Objects.equals(mvoName, other.mvoName) && sdgID == other.sdgID && value == other.value;
+		MvoGoalChild other = (MvoGoalChild) obj;
+		return datasource == other.datasource && Objects.equals(icon, other.icon)
+				&& Objects.equals(mvoName, other.mvoName) && sdgComp == other.sdgComp && value == other.value;
 	}
 	
 	
-	public void addMvoGoal(MvoGoal g) {
+	public void addMvoGoal(MvoGoalChild g) {
 		
 		mvoGoalMapper.insert(g); 
 	}
 	
-	public void removeMvoGoal(MvoGoal g) {
+	public void removeMvoGoal(MvoGoalChild g) {
 		mvoGoalMapper.delete(g);
 	}
 	
-	public MvoGoal getMvoGoal(MvoGoal g) {
-		return mvoGoalMapper.get(g); 
+	public MvoGoalChild getMvoGoal(int mvoGoalId) {
+		return mvoGoalMapper.get(mvoGoalId); 
 	}
 	
-	public void updateMvoGoal(MvoGoal g) {
+	public void updateMvoGoal(MvoGoalChild g) {
 		mvoGoalMapper.update(g); 
+	}
+
+	public void deleteMvoGoal(MvoGoalChild mvoGoal) {
+		mvoGoalMapper.delete(mvoGoal);
+		
 	}
 	
 
