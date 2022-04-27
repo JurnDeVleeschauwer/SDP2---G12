@@ -1,6 +1,6 @@
 package gui;
 
-import domain.DomeinController;
+import domain.CategoryController;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -19,11 +19,11 @@ import javafx.scene.layout.VBox;
 public class CategorieenPaneel extends GridPane {
 
 	private final HoofdPaneel hoofdPaneel;
-	private final DomeinController domeinController;
+	private final CategoryController categoryController;
 
-	public CategorieenPaneel(HoofdPaneel hoofdPaneel , DomeinController domeinController ) {
+	public CategorieenPaneel(HoofdPaneel hoofdPaneel , CategoryController categoryController ) {
 		this.hoofdPaneel = hoofdPaneel;
-		 this.domeinController=domeinController;
+		 this.categoryController=categoryController;
 
 		configureerGrid();
 		update();
@@ -48,7 +48,7 @@ public class CategorieenPaneel extends GridPane {
 
 
 		
-		/*for (List<String> lijstCategorieen: domeinController.getCategorieeen()) {
+		/*for (List<String> lijstCategorieen: categoryController.getCategorieeen()) {
 			MenuItem verwijderCategorieMenuItem = new MenuItem("Verwijderen");
 			MenuItem wijzigCategorieMenuItem = new MenuItem("Wijzigen");
 			verwijderCategorieMenuItem.setOnAction(this::verwijderCategorie);
@@ -106,7 +106,7 @@ public class CategorieenPaneel extends GridPane {
 //		
 //
 //		
-		HBox categorieenHBox = new CategorieenHBox(domeinController, hoofdPaneel);
+		HBox categorieenHBox = new CategorieenHBox(categoryController, hoofdPaneel);
 		
 		
 		add(categorieenHBox,0,2,1,1);

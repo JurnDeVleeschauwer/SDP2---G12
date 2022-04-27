@@ -34,7 +34,7 @@ public class AanmeldPaneel extends GridPane
     public AanmeldPaneel(DomeinController dc, HoofdPaneel hoofdPaneel)
     {
         domeinController = dc;
-        this.hoofdPaneel = hoofdPaneel;
+        this.hoofdPaneel = hoofdPaneel;	
 
         
         configureerGrid();

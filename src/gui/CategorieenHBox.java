@@ -3,7 +3,7 @@ package gui;
 import java.util.List;
 import java.util.Optional;
 
-import domain.DomeinController;
+import domain.CategoryController;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -17,12 +17,12 @@ import javafx.scene.layout.VBox;
 
 public class CategorieenHBox extends HBox{
 
-	private final DomeinController domeinController;
+	private final CategoryController categoryController;
 	private final HoofdPaneel hoofdPaneel;
 	
-	public CategorieenHBox(DomeinController domeinController, HoofdPaneel hoofdPaneel) {
+	public CategorieenHBox(CategoryController categoryController, HoofdPaneel hoofdPaneel) {
 		
-		this.domeinController=domeinController;
+		this.categoryController=categoryController;
 		this.hoofdPaneel=hoofdPaneel;
 		update();
 		
@@ -31,7 +31,7 @@ public class CategorieenHBox extends HBox{
 	public void update() {
 		this.getChildren().clear();
 
-		for (List<String> lijstCategorieen: domeinController.getCategorieen()) {
+		for (List<String> lijstCategorieen: categoryController.getCategorieen()) {
 		
 			VBox categorieVBox = new VBox();
 			Label categorieLabel = new Label(lijstCategorieen.get(0));// naam op 0e index van lijst
@@ -52,7 +52,7 @@ public class CategorieenHBox extends HBox{
 
 		public void wijzigCategorie(ActionEvent event) {
 
-			domeinController.wijzigCategorie(this.getChildren().indexOf(((Node) event.getSource()).getParent()));			// this.getChildren().indexOf(((Node) event.getSource()).getParent() geeft index van de categorie waarin de button geklikt werd
+			categoryController.wijzigCategorie(this.getChildren().indexOf(((Node) event.getSource()).getParent()));			// this.getChildren().indexOf(((Node) event.getSource()).getParent() geeft index van de categorie waarin de button geklikt werd
 
 			
 			
@@ -66,7 +66,7 @@ public class CategorieenHBox extends HBox{
 			
 			Optional<ButtonType> result = alert.showAndWait();
 			if(result.isPresent() && result.get()==ButtonType.OK) {
-				domeinController.verwijderCategorie(this.getChildren().indexOf(((Node) event.getSource()).getParent()));			// this.getChildren().indexOf(((Node) event.getSource()).getParent() geeft index van de categorie waarin de button geklikt werd
+				categoryController.verwijderCategorie(this.getChildren().indexOf(((Node) event.getSource()).getParent()));			// this.getChildren().indexOf(((Node) event.getSource()).getParent() geeft index van de categorie waarin de button geklikt werd
 
 			}
 

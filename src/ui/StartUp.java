@@ -12,7 +12,7 @@ public class StartUp extends Application{
 
 	public static void main(String[] args) {
 	        if (args[0].contentEquals("c")) {
-	        	CategoryController dc = new CategoryController();
+	        	DomeinController dc = new DomeinController();
 	    		MultiLanguageApp app = new MultiLanguageApp(); 
 	    		
 	    		int languageChoice = app.chooseLanguage();
@@ -29,10 +29,10 @@ public class StartUp extends Application{
 	
 	@Override
 	public void start(Stage stage) {
-    	DomeinController dc = new DomeinController();
+    	CategoryController categoryController= new CategoryController();
         
 
-        HoofdPaneel root = new HoofdPaneel(dc);
+        HoofdPaneel root = new HoofdPaneel(categoryController);
 
         Scene scene = new Scene(root, 800, 800);
 

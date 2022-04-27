@@ -5,7 +5,7 @@ import javafx.scene.layout.BorderPane;
 import java.util.*;
 
 import domain.CategoryController;
-import domain.DomeinController;
+import domain.CategoryController;
 
 /**
  * 
@@ -13,7 +13,7 @@ import domain.DomeinController;
  *
  */
 public class HoofdPaneel extends BorderPane {
-    private final DomeinController dc;
+    private final CategoryController categorieController;
     private AanmeldPaneel aanmelden;
     private CategorieenPaneel categoriePaneel;
 
@@ -22,8 +22,8 @@ public class HoofdPaneel extends BorderPane {
      * 
      * @param CategoryController
      */
-    public HoofdPaneel(DomeinController dc) {
-        this.dc = dc;
+    public HoofdPaneel(CategoryController categorieController) {
+        this.categorieController = categorieController;
         
         createPanelen();
         voegComponentenToe();
@@ -37,8 +37,8 @@ public class HoofdPaneel extends BorderPane {
      * 
      */
     public void createPanelen() {
-        this.aanmelden = new AanmeldPaneel(dc, this);
-        this.categoriePaneel=new CategorieenPaneel(this, new DomeinController());
+        this.aanmelden = new AanmeldPaneel(categorieController, this);
+        this.categoriePaneel=new CategorieenPaneel(this, new CategoryController());
     }
     
     /**
