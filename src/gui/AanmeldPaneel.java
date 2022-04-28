@@ -23,7 +23,6 @@ import javafx.scene.text.Text;
   */
 public class AanmeldPaneel extends GridPane
 {
-    private final DomeinController domeinController;
     private final HoofdPaneel hoofdPaneel;
 
     /**
@@ -31,9 +30,9 @@ public class AanmeldPaneel extends GridPane
      * @param dc
      * @param hoofdPaneel
      */
-    public AanmeldPaneel(DomeinController dc, HoofdPaneel hoofdPaneel)
+    public AanmeldPaneel( HoofdPaneel hoofdPaneel)
     {
-        domeinController = dc;
+        
         this.hoofdPaneel = hoofdPaneel;	
 
         
