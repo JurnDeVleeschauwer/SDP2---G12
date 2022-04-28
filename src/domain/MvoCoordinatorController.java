@@ -2,6 +2,8 @@ package domain;
 
 import java.util.List;
 
+import javax.security.sasl.AuthenticationException;
+
 public class MvoCoordinatorController {
 	
 	
@@ -31,13 +33,13 @@ public class MvoCoordinatorController {
 	}
 	
 	
-	private MvoCoordinator getMvoCoordinator(String username, String password) {
+	private MvoCoordinator getMvoCoordinator(String username, String password) throws AuthenticationException {
 		
 		return mvoCoord.getMvoCoordinator(username, password);
 		
 	}
 	
-	public MvoCoordinator login(String username, String password) /*throws exception*/ { 
+	public MvoCoordinator login(String username, String password) throws AuthenticationException /*throws exception*/ { 
 	
 			MvoCoordinator mvoCoordDB = mvoCoord.getMvoCoordinator(username, password);
 			

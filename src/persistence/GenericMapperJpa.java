@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 
 public class GenericMapperJpa<T> implements GenericMapper<T> {
 	private static final String PU_NAME = "fluvius";
-	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU_NAME);
+	protected static final EntityManagerFactory emf = Persistence.createEntityManagerFactory(PU_NAME);
 	protected static EntityManager em = emf.createEntityManager();
 	private final Class<T> type;
 

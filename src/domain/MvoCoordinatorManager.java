@@ -3,6 +3,8 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.security.sasl.AuthenticationException;
+
 import persistence.GenericMapperJpa;
 import persistence.MvoCoordinatorMapper;
 
@@ -30,7 +32,7 @@ public class MvoCoordinatorManager {
 		return (MvoCoordinator) mvoCoordinatorMapper.get(mvoCoordinatorId);
 	}
 
-	public MvoCoordinator getMvoCoordinator(String username, String password) {
+	public MvoCoordinator getMvoCoordinator(String username, String password) throws AuthenticationException {
 		return mvoCoordinatorMapper.get(username, password ); 
 	}
 	

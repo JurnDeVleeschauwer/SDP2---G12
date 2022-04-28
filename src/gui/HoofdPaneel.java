@@ -7,6 +7,7 @@ import java.util.*;
 
 import domain.CategoryController;
 import domain.DomeinController;
+import domain.MvoCoordinatorController;
 import domain.MvoGoalController;
 import domain.SdgController;
 import domain.CategoryController;
@@ -56,7 +57,7 @@ setCenter(dashboard);
      * 
      */
     public void createPanelen() {
-       this.aanmelden = new AanmeldPaneel( this);
+       this.aanmelden = new AanmeldPaneel(this,new MvoCoordinatorController());
 
         this.categoriePaneel=new CategorieenPaneel(this, new CategoryController());
         this.mvoGoalPaneel = new MvoGoalPaneel(this, new MvoGoalController());
