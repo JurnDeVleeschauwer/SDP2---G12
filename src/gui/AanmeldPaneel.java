@@ -1,13 +1,9 @@
 package gui;
 
-import domain.CategoryController;
-import domain.DomeinController;
-//import i18n.UITextHelper;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -15,21 +11,10 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.text.Text;
- /**
-  * 
-  * @author Jurn
-  *
-  */
-public class AanmeldPaneel extends GridPane
-{
-    private final HoofdPaneel hoofdPaneel;
 
-    /**
-     * 
-     * @param dc
-     * @param hoofdPaneel
-     */
+
+public class AanmeldPaneel extends GridPane{
+    private final HoofdPaneel hoofdPaneel;
     public AanmeldPaneel( HoofdPaneel hoofdPaneel)
     {
         
@@ -39,6 +24,7 @@ public class AanmeldPaneel extends GridPane
         configureerGrid();
         voegComponentenToe();
     }
+    
 
     private void configureerGrid()
     {
@@ -61,7 +47,7 @@ public class AanmeldPaneel extends GridPane
     
     private void voegComponentenToe()
     {
-        Text header = new Text("Aanmelden");
+        Label header = new Label("Aanmelden");
         GridPane.setHalignment(header, HPos.LEFT);
         add(header, 0, 0, 2, 1);
         
@@ -79,27 +65,11 @@ public class AanmeldPaneel extends GridPane
         add(controls, 0, 3, 2, 1);
         
     }
-    
+
     private void aanmelden(ActionEvent event)
     {
-        /*if (email.getText().trim().isEmpty()) {
-            foutbericht.setText("Gelieve.uw.emailadres.op.te.geven");
-            return;
-        }
-        if (wachtwoord.getText().trim().isEmpty()) {
-            foutbericht.setText("Gelieve.uw.wachtwoord.op.te.geven");
-            return;
-        }
-        
-        domeinController.meldAan(email.getText().trim(), wachtwoord.getText().trim());
-        
-        if (domeinController.getUser() == null) {
-            foutbericht.setText("Deze.speler.bestaat.niet.of.het.wachtwoord.is.verkeerd");
-            return;
-        }
-        
-        foutbericht.setText(null);
-        hoofdPaneel.toonDashboards();*/
+
+
     }
-    
+
 }
