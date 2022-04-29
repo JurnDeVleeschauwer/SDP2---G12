@@ -42,7 +42,7 @@ public class MvoCoordinatorController {
 	public MvoCoordinator login(String username, String password) throws AuthenticationException /*throws exception*/ { 
 	
 			MvoCoordinator mvoCoordDB = mvoCoord.getMvoCoordinator(username, password);
-			
+
 		
 			
 			return mvoCoordDB; 
@@ -62,7 +62,7 @@ public class MvoCoordinatorController {
 		
 	}
 	
-	public List<MvoCoordinator> getAll() {
+	public MvoCoordinator getMvoCoordinator() {
 		return mvoCoord.getAll(); 
 	}
 

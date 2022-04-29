@@ -10,12 +10,12 @@ import persistence.MvoCoordinatorMapper;
 
 public class MvoCoordinatorManager {
 	
-	private List<MvoCoordinator> mvoCoordinator; 
+	private MvoCoordinator mvoCoordinator; 
 	private MvoCoordinatorMapper<MvoCoordinator> mvoCoordinatorMapper = new MvoCoordinatorMapper<MvoCoordinator>(MvoCoordinator.class); 
 	
 	
 	public MvoCoordinatorManager() {
-		mvoCoordinator = new ArrayList<>(); 
+
 	}
 		
 	public void updateMvoCoordinator(MvoCoordinator mvoCoordinatorToUpdate) {
@@ -33,7 +33,9 @@ public class MvoCoordinatorManager {
 	}
 
 	public MvoCoordinator getMvoCoordinator(String username, String password) throws AuthenticationException {
-		return mvoCoordinatorMapper.get(username, password ); 
+		mvoCoordinator=mvoCoordinatorMapper.get(username, password);
+		
+		return mvoCoordinator; 
 	}
 	
 	public void createMvoCoordinator(MvoCoordinator mvoCoordinator) {
@@ -43,7 +45,7 @@ public class MvoCoordinatorManager {
 	}
 	
 	
-	public List<MvoCoordinator> getAll() {
+	public MvoCoordinator getAll() {
 		return mvoCoordinator; 
 	}
 	

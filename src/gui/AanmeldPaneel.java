@@ -88,7 +88,7 @@ public class AanmeldPaneel extends GridPane {
 			return;
 
 		}
-
+		;
 		foutbericht.setText(null);
 		hoofdPaneel.toonCategoriePaneell();
 
