@@ -14,7 +14,7 @@ import domain.MvoCoordinator;
 import domain.MvoCoordinatorController;
 import persistence.GenericMapperJpa;
 import persistence.PopulateDatabase;
-
+import persistence.PopulateDatabase;
 
 public class StartUp extends Application{
 
@@ -38,7 +38,7 @@ public class StartUp extends Application{
 	@Override
 	public void start(Stage stage) {
 
-
+		PopulateDatabase.populateDatabase();
         HoofdPaneel root = new HoofdPaneel();
 
         Scene scene = new Scene(root, 800, 800);

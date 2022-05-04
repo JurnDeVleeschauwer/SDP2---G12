@@ -32,6 +32,8 @@ public class ListMvoGoalPaneel extends GridPane {
 		this.mvoGoalController = mvoGoalController;
 
 		configureerGrid();
+
+
 	}
 
 	private void configureerGrid() {
@@ -68,7 +70,6 @@ public class ListMvoGoalPaneel extends GridPane {
 		}
 
 		add(tableView, 2, 4);
-
 		/*
 		 * Button aanmakenButton = new Button("Toevoegen");
 		 * aanmakenButton.setOnAction(e->{ mvo.add(); window.close(); });

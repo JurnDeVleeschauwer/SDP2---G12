@@ -50,7 +50,7 @@ public class CategoryController {
 	public void addSdgToCategory(int categoryId, int sdgId) {
 		
 		SdgAbstract sdg = sdgManager.getSdg(sdgId); 
-		
+
 		cm.addSdgToCategory(categoryId, sdg);
 	}
 	

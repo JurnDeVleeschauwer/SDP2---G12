@@ -27,6 +27,7 @@ public class GenericMapperJpa<T> implements GenericMapper<T> {
 	}
 
 	public static void commitTransactionAndClose() {
+
 		em.getTransaction().commit();
 		em.close();
 
