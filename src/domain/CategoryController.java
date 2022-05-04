@@ -7,14 +7,24 @@ public class CategoryController {
 	
 	
 	private CategoryManager cm; 
-	
+	private SdgManager sdgManager; 
+
 	public CategoryController() {
 		cm = new CategoryManager(); 
+		
+		if(sdgManager == null) {
+			sdgManager = new SdgManager(); 
+		}
 	}
 	
-	public void addCategory(String name, String icon,  boolean showCategory) {
+
+	
+	public void addCategory(String name, String icon) {
 		
-		Category cat = new Category(name, icon,  showCategory); 
+		Category cat; 
+		cat = new Category(name, icon); 
+
+
 		cm.addCategory(cat);
 	}
 	
@@ -35,6 +45,13 @@ public class CategoryController {
 	
 	public void deleteCategory(int index) {
 		cm.deleteCategory(index); 
+	}
+	
+	public void addSdgToCategory(int categoryId, int sdgId) {
+		
+		SdgAbstract sdg = sdgManager.getSdg(sdgId); 
+		
+		cm.addSdgToCategory(categoryId, sdg);
 	}
 	
 	public List<Category> getAll() {

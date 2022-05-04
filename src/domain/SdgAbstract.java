@@ -1,9 +1,27 @@
 package domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
+
 import exceptions.SdgException;
 
+@Entity
+@Inheritance(strategy =InheritanceType.SINGLE_TABLE)
+@MappedSuperclass
 public abstract class SdgAbstract {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected int id; 
+	
+	protected SdgAbstract() {
+		
+	}
 	
 	
 	//GEmeenschappelijke methodes 
@@ -11,9 +29,6 @@ public abstract class SdgAbstract {
 		
 	}
 	
-	public void getChild() {
-		
-	}
 	
 	public void add(SdgAbstract sdg) throws SdgException {
 
@@ -24,7 +39,7 @@ public abstract class SdgAbstract {
 	}
 
 	
-	public SdgChild getChild(SdgAbstract sdg) throws SdgException {
+	public SdgChild getChild(int id) throws SdgException {
 		return null;
 	}
 	
@@ -43,6 +58,16 @@ public abstract class SdgAbstract {
 
 	public void updateSdg(SdgComp sdgCompToUpdate) {
 		
+	}
+
+
+	public void setId(int id) {
+		this.id = id; 
+		
+	}
+	
+	public int getId() {
+		return id; 
 	}
 	
 	

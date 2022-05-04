@@ -11,32 +11,47 @@ public class MvoGoalController {
 		mvoGoalManager = new MvoGoalManager(); 
 	}
 	
-	public void addMvoGoal(int id, int value, SdgComp sdgComp, Datasource datasource, String icon, String mvoName) {
-		
-		MvoGoalChild goal = new MvoGoalChild( id,  value,  sdgComp,  datasource,  icon,  mvoName); 
-		goal.addMvoGoal(goal);
+	public void addMvoGoalChild( int value, Datasource datasource, String icon, String mvoName) {
+		MvoGoalChild goal = new MvoGoalChild(value, datasource,  icon,  mvoName); 
+		System.out.println(goal.toString());
+		mvoGoalManager.addMvoGoal(goal);
 	}
 	
-	public void updateMvoGoal(int MvoGoalId) {
+	public void addMvoGoalComp(String name) {
 		
-		MvoGoalAbstract MvoGoalToUpdate = getMvoGoal(MvoGoalId); 
+		MvoGoalAbstract goal = new MvoGoalComp(name); 
+		//System.out.println(goal.getId());
+		mvoGoalManager.addMvoGoal(goal);
+	}
+	
+	public void updateMvoGoal(int mvoGoalId) {
+		
+		MvoGoalAbstract MvoGoalToUpdate = getMvoGoal(mvoGoalId); 
 		
 		mvoGoalManager.updateMvoGoal(MvoGoalToUpdate);
 	}
 	
 	
-	public MvoGoalAbstract getMvoGoal(int MvoGoalId) {
+	public MvoGoalAbstract getMvoGoal(int mvoGoalId) {
 		
-		return mvoGoalManager.getMvoGoal(MvoGoalId);
+		return mvoGoalManager.getMvoGoal(mvoGoalId);
 	}
 	
 	
-	public void deleteMvoGoal(MvoGoalChild MvoGoal) {
-		mvoGoalManager.deleteMvoGoal(MvoGoal); 
+	public void deleteMvoGoal(MvoGoalChild mvoGoal) {
+		mvoGoalManager.deleteMvoGoal(mvoGoal); 
 	}
 	
 	public List<MvoGoalAbstract> getAll() {
 		return mvoGoalManager.getAll(); 
+	}
+	
+	
+	public void addSubMvoGoal(int mvoGoalCompId, int value, Datasource datasource, String icon, String mvoName) {
+		
+		MvoGoalChild mvoGoalChild = new MvoGoalChild( value,  datasource,  icon,  mvoName);
+		
+		mvoGoalManager.addSubMvoGoal(mvoGoalChild, mvoGoalCompId);
 	}
 	
 

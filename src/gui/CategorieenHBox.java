@@ -70,7 +70,7 @@ public class CategorieenHBox extends HBox{
 		categorieAanmakenButton.setOnAction(e->{
 			List<String> resultaat=CategorieAanmakenPopup.display();
 			if(!resultaat.isEmpty()) {
-				categoryController.addCategory(resultaat.get(0),resultaat.get(1),true);
+				categoryController.addCategory(resultaat.get(0),resultaat.get(1));
 				update();
 			}
 		});

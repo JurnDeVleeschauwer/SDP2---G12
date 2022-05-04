@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,26 +24,39 @@ import persistence.GenericMapperJpa;
 @Table(name = "sdg")
 public class SdgComp extends SdgAbstract implements Serializable  {
 		
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
+	private String description; 
 	
-	@OneToMany(mappedBy = "sdgchild", cascade = CascadeType.MERGE)
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<SdgChild> sdgs = new ArrayList<>(); 
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	private Category category;  
 
 	
-	public SdgComp(int id, String name, List<SdgChild> sdgs, Category cat) {
-		setId(id);
+	public SdgComp(String name, String description) {
+		setName(name); 
+		setDescription(description); 
+	}
+	
+	public SdgComp(String name, String description, List<SdgChild> sdgs) {
 		setName(name);
 		setSdgs(sdgs);
-		setCategory(cat);
+		setDescription(description); 
 		
 	}
 	
+	public void setDescription(String description) {
+		this.description = description; 
+		
+	}
+	
+	public String getDescription() {
+		return description; 
+	}
+
 	public SdgComp() {
 		
 	}
@@ -66,18 +80,12 @@ public class SdgComp extends SdgAbstract implements Serializable  {
 	
 	
 	@Override
-	public SdgChild getChild(SdgAbstract sdg) throws SdgException {
+	public SdgChild getChild(int sdgId) throws SdgException {
 		
-	 return sdgs.stream().filter((currentSdg) -> currentSdg == sdg).collect(Collectors.toList()).get(0);
+	 return sdgs.stream().filter((currentSdg) -> currentSdg.getId() == sdgId).collect(Collectors.toList()).get(0);
 		
 	}
-	
-	
-	public int getId() {
-		return id; 
-	}
-	
-	
+		
 	public String getName() {
 		return name;
 	}
@@ -93,24 +101,13 @@ public class SdgComp extends SdgAbstract implements Serializable  {
 	public void setSdgs(List<SdgChild> sdgs) {
 		this.sdgs = sdgs;
 	}
+	
 
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public Category getCategory() {
-		return category;
-	}
-	
-	public void setCategory(Category cat) {
-		this.category = cat;
-	}
-	
 	@Override
 	public String toString() {
 		String res = "";
 		
-		res += String.format("Id: %d, name: %s%n, Category: %s%n", getId(), getName(), getCategory().toString());
+		res += String.format("Id: %d, name: %s%n, Category: %s%n", getName());
 		
 		
 		for(SdgChild child : sdgs) {

@@ -82,18 +82,18 @@ import javafx.scene.text.Font;
 			add( title, 5, 0);
 			
 			ArrayList<MvoGoalChild> listMVoChild = new ArrayList<MvoGoalChild>();
-			listMVoChild.add(new MvoGoalChild(1, 1, null, null, "null", "Blad"));
+			listMVoChild.add(new MvoGoalChild(1, null, null, "null"));
 			
-			MvoGoalComp mvoGoal = new MvoGoalComp(1, "Boom", listMVoChild, new Category("Natuur", "Natuur", true));
+			MvoGoalComp mvoGoal = new MvoGoalComp("NaamMvoGoalComp", listMVoChild);
 			//MvoGoalComp mvoGoal = (MvoGoalComp) mvoGoalController.getMvoGoal(this.id);
 			Label id = new Label("ID:");
 			id.setFont(new Font("Arial", 15));
 			add( id, 1, 1);
 			add( new Label(Integer.toString(mvoGoal.getId())), 2, 1);
-			Label category = new Label("Category:");
-			category.setFont(new Font("Arial", 15));
-			add( category, 1, 2);
-			add( new Label(mvoGoal.getCategory().getName()), 2, 2);
+//			Label category = new Label("Category:");
+//			category.setFont(new Font("Arial", 15));
+//			add( category, 1, 2);
+//			add( new Label(mvoGoal.getCategory().getName()), 2, 2);
 			Label name = new Label("Name:");
 			name.setFont(new Font("Arial", 15));
 			add( name, 1, 3);

@@ -81,7 +81,7 @@ import javafx.scene.text.Font;
 			add( title, 5, 0);
 			
 			
-			SdgComp sdg = new SdgComp(1, "gerge", new ArrayList<>(), new Category("rfezrg", "rfezger", true));//(SdgComp) sdgController.getSdg(this.id);
+			SdgComp sdg = new SdgComp( "naamSdgComp", "DescriptieSdgComp",new ArrayList<>());//(SdgComp) sdgController.getSdg(this.id);
 			
 			
 			Label id = new Label("ID:");
@@ -91,7 +91,6 @@ import javafx.scene.text.Font;
 			Label category = new Label("Category:");
 			category.setFont(new Font("Arial", 15));
 			add( category, 1, 2);
-			add(new Label(sdg.getCategory().toString()), 2, 2);
 			Label name = new Label("Name:");
 			name.setFont(new Font("Arial", 15));
 			add( name, 1, 3);

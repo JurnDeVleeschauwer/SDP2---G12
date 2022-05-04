@@ -10,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
+import exceptions.SdgException;
 
 
 @Entity
@@ -24,31 +28,30 @@ public class SdgChild extends SdgAbstract implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private String name;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
 	private String description;
 	private String icon;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST )
-	private Category category;
+
+	
+
 	private int target;
-	@ManyToOne(targetEntity = SdgComp.class, cascade = CascadeType.MERGE)
-	private SdgComp sdgComp; 
+
 	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private MvoGoalAbstract mvoGoal; 
+
 	
-	public SdgChild(String name, String id, String description, String icon, Category category, SdgComp sdgComp, int target) {
+	public SdgChild(String name, String icon, MvoGoalAbstract mvoGoal, SdgComp sdgComp, int target) {
 		setName(name);
-		setId(id);
 		setDescription(description);
-		setCategoryID(category);
 		setTarget(target); 
-		setSdgComp(sdgComp); 
-		
+		setMvoGoalAbstract(mvoGoal);
 	}
 
 
+	protected SdgChild() {
+		
+	}
 
 	public String getName() {
 		return name;
@@ -62,15 +65,8 @@ public class SdgChild extends SdgAbstract implements Serializable{
 
 
 
-	public String getId() {
-		return id;
-	}
 
 
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 
 
@@ -98,18 +94,6 @@ public class SdgChild extends SdgAbstract implements Serializable{
 
 
 
-	public Category getCategoryID() {
-		return category;
-	}
-
-
-
-	public void setCategoryID(Category cat) {
-		this.category = cat; 
-	
-	}
-
-
 
 	public int getTarget() {
 		return target;
@@ -121,18 +105,68 @@ public class SdgChild extends SdgAbstract implements Serializable{
 		this.target = target;
 	}
 	
-	public SdgComp getSdgComp() {
-		return sdgComp;
-	}
 	
-	public void setSdgComp(SdgComp sdgComp) {
-		this.sdgComp = sdgComp;
+	public void setMvoGoalAbstract(MvoGoalAbstract mvoGoal) {
+		
+		
+		if(mvoGoal instanceof MvoGoalChild) {
+			this.mvoGoal = (MvoGoalChild) mvoGoal;
+
+		} else {
+			this.mvoGoal = (MvoGoalComp) mvoGoal; 
+		}
+		
 	}
 	
 	
 	@Override
 	public String toString() {
 		return String.format("id: %s, icon: %s, description: %s", getId(), getIcon(), getDescription());
+	}
+	
+	public void get() {
+		throw new UnsupportedOperationException(); 
+
+		
+	}
+	
+	public void getChild() {
+		throw new UnsupportedOperationException(); 
+
+	}
+	
+	public void add(SdgAbstract sdg) throws SdgException {
+		throw new UnsupportedOperationException(); 
+
+		
+	}
+	public void remove(SdgAbstract sdg) throws SdgException {
+		throw new UnsupportedOperationException(); 
+
+	}
+
+	
+	public SdgChild getChild(SdgAbstract sdg) throws SdgException {
+		throw new UnsupportedOperationException(); 
+	}
+	
+	public void addSdgJpa(SdgAbstract comp) {
+		throw new UnsupportedOperationException(); 
+
+	}
+	
+	public void removeSdgJpa(SdgComp comp) {
+		throw new UnsupportedOperationException(); 
+
+	}
+	
+	public SdgComp getSdgJpa(int id) {
+		throw new UnsupportedOperationException(); 
+		
+	}
+
+	public void updateSdg(SdgComp sdgCompToUpdate) {
+		throw new UnsupportedOperationException(); 
 	}
 
 }
