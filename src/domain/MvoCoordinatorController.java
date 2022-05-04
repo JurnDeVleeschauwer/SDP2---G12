@@ -49,6 +49,7 @@ public class MvoCoordinatorController {
 	
 	
 	}
+	
 		
 	public void insertMvoCoordinator(String username, String password) {
 		

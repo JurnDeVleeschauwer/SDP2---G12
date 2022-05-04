@@ -13,6 +13,7 @@ public class DatasourceController {
 	public void addDatasource(String name, String yAxis, String xAxis, int year, int expectedGoal) {
 
 		Datasource data = new Datasource(name, yAxis, xAxis, year, expectedGoal );
+		System.out.println(data.getId());
 		datasourceManager.addDatasource(data);
 	}
 

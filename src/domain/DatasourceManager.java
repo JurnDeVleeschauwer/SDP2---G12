@@ -17,6 +17,7 @@ public class DatasourceManager {
 	
 	public void addDatasource(Datasource d) {
 		datasourceMapper.insert(d);
+		populateList();
 		
 	}
 	
@@ -25,8 +26,8 @@ public class DatasourceManager {
 		datasourceMapper.delete(d);
 	}
 	
-	public Datasource getDatasource(int datasourceId) {
-		return datasourceMapper.get(datasourceId);
+	public Datasource getDatasource(int index) {
+		return datasources.get(0);
 	}
 	
 	public void updateDatasource(Datasource category) {

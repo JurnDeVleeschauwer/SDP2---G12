@@ -6,6 +6,7 @@ import domain.DatasourceReader;
 import domain.MvoCoordinator;
 import domain.MvoCoordinatorController;
 import persistence.GenericMapperJpa;
+import persistence.PopulateDatabase;
 
 public class StartUp {
 
@@ -26,11 +27,9 @@ public class StartUp {
 		 *	GenericMapperJpa.commitTransaction();
 		 *	GenericMapperJpa.closePersistency(); 
 		 */ 
-		
-		MvoCoordinatorController mvoC = new MvoCoordinatorController();
-		MultiLanguageApp app = new MultiLanguageApp(); 
-		
-		DatasourceReader r = new DatasourceReader(); 
+		 
+			PopulateDatabase pd = new PopulateDatabase(); 
+		 
 		
 
 		

@@ -13,10 +13,13 @@ public class MvoGoalManager {
 	
 	public MvoGoalManager() {
 		mvoGoals = new ArrayList<MvoGoalAbstract>(); 
+		populateList();
 	}
 	
 	
 	public void populateList() {
+	
+		
 		mvoGoals.addAll(mvoGoalMapper.findAll()); 
 	}
 	
@@ -26,8 +29,10 @@ public class MvoGoalManager {
 	}
 	
 	public void addMvoGoal(MvoGoalAbstract comp) {
+
 		mvoGoalMapper.insert(comp);
-		
+		populateList();
+
 	}
 	
 	public void deleteMvoGoal(MvoGoalAbstract comp) {
@@ -35,8 +40,8 @@ public class MvoGoalManager {
 		
 	}
 	
-	public MvoGoalComp getMvoGoal(int mvoGoalId) {
-		return (MvoGoalComp) mvoGoalMapper.get(mvoGoalId); 
+	public MvoGoalAbstract getMvoGoal(int mvoGoalId) {
+		return mvoGoals.get(mvoGoalId); 
 		
 	}
 
@@ -46,5 +51,13 @@ public class MvoGoalManager {
 		return mvoGoals;
 	}
 	
+	
+	public void addSubMvoGoal(MvoGoalChild mvoGoalChild, int mvoCompIndex) {
+	
+		MvoGoalComp comp = (MvoGoalComp) mvoGoals.get(mvoCompIndex);
+		
+		comp.add(mvoGoalChild);
+		
+	}
 
 }

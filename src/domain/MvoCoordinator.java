@@ -26,9 +26,6 @@ public class MvoCoordinator implements Serializable {
 	private String username;
 	private String password;
 
-	@Transient
-	private GenericMapperJpa<MvoCoordinator> mvoCoordinatorMapper = new GenericMapperJpa<MvoCoordinator>(MvoCoordinator.class); 
-	
 	
 	public MvoCoordinator(String username, String password) {
 		

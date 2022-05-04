@@ -13,7 +13,8 @@ public class MvoCoordinatorManager {
 	
 	
 	public MvoCoordinatorManager() {
-		mvoCoordinator = new ArrayList<>(); 
+		mvoCoordinator = new ArrayList<>();
+		
 	}
 		
 	public void updateMvoCoordinator(MvoCoordinator mvoCoordinatorToUpdate) {

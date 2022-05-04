@@ -3,10 +3,12 @@ package domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.sql.DataSource;
 
@@ -34,6 +36,7 @@ public class Datasource implements Serializable {
 	private String xAxis;
 	
 	
+	
 	public Datasource(String name, String yAxis, String xAxis, int year, int expectedGoal) {
 		
 		setName(name);
@@ -50,10 +53,6 @@ public class Datasource implements Serializable {
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getName() {

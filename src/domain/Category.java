@@ -1,13 +1,17 @@
 package domain;
 
 import java.io.Serializable;
+
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -20,7 +24,12 @@ import persistence.GenericMapperJpa;
 public class Category implements Serializable{
 	
 	/**
-	 * 
+	 * interfaces Boven klassen 
+	 * Code omdraaien -> Hoog -> laag 
+	 * Unsupported operation exception toevoegen 
+	 * Kijken voor Liberaries 
+	 * SDGComp aanpassen 
+	 * tableview implenteren 
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -28,21 +37,19 @@ public class Category implements Serializable{
 	//Attributes
 	private String name;
 	private String icon; 
-	private boolean showCategory;
 	
-	@Transient
-	private GenericMapperJpa<Category> categoryMapper = new GenericMapperJpa<Category>(Category.class); 
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	private List<SdgAbstract> sdgAbstract; 
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
 	//Constructors
 	
-	public Category(String name, String icon, int id,  boolean showCategory)  {
+	public Category(String name, String icon)  {
 		setName(name);
 		setIcon(icon);
-		setId(id);
-		setShowCategory(showCategory);
 	}
 	
 	protected Category() {
@@ -55,6 +62,12 @@ public class Category implements Serializable{
 	}
 
 
+	public void setMvoGoalAbstract(List<SdgAbstract> sdgAbstract) {
+		this.sdgAbstract = sdgAbstract; 
+		
+	}
+	
+	
 	public void setName(String name) /* throws CategoryException */ {
 		this.name = name;
 	}
@@ -80,18 +93,27 @@ public class Category implements Serializable{
 	}
 
 
-	public boolean isShowCategory() {
-		return showCategory;
-	}
-
-
-	public void setShowCategory(boolean showCategory) {
-		this.showCategory = showCategory;
-	}
 	
+	public void addSdg(SdgAbstract sdg) {
+		
+		sdgAbstract.add(sdg); 
+		
+	}
+
+
+	
+
+	public List<SdgAbstract> getSdgAbstract() {
+		return sdgAbstract;
+	}
+
+	public void setSdgAbstract(List<SdgAbstract> sdgAbstract) {
+		this.sdgAbstract = sdgAbstract;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(icon, name, showCategory);
+		return Objects.hash(icon, name);
 	}
 
 	@Override
@@ -103,16 +125,14 @@ public class Category implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Category other = (Category) obj;
-		return Objects.equals(icon, other.icon) && Objects.equals(name, other.name)
-				&& showCategory == other.showCategory;
+		return Objects.equals(icon, other.icon) && Objects.equals(name, other.name);
 	}
-
-	
 
 	@Override
 	public String toString() {
 		return String.format("Name: %s, id: %d", getName(), getId());
 	}
+
 
 	
 

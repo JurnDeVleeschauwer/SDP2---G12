@@ -6,17 +6,24 @@ import persistence.GenericMapperJpa;
 
 public class SdgController {
 	
-	SdgManager sdgManager = new SdgManager(); 
+	SdgManager sdgManager; 
 	
 	public SdgController() {
 		sdgManager = new SdgManager(); 
+		
 	}
 	
-	public void addSdg(int id, String name, List<SdgChild> sdgs, Category category) {
+	public void addSdg(String name, String description) {
 		
-		SdgComp sdgComp = new SdgComp(id, name, sdgs, category); 
+		SdgComp sdgComp = new SdgComp(name, description); 
 		sdgManager.addSdgJpa(sdgComp); 
 	}
+	
+	public void addSdg(String name, String icon, MvoGoalAbstract mvoGoal, SdgComp sdgComp, int target) {
+		SdgChild sdgChild = new SdgChild(name, icon, mvoGoal, sdgComp, target);
+		sdgManager.addSdgJpa(sdgChild);
+	}
+	
 	
 	public void updateSdg(int sdgId) {
 		
@@ -26,11 +33,18 @@ public class SdgController {
 	}
 	
 	
-	public SdgComp getSdg(int categoryId) {
+	public SdgComp getSdg(int sdgCompId) {
 		
-		return sdgManager.getSdgJpa(categoryId);
+		return sdgManager.getSdg(sdgCompId);
 	}
 	
+	
+	public void addSubSdg(String name, String icon, MvoGoalAbstract mvoGoal, SdgComp sdgComp, int target, int sdgCompId) {
+		
+		SdgChild sdgChild = new SdgChild( name,  icon,  mvoGoal,  sdgComp,  target);
+		
+		sdgManager.addSubSdg(sdgChild, sdgCompId);
+	}
 	
 	public void deleteSdg(SdgComp sdgComp) {
 		 sdgManager.deleteSdg(sdgComp); 

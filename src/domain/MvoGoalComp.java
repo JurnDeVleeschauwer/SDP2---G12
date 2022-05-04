@@ -3,6 +3,7 @@ package domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
@@ -10,7 +11,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -18,9 +23,7 @@ import exceptions.MvoGoalException;
 import exceptions.SdgException;
 import persistence.GenericMapperJpa;
 
-
 @Entity
-@Table(name = "sdg")
 public class MvoGoalComp extends MvoGoalAbstract implements Serializable  {
 	/**
 	 * 
@@ -30,25 +33,20 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable  {
 	@Transient
 	private GenericMapperJpa<MvoGoalAbstract> mvoGoalMapper = new GenericMapperJpa<>(MvoGoalAbstract.class); 
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	
 	private String name;
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<MvoGoalChild> mvoGoals = new ArrayList<>(); 
 	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	private Category category;   
+	
 
 	
-	public MvoGoalComp(int id, String name, List<MvoGoalChild> sdgs, Category cat) {
-		setId(id);
-		setName(name);
-		setSdgs(sdgs);
-		setCategory(cat);
-		
+	public MvoGoalComp(String name) {
+		setName(name);		
 	}
 	
-	public MvoGoalComp() {
+	protected MvoGoalComp() {
 		
 	}
 
@@ -71,17 +69,11 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable  {
 	
 	
 	@Override
-	public MvoGoalChild getChild(MvoGoalAbstract sdg) throws MvoGoalException {
+	public MvoGoalChild getChild(int mvoGoalChildId) throws MvoGoalException {
 		
-	 return mvoGoals.stream().filter((currentSdg) -> currentSdg == sdg).collect(Collectors.toList()).get(0);
+	 return mvoGoals.stream().filter((currentMvo) -> currentMvo.getCounter() == mvoGoalChildId).collect(Collectors.toList()).get(0);
 		
-	}
-	
-	
-	public int getId() {
-		return id; 
-	}
-	
+	}	
 	
 	public String getName() {
 		return name;
@@ -95,18 +87,10 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable  {
 		return mvoGoals;
 	}
 
-	public void setSdgs(List<MvoGoalChild> mvoGoals) {
-		this.mvoGoals = mvoGoals;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public Category getCategory() {
-		return category;
-	}
-	
+
+
+
 	
 	public GenericMapperJpa<MvoGoalAbstract> getMvoGoalMapper() {
 		return mvoGoalMapper;
@@ -120,12 +104,27 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable  {
 		return mvoGoals;
 	}
 
-	public void setMvoGoals(List<MvoGoalChild> mvoGoals) {
-		this.mvoGoals = mvoGoals;
+	public void setMvoGoals(MvoGoalChild mvoGoals) {
+		this.mvoGoals.add(mvoGoals); 
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(mvoGoals, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MvoGoalComp other = (MvoGoalComp) obj;
+		return Objects.equals(mvoGoals, other.mvoGoals) && Objects.equals(name, other.name);
 	}
 
 	@Override
@@ -133,10 +132,10 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable  {
 		 String res = ""; 
 	
 		 
-		 res += String.format("Id: %d%n, Category: %s%n, Name: %s%n", getId(), getName(), getCategory().toString());
+		 res += String.format(" Name: %s%n", getName());
 		 
-		 for(MvoGoalChild child :mvoGoals) {
-			 res += mvoGoals.toString(); 
+		 for(MvoGoalChild child : mvoGoals) {
+			 res += child.toString(); 
 			 
 		 }
 		 

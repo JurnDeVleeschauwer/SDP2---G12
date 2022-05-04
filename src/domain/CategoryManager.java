@@ -8,11 +8,13 @@ import persistence.GenericMapperJpa;
 public class CategoryManager {
 	
 	private List<Category> categories;
-	private GenericMapperJpa<Category> categoryMapper = new GenericMapperJpa<>(Category.class); 
-	
+	private GenericMapperJpa<Category> categoryMapper;
 	
 	public CategoryManager() {
 		categories = new ArrayList<>();
+		categoryMapper = new GenericMapperJpa<Category>(Category.class); 
+	
+		
 		populateList();
 	}
 	
@@ -46,7 +48,14 @@ public class CategoryManager {
 	public void addCategory(Category c) {
 		
 		categoryMapper.insert(c);
+		populateList();
 		
+	}
+	
+	public void addSdgToCategory(int id, SdgAbstract sdg) {
+		
+		categories.get(id).addSdg(sdg);
+		populateList();
 	}
 
 }
