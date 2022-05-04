@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import persistence.GenericMapperJpa;
 
@@ -23,8 +24,8 @@ public class CategoryManager {
 		categoryMapper.delete(c);
 	}
 	
-	public Category getCategory(int categoryId) {
-		return categoryMapper.get(categoryId);
+	public Category getCategory(int id) {
+		return categories.stream().filter(category->category.getId()==id).findAny().get();
 	}
 	public Category getCategoryByIndex(int index) {
 		return categories.get(index);
@@ -34,8 +35,9 @@ public class CategoryManager {
 		updateList();
 	}
 
-	public void deleteCategory(int index) {
-		categoryMapper.delete(categories.get(index));
+	public void deleteCategory(int id) {
+		Category categorySelected= categories.stream().filter(category->category.getId()==id).findAny().get();
+		categoryMapper.delete(categorySelected );
 		updateList();
 	}
 	
@@ -76,6 +78,18 @@ public class CategoryManager {
 		
 		categories.get(id).addSdg(sdg);
 		populateList();
+	}
+
+	public  void updateCategoryName(Category category, String newValue) {
+		Category categorySelected= categories.stream().filter(categoryFromList->categoryFromList==category).findAny().get();
+		categorySelected.setName(newValue);
+		categoryMapper.update(categorySelected);
+	}
+
+	public void updateCategoryIcoon(Category category, String newValue) {
+		Category categorySelected= categories.stream().filter(categoryFromList->categoryFromList==category).findAny().get();
+		categorySelected.setIcon(newValue);
+		categoryMapper.update(categorySelected);		
 	}
 
 }

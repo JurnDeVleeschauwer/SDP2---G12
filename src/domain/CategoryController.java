@@ -4,65 +4,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryController {
-	
-	
-	private CategoryManager cm; 
-	private SdgManager sdgManager; 
+
+	private CategoryManager cm;
+	private SdgManager sdgManager;
 
 	public CategoryController() {
-		cm = new CategoryManager(); 
-		
-		if(sdgManager == null) {
-			sdgManager = new SdgManager(); 
+		cm = new CategoryManager();
+
+		if (sdgManager == null) {
+			sdgManager = new SdgManager();
 		}
 	}
-	
 
-	
 	public void addCategory(String name, String icon) {
-		
-		Category cat; 
-		cat = new Category(name, icon); 
 
+		Category cat;
+		cat = new Category(name, icon);
 
 		cm.addCategory(cat);
 	}
-	
-	public void updateCategory(int index,List<String> categorie) {
-		
-		Category categoryToUpdate = getCategory(index); 
-		categoryToUpdate.setName(categorie.get(0));
-		categoryToUpdate.setIcon(categorie.get(1));
+
+	public void updateCategory(int id,String naam,String icon) {
+
+		Category categoryToUpdate = getCategory(id);
+		categoryToUpdate.setName(naam);
+		categoryToUpdate.setIcon(icon);
 		cm.updateCategory(categoryToUpdate);
 	}
-	
-	
-	public Category getCategory(int index) {
-		
-		return cm.getCategoryByIndex(index);
+
+	public Category getCategory(int id) {
+
+		return cm.getCategory(id);
 	}
-	
-	
-	public void deleteCategory(int index) {
-		cm.deleteCategory(index); 
+
+	public void deleteCategory(int id) {
+		cm.deleteCategory(id);
 	}
-	
+
 	public void addSdgToCategory(int categoryId, int sdgId) {
-		
-		SdgAbstract sdg = sdgManager.getSdg(sdgId); 
+
+		SdgAbstract sdg = sdgManager.getSdg(sdgId);
 
 		cm.addSdgToCategory(categoryId, sdg);
 	}
-	
+
 	public List<Category> getAll() {
-		return cm.getAllCategories(); 
+		return cm.getAllCategories();
 	}
 
-	public List<List<String>> getCategorieen() { //om GUI te testen
-
+	public List<List<String>> getCategorieen() { // om GUI te testen
 
 		return cm.getCategoriesAsStringList();
 
+	}
+
+	public void updateCategoryName(Category category, String newValue) {
+		cm.updateCategoryName(category,newValue);
+		
+	}
+
+	public void updateCategoryIcoon(Category category, String newValue) {
+		cm.updateCategoryIcoon(category,newValue);
+
+		
 	}
 
 }

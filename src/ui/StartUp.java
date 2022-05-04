@@ -57,7 +57,7 @@ public class StartUp extends Application{
 		 *	GenericMapperJpa.closePersistency(); 
 		 */ 
 		 
-			PopulateDatabase pd = new PopulateDatabase(); 
+
 		 
 		
 
