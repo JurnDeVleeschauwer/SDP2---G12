@@ -43,7 +43,7 @@ public class AanmeldPaneel extends GridPane {
 		getColumnConstraints().addAll(col1, col2);
 	}
 
-	private final TextField email = new TextField();
+	private final TextField gebruikersnaam = new TextField();
 	private final PasswordField wachtwoord = new PasswordField();
 	private final Label foutbericht = new Label();
 
@@ -52,8 +52,8 @@ public class AanmeldPaneel extends GridPane {
 		GridPane.setHalignment(header, HPos.LEFT);
 		add(header, 0, 0, 2, 1);
 		foutbericht.setTextFill(Color.color(1, 0, 0));
-		add(new Label("Email"), 0, 1, 1, 1);
-		add(email, 1, 1, 1, 1);
+		add(new Label("Gebruikersnaam"), 0, 1, 1, 1);
+		add(gebruikersnaam, 1, 1, 1, 1);
 
 		add(new Label("Wachtwoord"), 0, 2, 1, 1);
 		add(wachtwoord, 1, 2, 1, 1);
@@ -69,11 +69,11 @@ public class AanmeldPaneel extends GridPane {
 
 	private void aanmelden(ActionEvent event) {
 
-		if (email.getText().trim().isEmpty()) {
+		if (gebruikersnaam.getText().trim().isEmpty()) {
 
-			foutbericht.setText("Gelieve uw emailadres op te geven");
+			foutbericht.setText("Gelieve uw gebruikersnaam op te geven");
 			if (wachtwoord.getText().trim().isEmpty()) {
-				foutbericht.setText("Gelieve uw email en wachtwoord op te geven");
+				foutbericht.setText("Gelieve uw gebruikersnaam en wachtwoord op te geven");
 				return;
 			}
 			return;
@@ -82,7 +82,7 @@ public class AanmeldPaneel extends GridPane {
 			return;
 		}
 		try {
-			mvoCoordinatorController.login(email.getText().trim(), wachtwoord.getText().trim());
+			mvoCoordinatorController.login(gebruikersnaam.getText().trim(), wachtwoord.getText().trim());
 		} catch (AuthenticationException e) {
 			foutbericht.setText("Ongeldige combinatie, gelieve opnieuw te proberen.");
 			return;

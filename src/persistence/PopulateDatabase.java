@@ -24,7 +24,7 @@ public class PopulateDatabase {
 
 		cc.addCategory("Electricity", "Electricity.png");
 
-		mcc.insertMvoCoordinator("Yorben ", "123456789");
+		mcc.insertMvoCoordinator("Yorben", "123456789");
 		dc.addDatasource("Electricity Consuption", "Watt", "Month", 2022, 50);
 		mgc.addMvoGoalComp("Eradicate poverty by 2030 everywhere");
 		mgc.addSubMvoGoal(0, 60, dc.getDatasource(1), "electricity.png", "Poverty");
