@@ -50,6 +50,12 @@ public class Dashboard extends GridPane{
 		});
     	add(buttonAanmelden,3,0);
 		
+		Button buttonListMVO = new Button("List Mvo");
+		buttonListMVO.setOnAction(e->{
+		hoofdPaneel.toonListMvoGoalPaneel();
+	});
+	add(buttonListMVO,4,0);
+	
 		
 	}
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Category;
+import domain.MvoGoalChild;
 import domain.MvoGoalComp;
 import domain.MvoGoalController;
 import javafx.event.ActionEvent;
@@ -12,7 +13,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 	/**
 	 * 
@@ -23,6 +28,7 @@ import javafx.scene.layout.GridPane;
 		private final MvoGoalController mvoGoalController;
 		private final HoofdPaneel hoofdPaneel;
 		private int id;
+		private TableView<MvoGoalChild> tableView;
 
 
 		public MvoGoalPaneel(HoofdPaneel hoofdPaneel, MvoGoalController mvoGoalController) {
@@ -71,12 +77,32 @@ import javafx.scene.layout.GridPane;
 		private void maakGrid() {
 			getChildren().clear();
 			
-			MvoGoalComp mvoGoal = new MvoGoalComp(1, "gerge", new ArrayList<>(), new Category("rfezrg", "rfezger", true));//(MvoGoalComp) mvoGoalController.getMvoGoal(this.id);
+			Label title = new Label("MVOGoal");
+			title.setFont(new Font("Arial", 30));
+			add( title, 5, 0);
 			
-			add( new Label(Integer.toString(mvoGoal.getId())), 1, 1);
-			add( new Label(mvoGoal.getCategory().toString()), 2, 1);
-			add( new Label(mvoGoal.getName()), 3, 1);;
-			add( new Label(mvoGoal.getSdgs().toString()), 4, 1);
+			ArrayList<MvoGoalChild> listMVoChild = new ArrayList<MvoGoalChild>();
+			listMVoChild.add(new MvoGoalChild(1, 1, null, null, "null", "Blad"));
+			
+			MvoGoalComp mvoGoal = new MvoGoalComp(1, "Boom", listMVoChild, new Category("Natuur", "Natuur", true));
+			//MvoGoalComp mvoGoal = (MvoGoalComp) mvoGoalController.getMvoGoal(this.id);
+			Label id = new Label("ID:");
+			id.setFont(new Font("Arial", 15));
+			add( id, 1, 1);
+			add( new Label(Integer.toString(mvoGoal.getId())), 2, 1);
+			Label category = new Label("Category:");
+			category.setFont(new Font("Arial", 15));
+			add( category, 1, 2);
+			add( new Label(mvoGoal.getCategory().getName()), 2, 2);
+			Label name = new Label("Name:");
+			name.setFont(new Font("Arial", 15));
+			add( name, 1, 3);
+			add( new Label(mvoGoal.getName()), 2, 3);;
+			Label SDGs = new Label("SDGs:");
+			SDGs.setFont(new Font("Arial", 15));
+			add( SDGs, 1, 4);
+			maakTableView(mvoGoal);
+
 			
 			
 			
@@ -96,6 +122,36 @@ import javafx.scene.layout.GridPane;
 
 
 		}
+
+		private void maakTableView(MvoGoalComp mvoGoal) {
+			//getChildren().clear();
+		    tableView = new TableView<MvoGoalChild>();
+		        
+		    TableColumn<MvoGoalChild, String> column1 = new TableColumn<>("id");
+		    column1.setCellValueFactory(new PropertyValueFactory<>("id"));
+
+
+		    TableColumn<MvoGoalChild, String> column2 = new TableColumn<>("value");
+		    column2.setCellValueFactory(new PropertyValueFactory<>("value"));
+
+	        TableColumn<MvoGoalChild, String> column3 = new TableColumn<>("mvoName");
+	        column3.setCellValueFactory(new PropertyValueFactory<>("mvoName"));
+
+	        tableView.getColumns().add(column1);
+	        tableView.getColumns().add(column2);
+	        tableView.getColumns().add(column3);
+	        
+	        for(MvoGoalChild mvoGoalChild : mvoGoal.getSdgs()) {
+	        	tableView.getItems().add(mvoGoalChild);
+	        }
+
+	        add(tableView, 1, 5);
+	        
+
+		}
+
+			
+		
 
 	
 

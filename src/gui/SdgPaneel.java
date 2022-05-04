@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Category;
+import domain.MvoGoalChild;
 import domain.MvoGoalComp;
 import domain.MvoGoalController;
 import domain.SdgComp;
@@ -12,7 +13,11 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 	/**
 	 * 
@@ -71,16 +76,26 @@ import javafx.scene.layout.GridPane;
 		private void maakGrid() {
 			getChildren().clear();
 			
+			Label title = new Label("SDG");
+			title.setFont(new Font("Arial", 30));
+			add( title, 5, 0);
+			
+			
 			SdgComp sdg = new SdgComp(1, "gerge", new ArrayList<>(), new Category("rfezrg", "rfezger", true));//(SdgComp) sdgController.getSdg(this.id);
 			
-			Label id = new Label(Integer.toString(sdg.getId()));
-			add(id, 1, 1);
-			Label categoryid = new Label(sdg.getCategory().toString());
-			add(categoryid, 2, 1);
-			Label naam = new Label(sdg.getName());
-			add(naam, 3, 1);
-			Label sdgs = new Label(sdg.getSdgs().toString());
-			add(sdgs, 4, 1);
+			
+			Label id = new Label("ID:");
+			id.setFont(new Font("Arial", 15));
+			add( id, 1, 1);
+			add(new Label(Integer.toString(sdg.getId())), 2, 1);
+			Label category = new Label("Category:");
+			category.setFont(new Font("Arial", 15));
+			add( category, 1, 2);
+			add(new Label(sdg.getCategory().toString()), 2, 2);
+			Label name = new Label("Name:");
+			name.setFont(new Font("Arial", 15));
+			add( name, 1, 3);
+			add(new Label(sdg.getName()), 2, 3);
 			
 			
 			
@@ -99,7 +114,7 @@ import javafx.scene.layout.GridPane;
 
 
 		}
-
+		
 	
 
 	}

@@ -18,14 +18,12 @@ import domain.CategoryController;
  *
  */
 public class HoofdPaneel extends BorderPane {
-    private CategoryController categorieController;
     private AanmeldPaneel aanmelden;
     private CategorieenPaneel categoriePaneel;
     private MvoGoalPaneel mvoGoalPaneel;
-    private MvoGoalWijzigenPopup mvoGoalEditPaneel;
     private SdgPaneel sdgPaneel;
-    private SdgWijzigenPopup sdgEditPaneel;
     private Dashboard dashboard;
+    private ListMvoGoalPaneel listMvoGoalPaneel;
 
 
     /**
@@ -43,7 +41,7 @@ public class HoofdPaneel extends BorderPane {
     	
     	Button dashboardButton=new Button("Naar dashboard");
     	dashboardButton.setOnAction(e->{toonDashboard();});
-    	setTop(dashboardButton);
+    	setBottom(dashboardButton);
     	toonDashboard();
     	//toonSdgPaneel(1);
     	//toonCategoriePaneell();
@@ -63,6 +61,8 @@ setCenter(dashboard);
         this.mvoGoalPaneel = new MvoGoalPaneel(this, new MvoGoalController());
         this.sdgPaneel = new SdgPaneel(this, new SdgController());
         this.dashboard= new Dashboard(this);
+        this.listMvoGoalPaneel = new ListMvoGoalPaneel(this, new MvoGoalController());
+        
     }
     
     /**
@@ -85,6 +85,10 @@ setCenter(dashboard);
     public void toonSdgPaneel(int id) {
     	sdgPaneel.voegComponentenToe(id);
         setCenter(sdgPaneel);
+    }
+    
+    public void toonListMvoGoalPaneel() {
+        setCenter(listMvoGoalPaneel);
     }
     
     
