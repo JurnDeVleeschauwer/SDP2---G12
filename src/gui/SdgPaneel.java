@@ -50,8 +50,22 @@ import javafx.scene.layout.GridPane;
 		}
 
 		private void editButton(ActionEvent event) {
-			//sdgController.edit();
-			hoofdPaneel.toonSdgEditPaneel(this.id);
+			/*List<String> resultaat=SdgWijzigenPopup.display();
+			if(resultaat!=null) {
+				
+				sdgController.updateSdg();
+				update();
+			}*/
+		}
+		
+		
+		private void createButton(ActionEvent event) {
+			/*
+				List<String> resultaat= SdgAanmakenPopup.display();
+				if(!resultaat.isEmpty()) {
+					sdgController.addMvoGoal(resultaat.get(0),resultaat.get(1), null, true);
+				
+			};*/
 		}
 		
 		private void maakGrid() {
@@ -70,14 +84,17 @@ import javafx.scene.layout.GridPane;
 			
 			
 			
-			Button deleteButtonAction = new Button("Delete");
+			Button deleteButtonAction = new Button("Verwijderen");
 			deleteButtonAction.setOnAction(this::deleteButtonAction);
 			add(deleteButtonAction, 12, 11);
 
-			Button editButton = new Button("Edit");
+			Button editButton = new Button("Wijzigen");
 			editButton.setOnAction(this::editButton);
 			add(editButton, 13, 11);
 
+			Button createButton = new Button("Aanmaken");
+			createButton.setOnAction(this::createButton);
+			add(createButton, 14, 11);
 			
 
 

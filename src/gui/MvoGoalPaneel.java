@@ -9,6 +9,7 @@ import domain.MvoGoalComp;
 import domain.MvoGoalController;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -49,9 +50,23 @@ import javafx.scene.layout.GridPane;
 		}
 
 		private void editButton(ActionEvent event) {
-			//MvoGoalController.edit();
-			hoofdPaneel.toonMvoGoalEditPaneel(this.id);
+			/*List<String> resultaat=MvoGoalWijzigenPopup.display();
+			if(resultaat!=null) {
+				
+				mvoGoalController.updateMvoGoal();
+				update();
+			}*/
 		}
+		
+		private void createButton(ActionEvent event) {
+			/*
+				List<String> resultaat=MvoGoalAanmakenPopup.display();
+				if(!resultaat.isEmpty()) {
+					mvoGoalController.addMvoGoal(resultaat.get(0),resultaat.get(1), null, true);
+				
+			};*/
+		}
+		
 		
 		private void maakGrid() {
 			getChildren().clear();
@@ -65,14 +80,18 @@ import javafx.scene.layout.GridPane;
 			
 			
 			
-			Button deleteButtonAction = new Button("Delete");
+			Button deleteButtonAction = new Button("Verwijderen");
 			deleteButtonAction.setOnAction(this::deleteButtonAction);
 			add(deleteButtonAction, 12, 11);
 
-			Button editButton = new Button("Edit");
+			Button editButton = new Button("Wijzigen");
 			editButton.setOnAction(this::editButton);
 			add(editButton, 13, 11);
-
+			
+			Button createButton = new Button("Aanmaken");
+			createButton.setOnAction(this::createButton);
+			add(createButton, 14, 11);
+			
 			
 
 

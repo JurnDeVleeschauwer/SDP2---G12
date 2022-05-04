@@ -22,9 +22,9 @@ public class HoofdPaneel extends BorderPane {
     private AanmeldPaneel aanmelden;
     private CategorieenPaneel categoriePaneel;
     private MvoGoalPaneel mvoGoalPaneel;
-    private MvoGoalEditPaneel mvoGoalEditPaneel;
+    private MvoGoalWijzigenPopup mvoGoalEditPaneel;
     private SdgPaneel sdgPaneel;
-    private SdgEditPaneel sdgEditPaneel;
+    private SdgWijzigenPopup sdgEditPaneel;
     private Dashboard dashboard;
 
 
@@ -61,9 +61,7 @@ setCenter(dashboard);
 
         this.categoriePaneel=new CategorieenPaneel(this, new CategoryController());
         this.mvoGoalPaneel = new MvoGoalPaneel(this, new MvoGoalController());
-        this.mvoGoalEditPaneel = new MvoGoalEditPaneel(this, new MvoGoalController());
         this.sdgPaneel = new SdgPaneel(this, new SdgController());
-        this.sdgEditPaneel = new SdgEditPaneel(this, new SdgController());
         this.dashboard= new Dashboard(this);
     }
     
@@ -83,20 +81,12 @@ setCenter(dashboard);
         setCenter(mvoGoalPaneel);
     }
     
-    public void toonMvoGoalEditPaneel(int id) {
-    	mvoGoalEditPaneel.voegComponentenToe(id);
-        setCenter(mvoGoalEditPaneel);
-    }
     
     public void toonSdgPaneel(int id) {
     	sdgPaneel.voegComponentenToe(id);
         setCenter(sdgPaneel);
     }
     
-    public void toonSdgEditPaneel(int id) {
-    	sdgEditPaneel.voegComponentenToe(id);
-        setCenter(sdgEditPaneel);
-    }
     
 
 }
