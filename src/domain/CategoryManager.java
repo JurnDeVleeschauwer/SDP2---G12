@@ -66,12 +66,12 @@ public class CategoryManager {
 		return lijst; 
 	}
 	
-	public void addCategory(Category c) {
+	public Category addCategory(Category c) {
 		
 		categoryMapper.insert(c);
 
 		updateList();
-
+		return c;
 	}
 	
 	public void addSdgToCategory(int id, SdgAbstract sdg) {
@@ -81,13 +81,13 @@ public class CategoryManager {
 	}
 
 	public  void updateCategoryName(Category category, String newValue) {
-		Category categorySelected= categories.stream().filter(categoryFromList->categoryFromList==category).findAny().get();
+		Category categorySelected= categories.stream().filter(categoryFromList->categoryFromList.getId()==category.getId()).findAny().get();
 		categorySelected.setName(newValue);
 		categoryMapper.update(categorySelected);
 	}
 
 	public void updateCategoryIcoon(Category category, String newValue) {
-		Category categorySelected= categories.stream().filter(categoryFromList->categoryFromList==category).findAny().get();
+		Category categorySelected= categories.stream().filter(categoryFromList->categoryFromList.getId()==category.getId()).findAny().get();
 		categorySelected.setIcon(newValue);
 		categoryMapper.update(categorySelected);		
 	}

@@ -80,7 +80,6 @@ public class GenericMapperJpa<T> implements GenericMapper<T> {
 		startTransaction();
 		em.persist(object);
 		commitTransactionAndClose();
-
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package gui;
 import java.util.List;
 import java.util.Optional;
 
+
 import domain.Category;
 import domain.CategoryController;
 import javafx.event.ActionEvent;
@@ -59,13 +60,7 @@ public class CategorieenHBox extends HBox {
 		categorieVBox.getChildren().addAll( categorieAanmakenButton,verwijderCategorieButton);
 		this.getChildren().add(categorieVBox);
 
-		categorieAanmakenButton.setOnAction(e -> {
-			List<String> resultaat = CategorieAanmakenPopup.display();
-			if (!resultaat.isEmpty()) {
-				categoryController.addCategory(resultaat.get(0), resultaat.get(1));
-				update();
-			}
-		});
+		categorieAanmakenButton.setOnAction(this::categorieAanmaken);
 
 		maakTableView(categoryController);
 	}
@@ -84,6 +79,15 @@ public class CategorieenHBox extends HBox {
 
 		}
 
+	}
+	
+	public void categorieAanmaken(ActionEvent event) {
+		List<String> resultaat = CategorieAanmakenPopup.display();
+		if (!resultaat.isEmpty()) {
+			
+			tableView.getItems().add( categoryController.addCategory(resultaat.get(0), resultaat.get(1)));
+		}
+	
 	}
 
 	public void wijzigCategorie(ActionEvent event) {
@@ -105,23 +109,25 @@ public class CategorieenHBox extends HBox {
 		tableView = new TableView<Category>();
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		tableView.setEditable(true);
+
 		TableColumn<Category, String> columnId = new TableColumn<>("Id");
 		columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		columnId.setEditable(false);
-
+		
 		TableColumn<Category, String> columnNaam = new TableColumn<>("Naam");
 		columnNaam.setCellValueFactory(new PropertyValueFactory<>("name"));
 		columnNaam.setCellFactory(TextFieldTableCell.forTableColumn());
 		columnNaam.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Category, String>>() {
-
+		
 			@Override
 			public void handle(CellEditEvent<Category, String> event) {
+				
 				Category category = event.getRowValue();
 				categoryController.updateCategoryName(category, event.getNewValue());
 
 			}
 		});
-
+		
 		TableColumn<Category, String> columnIcoon = new TableColumn<>("Icoon");
 		columnIcoon.setCellValueFactory(new PropertyValueFactory<>("icon"));
 		columnIcoon.setCellFactory(TextFieldTableCell.forTableColumn());

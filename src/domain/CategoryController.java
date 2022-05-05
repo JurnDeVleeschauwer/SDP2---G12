@@ -16,12 +16,12 @@ public class CategoryController {
 		}
 	}
 
-	public void addCategory(String name, String icon) {
+	public Category addCategory(String name, String icon) {
 
 		Category cat;
 		cat = new Category(name, icon);
-
-		cm.addCategory(cat);
+		
+		return cm.addCategory(cat);
 	}
 
 	public void updateCategory(int id,String naam,String icon) {
