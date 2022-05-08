@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import domain.Datasource;
+import domain.DatasourceController;
 import domain.MvoGoalAbstract;
 import domain.MvoGoalChild;
 import domain.MvoGoalComp;
@@ -30,11 +32,13 @@ import javafx.stage.Stage;
 public class ListMvoGoalPaneel extends GridPane {
 	private final MvoGoalController mvoGoalController;
 	private final HoofdPaneel hoofdPaneel;
+	private DatasourceController datasourceController;
 	private TableView<MvoGoalComp> tableView;
 
-	public ListMvoGoalPaneel(HoofdPaneel hoofdPaneel, MvoGoalController mvoGoalController) {
+	public ListMvoGoalPaneel(HoofdPaneel hoofdPaneel, MvoGoalController mvoGoalController,DatasourceController datasourceController) {
 		this.hoofdPaneel = hoofdPaneel;
 		this.mvoGoalController = mvoGoalController;
+		this.datasourceController = datasourceController;
 
 		configureerGrid();
 
@@ -79,6 +83,10 @@ public class ListMvoGoalPaneel extends GridPane {
 		Button deleteButtonAction = new Button("Verwijderen");
 		deleteButtonAction.setOnAction(this::deleteButtonAction);
 		add(deleteButtonAction, 12, 11);
+		
+		Button createButtonAction = new Button("Aanmaken");
+		createButtonAction.setOnAction(this::createButtonAction);
+		add(createButtonAction, 13, 11);
 		 
 
 		
@@ -97,6 +105,17 @@ public class ListMvoGoalPaneel extends GridPane {
 			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
 
 		}
+		
+	}
+	
+	private void createButtonAction(ActionEvent event) {
+		
+		List<Object> resultaat = MvoGoalAanmakenPopup.display(datasourceController.getDatasources());
+		if (!resultaat.isEmpty()) {
+			mvoGoalController.addMvoGoalChild(Integer.valueOf((String) resultaat.get(0)), (Datasource) resultaat.get(1),
+					(String) resultaat.get(2), (String) resultaat.get(3));
+
+		};
 		
 	}
 }

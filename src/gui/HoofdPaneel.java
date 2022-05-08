@@ -62,7 +62,7 @@ setCenter(dashboard);
         this.mvoGoalPaneel = new MvoGoalPaneel(this, new MvoGoalController(), new DatasourceController());
         this.sdgPaneel = new SdgPaneel(this, new SdgController());
         this.dashboard= new Dashboard(this);
-        this.listMvoGoalPaneel = new ListMvoGoalPaneel(this, new MvoGoalController());
+        this.listMvoGoalPaneel = new ListMvoGoalPaneel(this, new MvoGoalController(), new DatasourceController());
         
     }
     
