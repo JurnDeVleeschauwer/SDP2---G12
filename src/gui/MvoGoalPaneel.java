@@ -3,18 +3,23 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import domain.Category;
+import domain.DatasourceController;
 import domain.MvoGoalChild;
 import domain.MvoGoalComp;
 import domain.MvoGoalController;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -27,13 +32,15 @@ import javafx.scene.text.Font;
 	public class MvoGoalPaneel extends GridPane {
 		private final MvoGoalController mvoGoalController;
 		private final HoofdPaneel hoofdPaneel;
+		private DatasourceController datasourceController;
 		private int id;
 		private TableView<MvoGoalChild> tableView;
 
 
-		public MvoGoalPaneel(HoofdPaneel hoofdPaneel, MvoGoalController mvoGoalController) {
+		public MvoGoalPaneel(HoofdPaneel hoofdPaneel, MvoGoalController mvoGoalController,DatasourceController datasourceController) {
 			this.hoofdPaneel = hoofdPaneel;
 			this.mvoGoalController = mvoGoalController;
+			this.datasourceController = datasourceController;
 
 			configureerGrid();
 		}
@@ -51,8 +58,20 @@ import javafx.scene.text.Font;
 		}
 		
 		private void deleteButtonAction(ActionEvent event) {
-			//MvoGoalController.deleteMvoGoal(mvoGoalController.getMvoGoal(this.id));
-			//hoofdPaneel.toonCategoriePaneell();
+			
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirmeer verwijdering");
+			alert.setHeaderText("Bent u zeker dat u deze categorie wilt verwijderen?");
+			alert.setGraphic(null);
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.isPresent() && result.get() == ButtonType.OK) {
+				mvoGoalController.deleteMvoGoal(mvoGoalController.getMvoGoal(tableView.getSelectionModel().getSelectedItem().getId())); 
+																										
+				tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
+
+			}
+			
 		}
 
 		private void editButton(ActionEvent event) {
@@ -65,12 +84,12 @@ import javafx.scene.text.Font;
 		}
 		
 		private void createButton(ActionEvent event) {
-			/*
-				List<String> resultaat=MvoGoalAanmakenPopup.display();
+			
+				List<String> resultaat=MvoGoalAanmakenPopup.display(datasourceController.getDatasources());
 				if(!resultaat.isEmpty()) {
-					mvoGoalController.addMvoGoal(resultaat.get(0),resultaat.get(1), null, true);
+					//mvoGoalController.addMvoGoalChild(resultaat.get(0),resultaat.get(1), null, true);
 				
-			};*/
+			};
 		}
 		
 		

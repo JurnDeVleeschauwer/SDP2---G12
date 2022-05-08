@@ -38,7 +38,7 @@ public class MvoGoalController {
 	}
 	
 	
-	public void deleteMvoGoal(MvoGoalChild mvoGoal) {
+	public void deleteMvoGoal(MvoGoalAbstract mvoGoal) {
 		mvoGoalManager.deleteMvoGoal(mvoGoal); 
 	}
 	

@@ -6,6 +6,7 @@ import javafx.scene.layout.BorderPane;
 import java.util.*;
 
 import domain.CategoryController;
+import domain.DatasourceController;
 import domain.DomeinController;
 import domain.MvoCoordinatorController;
 import domain.MvoGoalController;
@@ -58,7 +59,7 @@ setCenter(dashboard);
        this.aanmelden = new AanmeldPaneel(this,new MvoCoordinatorController());
 
         this.categoriePaneel=new CategorieenPaneel(this, new CategoryController());
-        this.mvoGoalPaneel = new MvoGoalPaneel(this, new MvoGoalController());
+        this.mvoGoalPaneel = new MvoGoalPaneel(this, new MvoGoalController(), new DatasourceController());
         this.sdgPaneel = new SdgPaneel(this, new SdgController());
         this.dashboard= new Dashboard(this);
         this.listMvoGoalPaneel = new ListMvoGoalPaneel(this, new MvoGoalController());
