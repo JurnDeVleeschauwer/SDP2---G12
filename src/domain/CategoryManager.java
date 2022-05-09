@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import persistence.CategorySdgMapper;
 import persistence.GenericMapperJpa;
 
 public class CategoryManager {
 	
 	private List<Category> categories;
 	private GenericMapperJpa<Category> categoryMapper;
-	
+	private CategorySdgMapper<String> catSdgMapper;
 	public CategoryManager() {
 		categories = new ArrayList<>();
 		categoryMapper = new GenericMapperJpa<Category>(Category.class); 
@@ -42,7 +43,12 @@ public class CategoryManager {
 	}
 	
 	public void populateList() {
+		categories.clear();
 		categories.addAll(categoryMapper.findAll()); 
+		for (Category cat :categories) {
+			cat.setMvoGoalAbstract(catSdgMapper.getSdgsFromCategory(cat.getId()) );
+
+		}
 
 	}
 	
@@ -75,7 +81,9 @@ public class CategoryManager {
 	}
 	
 	public void addSdgToCategory(int id, SdgAbstract sdg) {
-		
+		 catSdgMapper = new CategorySdgMapper<>(null);
+	
+		catSdgMapper.persistSdgToCategory(categories.get(id).getId(), sdg.getId());
 		categories.get(id).addSdg(sdg);
 		populateList();
 	}

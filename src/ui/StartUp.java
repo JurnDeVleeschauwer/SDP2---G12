@@ -38,8 +38,8 @@ public class StartUp extends Application{
 	@Override
 	public void start(Stage stage) {
 
-		PopulateDatabase.populateDatabase();
-        HoofdPaneel root = new HoofdPaneel();
+		CategoryController categoryController=	PopulateDatabase.populateDatabase();
+        HoofdPaneel root = new HoofdPaneel(categoryController);
 
         Scene scene = new Scene(root, 800, 800);
 

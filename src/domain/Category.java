@@ -11,10 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table
+@NamedNativeQuery(name="getSdgsFromCategory", query="SELECT * FROM sdgabstract join category_sdgabstract on sdgabstract.ID = category_sdgabstract.sdgAbstract_ID where category_sdgabstract.Category_ID=#catId", resultClass=SdgAbstract.class)
 public class Category implements Serializable{
 	
 	/**
@@ -109,7 +111,7 @@ public class Category implements Serializable{
 
 	
 
-	public List<SdgAbstract> getSdgAbstract() {
+	public List<SdgAbstract> getSdgAbstracts() {
 		return sdgAbstract;
 	}
 

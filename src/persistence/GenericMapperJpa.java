@@ -69,6 +69,7 @@ public class GenericMapperJpa<T> implements GenericMapper<T> {
 
 	@Override
 	public void delete(T object) {
+		
 		startTransaction();
 		em.remove(em.merge(object));
 		commitTransactionAndClose();

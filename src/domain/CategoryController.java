@@ -11,9 +11,11 @@ public class CategoryController {
 	public CategoryController() {
 		cm = new CategoryManager();
 
-		if (sdgManager == null) {
-			sdgManager = new SdgManager();
-		}
+	}
+
+	public CategoryController(SdgManager sdgManager) {
+		cm = new CategoryManager();
+		this.sdgManager=sdgManager;
 	}
 
 	public Category addCategory(String name, String icon) {
@@ -43,9 +45,11 @@ public class CategoryController {
 
 	public void addSdgToCategory(int categoryId, int sdgId) {
 
+
 		SdgAbstract sdg = sdgManager.getSdg(sdgId);
 
 		cm.addSdgToCategory(categoryId, sdg);
+		
 	}
 
 	public List<Category> getAll() {

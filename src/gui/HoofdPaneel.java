@@ -29,11 +29,12 @@ public class HoofdPaneel extends BorderPane {
 
     /**
      * 
+     * @param categoryController 
      * @param CategoryController
      */
-    public HoofdPaneel() {
+    public HoofdPaneel(CategoryController categoryController) {
         
-        createPanelen();
+        createPanelen(categoryController);
         voegComponentenToe();
     }
 
@@ -53,12 +54,13 @@ setCenter(dashboard);
 	}
 
 	/**
+	 * @param categoryController 
      * 
      */
-    public void createPanelen() {
+    public void createPanelen(CategoryController categoryController) {
        this.aanmelden = new AanmeldPaneel(this,new MvoCoordinatorController());
 
-        this.categoriePaneel=new CategorieenPaneel(this, new CategoryController());
+        this.categoriePaneel=new CategorieenPaneel(this, categoryController);
         this.mvoGoalPaneel = new MvoGoalPaneel(this, new MvoGoalController(), new DatasourceController());
         this.sdgPaneel = new SdgPaneel(this, new SdgController());
         this.dashboard= new Dashboard(this);

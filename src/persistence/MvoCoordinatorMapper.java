@@ -18,7 +18,7 @@ public class MvoCoordinatorMapper<T> extends GenericMapperJpa<T> {
 		em = emf.createEntityManager();
 		em.getTransaction().begin();
 		MvoCoordinator mvoCoordinator;
-
+		
 		try {
 			mvoCoordinator = (MvoCoordinator) em
 					.createQuery("select mvo from " + type.getSimpleName() + " mvo " + "where " + "mvo.username like "

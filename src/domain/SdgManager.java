@@ -16,6 +16,7 @@ public class SdgManager {
 	}
 	
 	public void populateList() {
+		
 		sdgs.addAll(sdgMapper.findAll()); 
 	}
 	
@@ -24,6 +25,7 @@ public class SdgManager {
 	public void addSdgJpa(SdgAbstract sdg) {
 		sdgMapper.insert(sdg);
 		populateList();
+		
 	}
 	
 	public void deleteSdg(SdgAbstract sdg) {
@@ -32,6 +34,7 @@ public class SdgManager {
 	}
 	
 	public SdgComp getSdg(int sdgId) {
+	
 		return (SdgComp) sdgs.get(sdgId); 
 		
 	}
@@ -46,7 +49,7 @@ public class SdgManager {
 	}
 
 	public void addSubSdg(SdgChild sdgChild, int sdgCompIndex) {
-	
+
 		SdgComp comp = (SdgComp) sdgs.get(sdgCompIndex);
 		
 		comp.add(sdgChild);

@@ -7,6 +7,7 @@ import java.util.Optional;
 import domain.Category;
 import domain.CategoryController;
 import domain.SdgAbstract;
+import domain.SdgComp;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -112,7 +113,9 @@ public class CategorieenHBox extends HBox {
 		tableView = new TableView<Category>();
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		tableView.setEditable(true);
-		
+
+
+
 		
 		TableColumn<Category, String> columnId = new TableColumn<>("Id");
 		columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -150,7 +153,8 @@ public class CategorieenHBox extends HBox {
 		tableView.getColumns().add(columnIcoon);
 		tableView.getSelectionModel().selectedItemProperty().addListener( (obs,oldSelection,newSelection)->{
 			if(newSelection!=null) {
-				updateListView(newSelection.getSdgAbstract());
+				
+				updateListView(newSelection.getSdgAbstracts());
 			}
 		});
 		for (Category category : categoryController.getAll()) {
@@ -162,8 +166,10 @@ public class CategorieenHBox extends HBox {
 	}
 	
 	private void updateListView(List<SdgAbstract> sdgAbstract) {
+
 		for (SdgAbstract sdg : sdgAbstract) {
-			listview.getItems().add(sdg.getName());
+		SdgComp	sdgComp= (SdgComp) sdg;
+			listview.getItems().add(sdgComp.getName());
 		}
 
 		
