@@ -18,6 +18,8 @@ public abstract class SdgAbstract {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int id; 
+	protected String name;
+
 	
 	protected SdgAbstract() {
 		
@@ -28,7 +30,12 @@ public abstract class SdgAbstract {
 	public void get() {
 		
 	}
-	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name=name;
+	}
 	
 	public void add(SdgAbstract sdg) throws SdgException {
 
@@ -37,7 +44,7 @@ public abstract class SdgAbstract {
 	public void remove(SdgAbstract sdg) throws SdgException {
 		
 	}
-
+	
 	
 	public SdgChild getChild(int id) throws SdgException {
 		return null;

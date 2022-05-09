@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import domain.Category;
 import domain.CategoryController;
+import domain.SdgAbstract;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
@@ -33,7 +35,7 @@ public class CategorieenHBox extends HBox {
 	private final CategoryController categoryController;
 	private final HoofdPaneel hoofdPaneel;
 	private TableView<Category> tableView;
-
+	private ListView<String> listview;
 	public CategorieenHBox(CategoryController categoryController, HoofdPaneel hoofdPaneel) {
 
 		this.categoryController = categoryController;
@@ -63,6 +65,7 @@ public class CategorieenHBox extends HBox {
 		categorieAanmakenButton.setOnAction(this::categorieAanmaken);
 
 		maakTableView(categoryController);
+		maakListView();
 	}
 
 	public void verwijderCategorie(ActionEvent event) {
@@ -109,7 +112,8 @@ public class CategorieenHBox extends HBox {
 		tableView = new TableView<Category>();
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		tableView.setEditable(true);
-
+		
+		
 		TableColumn<Category, String> columnId = new TableColumn<>("Id");
 		columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		columnId.setEditable(false);
@@ -144,13 +148,34 @@ public class CategorieenHBox extends HBox {
 		tableView.getColumns().add(columnId);
 		tableView.getColumns().add(columnNaam);
 		tableView.getColumns().add(columnIcoon);
-
+		tableView.getSelectionModel().selectedItemProperty().addListener( (obs,oldSelection,newSelection)->{
+			if(newSelection!=null) {
+				updateListView(newSelection.getSdgAbstract());
+			}
+		});
 		for (Category category : categoryController.getAll()) {
 			tableView.getItems().add(category);
 		}
 
 		this.getChildren().add(tableView);
 
+	}
+	
+	private void updateListView(List<SdgAbstract> sdgAbstract) {
+		for (SdgAbstract sdg : sdgAbstract) {
+			listview.getItems().add(sdg.getName());
+		}
+
+		
+	}
+
+	private void maakListView() {
+
+		listview = new ListView<>();
+
+
+		this.getChildren().add(listview);
+	
 	}
 
 }
