@@ -49,9 +49,7 @@ public class CategorySdgMapper<T> extends GenericMapperJpa<T>{
 	
 		em.getTransaction().commit();
 		em.close();
-		System.out.println("SDGS");
-		System.out.println(sdgs.get(0).getName());
-		System.out.println("SDGS");
+
 		return sdgs;
 
 	}
