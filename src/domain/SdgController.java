@@ -46,8 +46,8 @@ public class SdgController {
 	public void addSubSdg(String name, String icon, MvoGoalAbstract mvoGoal, SdgComp sdgComp, int target, int sdgCompId) {
 		
 		SdgChild sdgChild = new SdgChild( name,  icon,  mvoGoal,  sdgComp,  target);
-		
 		sdgManager.addSubSdg(sdgChild, sdgCompId);
+		sdgManager.updateSdg(sdgComp);
 	}
 	
 	public void deleteSdg(SdgComp sdgComp) {
