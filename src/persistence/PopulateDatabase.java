@@ -14,12 +14,8 @@ public class PopulateDatabase {
 	
 
 	
-	public static CategoryController populateDatabase() {
-		DatasourceController dc = new DatasourceController(); 
-		MvoCoordinatorController mcc = new MvoCoordinatorController(); 
-		MvoGoalController mgc = new MvoGoalController(); 
-		SdgController sc = new SdgController(); 
-		CategoryController cc = new CategoryController(sc.getSdgManager()); 
+	public static CategoryController populateDatabase(CategoryController cc,DatasourceController dc, MvoCoordinatorController mcc,MvoGoalController mgc, SdgController sc) {
+
 		
 
 		cc.addCategory("Electricity", "Electricity.png");

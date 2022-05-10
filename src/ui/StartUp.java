@@ -9,9 +9,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.*;
 import domain.Datasource;
+import domain.DatasourceController;
 import domain.DatasourceReader;
 import domain.MvoCoordinator;
 import domain.MvoCoordinatorController;
+import domain.MvoGoalController;
+import domain.SdgController;
 import persistence.GenericMapperJpa;
 import persistence.PopulateDatabase;
 import persistence.PopulateDatabase;
@@ -38,8 +41,14 @@ public class StartUp extends Application{
 	@Override
 	public void start(Stage stage) {
 
-		CategoryController categoryController=	PopulateDatabase.populateDatabase();
-        HoofdPaneel root = new HoofdPaneel(categoryController);
+		CategoryController cg = new CategoryController();
+		DatasourceController dc = new DatasourceController(); 
+		MvoCoordinatorController mcc = new MvoCoordinatorController(); 
+		MvoGoalController mgc = new MvoGoalController(); 
+		SdgController sc = new SdgController(); 
+		
+		PopulateDatabase.populateDatabase(cg,dc,mcc,mgc,sc);
+        HoofdPaneel root = new HoofdPaneel(cg,dc,mcc,mgc,sc);
 
         Scene scene = new Scene(root, 800, 800);
 

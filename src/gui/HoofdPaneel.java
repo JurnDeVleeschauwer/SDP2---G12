@@ -7,6 +7,7 @@ import java.util.*;
 
 import domain.CategoryController;
 import domain.DatasourceController;
+import domain.DatasourceReader;
 import domain.DomeinController;
 import domain.MvoCoordinatorController;
 import domain.MvoGoalController;
@@ -25,16 +26,30 @@ public class HoofdPaneel extends BorderPane {
     private SdgPaneel sdgPaneel;
     private Dashboard dashboard;
     private ListMvoGoalPaneel listMvoGoalPaneel;
+    private CategoryController cc;
+    private DatasourceController dc;
+    private MvoCoordinatorController mcc;
+    private MvoGoalController mgc;
+    private SdgController sc;
 
 
     /**
      * 
      * @param categoryController 
+     * @param sc 
+     * @param mgc 
+     * @param mcc 
+     * @param dc 
      * @param CategoryController
      */
-    public HoofdPaneel(CategoryController categoryController) {
-        
-        createPanelen(categoryController);
+    public HoofdPaneel(CategoryController categoryController, DatasourceController dc, MvoCoordinatorController mcc, MvoGoalController mgc, SdgController sc) {
+        this.cc=categoryController;
+        this.dc=dc;
+        this.mcc=mcc;
+        this.mgc=mgc;
+        this.sc=sc;
+    	
+        createPanelen();
         voegComponentenToe();
     }
 
@@ -57,14 +72,14 @@ setCenter(dashboard);
 	 * @param categoryController 
      * 
      */
-    public void createPanelen(CategoryController categoryController) {
-       this.aanmelden = new AanmeldPaneel(this,new MvoCoordinatorController());
+    public void createPanelen() {
+       this.aanmelden = new AanmeldPaneel(this,mcc);
 
-        this.categoriePaneel=new CategorieenPaneel(this, categoryController);
-        this.mvoGoalPaneel = new MvoGoalPaneel(this, new MvoGoalController(), new DatasourceController());
-        this.sdgPaneel = new SdgPaneel(this, new SdgController());
+        this.categoriePaneel=new CategorieenPaneel(this, cc);
+        this.mvoGoalPaneel = new MvoGoalPaneel(this, mgc, dc);
+        this.sdgPaneel = new SdgPaneel(this, sc);
         this.dashboard= new Dashboard(this);
-        this.listMvoGoalPaneel = new ListMvoGoalPaneel(this, new MvoGoalController(), new DatasourceController());
+        this.listMvoGoalPaneel = new ListMvoGoalPaneel(this, mgc, dc);
         
     }
     
