@@ -15,7 +15,7 @@ import exceptions.SdgException;
 
 @Entity
 @Inheritance(strategy =InheritanceType.SINGLE_TABLE)
-@Table(name="SdgAbstract")
+@MappedSuperclass
 public abstract class SdgAbstract implements Serializable{
 	
 	/**
