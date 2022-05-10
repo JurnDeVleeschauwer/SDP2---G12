@@ -19,28 +19,24 @@ import javafx.scene.paint.Color;
 public class AanmeldPaneel extends GridPane {
 	private final HoofdPaneel hoofdPaneel;
 	private final MvoCoordinatorController mvoCoordinatorController;
+	
 
 	public AanmeldPaneel(HoofdPaneel hoofdPaneel, MvoCoordinatorController mvoCoordinatorController) {
 
 		this.hoofdPaneel = hoofdPaneel;
 		this.mvoCoordinatorController = mvoCoordinatorController;
+		this.setStyle("-fx-background-color: #004C6A");
 
 		configureerGrid();
 		voegComponentenToe();
 	}
-
+	
 	private void configureerGrid() {
+		//this.gridLinesVisibleProperty().set(true);
+		
 		setPadding(new Insets(10));
 		setHgap(10);
 		setVgap(10);
-
-		ColumnConstraints col1 = new ColumnConstraints();
-		col1.setHalignment(HPos.RIGHT);
-
-		ColumnConstraints col2 = new ColumnConstraints();
-		col2.setHgrow(Priority.ALWAYS);
-
-		getColumnConstraints().addAll(col1, col2);
 	}
 
 	private final TextField gebruikersnaam = new TextField();
@@ -48,22 +44,39 @@ public class AanmeldPaneel extends GridPane {
 	private final Label foutbericht = new Label();
 
 	private void voegComponentenToe() {
+		//Label aanmelden
 		Label header = new Label("Aanmelden");
-		GridPane.setHalignment(header, HPos.LEFT);
-		add(header, 0, 0, 2, 1);
+		header.setStyle("-fx-text-fill: #B2D235; -fx-font: normal bold 47px 'system'");
+		add(header, 0, 0, 1, 1);
+		
+		
+		//label gebruikersnaam + inputbox
+		Label gebruikersnaamLbl = new Label("Gebruikersnaam");
+		gebruikersnaamLbl.setStyle("-fx-text-fill: #B2D235; -fx-font: normal 18px 'system'");
+		gebruikersnaam.setStyle("-fx-font: normal 18px 'system';");
+		gebruikersnaam.setPrefWidth(300.0);
+		gebruikersnaam.setMaxWidth(300.0);
+		foutbericht.setStyle("-fx-font: normal 18px 'system'");
 		foutbericht.setTextFill(Color.color(1, 0, 0));
-		add(new Label("Gebruikersnaam"), 0, 1, 1, 1);
-		add(gebruikersnaam, 1, 1, 1, 1);
+		add(gebruikersnaamLbl, 0, 1, 1, 1);
+		add(gebruikersnaam, 0, 2, 1, 1);
 
-		add(new Label("Wachtwoord"), 0, 2, 1, 1);
-		add(wachtwoord, 1, 2, 1, 1);
+		//label wachtwoord + inputbox
+		Label wachtwoordLbl = new Label("Wachtwoord");
+		wachtwoordLbl.setStyle("-fx-text-fill: #B2D235; -fx-font: normal 18px 'system'");
+		wachtwoord.setStyle("-fx-font: normal 18px 'system';");
+		wachtwoord.setPrefWidth(300.0);
+		wachtwoord.setMaxWidth(300.0);
+		add(wachtwoordLbl, 0, 3, 1, 1);
+		add(wachtwoord, 0, 4, 1, 1);
 
 		Button aanmelden = new Button("Aanmelden");
 		aanmelden.setOnAction(this::aanmelden);
 		aanmelden.setDefaultButton(true);
-		HBox controls = new HBox(aanmelden, foutbericht);
-		controls.setSpacing(10);
-		add(controls, 0, 3, 2, 1);
+		aanmelden.setStyle("-fx-background-color: #0A759D; -fx-text-fill: #B2D235; -fx-font: normal 18px 'system'");
+		add(foutbericht, 0, 5, 1, 1);
+		add(aanmelden, 0, 6, 1, 1);
+		
 
 	}
 

@@ -31,7 +31,9 @@ public class HoofdPaneel extends BorderPane {
      * @param CategoryController
      */
     public HoofdPaneel() {
-        
+    	this.setStyle("-fx-border-color: black; -fx-background-color: #0A759D");
+    	
+        		
         createPanelen();
         voegComponentenToe();
     }
@@ -40,6 +42,7 @@ public class HoofdPaneel extends BorderPane {
     	setCenter(mvoGoalPaneel);
     	
     	Button dashboardButton=new Button("Naar dashboard");
+    	dashboardButton.setMinWidth(800.0);
     	dashboardButton.setOnAction(e->{toonDashboard();});
     	setBottom(dashboardButton);
     	toonDashboard();
@@ -48,7 +51,7 @@ public class HoofdPaneel extends BorderPane {
     }
 
     private void toonDashboard() {
-setCenter(dashboard);		
+    	setCenter(dashboard);		
 	}
 
 	/**

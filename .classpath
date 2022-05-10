@@ -6,53 +6,57 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/javafx/javafx.base.jar">
+	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17/lib/javafx.base.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/javafx/javafx.controls.jar">
+	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17/lib/javafx.controls.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/javafx/javafx.fxml.jar">
+	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17/lib/javafx.fxml.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/javafx/javafx.graphics.jar">
+	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17/lib/javafx.graphics.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/javafx/javafx.media.jar">
+	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17/lib/javafx.media.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/javafx/javafx.swing.jar">
+	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17/lib/javafx.swing.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/javafx/javafx.web.jar">
+	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17/lib/javafx.web.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/javafx/javafx-swt.jar">
+	<classpathentry kind="lib" path="C:/Program Files/JavaFX17/javafx-sdk-17/lib/javafx-swt.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/jpa_new/mysql-connector-java-8.0.27.jar"/>
-	<classpathentry kind="lib" path="D:/jpa_new/jpa/eclipselink.jar"/>
-	<classpathentry kind="lib" path="D:/jpa_new/jpa/jakarta.persistence.source_2.2.3.jar"/>
-	<classpathentry kind="lib" path="D:/jpa_new/jpa/jakarta.persistence_2.2.3.jar"/>
-	<classpathentry kind="lib" path="D:/jpa_new/jpa/org.eclipse.persistence.jpa.modelgen.source_2.7.10.v20211216-fe64cd39c3.jar"/>
-	<classpathentry kind="lib" path="D:/jpa_new/jpa/org.eclipse.persistence.jpa.modelgen_2.7.10.v20211216-fe64cd39c3.jar"/>
-	<classpathentry kind="lib" path="D:/jpa_new/jpa/org.eclipse.persistence.jpars.source_2.7.10.v20211216-fe64cd39c3.jar"/>
-	<classpathentry kind="lib" path="D:/jpa_new/jpa/org.eclipse.persistence.jpars_2.7.10.v20211216-fe64cd39c3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/xande/Downloads/JARS_Mockito/byte-buddy-1.11.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/xande/Downloads/JARS_Mockito/mockito-core-3.12.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/xande/Downloads/JARS_Mockito/mockito-junit-jupiter-3.12.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/xande/Downloads/JARS_Mockito/objenesis-3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/xande/Downloads/jpaJARS/eclipselink.jar"/>
+	<classpathentry kind="lib" path="C:/Users/xande/Downloads/jpaJARS/jakarta.persistence.source_2.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/xande/Downloads/jpaJARS/jakarta.persistence_2.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/xande/Downloads/jpaJARS/mysql-connector-java-8.0.27.jar"/>
+	<classpathentry kind="lib" path="C:/Users/xande/Downloads/jpaJARS/org.eclipse.persistence.jpa.modelgen.source_2.7.10.v20211216-fe64cd39c3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/xande/Downloads/jpaJARS/org.eclipse.persistence.jpa.modelgen_2.7.10.v20211216-fe64cd39c3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/xande/Downloads/jpaJARS/org.eclipse.persistence.jpars.source_2.7.10.v20211216-fe64cd39c3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/xande/Downloads/jpaJARS/org.eclipse.persistence.jpars_2.7.10.v20211216-fe64cd39c3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
