@@ -1,4 +1,5 @@
-/persistence/
 /domain/
+/exceptions/
 /gui/
+/persistence/
 /ui/

@@ -51,7 +51,7 @@ public class SdgManager {
 	public void addSubSdg(SdgChild sdgChild, int sdgCompIndex) {
 
 		SdgComp comp = (SdgComp) sdgs.get(sdgCompIndex);
-		
+		sdgMapper.insert(sdgChild);
 		comp.add(sdgChild);
 	}
 	
