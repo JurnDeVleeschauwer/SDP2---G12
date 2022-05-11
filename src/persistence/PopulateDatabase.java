@@ -28,7 +28,6 @@ public class PopulateDatabase {
 		sc.addSdg("No Poverty", "End poverty in all its forms everywhere");
 		sc.addSubSdg("Eradicate Extreme Poverty", "sdgGoal1.png", mgc.getMvoGoal(0), sc.getSdg(0) , 60,  0);
 
-
 		cc.addSdgToCategory(0, sc.getSdg(0).getChild(0).getId());
 		return cc;
 
