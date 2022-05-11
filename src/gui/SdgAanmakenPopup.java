@@ -17,9 +17,9 @@
 
 	public class SdgAanmakenPopup {
 		
-		static List<String> sdg;
+		static List<Object> sdg;
 		
-		public static List<String> display(){
+		public static List<Object> display(){
 			sdg=new ArrayList<>();
 			
 			Stage window = new Stage();
@@ -33,9 +33,14 @@
 			TextField textFieldNaam = new TextField();
 			textFieldNaam.setPromptText("Sdg naam");
 			
+			Label labelDescription= new Label("Description:");
+			TextField textFieldDescription= new TextField();
+			textFieldDescription.setPromptText("Sdg description");
+			
 			Button aanmakenButton = new Button("Aanmaken");
 			aanmakenButton.setOnAction(e->{
 				sdg.add(textFieldNaam.getText());
+				sdg.add(textFieldDescription.getText());
 				window.close();
 			});
 			aanmakenButton.setDefaultButton(true);
@@ -51,7 +56,7 @@
 			hboxButtons.getChildren().addAll(aanmakenButton,annulerenButton);
 			hboxButtons.setAlignment(Pos.CENTER);
 			VBox layout = new VBox(10);
-			layout.getChildren().addAll(labeltitel,labelNaam,textFieldNaam,hboxButtons);
+			layout.getChildren().addAll(labeltitel,labelNaam,textFieldNaam,labelDescription,textFieldDescription,hboxButtons);
 			layout.setAlignment(Pos.CENTER);
 			Scene scene = new Scene(layout);
 			window.setScene(scene);

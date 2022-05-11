@@ -54,6 +54,9 @@ public class SdgController {
 		 sdgManager.deleteSdg(sdgComp); 
 	}
 	
+	public List<SdgAbstract> getAll() {
+		return sdgManager.getAll();
+	}
 	
 
 }

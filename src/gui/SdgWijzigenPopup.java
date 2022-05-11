@@ -3,6 +3,7 @@ package gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.SdgAbstract;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,10 +16,12 @@ import javafx.stage.Stage;
 
 public class SdgWijzigenPopup {
 	
-	static List<String> sdg;
+	static List<Object> sdg;
+	static SdgAbstract sdgUpdate;
 	
 	
-	public static List<String> display(String naam,String categorie){
+	public static List<Object> display(SdgAbstract sdgToUpdate){
+		sdgUpdate = sdgToUpdate;
 		sdg=new ArrayList<>();
 		
 		Stage window = new Stage();
@@ -29,11 +32,11 @@ public class SdgWijzigenPopup {
 		
 		Label labelNaam = new Label("Naam:");
 		TextField textFieldNaam = new TextField();
-		textFieldNaam.setText(naam);
+		//textFieldNaam.setText(sdgUpdate.getName());
 		
 		Label labelCategorie = new Label("Categorie:");
 		TextField textFieldCategorie = new TextField();
-		textFieldCategorie.setText(categorie);
+		//textFieldCategorie.setText(sdgUpdate.get);
 		
 		Button wijzigenButton = new Button("Wijzigen");
 		wijzigenButton.setOnAction(e->{
