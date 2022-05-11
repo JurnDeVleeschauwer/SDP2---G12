@@ -3,6 +3,7 @@ package ui;
 import domain.CategoryController;
 
 import domain.DomeinController;
+import gui.AanmeldPaneel;
 import gui.HoofdPaneel;
 import javafx.application.Application;
 import javafx.scene.Scene;

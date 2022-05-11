@@ -58,10 +58,15 @@ public class SdgPaneel extends GridPane {
 
 	private void deleteButtonAction(ActionEvent event) {
 
+
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmeer verwijdering");
 		alert.setHeaderText("Bent u zeker dat u deze categorie wilt verwijderen?");
 		alert.setGraphic(null);
+
+			
+		
+
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -69,7 +74,49 @@ public class SdgPaneel extends GridPane {
 
 			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
 
-		}
+		}}
+
+		
+		private void maakGrid() {
+			this.gridLinesVisibleProperty().set(true);
+			
+			getChildren().clear();
+			
+			Label title = new Label("SDG");
+			title.setFont(new Font("Arial", 30));
+			add( title, 5, 0);
+			
+			
+			SdgComp sdg = new SdgComp( "naamSdgComp", "DescriptieSdgComp",new ArrayList<>());//(SdgComp) sdgController.getSdg(this.id);
+			
+			
+			Label id = new Label("ID:");
+			id.setFont(new Font("Arial", 15));
+			add( id, 1, 1);
+			add(new Label(Integer.toString(sdg.getId())), 2, 1);
+			Label category = new Label("Category:");
+			category.setFont(new Font("Arial", 15));
+			add( category, 1, 2);
+			Label name = new Label("Name:");
+			name.setFont(new Font("Arial", 15));
+			add( name, 1, 3);
+			add(new Label(sdg.getName()), 2, 3);
+			
+			
+			
+			Button deleteButtonAction = new Button("Verwijderen");
+			deleteButtonAction.setOnAction(this::deleteButtonAction);
+			add(deleteButtonAction, 12, 11);
+
+			Button editButton = new Button("Wijzigen");
+			editButton.setOnAction(this::editButton);
+			add(editButton, 13, 11);
+
+			Button createButton = new Button("Aanmaken");
+			createButton.setOnAction(this::createButton);
+			add(createButton, 14, 11);
+			
+
 
 	}
 
@@ -94,40 +141,6 @@ public class SdgPaneel extends GridPane {
 		;
 	}
 
-	private void maakGrid() {
-		getChildren().clear();
 
-		Label title = new Label("SDG");
-		title.setFont(new Font("Arial", 30));
-		add(title, 5, 0);
-
-		SdgComp sdg = new SdgComp("naamSdgComp", "DescriptieSdgComp", new ArrayList<>());// (SdgComp)
-																							// sdgController.getSdg(this.id);
-
-		Label id = new Label("ID:");
-		id.setFont(new Font("Arial", 15));
-		add(id, 1, 1);
-		add(new Label(Integer.toString(sdg.getId())), 2, 1);
-		Label category = new Label("Category:");
-		category.setFont(new Font("Arial", 15));
-		add(category, 1, 2);
-		Label name = new Label("Name:");
-		name.setFont(new Font("Arial", 15));
-		add(name, 1, 3);
-		add(new Label(sdg.getName()), 2, 3);
-
-		Button deleteButtonAction = new Button("Verwijderen");
-		deleteButtonAction.setOnAction(this::deleteButtonAction);
-		add(deleteButtonAction, 12, 11);
-
-		Button editButton = new Button("Wijzigen");
-		editButton.setOnAction(this::editButton);
-		add(editButton, 13, 11);
-
-		Button createButton = new Button("Aanmaken");
-		createButton.setOnAction(this::createButton);
-		add(createButton, 14, 11);
-
-	}
 
 }
