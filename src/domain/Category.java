@@ -141,6 +141,11 @@ public class Category implements Serializable{
 		return String.format("Name: %s, id: %d", getName(), getId());
 	}
 
+	public boolean hasSdgs() {
+
+		return !sdgAbstract.isEmpty();
+	}
+
 
 	
 

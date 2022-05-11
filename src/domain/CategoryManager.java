@@ -100,4 +100,8 @@ public class CategoryManager {
 		categoryMapper.update(categorySelected);		
 	}
 
+	public boolean heeftSdgs(int id) {
+		return categories.stream().filter(category->category.getId()==id).findAny().get().hasSdgs();
+	}
+
 }

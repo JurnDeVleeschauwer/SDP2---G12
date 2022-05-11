@@ -3,7 +3,6 @@ package gui;
 import java.util.List;
 import java.util.Optional;
 
-
 import domain.Category;
 import domain.CategoryController;
 import domain.SdgAbstract;
@@ -37,6 +36,7 @@ public class CategorieenHBox extends HBox {
 	private final HoofdPaneel hoofdPaneel;
 	private TableView<Category> tableView;
 	private ListView<String> listview;
+
 	public CategorieenHBox(CategoryController categoryController, HoofdPaneel hoofdPaneel) {
 
 		this.categoryController = categoryController;
@@ -60,7 +60,7 @@ public class CategorieenHBox extends HBox {
 		verwijderCategorieButton.setOnAction(this::verwijderCategorie);
 		Button categorieAanmakenButton = new Button("Nieuwe categorie maken");
 
-		categorieVBox.getChildren().addAll( categorieAanmakenButton,verwijderCategorieButton);
+		categorieVBox.getChildren().addAll(categorieAanmakenButton, verwijderCategorieButton);
 		this.getChildren().add(categorieVBox);
 
 		categorieAanmakenButton.setOnAction(this::categorieAanmaken);
@@ -70,28 +70,37 @@ public class CategorieenHBox extends HBox {
 	}
 
 	public void verwijderCategorie(ActionEvent event) {
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Confirmeer verwijdering");
-		alert.setHeaderText("Bent u zeker dat u deze categorie wilt verwijderen?");
-		alert.setGraphic(null);
 
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.isPresent() && result.get() == ButtonType.OK) {
-			categoryController.deleteCategory(tableView.getSelectionModel().getSelectedItem().getId()); 
-																									
-			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
+		if (categoryController.heeftSdgs(tableView.getSelectionModel().getSelectedItem().getId())) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Waarschuwing!");
+			alert.setHeaderText("Deze categorie bevat nog Sdgs, gelieve deze eerst aan te passen.");
+			
+			alert.show();
+		} else {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirmeer verwijdering");
+			alert.setHeaderText("Bent u zeker dat u deze categorie wilt verwijderen?");
+			alert.setGraphic(null);
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.isPresent() && result.get() == ButtonType.OK) {
+				categoryController.deleteCategory(tableView.getSelectionModel().getSelectedItem().getId());
+
+				tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
+			}
 
 		}
 
 	}
-	
+
 	public void categorieAanmaken(ActionEvent event) {
 		List<String> resultaat = CategorieAanmakenPopup.display();
 		if (!resultaat.isEmpty()) {
-			
-			tableView.getItems().add( categoryController.addCategory(resultaat.get(0), resultaat.get(1)));
+
+			tableView.getItems().add(categoryController.addCategory(resultaat.get(0), resultaat.get(1)));
 		}
-	
+
 	}
 
 	public void wijzigCategorie(ActionEvent event) {
@@ -114,27 +123,24 @@ public class CategorieenHBox extends HBox {
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		tableView.setEditable(true);
 
-
-
-		
 		TableColumn<Category, String> columnId = new TableColumn<>("Id");
 		columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		columnId.setEditable(false);
-		
+
 		TableColumn<Category, String> columnNaam = new TableColumn<>("Naam");
 		columnNaam.setCellValueFactory(new PropertyValueFactory<>("name"));
 		columnNaam.setCellFactory(TextFieldTableCell.forTableColumn());
 		columnNaam.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Category, String>>() {
-		
+
 			@Override
 			public void handle(CellEditEvent<Category, String> event) {
-				
+
 				Category category = event.getRowValue();
 				categoryController.updateCategoryName(category, event.getNewValue());
 
 			}
 		});
-		
+
 		TableColumn<Category, String> columnIcoon = new TableColumn<>("Icoon");
 		columnIcoon.setCellValueFactory(new PropertyValueFactory<>("icon"));
 		columnIcoon.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -151,9 +157,9 @@ public class CategorieenHBox extends HBox {
 		tableView.getColumns().add(columnId);
 		tableView.getColumns().add(columnNaam);
 		tableView.getColumns().add(columnIcoon);
-		tableView.getSelectionModel().selectedItemProperty().addListener( (obs,oldSelection,newSelection)->{
-			if(newSelection!=null) {
-				
+		tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+			if (newSelection != null) {
+
 				updateListView(newSelection.getSdgAbstracts());
 			}
 		});
@@ -164,24 +170,22 @@ public class CategorieenHBox extends HBox {
 		this.getChildren().add(tableView);
 
 	}
-	
+
 	private void updateListView(List<SdgAbstract> sdgAbstract) {
 		listview.getItems().clear();
 		for (SdgAbstract sdg : sdgAbstract) {
-		SdgComp	sdgComp= (SdgComp) sdg;
+			SdgComp sdgComp = (SdgComp) sdg;
 			listview.getItems().add(sdgComp.getName());
 		}
 
-		
 	}
 
 	private void maakListView() {
 
 		listview = new ListView<>();
 
-
 		this.getChildren().add(listview);
-	
+
 	}
 
 }

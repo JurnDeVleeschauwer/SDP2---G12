@@ -73,4 +73,9 @@ public class CategoryController {
 		
 	}
 
+	public boolean heeftSdgs(int id) {
+
+		return cm.heeftSdgs(id);
+	}
+
 }
