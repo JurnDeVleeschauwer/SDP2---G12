@@ -6,6 +6,7 @@ import domain.MvoCoordinatorController;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -14,29 +15,53 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-public class AanmeldPaneel extends GridPane {
+public class AanmeldPaneel extends StackPane {
 	private final HoofdPaneel hoofdPaneel;
+	private GridPane grid;
 	private final MvoCoordinatorController mvoCoordinatorController;
-	
+	private VBox vbox;
+	private HBox hbox;
 
 	public AanmeldPaneel(HoofdPaneel hoofdPaneel, MvoCoordinatorController mvoCoordinatorController) {
 
 		this.hoofdPaneel = hoofdPaneel;
 		this.mvoCoordinatorController = mvoCoordinatorController;
-		this.setStyle("-fx-background-color: #004C6A");
+		
+		//this.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
+		
+		//this.setStyle("-fx-background-color: #004C6A");
+		
+		this.setId("aanmeldpanneel_id");
 
+		this.setAlignment(Pos.CENTER);
+		
+		vbox= new VBox();
+		hbox = new HBox();
+		
+		vbox.setAlignment(Pos.CENTER);
+		hbox.setAlignment(Pos.CENTER);
+		
+		getChildren().add(vbox);
+		vbox.getChildren().add(hbox);
+		
 		configureerGrid();
 		voegComponentenToe();
 	}
 	
 	private void configureerGrid() {
-		//this.gridLinesVisibleProperty().set(true);
+		grid = new GridPane();
+		grid.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
+		//grid.gridLinesVisibleProperty().set(true);
 		
-		setPadding(new Insets(10));
-		setHgap(10);
-		setVgap(10);
+		grid.setPadding(new Insets(10));
+		grid.setHgap(10);
+		grid.setVgap(10);
+		hbox.getChildren().add(grid);
+	 	StackPane.setAlignment(grid, Pos.CENTER);
 	}
 
 	private final TextField gebruikersnaam = new TextField();
@@ -46,36 +71,43 @@ public class AanmeldPaneel extends GridPane {
 	private void voegComponentenToe() {
 		//Label aanmelden
 		Label header = new Label("Aanmelden");
-		header.setStyle("-fx-text-fill: #B2D235; -fx-font: normal bold 47px 'system'");
-		add(header, 0, 0, 1, 1);
+		header.setId("header_id");
+		//header.setStyle("-fx-text-fill: #B2D235; -fx-font: normal bold 47px 'system'");
+		grid.add(header, 0, 0, 1, 1);
 		
 		
 		//label gebruikersnaam + inputbox
 		Label gebruikersnaamLbl = new Label("Gebruikersnaam");
-		gebruikersnaamLbl.setStyle("-fx-text-fill: #B2D235; -fx-font: normal 18px 'system'");
-		gebruikersnaam.setStyle("-fx-font: normal 18px 'system';");
+		gebruikersnaamLbl.setId("gebruikersnaamlbl_id");
+		gebruikersnaam.setId("gebruikersnaambtn_id");
+		//gebruikersnaamLbl.setStyle("-fx-text-fill: #B2D235; -fx-font: normal 18px 'system'");
+		//gebruikersnaam.setStyle("-fx-font: normal 18px 'system';");
 		gebruikersnaam.setPrefWidth(300.0);
 		gebruikersnaam.setMaxWidth(300.0);
 		foutbericht.setStyle("-fx-font: normal 18px 'system'");
 		foutbericht.setTextFill(Color.color(1, 0, 0));
-		add(gebruikersnaamLbl, 0, 1, 1, 1);
-		add(gebruikersnaam, 0, 2, 1, 1);
+		grid.add(gebruikersnaamLbl, 0, 1, 1, 1);
+		grid.add(gebruikersnaam, 0, 2, 1, 1);
 
 		//label wachtwoord + inputbox
 		Label wachtwoordLbl = new Label("Wachtwoord");
-		wachtwoordLbl.setStyle("-fx-text-fill: #B2D235; -fx-font: normal 18px 'system'");
-		wachtwoord.setStyle("-fx-font: normal 18px 'system';");
+		wachtwoordLbl.setId("wachtwoordlbl_id");
+		wachtwoord.setId("wachtwoordbtn_id");
+		//wachtwoordLbl.setStyle("-fx-text-fill: #B2D235; -fx-font: normal 18px 'system'");
+		//wachtwoord.setStyle("-fx-font: normal 18px 'system';");
 		wachtwoord.setPrefWidth(300.0);
 		wachtwoord.setMaxWidth(300.0);
-		add(wachtwoordLbl, 0, 3, 1, 1);
-		add(wachtwoord, 0, 4, 1, 1);
+		grid.add(wachtwoordLbl, 0, 3, 1, 1);
+		grid.add(wachtwoord, 0, 4, 1, 1);
 
 		Button aanmelden = new Button("Aanmelden");
+		aanmelden.setId("aanmeldenbtn_id");
 		aanmelden.setOnAction(this::aanmelden);
 		aanmelden.setDefaultButton(true);
-		aanmelden.setStyle("-fx-background-color: #0A759D; -fx-text-fill: #B2D235; -fx-font: normal 18px 'system'");
-		add(foutbericht, 0, 5, 1, 1);
-		add(aanmelden, 0, 6, 1, 1);
+		aanmelden.setPrefWidth(300.0);
+		//aanmelden.setStyle("-fx-background-color: #0A759D; -fx-text-fill: #B2D235; -fx-font: normal 18px 'system'");
+		grid.add(foutbericht, 0, 5, 1, 1);
+		grid.add(aanmelden, 0, 6, 1, 1);
 		
 
 	}

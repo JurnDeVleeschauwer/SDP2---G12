@@ -8,73 +8,72 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
-public class Dashboard extends GridPane{
-	
-    private final HoofdPaneel hoofdPaneel;
+public class Dashboard extends GridPane {
 
-	  public Dashboard (HoofdPaneel hoofdPaneel)
-	    {
-	    
-	        this.hoofdPaneel = hoofdPaneel;	
+	private final HoofdPaneel hoofdPaneel;
 
-	        
-	        configureerGrid();
-	        voegComponentenToe();
-	    }
+	public Dashboard(HoofdPaneel hoofdPaneel) {
 
-	
-    private void voegComponentenToe() {
-    	Button buttonCategoryPaneel = new Button("Categories");
-    		buttonCategoryPaneel.setOnAction(e->{
-    			hoofdPaneel.toonCategoriePaneell();
-    		});
-    		
-    		add(buttonCategoryPaneel,0,0);
-    	
-    	Button buttonSdg = new Button("Sdg 1");
-    	buttonSdg.setOnAction(e->{
-    		hoofdPaneel.toonSdgPaneel(1);
-    	});
-    	
-    	add(buttonSdg,1,0);
-    	
-    	Button buttonMvogoal = new Button("MvoGoal 1");
-    		buttonMvogoal.setOnAction(e->{
-    			hoofdPaneel.toonMvoGoalPaneel(1);
-    		});
-    	add(buttonMvogoal,2,0);
-    		
-    		Button buttonAanmelden = new Button("Aanmelden");
-		buttonAanmelden.setOnAction(e->{
-			hoofdPaneel.toonAanmeldPaneel();
-		});
-    	add(buttonAanmelden,3,0);
-		
-		Button buttonListMVO = new Button("List Mvo");
-		buttonListMVO.setOnAction(e->{
-		hoofdPaneel.toonListMvoGoalPaneel();
-	});
-	add(buttonListMVO,4,0);
-	
-		
+		this.hoofdPaneel = hoofdPaneel;
+		this.gridLinesVisibleProperty().set(true);
+		this.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
+
+		configureerGrid();
+		voegComponentenToe();
 	}
 
+	private void voegComponentenToe() {
+		Button buttonCategoryPaneel = new Button("Categories");
+		buttonCategoryPaneel.setOnAction(e -> {
+			hoofdPaneel.toonCategoriePaneell();
+		});
+		buttonCategoryPaneel.setId("categorybtn_id");
+		add(buttonCategoryPaneel, 0, 0);
 
-	private void configureerGrid()
-    {
-        setPadding(new Insets(10));
-        setHgap(10);
-        setVgap(10);
-        
-        ColumnConstraints col1 = new ColumnConstraints();
-        col1.setHalignment(HPos.RIGHT);
-        
-        ColumnConstraints col2 = new ColumnConstraints();
-        col2.setHgrow(Priority.ALWAYS);
-        
-        getColumnConstraints().addAll(col1, col2);
-    }
+		Button buttonSdg = new Button("Sdg 1");
+		buttonSdg.setOnAction(e -> {
+			hoofdPaneel.toonSdgPaneel(1);
+		});
+		buttonSdg.setId("sdgbtn_id");
+		add(buttonSdg, 1, 0);
 
-	
+		Button buttonMvogoal = new Button("MvoGoal 1");
+		buttonMvogoal.setOnAction(e -> {
+			hoofdPaneel.toonMvoGoalPaneel(1);
+		});
+		buttonMvogoal.setId("mvogoalbtn_id");
+		add(buttonMvogoal, 2, 0);
+
+		Button buttonListMVO = new Button("List Mvo");
+		buttonListMVO.setOnAction(e -> {
+			hoofdPaneel.toonListMvoGoalPaneel();
+		});
+		buttonListMVO.setId("listmvobtn_id");
+		add(buttonListMVO, 3, 0);
+		
+		Button buttonAanmelden = new Button("Aanmelden");
+		buttonAanmelden.setOnAction(e -> {
+			hoofdPaneel.toonAanmeldPaneel();
+		});
+		buttonAanmelden.setId("btnaanmelden_id");
+		add(buttonAanmelden, 4, 0);
+
+		
+
+	}
+
+	private void configureerGrid() {
+		setPadding(new Insets(10));
+		//setHgap(10);
+		setVgap(10);
+
+		ColumnConstraints col1 = new ColumnConstraints();
+		col1.setHalignment(HPos.RIGHT);
+
+		ColumnConstraints col2 = new ColumnConstraints();
+		col2.setHgrow(Priority.ALWAYS);
+
+		getColumnConstraints().addAll(col1, col2);
+	}
 
 }

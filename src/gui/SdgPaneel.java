@@ -42,6 +42,7 @@ import javafx.scene.text.Font;
 			setHgap(2);
 			setVgap(2);
 
+			
 		}
 
 		public void voegComponentenToe(int id) {
@@ -74,6 +75,8 @@ import javafx.scene.text.Font;
 		}
 		
 		private void maakGrid() {
+			this.gridLinesVisibleProperty().set(true);
+			
 			getChildren().clear();
 			
 			Label title = new Label("SDG");
