@@ -1,6 +1,7 @@
 package gui;
 
 import domain.DomeinController;
+import domain.MvoCoordinatorController;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -12,10 +13,12 @@ import javafx.scene.layout.Priority;
 public class Dashboard extends GridPane {
 
 	private final HoofdPaneel hoofdPaneel;
-
-	public Dashboard(HoofdPaneel hoofdPaneel) {
+	private MvoCoordinatorController mcc;
+	
+	public Dashboard(HoofdPaneel hoofdPaneel, MvoCoordinatorController mcc) {
 
 		this.hoofdPaneel = hoofdPaneel;
+		this.mcc=mcc;
 		this.gridLinesVisibleProperty().set(true);
 		this.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
 
@@ -53,9 +56,10 @@ public class Dashboard extends GridPane {
 		buttonListMVO.setId("listmvobtn_id");
 		add(buttonListMVO, 3, 0);
 		
-		Button buttonAanmelden = new Button("Aanmelden");
+		Button buttonAanmelden = new Button("Afmelden");
 		buttonAanmelden.setOnAction(e -> {
-			hoofdPaneel.toonAanmeldPaneel();
+			mcc.afmelden();
+			hoofdPaneel.toonNewAanmeldPaneel();
 		});
 		buttonAanmelden.setId("btnaanmelden_id");
 		add(buttonAanmelden, 4, 0);

@@ -135,6 +135,7 @@ public class AanmeldPaneel extends StackPane {
 		}
 		;
 		foutbericht.setText(null);
+		hoofdPaneel.enableDashboard();
 		hoofdPaneel.toonCategoriePaneell();
 
 	}

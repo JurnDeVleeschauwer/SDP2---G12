@@ -2,6 +2,7 @@ package ui;
 
 import domain.CategoryController;
 
+import ui.MultiLanguageApp;
 import domain.DomeinController;
 import gui.AanmeldPaneel;
 import gui.HoofdPaneel;

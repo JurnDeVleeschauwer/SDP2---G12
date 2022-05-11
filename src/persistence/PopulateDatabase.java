@@ -19,6 +19,7 @@ public class PopulateDatabase {
 		
 
 		cc.addCategory("Electricity", "Electricity.png");
+		cc.addCategory("Climate", "Climate.png");
 
 		mcc.insertMvoCoordinator("Yorben", "123456789");
 		dc.addDatasource("Electricity Consuption", "Watt", "Month", 2022, 50); 

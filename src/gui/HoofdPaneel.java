@@ -32,6 +32,7 @@ public class HoofdPaneel extends BorderPane {
 	private MvoGoalController mgc;
 	private SdgController sc;
 
+	
 	/**
 	 * 
 	 * @param categoryController
@@ -58,24 +59,18 @@ public class HoofdPaneel extends BorderPane {
 
 	private void voegComponentenToe() {
 		setCenter(mvoGoalPaneel);
+		
 
-		Button dashboardButton = new Button("Naar dashboard");
-		dashboardButton.setId("dashboardButton");
-		dashboardButton.setMinWidth(800.0);
-		dashboardButton.setPrefHeight(50.0);
-		dashboardButton.setOnAction(e -> {
-			toonDashboard();
-		});
-		setBottom(dashboardButton);
-		toonDashboard();
-		// toonSdgPaneel(1);
-		// toonCategoriePaneell();
+		toonAanmeldPaneel();
+
 	}
 
-	private void toonDashboard() {
+	public void toonDashboard() {
 		setTop(dashboard);
 	}
-
+	public void enableDashboard() {
+		setTop(dashboard);
+	}
 	/**
 	 * @param categoryController
 	 * 
@@ -86,7 +81,7 @@ public class HoofdPaneel extends BorderPane {
 		this.categoriePaneel = new CategorieenPaneel(this, cc);
 		this.mvoGoalPaneel = new MvoGoalPaneel(this, mgc, dc);
 		this.sdgPaneel = new SdgPaneel(this, sc);
-		this.dashboard = new Dashboard(this);
+		this.dashboard = new Dashboard(this,mcc);
 		this.listMvoGoalPaneel = new ListMvoGoalPaneel(this, mgc, dc);
 
 	}
@@ -98,7 +93,11 @@ public class HoofdPaneel extends BorderPane {
 
 		setCenter(aanmelden);
 	}
-
+	public void toonNewAanmeldPaneel() {
+		aanmelden = new AanmeldPaneel(this, mcc);
+		setCenter(aanmelden);
+		setTop(null);
+	}
 	public void toonCategoriePaneell() {
 		setCenter(categoriePaneel);
 	}
@@ -116,5 +115,7 @@ public class HoofdPaneel extends BorderPane {
 	public void toonListMvoGoalPaneel() {
 		setCenter(listMvoGoalPaneel);
 	}
+
+
 
 }
