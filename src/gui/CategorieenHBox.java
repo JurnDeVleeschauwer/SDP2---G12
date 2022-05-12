@@ -70,7 +70,8 @@ public class CategorieenHBox extends HBox {
 	}
 
 	public void verwijderCategorie(ActionEvent event) {
-
+		System.out.println(categoryController.getCategory(tableView.getSelectionModel().getSelectedItem().getId()).getName());
+		System.out.println(categoryController.heeftSdgs(tableView.getSelectionModel().getSelectedItem().getId()));
 		if (categoryController.heeftSdgs(tableView.getSelectionModel().getSelectedItem().getId())) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Waarschuwing!");

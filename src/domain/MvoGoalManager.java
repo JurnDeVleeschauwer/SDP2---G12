@@ -55,7 +55,7 @@ public class MvoGoalManager {
 	public void addSubMvoGoal(MvoGoalChild mvoGoalChild, int mvoCompIndex) {
 	
 		MvoGoalComp comp = (MvoGoalComp) mvoGoals.get(mvoCompIndex);
-		
+
 		comp.add(mvoGoalChild);
 		
 	}

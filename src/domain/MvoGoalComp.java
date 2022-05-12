@@ -36,7 +36,7 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable  {
 	
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST,orphanRemoval = true)
 	private List<MvoGoalChild> mvoGoals = new ArrayList<>(); 
 	
 	
