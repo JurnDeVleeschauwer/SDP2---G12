@@ -39,7 +39,7 @@ public class CategoryManager {
 	public void deleteCategory(int id) {
 		Category categorySelected= categories.stream().filter(category->category.getId()==id).findAny().get();
 		categoryMapper.delete(categorySelected );
-		updateList();
+		categories.remove(categorySelected);
 	}
 	
 	public void populateList() {
@@ -76,7 +76,7 @@ public class CategoryManager {
 		
 		categoryMapper.insert(c);
 
-		updateList();
+		categories.add(c);
 		return c;
 	}
 	
