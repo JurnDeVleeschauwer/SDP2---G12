@@ -103,7 +103,9 @@ public class MvoGoalPaneel extends GridPane {
 		ArrayList<MvoGoalChild> listMVoChild = new ArrayList<MvoGoalChild>();
 		listMVoChild.add(new MvoGoalChild(1, null, null, "null"));
 
-		MvoGoalComp mvoGoal = new MvoGoalComp("NaamMvoGoalComp", listMVoChild);
+
+		MvoGoalComp mvoGoal = new MvoGoalComp.Builder().setName("naamMvoGoalComp").setMvoGoals(listMVoChild).build();
+		
 		//MvoGoalComp mvoGoal = (MvoGoalComp) mvoGoalController.getMvoGoal(this.id);
 		
 		Label id = new Label("ID:");

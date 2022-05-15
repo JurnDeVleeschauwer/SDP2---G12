@@ -24,7 +24,7 @@ public abstract class MvoGoalAbstract implements Serializable {
 		
 	}
 	
-
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

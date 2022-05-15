@@ -19,7 +19,7 @@ public class MvoGoalController {
 	
 	public void addMvoGoalComp(String name) {
 		
-		MvoGoalAbstract goal = new MvoGoalComp(name); 
+		MvoGoalAbstract goal = new MvoGoalComp.Builder().setName(name).build(); 
 		//System.out.println(goal.getId());
 		mvoGoalManager.addMvoGoal(goal);
 	}
