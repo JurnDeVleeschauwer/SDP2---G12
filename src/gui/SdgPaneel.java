@@ -87,7 +87,7 @@ public class SdgPaneel extends GridPane {
 			add( title, 5, 0);
 			
 			
-			SdgComp sdg = new SdgComp( "naamSdgComp", "DescriptieSdgComp",new ArrayList<>());//(SdgComp) sdgController.getSdg(this.id);
+			SdgComp sdg = new SdgComp.Builder().description("Description").name("Name").build(); //(SdgComp) sdgController.getSdg(this.id);
 			
 			
 			Label id = new Label("ID:");

@@ -15,7 +15,8 @@ public class SdgController {
 	
 	public void addSdg(String name, String description) {
 		
-		SdgComp sdgComp = new SdgComp(name, description); 
+		SdgComp sdgComp = new SdgComp.Builder().name(name).description(description).build();
+
 		sdgManager.addSdgJpa(sdgComp); 
 	}
 	
