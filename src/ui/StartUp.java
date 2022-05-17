@@ -57,7 +57,6 @@ public class StartUp extends Application {
 		MvoGoalController mgc = new MvoGoalController();
 		SdgController sc = new SdgController();
 		CategoryController cg = new CategoryController(sc.getSdgManager());
-
 		PopulateDatabase.populateDatabase(cg, dc, mcc, mgc, sc);
 		HoofdPaneel root = new HoofdPaneel(cg, dc, mcc, mgc, sc);
 

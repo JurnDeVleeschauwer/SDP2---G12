@@ -14,10 +14,7 @@ import domain.SdgComp;
 import domain.SdgController;
 
 public class PopulateDatabase {
-	
-
-	
-	public static CategoryController populateDatabase(CategoryController cc,DatasourceController dc, MvoCoordinatorController mcc,MvoGoalController mgc, SdgController sc) throws FileNotFoundException {
+		public static CategoryController populateDatabase(CategoryController cc,DatasourceController dc, MvoCoordinatorController mcc,MvoGoalController mgc, SdgController sc) throws FileNotFoundException {
 		
 		cc.addCategory("Electricity", "Electricity.png");
 		cc.addCategory("Climate", "Climate.png");
