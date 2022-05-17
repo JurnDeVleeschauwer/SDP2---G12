@@ -1,5 +1,7 @@
 package domain;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class DatasourceController {
@@ -10,10 +12,11 @@ public class DatasourceController {
 		datasourceManager = new DatasourceManager();
 	}
 
-	public void addDatasource(String name, String yAxis, String xAxis, int year, int expectedGoal) {
+	public void addDatasource(String name, String yAxis, String xAxis, int year, int expectedGoal, File f) throws FileNotFoundException {
 
-		Datasource data = new Datasource(name, yAxis, xAxis, year, expectedGoal );
-		System.out.println(data.getId());
+		DataPerSource dataPerSource = new DataPerSource(f);  
+		
+		Datasource data = new Datasource(name, yAxis, xAxis, year, expectedGoal, dataPerSource );
 		datasourceManager.addDatasource(data);
 	}
 

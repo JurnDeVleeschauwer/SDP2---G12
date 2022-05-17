@@ -30,7 +30,7 @@ public class SdgComp extends SdgAbstract implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	private String description; 
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST,orphanRemoval = true)
 	private List<SdgChild> sdgs = new ArrayList<>(); 
 	
 

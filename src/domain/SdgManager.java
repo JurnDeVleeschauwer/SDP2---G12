@@ -35,7 +35,7 @@ public class SdgManager {
 	
 	public SdgComp getSdg(int sdgId) {
 	
-		return (SdgComp) sdgs.get(sdgId); 
+		return (SdgComp) sdgs.stream().filter(category->category.getId()==sdgId).findAny().get(); 
 		
 	}
 	
@@ -48,10 +48,10 @@ public class SdgManager {
 		return sdgs; 
 	}
 
-	public void addSubSdg(SdgChild sdgChild, int sdgCompIndex) {
+	public void addSubSdg(SdgChild sdgChild, int sdgCompId) {
 
-		SdgComp comp = (SdgComp) sdgs.get(sdgCompIndex);
-		sdgMapper.insert(sdgChild);
+		SdgComp comp = (SdgComp)  sdgs.stream().filter(category->category.getId()==sdgCompId).findAny().get();
+
 		comp.add(sdgChild);
 	}
 	

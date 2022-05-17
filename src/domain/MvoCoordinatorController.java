@@ -64,7 +64,13 @@ public class MvoCoordinatorController {
 	}
 	
 	public MvoCoordinator getMvoCoordinator() {
-		return mvoCoord.getAll(); 
+		return mvoCoord.getMvoCoordinator(); 
+	}
+
+
+	public void afmelden() {
+
+		mvoCoord.afmelden();
 	}
 
 }

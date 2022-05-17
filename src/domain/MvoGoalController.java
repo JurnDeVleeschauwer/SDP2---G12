@@ -52,6 +52,7 @@ public class MvoGoalController {
 		MvoGoalChild mvoGoalChild = new MvoGoalChild( value,  datasource,  icon,  mvoName);
 		
 		mvoGoalManager.addSubMvoGoal(mvoGoalChild, mvoGoalCompId);
+		mvoGoalManager.updateMvoGoal(mvoGoalManager.getMvoGoal(mvoGoalCompId) );
 	}
 	
 

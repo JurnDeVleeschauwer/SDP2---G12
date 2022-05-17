@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.sql.DataSource;
+
 
 import persistence.GenericMapperJpa;
 
@@ -35,16 +37,20 @@ public class Datasource implements Serializable {
 	private String yAxis;
 	private String xAxis;
 	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	private DataPerSource data; 
 	
 	
-	public Datasource(String name, String yAxis, String xAxis, int year, int expectedGoal) {
+	public Datasource(String name, String yAxis, String xAxis, int year, int expectedGoal, DataPerSource dataPerSource) {
+		
+		
 		
 		setName(name);
 		setyAxis(yAxis);
 		setxAxis(xAxis);
 		setYear(year);
 		setExpectedGoal(expectedGoal);
-		
+		setData(dataPerSource);
 	}
 	
 	protected Datasource() {
@@ -95,9 +101,23 @@ public class Datasource implements Serializable {
 		this.xAxis = xAxis;
 	}
 
+
+	
+	public DataPerSource getData() {
+		return data;
+	}
+
+	public void setData(DataPerSource data) {
+		this.data = data;
+	}
+
+	public void addData() {
+		
+	}
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(expectedGoal, name, xAxis, yAxis, year);
+		return Objects.hash(data, expectedGoal, name, xAxis, yAxis, year);
 	}
 
 	@Override
@@ -109,16 +129,18 @@ public class Datasource implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Datasource other = (Datasource) obj;
-		return expectedGoal == other.expectedGoal && Objects.equals(name, other.name)
-				&& Objects.equals(xAxis, other.xAxis) && Objects.equals(yAxis, other.yAxis) && year == other.year;
+		return Objects.equals(data, other.data) && expectedGoal == other.expectedGoal
+				&& Objects.equals(name, other.name) && Objects.equals(xAxis, other.xAxis)
+				&& Objects.equals(yAxis, other.yAxis) && year == other.year;
 	}
 
-	
 	@Override
 	public String toString() {
 		return String.format("name: %s, yAxis: %s, xAxis: %s, Year: %d, Expectedgoal: %d", getName(), getyAxis(), getxAxis(), getYear(), getExpectedGoal()); 
 	}
 
+	
+	
 	
 	
 	

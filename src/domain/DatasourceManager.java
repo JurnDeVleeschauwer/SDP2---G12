@@ -1,5 +1,6 @@
 package domain;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,12 @@ public class DatasourceManager {
 		
 	}
 	
+	public void addDataFromFile(File f) {
+		
+		
+		
+	}
+	
 	public void removeDatasource(Datasource d) {
 		
 		datasourceMapper.delete(d);
@@ -30,12 +37,12 @@ public class DatasourceManager {
 		return datasources.get(0);
 	}
 	
-	public void updateDatasource(Datasource category) {
-		datasourceMapper.update(category); 
+	public void updateDatasource(Datasource datasource) {
+		datasourceMapper.update(datasource); 
 	}
 
-	public void deleteDatasource(Datasource category) {
-		datasourceMapper.delete(category);
+	public void deleteDatasource(Datasource datasource) {
+		datasourceMapper.delete(datasource);
 		
 	}
 		

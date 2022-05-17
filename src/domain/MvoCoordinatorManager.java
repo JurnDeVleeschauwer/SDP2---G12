@@ -44,8 +44,10 @@ public class MvoCoordinatorManager {
 
 	}
 	
-	
-	public MvoCoordinator getAll() {
+	public void afmelden() {
+		mvoCoordinator=null;
+	}
+	public MvoCoordinator getMvoCoordinator() {
 		return mvoCoordinator; 
 	}
 	

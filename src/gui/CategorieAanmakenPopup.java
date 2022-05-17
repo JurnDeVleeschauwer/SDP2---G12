@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class CategorieAanmakenPopup {
 	
@@ -21,12 +22,13 @@ public class CategorieAanmakenPopup {
 	public static List<String> display(){
 		categorie=new ArrayList<>();
 		
-		Stage window = new Stage();
+		Stage window = new Stage(StageStyle.UTILITY);
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Categorie maken");
 		window.setMinWidth(350);
 		window.setMinHeight(300);
 		Label labeltitel = new Label("Nieuwe Categorie maken");
+		labeltitel.setStyle("-fx-text-fill: #B2D235; -fx-font: normal bold 47px 'system'");
 		labeltitel.setPadding(new Insets(0, 0, 25, 0));
 		Label labelNaam = new Label("Naam:");
 		TextField textFieldNaam = new TextField();
