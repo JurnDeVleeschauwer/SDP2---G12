@@ -1,35 +1,75 @@
-OPTELLING TEST
+TAAL: NEDERLANDS
 
 BEGIN: Electriciteitverbruik per dag 
-Monday: 1
-Dinsdag: 2
-Wednesday: 3
-Donderdag: 4
-Friday: 5 
-Saturday: 6 
-Sunday: 7 
 
-Monday: 1
+maart
+tot: 28
+Maandag: 1
 Dinsdag: 2
-Wednesday: 3
+Woensdag: 3
 Donderdag: 4
-Friday: 5 
-Saturday: 6 
-Sunday: 7 
+Vrijdag: 5 
+Zaterdag: 6 
+Zondag: 7 
 
-Monday: 1
-Dinsdag: 2
-Wednesday: 3
-Donderdag: 4
-Friday: 5 
-Saturday: 6 
-Sunday: 7 
+tot: 56
+Maandag: 2
+Dinsdag: 4
+Woensdag:6
+Donderdag:8
+Vrijdag:  10
+Zaterdag: 12
+Zondag:  14
 
-Monday: 1
+Maandag: 1
 Dinsdag: 2
-Wednesday: 3
+Woensdag: 3
 Donderdag: 4
-Friday: 5 
-Saturday: 6 
-Sunday: 7 
+Vrijdag: 5 
+Zaterdag: 6 
+Zondag: 7 
+
+Maandag: 2
+Dinsdag: 4
+Woensdag:6
+Donderdag:8
+Vrijdag:  10
+Zaterdag: 12
+Zondag:  14
+
+Maandag: 1
+Dinsdag: 2
+Woensdag: 3
+Donderdag: 4
+Vrijdag: 5 
+Zaterdag: 6 
+Zondag: 7 
+
+Maandag: 2
+Dinsdag: 4
+Woensdag:6
+Donderdag:8
+Vrijdag:  10
+Zaterdag: 12
+Zondag:  14
+
+
+Maandag: 1
+Dinsdag: 2
+Woensdag: 3
+Donderdag: 4
+Vrijdag: 5 
+Zaterdag: 6 
+Zondag: 7 
+
+
+Maandag: 1
+Dinsdag: 4
+Woensdag:6
+Donderdag:8
+Vrijdag:  10
+Zaterdag: 12
+Zondag:  14
+
+
 

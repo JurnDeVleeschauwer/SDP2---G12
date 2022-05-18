@@ -1,0 +1,74 @@
+//hoofdpanneel
+#hoofdpanneel_id{
+    -fx-border-color: black; 
+    -fx-background-color: #0A759D
+}
+
+#dashboardButton{
+    -fx-font-size: 20px;
+    -fx-text-fill: #B2D235;
+    -fx-font-weight: bold;
+    //-fx-font: normal bold 47px 'system';
+    -fx-background-color: #0A759D; 
+    -fx-border-color: black; 
+    -fx-border-width: 2;    
+}
+
+#dashboardButton:hover{
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-background-color: #B2D235;
+}
+
+//Aanmelden
+#header_id{
+    -fx-text-fill: #B2D235; 
+    -fx-font: normal bold 47px 'system';
+}
+
+#gebruikersnaamlbl_id, #wachtwoordlbl_id {
+    -fx-text-fill: #B2D235; 
+    -fx-font: normal 18px 'system';
+}
+
+#gebruikersnaambtn_id {
+    -fx-font-size: 18px;
+    -fx-font: normal 18px 'system';
+}
+#wachtwoordbtn_id {
+    -fx-font-size: 18px;
+    -fx-font: normal 18px 'system';
+}
+
+#aanmeldenbtn_id{
+    -fx-background-color: #004C6A; 
+    -fx-text-fill: #B2D235; 
+    -fx-font: normal 18px 'system';
+    -fx-border-color: black;
+}
+
+#aanmeldenbtn_id:hover {
+    -fx-text-fill: black;
+    -fx-background-color: #B2D235; 
+}
+
+//dashboard
+#categorybtn_id, #sdgbtn_id, #mvogoalbtn_id, #listmvobtn_id, #btnaanmelden_id {
+    -fx-background-color: #0A759D;
+    -fx-text-fill: #B2D235;
+
+    -fx-font: normal 18px 'system';
+
+    -fx-border-color: black;
+    -fx-border-width: 1;  
+
+    -fx-pref-width: 156px;
+}
+
+#categorybtn_id:hover, #sdgbtn_id:hover, #mvogoalbtn_id:hover, #listmvobtn_id:hover, #btnaanmelden_id:hover {
+    -fx-background-color: #B2D235;
+    -fx-text-fill: black; 
+}
+
+//

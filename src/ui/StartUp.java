@@ -9,6 +9,8 @@ import gui.HoofdPaneel;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
 import java.util.*;
 import domain.Datasource;
 import domain.DatasourceController;
@@ -23,15 +25,22 @@ import persistence.PopulateDatabase;
 
 public class StartUp extends Application {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		if (args[0].contentEquals("c")) {
-			DomeinController dc = new DomeinController();
-			MultiLanguageApp app = new MultiLanguageApp();
+			DatasourceController dc = new DatasourceController();
+		//	MultiLanguageApp app = new MultiLanguageApp();
 
-			int languageChoice = app.chooseLanguage();
+		//	int languageChoice = app.chooseLanguage();
+			MvoCoordinatorController mcc = new MvoCoordinatorController();
+			MvoGoalController mgc = new MvoGoalController();
+			SdgController sc = new SdgController();
+			CategoryController cg = new CategoryController(sc.getSdgManager());
 
-			System.out.println(app.translate(languageChoice, "LangTest"));
-
+			PopulateDatabase.populateDatabase(cg, dc, mcc, mgc, sc);
+		//	System.out.println(app.translate(languageChoice, "LangTest"));
+		//	GenericMapperJpa.commitTransactionAndClose();
+		//	GenericMapperJpa.closePersistency();
+			System.exit(0);
 		} else {
 			launch(args);
 		}
@@ -41,14 +50,13 @@ public class StartUp extends Application {
 
 	
 	@Override
-	public void start(Stage stage) {
+	public void start(Stage stage) throws FileNotFoundException {
 
 		DatasourceController dc = new DatasourceController();
 		MvoCoordinatorController mcc = new MvoCoordinatorController();
 		MvoGoalController mgc = new MvoGoalController();
 		SdgController sc = new SdgController();
 		CategoryController cg = new CategoryController(sc.getSdgManager());
-
 		PopulateDatabase.populateDatabase(cg, dc, mcc, mgc, sc);
 		HoofdPaneel root = new HoofdPaneel(cg, dc, mcc, mgc, sc);
 

@@ -1,0 +1,76 @@
+TAAL: ENGLISH
+BEGIN: Electriciteitverbruik per dag 
+
+
+
+tot: 28
+Monday: 1
+Tuesday: 2
+Wednesday: 3
+Thursday: 4
+Friday: 5 
+Saturday: 6 
+Sunday: 7 
+
+
+tot:56
+Monday: 2
+Tuesday: 4
+Wednesday: 6
+Thursday: 8
+Friday: 10
+Saturday: 12 
+Sunday: 14
+
+
+Monday: 1
+Tuesday: 2
+Wednesday: 3
+Thursday: 4
+Friday: 5 
+Saturday: 6 
+Sunday: 7 
+
+Monday: 1
+Tuesday: 2
+Wednesday: 3
+Thursday: 4
+Friday: 5 
+Saturday: 6 
+Sunday: 7 
+
+
+Monday: 1
+Tuesday: 2
+Wednesday: 3
+Thursday: 4
+Friday: 5 
+Saturday: 6 
+Sunday: 7 
+
+Monday: 1
+Tuesday: 2
+Wednesday: 3
+Thursday: 4
+Friday: 5 
+Saturday: 6 
+Sunday: 7 
+
+
+Monday: 1
+Tuesday: 2
+Wednesday: 3
+Thursday: 4
+Friday: 5 
+Saturday: 6 
+Sunday: 7 
+
+Monday: 1
+Tuesday: 2
+Wednesday: 3
+Thursday: 4
+Friday: 5 
+Saturday: 6 
+Sunday: 7 
+
+

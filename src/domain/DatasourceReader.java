@@ -11,16 +11,16 @@ import java.util.Scanner;
 public class DatasourceReader {
 
 
-	public static <T> List<T> readFile(File file) throws FileNotFoundException {
+	public static  List<String> readFile(File file) throws FileNotFoundException {
 		FileReader reader = new FileReader(file);
 		Scanner s = new Scanner(reader);
-		List<T> dataToProcess = new ArrayList<>(); 
-
+		List<String> dataToProcess = new ArrayList<>(); 
+		
+		
 		while(s.hasNext()) {
-			dataToProcess.add((T) s); 
+			
+			dataToProcess.add(s.nextLine().toLowerCase()); 
 		}
-		
-		
 		
 		
 		return dataToProcess; 

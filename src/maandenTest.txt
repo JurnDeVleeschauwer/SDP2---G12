@@ -1,0 +1,6 @@
+Nederlands  
+
+jan: 50
+feb: 80
+mar: 30
+apr: 20

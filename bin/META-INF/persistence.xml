@@ -26,6 +26,7 @@
 	<class>domain.MvoGoalComp</class>
 	<class>domain.SdgAbstract </class>
 	<class>domain.MvoGoalAbstract</class>
+	<class>domain.DataPerSource</class>
 
 
 
