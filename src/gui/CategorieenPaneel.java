@@ -57,7 +57,7 @@ public class CategorieenPaneel extends GridPane {
 		
 		
 		
-	}
+	} 
 
 
 

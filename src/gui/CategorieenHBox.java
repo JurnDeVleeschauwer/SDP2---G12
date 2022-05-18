@@ -25,6 +25,7 @@ import javafx.scene.control.skin.TableHeaderRow;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderImage;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
@@ -71,9 +72,15 @@ public class CategorieenHBox extends HBox {
 		this.getChildren().add(categorieVBox);
 
 		categorieAanmakenButton.setOnAction(this::categorieAanmaken);
+		
+		HBox hbox = new HBox();
+		hbox.setSpacing(50);
 
-		maakTableView(categoryController);
-		maakListView();
+		hbox.getChildren().addAll(maakTableView(categoryController), maakListView());
+		
+		hbox.setPadding(new Insets(20,0,20,0));
+		
+		this.getChildren().add(hbox);  
 	}
 
 	public void verwijderCategorie(ActionEvent event) {
@@ -126,16 +133,21 @@ public class CategorieenHBox extends HBox {
 
 	}
 
-	private void maakTableView(CategoryController categoryController) {
-
+	private TableView<Category> maakTableView(CategoryController categoryController) {
+		
 		tableView = new TableView<Category>();
 		tableView.setId("tableviewcat_id");
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		tableView.setEditable(true);
+		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		tableView.setPrefWidth(400);
+		tableView.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		
 		TableColumn<Category, String> columnId = new TableColumn<>("Id");
 		columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		columnId.setEditable(false);
+		columnId.setMinWidth(30);
+		columnId.setMaxWidth(30);
 
 		TableColumn<Category, String> columnNaam = new TableColumn<>("Naam");
 		columnNaam.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -176,8 +188,8 @@ public class CategorieenHBox extends HBox {
 		for (Category category : categoryController.getAll()) {
 			tableView.getItems().add(category);
 		}
-
-		this.getChildren().add(tableView);
+		
+		return tableView;
 
 	}
 
@@ -190,11 +202,14 @@ public class CategorieenHBox extends HBox {
 
 	}
 
-	private void maakListView() {
+	private ListView<String> maakListView() {
 
-		listview = new ListView<>();
+		listview = new ListView<String>();
+		
+		listview.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-		this.getChildren().add(listview);
+		return listview;
+		
 
 	}
 
