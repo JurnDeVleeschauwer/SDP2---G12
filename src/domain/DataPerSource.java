@@ -50,6 +50,8 @@ public class DataPerSource implements Serializable {
 	}
 
 	protected DataPerSource() {
+
+		
 		
 	}
 	
@@ -213,7 +215,6 @@ public class DataPerSource implements Serializable {
 									
 									if(iMonth == 0) {
 										monthValue /= 31; 
-										System.out.println("MONTHVALUE DIVIDE: " + monthValue);
 									}else if(iMonth == 1) {
 										monthValue /= 29; 
 									} else if(iMonth == 7 ) {

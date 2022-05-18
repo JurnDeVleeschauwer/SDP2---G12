@@ -61,8 +61,8 @@ public class HoofdPaneel extends BorderPane {
 		setCenter(mvoGoalPaneel);
 		
 
-		toonAanmeldPaneel();
-
+	toonAanmeldPaneel();
+//		toonDatasource();
 	}
 
 	public void toonDashboard() {
@@ -90,7 +90,7 @@ public class HoofdPaneel extends BorderPane {
 	 * toon AanmeldPaneel
 	 */
 	public void toonAanmeldPaneel() {
-
+		System.out.println(dc.getDatasource(0).getData().getDataSet());
 		setCenter(aanmelden);
 	}
 	public void toonNewAanmeldPaneel() {
@@ -101,7 +101,7 @@ public class HoofdPaneel extends BorderPane {
 	public void toonCategoriePaneell() {
 		setCenter(categoriePaneel);
 	}
-
+	
 	public void toonMvoGoalPaneel(int id) {
 		mvoGoalPaneel.voegComponentenToe(id);
 		setCenter(mvoGoalPaneel);
@@ -116,6 +116,8 @@ public class HoofdPaneel extends BorderPane {
 		setCenter(listMvoGoalPaneel);
 	}
 
-
+	public void toonDatasource() {
+		setCenter(new DataSourceView(this, dc));
+	}
 
 }
