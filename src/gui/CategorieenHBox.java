@@ -121,7 +121,8 @@ public class CategorieenHBox extends HBox {
 		tableView = new TableView<Category>();
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		tableView.setEditable(true);
-
+		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		
 		TableColumn<Category, String> columnId = new TableColumn<>("Id");
 		columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		columnId.setEditable(false);

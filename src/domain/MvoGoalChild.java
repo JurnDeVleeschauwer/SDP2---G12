@@ -1,7 +1,8 @@
 package domain;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -15,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import domain.MvoGoalComp.Builder;
 import exceptions.MvoGoalException;
 import persistence.GenericMapperJpa;
 
@@ -23,35 +25,100 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int value;
+	private final int value;
 	@OneToOne(cascade = CascadeType.PERSIST)
-	private Datasource datasource; 
+	private final Datasource datasource; 
 	
 	@Transient
-	private int counter = 1; 
+	private final int counter ; 
 	
-	private String icon;
-	private String mvoName;
+	private final String icon;
+	private final String mvoName;
 
 	
-	
-	
-	public MvoGoalChild(int value, Datasource datasource, String icon, String mvoName) {
+
+	public static class Builder {
+		private int value;
+		private Datasource datasource; 
 		
-		setDatasource(datasource);
-		setMvoName(mvoName);
-		setIcon(icon);
-		setValue(value);
-		counter++; 
+		private int counter = 1; 
+		
+		private String icon;
+		private String mvoName;
+		
+		
+		public Builder value(int value) {
+			this.value=value;
+			return this;
+		}
+		
+		public Builder datasource(Datasource datasource) {
+			this.datasource=datasource;
+			return this;
+		}
+		
+		public Builder counter(int counter) {
+			this.counter=counter;
+			return this;
+		}
+		public Builder icon (String icon) {
+			this.icon=icon;
+					return this;
+		}
+		public Builder mvoName(String mvoName) {
+			this.mvoName=mvoName;
+			return this;
+		}
+		
+		public void setValue(int value) {
+			this.value = value;
+		}
+		public void setDatasource(Datasource datasource) {
+			this.datasource = datasource;
+		}
+		public void setCounter(int counter) {
+			this.counter = counter;
+		}
+		public void setIcon(String icon) {
+			this.icon = icon;
+		}
+		public void setMvoName(String mvoName) {
+			this.mvoName = mvoName;
+		}
+		public MvoGoalChild build() {
+			return new MvoGoalChild(Builder.this);
+
+		}
+
+
 	}
+	
+
+
 	
 	protected MvoGoalChild() {
+		this.value = 0;
+		this.datasource = new Datasource();
+		this.counter = 1;
+		this.icon = "";
+		this.mvoName = "";
 		
 	}
 	
 
 	
 	
+	public MvoGoalChild(Builder builder) {
+		this.counter=builder.counter;
+		this.datasource=builder.datasource;
+		this.icon=builder.icon;
+		this.mvoName=builder.mvoName;
+		this.value=builder.value;
+	}
+
+
+
+
 	public int getId() {
 		return id;
 	}
@@ -68,16 +135,9 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 		return counter;
 	}
 
-	public void setCounter(int counter) {
-		this.counter = counter;
-	}
 
 	public int getValue() {
 		return value;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
 	}
 
 
@@ -85,27 +145,16 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 		return datasource;
 	}
 
-	public void setDatasource(Datasource datasource) {
-		this.datasource = datasource;
-		
-	}
+
 
 	public String getIcon() {
 		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
 	}
 
 	public String getMvoName() {
 		return mvoName;
 	}
 
-	public void setMvoName(String mvoName) {
-		this.mvoName = mvoName;
-	}
-	
 
 	
 	

@@ -21,7 +21,8 @@ public class SdgController {
 	}
 	
 	public void addSdg(String name, String icon, MvoGoalAbstract mvoGoal, SdgComp sdgComp, int target) {
-		SdgChild sdgChild = new SdgChild(name, icon, mvoGoal, sdgComp, target);
+		SdgChild sdgChild = new SdgChild.Builder().name(name).icon(icon).mvoGoal(mvoGoal).sdgComp(sdgComp).target(target).build();
+
 		sdgManager.addSdgJpa(sdgChild);
 	}
 	
@@ -45,8 +46,8 @@ public class SdgController {
 	}
 
 	public void addSubSdg(String name, String icon, MvoGoalAbstract mvoGoal, SdgComp sdgComp, int target, int sdgCompId) {
-		
-		SdgChild sdgChild = new SdgChild( name,  icon,  mvoGoal,  sdgComp,  target);
+		SdgChild sdgChild = new SdgChild.Builder().name(name).icon(icon).mvoGoal(mvoGoal).sdgComp(sdgComp).target(target).build();
+
 		sdgManager.addSubSdg(sdgChild, sdgCompId);
 		sdgManager.updateSdg(sdgComp);
 	}

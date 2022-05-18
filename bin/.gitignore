@@ -1,4 +1,8 @@
-/gui/
+/META-INF/
 /domain/
+/exceptions/
+/gui/
+/optellingTest.txt
 /persistence/
+/translations/
 /ui/
