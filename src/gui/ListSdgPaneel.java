@@ -35,7 +35,7 @@ import javafx.stage.Stage;
 public class ListSdgPaneel extends GridPane {
 	private final SdgController sdgController;
 	private final HoofdPaneel hoofdPaneel;
-	private TableView<SdgComp> tableView;
+	private TableView<SdgAbstract> tableView;
 
 	public ListSdgPaneel(HoofdPaneel hoofdPaneel, SdgController sdgController) {
 			this.hoofdPaneel = hoofdPaneel;
@@ -60,23 +60,24 @@ public class ListSdgPaneel extends GridPane {
 
 	private void maakGrid() {
 		getChildren().clear();
-		tableView = new TableView<SdgComp>();
+		tableView = new TableView<SdgAbstract>();
+		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-		TableColumn<SdgComp, String> column1 = new TableColumn<>("sdgCompId");
+		TableColumn<SdgAbstract, String> column1 = new TableColumn<>("sdgCompId");
 		column1.setCellValueFactory(new PropertyValueFactory<>("sdgCompId"));
 
-		TableColumn<SdgComp, String> column2 = new TableColumn<>("target");
+		TableColumn<SdgAbstract, String> column2 = new TableColumn<>("target");
 		column2.setCellValueFactory(new PropertyValueFactory<>("target"));
 
-		TableColumn<SdgComp, String> column3 = new TableColumn<>("name");
+		TableColumn<SdgAbstract, String> column3 = new TableColumn<>("name");
 		column2.setCellValueFactory(new PropertyValueFactory<>("name"));
 
 		tableView.getColumns().add(column1);
 		tableView.getColumns().add(column2);
 		tableView.getColumns().add(column3);
-
+		
 		for (SdgAbstract sdgChild : sdgController.getAll()) {
-			tableView.getItems().add((SdgComp) sdgChild);
+			tableView.getItems().add((SdgAbstract) sdgChild);
 		}
 		add(tableView, 2, 4);
 

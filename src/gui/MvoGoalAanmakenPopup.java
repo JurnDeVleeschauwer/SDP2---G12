@@ -29,7 +29,7 @@ public class MvoGoalAanmakenPopup {
 
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
-		window.setTitle("Mvo maken");
+		window.setTitle("Mvo Doelstelling maken");
 		window.setMinWidth(350);
 		window.setMinHeight(300);
 		Label labeltitel = new Label("Nieuwe Mvo maken");

@@ -108,6 +108,10 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable {
 	public String getName() {
 		return name;
 	}
+	
+	public String getValue() {
+		return null;
+	}
 
 	public List<MvoGoalChild> getSdgs() {
 		return mvoGoals;
@@ -119,6 +123,10 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable {
 
 	public List<MvoGoalChild> getMvoGoals() {
 		return mvoGoals;
+	}
+	
+	public String getMvoName() {
+		return null;
 	}
 
 	@Override

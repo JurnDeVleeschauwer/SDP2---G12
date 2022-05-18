@@ -24,39 +24,39 @@ import persistence.GenericMapperJpa;
 public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private final int value;
 	@OneToOne(cascade = CascadeType.PERSIST)
-	private final Datasource datasource; 
-	
+	private final Datasource datasource;
+
 	@Transient
-	private final int counter ; 
-	
+	private final int counter ;
+
 	private final String icon;
 	private final String mvoName;
 
-	
+
 
 	public static class Builder {
 		private int value;
-		private Datasource datasource; 
-		
-		private int counter = 1; 
-		
+		private Datasource datasource;
+
+		private int counter = 1;
+
 		private String icon;
 		private String mvoName;
-		
-		
+
+
 		public Builder value(int value) {
 			this.value=value;
 			return this;
 		}
-		
+
 		public Builder datasource(Datasource datasource) {
 			this.datasource=datasource;
 			return this;
 		}
-		
+
 		public Builder counter(int counter) {
 			this.counter=counter;
 			return this;
@@ -69,7 +69,7 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 			this.mvoName=mvoName;
 			return this;
 		}
-		
+
 		public void setValue(int value) {
 			this.value = value;
 		}
@@ -92,22 +92,22 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 
 
 	}
-	
 
 
-	
+
+
 	protected MvoGoalChild() {
 		this.value = 0;
 		this.datasource = new Datasource();
 		this.counter = 1;
 		this.icon = "";
 		this.mvoName = "";
-		
-	}
-	
 
-	
-	
+	}
+
+
+
+
 	public MvoGoalChild(Builder builder) {
 		this.counter=builder.counter;
 		this.datasource=builder.datasource;
@@ -122,13 +122,13 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 	public int getId() {
 		return id;
 	}
-	
-	
+
+
 	/*@Override
 	public void setId(int id) {
-		 String childId = Integer.toString(super.id) + Integer.toString(id); 
-		
-		this.id = Integer.parseInt(childId);  
+		 String childId = Integer.toString(super.id) + Integer.toString(id);
+
+		this.id = Integer.parseInt(childId);
 	} */
 
 	public int getCounter() {
@@ -155,10 +155,14 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 		return mvoName;
 	}
 
+	public String getName() {
+		return null;
+	}
 
-	
-	
-	
+
+
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(datasource, icon, mvoName, value);
@@ -181,51 +185,51 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 
 	@Override
 	public String toString() {
-		
+
 		//int id, int value, SdgComp sdgComp, Datasource datasource, String icon, String mvoName
 		return String.format("id: %d, value: %d%n,  Datasource: %s, Icon: %s, MvoName: %s",
-				getId(), getValue(), getDatasource().toString(), getIcon(), getMvoName() ); 
+				getId(), getValue(), getDatasource().toString(), getIcon(), getMvoName() );
 	}
-	
-	
+
+
 	public void get() {
 		throw new UnsupportedOperationException();
-		
+
 	}
-	
+
 	public void getChild() {
 		throw new UnsupportedOperationException();
 
 	}
-	
+
 	public void add(MvoGoalAbstract sdg) throws MvoGoalException {
 		throw new UnsupportedOperationException();
 
-		
+
 	}
 	public void remove(MvoGoalAbstract sdg) throws MvoGoalException {
 		throw new UnsupportedOperationException();
 
 	}
 
-	
+
 	public MvoGoalChild getChild(MvoGoalAbstract sdg) throws MvoGoalException {
 		throw new UnsupportedOperationException();
 	}
-	
+
 	public void addMvoGoalJpa(MvoGoalAbstract comp) {
 		throw new UnsupportedOperationException();
 
 	}
-	
+
 	public void removeMvoGoalJpa(MvoGoalComp comp) {
 		throw new UnsupportedOperationException();
 
 	}
-	
+
 	public MvoGoalAbstract getMvoGoalJpa(int id) {
 		throw new UnsupportedOperationException();
-		
+
 	}
 
 	public void updateMvoGoal(MvoGoalComp mvoGoalToUpdate) {
