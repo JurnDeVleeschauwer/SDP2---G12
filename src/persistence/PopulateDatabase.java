@@ -20,8 +20,8 @@ public class PopulateDatabase {
 		cc.addCategory("Climate", "Climate.png");
 
 		mcc.insertMvoCoordinator("Yorben", "123456789");
-		dc.addDatasource("Electricity Consuption", "Watt", "Month", 2022, 50, new File("C:\\Users\\wimva\\Downloads\\ProjFluv\\ProjFluv\\Latest\\optellingWekenTest.txt")); 
-		dc.addDatasource("Tree Consumption", "Watt", "Month", 2022, 35, new File("C:\\Users\\wimva\\Downloads\\ProjFluv\\ProjFluv\\Latest\\gemiddeldeTest.txt"));
+		dc.addDatasource("Electricity Consuption", "Watt", "Month", 2022, 50, new File("src/optellingWekenTest.txt")); 
+		dc.addDatasource("Tree Consumption", "Watt", "Month", 2022, 35, new File("src/gemiddeldeTest.txt"));
 		mgc.addMvoGoalComp("Eradicate poverty by 2030 everywhere");
 		mgc.addSubMvoGoal(0, 60, dc.getDatasource(1), "electricity.png", "Poverty");
 

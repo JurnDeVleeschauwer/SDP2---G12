@@ -1,15 +1,25 @@
+* {
+    -fx-fblue: '#004C6A';
+    -fx-fbluelight: '#0A759D';
+    -fx-fgreen: '#B2D235';
+}
 //hoofdpanneel
 #hoofdpanneel_id{
     -fx-border-color: black; 
-    -fx-background-color: #0A759D
+    
+    //-fx-background-color: -fx-fblue
+}
+
+#dashboard_id{
+    -fx-background-color: -fx-fblue
 }
 
 #dashboardButton{
     -fx-font-size: 20px;
-    -fx-text-fill: #B2D235;
+    -fx-text-fill: -fx-fgreen;
     -fx-font-weight: bold;
     //-fx-font: normal bold 47px 'system';
-    -fx-background-color: #0A759D; 
+    -fx-background-color: -fx-fblue; 
     -fx-border-color: black; 
     -fx-border-width: 2;    
 }
@@ -18,17 +28,22 @@
     -fx-font-size: 20px;
     -fx-text-fill: black;
     -fx-font-weight: bold;
-    -fx-background-color: #B2D235;
+    -fx-background-color: -fx-fgreen;
 }
 
 //Aanmelden
+#aanmeldpanneel_id {
+    -fx-background-color: -fx-fblue;
+    -fx-min-width: 800px;
+}
+
 #header_id{
-    -fx-text-fill: #B2D235; 
+    -fx-text-fill: -fx-fgreen; 
     -fx-font: normal bold 47px 'system';
 }
 
 #gebruikersnaamlbl_id, #wachtwoordlbl_id {
-    -fx-text-fill: #B2D235; 
+    -fx-text-fill: -fx-fgreen; 
     -fx-font: normal 18px 'system';
 }
 
@@ -42,33 +57,89 @@
 }
 
 #aanmeldenbtn_id{
-    -fx-background-color: #004C6A; 
-    -fx-text-fill: #B2D235; 
+    -fx-background-color: -fx-fbluelight; 
+    -fx-text-fill: -fx-fgreen; 
     -fx-font: normal 18px 'system';
     -fx-border-color: black;
 }
 
 #aanmeldenbtn_id:hover {
     -fx-text-fill: black;
-    -fx-background-color: #B2D235; 
+    -fx-background-color: -fx-fgreen; 
 }
 
 //dashboard
 #categorybtn_id, #sdgbtn_id, #mvogoalbtn_id, #listmvobtn_id, #btnaanmelden_id {
-    -fx-background-color: #0A759D;
-    -fx-text-fill: #B2D235;
+    -fx-background-color: -fx-fblue;
+    -fx-text-fill: -fx-fgreen;
 
     -fx-font: normal 18px 'system';
 
     -fx-border-color: black;
     -fx-border-width: 1;  
 
-    -fx-pref-width: 156px;
+    -fx-pref-width: 200px;
 }
 
 #categorybtn_id:hover, #sdgbtn_id:hover, #mvogoalbtn_id:hover, #listmvobtn_id:hover, #btnaanmelden_id:hover {
-    -fx-background-color: #B2D235;
+    -fx-background-color: -fx-fbluelight;
     -fx-text-fill: black; 
 }
 
-//
+//Categorieën
+#categorieVBox_id{
+    -fx-background-color: #D3D3D3;
+}
+
+
+#verwijdercatbtn_id, #aanmakencatbtn_id {
+    -fx-background-color: -fx-fbluelight;
+    -fx-text-fill: -fx-fgreen;
+    -fx-font: normal 15px 'system';
+    -fx-min-width: 200px;
+
+    /* -fx-border-color: black;
+    -fx-border-width: 1; */
+}
+
+#verwijdercatbtn_id:hover, #aanmakencatbtn_id:hover {
+    -fx-background-color: -fx-fgreen;
+    -fx-text-fill: black; 
+}
+
+.table-view{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header{
+    -fx-background-color: linear-gradient(to bottom, -fx-fblue, -fx-fbluelight);
+    -fx-dark-text-color: -fx-fgreen;
+    -fx-mid-text-color: -fx-fgreen;
+    -fx-light-text-color: -fx-fgreen;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  linear-gradient(to bottom, -fx-fblue, -fx-fbluelight);
+}
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(to right, -fx-fblue, -fx-fbluelight);
+}
+
+.table-row-cell: highlighted {
+    -fx-background-color: -fx-fgreen;
+}

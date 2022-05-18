@@ -16,6 +16,7 @@ public class Dashboard extends GridPane {
 	private MvoCoordinatorController mcc;
 	
 	public Dashboard(HoofdPaneel hoofdPaneel, MvoCoordinatorController mcc) {
+		this.setId("dashboard_id");
 
 		this.hoofdPaneel = hoofdPaneel;
 		this.mcc=mcc;
@@ -69,17 +70,23 @@ public class Dashboard extends GridPane {
 	}
 
 	private void configureerGrid() {
-		setPadding(new Insets(10));
-		//setHgap(10);
-		setVgap(10);
+//		setPadding(new Insets(10));
+//		//setHgap(10);
+//		setVgap(10);
 
 		ColumnConstraints col1 = new ColumnConstraints();
-		col1.setHalignment(HPos.RIGHT);
-
+		col1.setHalignment(HPos.LEFT);
 		ColumnConstraints col2 = new ColumnConstraints();
-		col2.setHgrow(Priority.ALWAYS);
+		col2.setHalignment(HPos.LEFT);
+		ColumnConstraints col3 = new ColumnConstraints();
+		col3.setHalignment(HPos.LEFT);
+		ColumnConstraints col4 = new ColumnConstraints();
+		col4.setHalignment(HPos.LEFT);
+		ColumnConstraints col5 = new ColumnConstraints();
+		col5.setHalignment(HPos.RIGHT);
+		col5.setHgrow(Priority.ALWAYS);
 
-		getColumnConstraints().addAll(col1, col2);
+		getColumnConstraints().addAll(col1, col2, col3, col4, col5);
 	}
 
 }

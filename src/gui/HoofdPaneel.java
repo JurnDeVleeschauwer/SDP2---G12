@@ -52,6 +52,7 @@ public class HoofdPaneel extends BorderPane {
 		this.sc = sc;
 		this.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
 		this.setId("hoofdpanneel_id");
+		
 
 		createPanelen();
 		voegComponentenToe();
