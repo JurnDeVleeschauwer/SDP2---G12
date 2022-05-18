@@ -44,9 +44,9 @@ public class DataPerSource implements Serializable {
 	
 
 	
-	public DataPerSource(File f) throws FileNotFoundException {
+	public DataPerSource(File f, boolean sum, boolean avg) throws FileNotFoundException {
 		setF(f); 
-		populateData(f);
+		populateData(f, sum, avg);
 	}
 
 	protected DataPerSource() {
@@ -97,12 +97,12 @@ public class DataPerSource implements Serializable {
 	
 	
 	
-	public Map<String, Integer>populateData(File f) throws FileNotFoundException {
+	public Map<String, Integer>populateData(File f, boolean sum, boolean average) throws FileNotFoundException {
 		
 		
 		dataRaw = DatasourceReader.readFile(f);
 		
-		dataSet = sum(dataRaw);
+		dataSet = processData(dataRaw, sum, average);
 		
 	
 		return dataSet; 
@@ -111,17 +111,16 @@ public class DataPerSource implements Serializable {
 	
 	
 	
-	public Map<String, Integer> sum(List<String> data) {
+	public Map<String, Integer> processData(List<String> data, boolean sum, boolean avg) {
 
 		Map<String, Integer> monthValueMap = new LinkedHashMap<>(); 
-		
 		List<String> daysOfWeek = new ArrayList<>();
 		List<String> months = new ArrayList<String>(); 
-		
 		String langMatchMonths; 
 		String langMatchDays; 
 		boolean dayCheck = false; 
-
+		boolean monthCheck = false; 
+		
 			if(data.get(0).equals("nederlands") || data.get(0).contains("ne")) {
 				langMatchDays = "\\b(?:zo.*?|ma.*?|di.*?|woe.*?|do.*?|vrij.*?|za.*?)"; 
 				langMatchMonths =  "\\b(?:jan.*?|feb.*?|maart.*?|apr.*?|mei.*?|juni.*?|juli.*?|aug.*?|sept.*?|okt.*?|nov.*?|dec.*?)";
@@ -140,6 +139,8 @@ public class DataPerSource implements Serializable {
 
 			}
 			
+			int monthCount = 0; 
+			
 			for(String line : data) {
 				if(line.matches(langMatchDays)) {
 						dayCheck = true; 
@@ -147,18 +148,42 @@ public class DataPerSource implements Serializable {
 				} 
 				
 				
+				if(line.matches(langMatchMonths)) {
+					monthCount++;
+					
+					//if(monthCount >= 2) {
+					//	monthCheck = true;
+					//	break; 
+					//}
+					
+					
+				}
+				
+				
 			}
 			
 			
-			if(dayCheck == true) {
-				monthValueMap = sumDays(data, langMatchDays, langMatchMonths, daysOfWeek, months ); 
-				
-			} else  if(dayCheck == false){
-				System.out.println("ENTERED ELSE");
-				monthValueMap = sumWeeks(data, langMatchMonths, daysOfWeek, months); 
-				
-			}
 			
+				
+				if(dayCheck == true) {
+					System.out.println("DAYCHECK");
+					monthValueMap = dayFunc(data, langMatchDays, langMatchMonths, daysOfWeek, months, avg); 
+					
+				} /*else if(monthCheck == true)  {
+					System.out.println("MONTHCHECK");
+					monthValueMap = monthFunc(data, langMatchMonths, daysOfWeek, months, true);
+					
+				}*/else if(dayCheck == false && monthCheck == false) {
+					System.out.println("WEEKCHECK");
+					monthValueMap = weekFunc(data, langMatchMonths, daysOfWeek, months, avg); 
+					
+				} 
+				
+				
+			
+			
+		
+		
 			monthValueMap.forEach((k,v) -> {
 				System.out.println("Key:" + k  + " V " + v);
 			});
@@ -166,8 +191,64 @@ public class DataPerSource implements Serializable {
 		return monthValueMap; 
 	}
 	
+	private Map<String, Integer> monthFunc(List<String> data, String langMatchMonths, List<String> daysOfWeek, List<String> months, boolean avg) {
+		
+
+		String currentMonth = ""; 
+		String prevMonth = ""; 
+		Map<String, Integer> monthValueMap = new LinkedHashMap<>(); 
+
+		
+		for(int i = 0; i < data.size(); i++) {
+					if(data.get(i).matches(langMatchMonths)) {
+						currentMonth = data.get(i).replaceAll(" ", "").split(":")[0];
+						
+						int monthValue = Integer.parseInt(data.get(i).replaceAll(" ", "").split(":")[1]); 
+						
+						if(avg == true) {
+							System.out.println("MONTHAVG");
+							for(int iMonth = 0; i < months.size(); i++) {
+								if(currentMonth == months.get(iMonth)) {
+									
+									
+									if(iMonth == 0) {
+										monthValue /= 31; 
+										System.out.println("MONTHVALUE DIVIDE: " + monthValue);
+									}else if(iMonth == 1) {
+										monthValue /= 29; 
+									} else if(iMonth == 7 ) {
+										monthValue /= 31; 
+									} else if(iMonth % 2 == 0) {
+										monthValue /= 31;
+									} else if(iMonth % 2 != 0) {
+										monthValue /= 30;
+									}
+									
+									
+								}
+							
+								
+								
+								
+							}
+							
+							
+							
+							
+						}
+						
+						monthValueMap.put(currentMonth, monthValue );
+				}
+		}
 	
-	private Map<String, Integer> sumWeeks(List<String> data, String langMatchMonths, List<String> daysOfWeek, List<String> months) {
+		
+		
+	return monthValueMap; 
+	
+	}
+	
+		
+	private Map<String, Integer> weekFunc(List<String> data, String langMatchMonths, List<String> daysOfWeek, List<String> months, boolean avg) {
 		
 		String currentMonth = ""; 
 		String prevMonth = ""; 
@@ -222,6 +303,11 @@ public class DataPerSource implements Serializable {
 									
 										}
 									
+									if(avg == true) {
+										System.out.println("AVG found");
+										monthValue /= valueOfWeeks.size(); 
+									}
+									
 									monthValueMap.put(currentMonth, monthValue);
 									currentMonth = "";  
 									weeksPerMonth = 0;
@@ -241,7 +327,7 @@ public class DataPerSource implements Serializable {
 	
 	}
 
-	private Map<String, Integer> sumDays(List<String> data, String langMatchDays, String langMatchMonths, List<String> daysOfWeek, List<String> months ) {
+	private Map<String, Integer> dayFunc(List<String> data, String langMatchDays, String langMatchMonths, List<String> daysOfWeek, List<String> months, boolean avg ) {
 
 		
 		String currentMonth = ""; 
@@ -324,6 +410,11 @@ public class DataPerSource implements Serializable {
 												}
 											}
 										
+										}
+										
+										if(avg == true) {
+											System.out.println("AVG FOUND");
+											monthValue /= valueOfWeeks.size();
 										}
 
 										monthValueMap.put(currentMonth, monthValue);

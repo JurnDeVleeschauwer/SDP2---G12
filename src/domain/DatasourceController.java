@@ -14,11 +14,12 @@ public class DatasourceController {
 
 	public void addDatasource(String name, String yAxis, String xAxis, int year, int expectedGoal, File f) throws FileNotFoundException {
 
-		DataPerSource dataPerSource = new DataPerSource(f);  
+		DataPerSource dataPerSource = new DataPerSource(f, false, true );  
 		
 		Datasource data = new Datasource(name, yAxis, xAxis, year, expectedGoal, dataPerSource );
 		datasourceManager.addDatasource(data);
 	}
+
 
 	public void updateDatasource(int DatasourceId) {
 
