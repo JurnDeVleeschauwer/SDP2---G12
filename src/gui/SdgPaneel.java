@@ -10,6 +10,7 @@ import domain.MvoGoalAbstract;
 import domain.MvoGoalChild;
 import domain.MvoGoalComp;
 import domain.MvoGoalController;
+import domain.SdgAbstract;
 import domain.SdgChild;
 import domain.SdgComp;
 import domain.SdgController;
@@ -35,7 +36,7 @@ public class SdgPaneel extends GridPane {
 	private final SdgController sdgController;
 	private final HoofdPaneel hoofdPaneel;
 	private int id;
-	private TableView<SdgChild> tableView;
+	private TableView<SdgAbstract> tableView;
 
 	public SdgPaneel(HoofdPaneel hoofdPaneel, SdgController sdgController) {
 		this.hoofdPaneel = hoofdPaneel;
@@ -58,15 +59,10 @@ public class SdgPaneel extends GridPane {
 
 	private void deleteButtonAction(ActionEvent event) {
 
-
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmeer verwijdering");
 		alert.setHeaderText("Bent u zeker dat u deze categorie wilt verwijderen?");
 		alert.setGraphic(null);
-
-			
-		
-
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -74,49 +70,49 @@ public class SdgPaneel extends GridPane {
 
 			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
 
-		}}
+		}
+	}
 
-		
-		private void maakGrid() {
-			this.gridLinesVisibleProperty().set(true);
-			
-			getChildren().clear();
-			
-			Label title = new Label("SDG");
-			title.setFont(new Font("Arial", 30));
-			add( title, 5, 0);
-			
-			
-			SdgComp sdg = new SdgComp.Builder().description("Description").name("Name").build(); //(SdgComp) sdgController.getSdg(this.id);
-			
-			
-			Label id = new Label("ID:");
-			id.setFont(new Font("Arial", 15));
-			add( id, 1, 1);
-			add(new Label(Integer.toString(sdg.getId())), 2, 1);
-			Label category = new Label("Category:");
-			category.setFont(new Font("Arial", 15));
-			add( category, 1, 2);
-			Label name = new Label("Name:");
-			name.setFont(new Font("Arial", 15));
-			add( name, 1, 3);
-			add(new Label(sdg.getName()), 2, 3);
-			
-			
-			
-			Button deleteButtonAction = new Button("Verwijderen");
-			deleteButtonAction.setOnAction(this::deleteButtonAction);
-			add(deleteButtonAction, 12, 11);
+	private void maakGrid() {
+		this.gridLinesVisibleProperty().set(true);
 
-			Button editButton = new Button("Wijzigen");
-			editButton.setOnAction(this::editButton);
-			add(editButton, 13, 11);
+		getChildren().clear();
 
-			Button createButton = new Button("Aanmaken");
-			createButton.setOnAction(this::createButton);
-			add(createButton, 14, 11);
-			
+		Label title = new Label("SDG");
+		title.setFont(new Font("Arial", 30));
+		add(title, 5, 0);
 
+		SdgComp sdg = (SdgComp) sdgController.getSdg(this.id);
+
+		Label id = new Label("ID:");
+		id.setFont(new Font("Arial", 15));
+		add(id, 1, 1);
+		add(new Label(Integer.toString(sdg.getId())), 2, 1);
+		Label description = new Label("Description:");
+		description.setFont(new Font("Arial", 15));
+		add(description, 1, 2);
+		add(new Label(sdg.getDescription()), 2, 2);
+		Label name = new Label("Name:");
+		name.setFont(new Font("Arial", 15));
+		add(name, 1, 3);
+		add(new Label(sdg.getName()), 2, 3);
+
+		Label SDGs = new Label("Sub Sdgs:");
+		SDGs.setFont(new Font("Arial", 15));
+		add(SDGs, 1, 4);
+		maakTableView(sdg);
+
+		Button deleteButtonAction = new Button("Verwijderen");
+		deleteButtonAction.setOnAction(this::deleteButtonAction);
+		add(deleteButtonAction, 1, 11);
+
+		Button editButton = new Button("Wijzigen");
+		editButton.setOnAction(this::editButton);
+		add(editButton, 7, 0);
+
+		Button createButton = new Button("Aanmaken");
+		createButton.setOnAction(this::createButton);
+		add(createButton, 1, 12);
 
 	}
 
@@ -125,7 +121,9 @@ public class SdgPaneel extends GridPane {
 		List<Object> resultaat = SdgWijzigenPopup.display(sdgController.getSdg(this.id));
 		if (resultaat != null) {
 
-			sdgController.updateSdg(id);
+			sdgController.updateSdg(new SdgChild((String) resultaat.get(0), (String) resultaat.get(1),
+					(MvoGoalAbstract) resultaat.get(2), (SdgComp) resultaat.get(3),
+					Integer.valueOf((String) resultaat.get(4))));
 		}
 
 	}
@@ -141,6 +139,30 @@ public class SdgPaneel extends GridPane {
 		;
 	}
 
+	private void maakTableView(SdgComp sdgGoal) {
+		// getChildren().clear();
+		tableView = new TableView<SdgAbstract>();
+		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		
+		TableColumn<SdgAbstract, Integer> column1 = new TableColumn<>("id");
+		column1.setCellValueFactory(new PropertyValueFactory<>("id"));
 
+		TableColumn<SdgAbstract, String> column2 = new TableColumn<>("target");
+		column1.setCellValueFactory(new PropertyValueFactory<>("target"));
+
+		TableColumn<SdgAbstract, String> column3 = new TableColumn<>("name");
+		column2.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+		tableView.getColumns().add(column1);
+		tableView.getColumns().add(column2);
+		tableView.getColumns().add(column3);
+
+		for (SdgAbstract mvoGoalChild : sdgGoal.getSdgs()) {
+			tableView.getItems().add(mvoGoalChild);
+		}
+
+		add(tableView, 1, 5);
+
+	}
 
 }

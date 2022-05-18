@@ -27,10 +27,9 @@ public class SdgController {
 	}
 	
 	
-	public void updateSdg(int sdgId) {
+	public void updateSdg(SdgAbstract sdgCompToUpdate) {
 		
-		SdgComp sdgCompToUpdate = getSdg(sdgId); 
-		
+			
 		sdgManager.updateSdg(sdgCompToUpdate);
 	}
 	

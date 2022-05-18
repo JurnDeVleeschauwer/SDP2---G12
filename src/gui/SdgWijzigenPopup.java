@@ -34,7 +34,7 @@ public class SdgWijzigenPopup {
 		TextField textFieldNaam = new TextField();
 		//textFieldNaam.setText(sdgUpdate.getName());
 		
-		Label labelCategorie = new Label("Categorie:");
+		Label labelCategorie = new Label("Discription:");
 		TextField textFieldCategorie = new TextField();
 		//textFieldCategorie.setText(sdgUpdate.get);
 		

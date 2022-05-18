@@ -25,9 +25,7 @@ public class MvoGoalController {
 		mvoGoalManager.addMvoGoal(goal);
 	}
 	
-	public void updateMvoGoal(int mvoGoalId) {
-		
-		MvoGoalAbstract MvoGoalToUpdate = getMvoGoal(mvoGoalId); 
+	public void updateMvoGoal(MvoGoalAbstract MvoGoalToUpdate) {
 		
 		mvoGoalManager.updateMvoGoal(MvoGoalToUpdate);
 	}

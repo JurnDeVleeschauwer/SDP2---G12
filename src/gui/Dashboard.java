@@ -44,7 +44,7 @@ public class Dashboard extends GridPane {
 
 		Button buttonMvogoal = new Button("MvoGoal 1");
 		buttonMvogoal.setOnAction(e -> {
-			hoofdPaneel.toonMvoGoalPaneel(1);
+			hoofdPaneel.toonMvoGoalPaneel(0);
 		});
 		buttonMvogoal.setId("mvogoalbtn_id");
 		add(buttonMvogoal, 2, 0);
