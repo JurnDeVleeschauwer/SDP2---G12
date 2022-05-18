@@ -155,9 +155,6 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 		return mvoName;
 	}
 
-	public void setMvoName(String mvoName) {
-		this.mvoName = mvoName;
-	}
 	public String getName() {
 		return null;
 	}

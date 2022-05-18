@@ -83,9 +83,9 @@ public class MvoGoalPaneel extends GridPane {
 		if (resultaat != null) {
 			MvoGoalAbstract mvoGoal = mvoGoalController.getMvoGoal(this.id);
 			if (mvoGoal.getClass() == MvoGoalChild.class) {
-				mvoGoalController.updateMvoGoal(new MvoGoalChild(Integer.valueOf((String) resultaat.get(0)),
+				/*mvoGoalController.updateMvoGoal(new MvoGoalChild(Integer.valueOf((String) resultaat.get(0)),
 						((MvoGoalChild)mvoGoalController.getMvoGoal(this.id)).getDatasource(), (String) resultaat.get(1),
-						(String) resultaat.get(2)));
+						(String) resultaat.get(2)));*/
 			}else {
 				//mvoGoalController.updateMvoGoal(new MvoGoalComp((String) resultaat.get(0)));
 			}

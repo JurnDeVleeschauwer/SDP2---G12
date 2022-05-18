@@ -121,9 +121,9 @@ public class SdgPaneel extends GridPane {
 		List<Object> resultaat = SdgWijzigenPopup.display(sdgController.getSdg(this.id));
 		if (resultaat != null) {
 
-			sdgController.updateSdg(new SdgChild((String) resultaat.get(0), (String) resultaat.get(1),
+			/*sdgController.updateSdg(new SdgChild((String) resultaat.get(0), (String) resultaat.get(1),
 					(MvoGoalAbstract) resultaat.get(2), (SdgComp) resultaat.get(3),
-					Integer.valueOf((String) resultaat.get(4))));
+					Integer.valueOf((String) resultaat.get(4))));*/
 		}
 
 	}
