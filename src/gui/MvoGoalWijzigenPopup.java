@@ -45,7 +45,7 @@ public class MvoGoalWijzigenPopup {
 		Label labelValue = new Label("Value:");
 		TextField textFieldValue = new TextField();
 
-		if (mvoGoalToUpdate.getClass() == MvoGoalChild.class) {
+		if (mvoGoalToUpdate.isBlad()) {
 			textFieldValue.setPromptText(Integer.toString(((MvoGoalChild) mvoGoalToUpdate).getValue()));
 			textFieldMvoNaam.setPromptText(((MvoGoalChild) mvoGoalToUpdate).getIcon());
 		}
@@ -72,7 +72,7 @@ public class MvoGoalWijzigenPopup {
 		hboxButtons.getChildren().addAll(wijzigenButton, annulerenButton);
 		hboxButtons.setAlignment(Pos.CENTER);
 		VBox layout = new VBox(10);
-		if (mvoGoalToUpdate.getClass() == MvoGoalChild.class) {
+		if (mvoGoalToUpdate.isBlad()) {
 			layout.getChildren().addAll(labelNaam, textFieldNaam, labelMvoNaam, textFieldMvoNaam, labelValue,
 					textFieldValue, hboxButtons);
 		}

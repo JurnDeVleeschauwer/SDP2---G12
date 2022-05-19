@@ -185,4 +185,7 @@ public class SdgChild extends SdgAbstract implements Serializable {
 		throw new UnsupportedOperationException();
 	}
 
+	public boolean isBlad() {
+		return true;
+	}
 }

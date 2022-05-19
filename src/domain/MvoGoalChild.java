@@ -158,6 +158,11 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 	public String getName() {
 		return null;
 	}
+	
+	@Override
+	public boolean isBlad() {
+		return true;
+	}
 
 
 
