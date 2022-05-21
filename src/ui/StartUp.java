@@ -60,11 +60,14 @@ public class StartUp extends Application {
 		PopulateDatabase.populateDatabase(cg, dc, mcc, mgc, sc);
 		HoofdPaneel root = new HoofdPaneel(cg, dc, mcc, mgc, sc);
 
-		Scene scene = new Scene(root, 800, 800);
+		Scene scene = new Scene(root, 1000, 600);
 
 		stage.setScene(scene);
 		stage.setTitle("Fluvius");
 		stage.show();
+		
+		stage.setMinWidth(1000.0);
+		stage.setMinHeight(400.0);
 	}
 
 	static void run() {

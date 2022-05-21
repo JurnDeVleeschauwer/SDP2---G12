@@ -5,6 +5,8 @@ import java.util.List;
 
 import domain.Datasource;
 import domain.MvoGoalAbstract;
+import domain.MvoGoalChild;
+import domain.MvoGoalComp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -29,34 +31,31 @@ public class MvoGoalWijzigenPopup {
 
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
-		window.setTitle("MvoGoal wijzigen");
+		window.setTitle("Mvo Doelstelling wijzigen");
 		window.setMinWidth(350);
 		window.setMinHeight(300);
 
 		Label labelNaam = new Label("Naam:");
 		TextField textFieldNaam = new TextField();
-		// textFieldNaam.setText(mvoGoal.getMvoName());
+		textFieldNaam.setText(((MvoGoalComp) mvoGoalToUpdate).getName());
 
 		Label labelMvoNaam = new Label("Foto:");
 		TextField textFieldMvoNaam = new TextField();
-		// textFieldMvoNaam.setPromptText(mvoGoal.getIcon());
 
 		Label labelValue = new Label("Value:");
 		TextField textFieldValue = new TextField();
-		// textFieldValue.setPromptText(mvoGoal.getValue());
 
-		ChoiceBox<Datasource> cbDatasources = new ChoiceBox<>();
-		ObservableList<Datasource> datasourcesList = FXCollections.observableArrayList();
-
-		// mvoGoal.getDatasource().stream().forEach(a -> datasourcesList.add(a));
-
-		cbDatasources.setItems(datasourcesList);
+		if (mvoGoalToUpdate.getClass() == MvoGoalChild.class) {
+			textFieldValue.setPromptText(Integer.toString(((MvoGoalChild) mvoGoalToUpdate).getValue()));
+			textFieldMvoNaam.setPromptText(((MvoGoalChild) mvoGoalToUpdate).getIcon());
+		}
 
 		Button wijzigenButton = new Button("Wijzigen");
 		wijzigenButton.setOnAction(e -> {
-			mvo.add(textFieldValue.getText());
-			mvo.add(cbDatasources.getSelectionModel().getSelectedItem());
-			mvo.add(textFieldMvoNaam.getText());
+			if (mvoGoalToUpdate.getClass() == MvoGoalChild.class) {
+				mvo.add(textFieldValue.getText());
+				mvo.add(textFieldMvoNaam.getText());
+			}
 			mvo.add(textFieldNaam.getText());
 			window.close();
 		});
@@ -73,8 +72,11 @@ public class MvoGoalWijzigenPopup {
 		hboxButtons.getChildren().addAll(wijzigenButton, annulerenButton);
 		hboxButtons.setAlignment(Pos.CENTER);
 		VBox layout = new VBox(10);
-		layout.getChildren().addAll(labelNaam, textFieldNaam, labelNaam, textFieldNaam, labelMvoNaam, textFieldMvoNaam,
-				labelValue, textFieldValue, cbDatasources, hboxButtons);
+		if (mvoGoalToUpdate.getClass() == MvoGoalChild.class) {
+			layout.getChildren().addAll(labelNaam, textFieldNaam, labelMvoNaam, textFieldMvoNaam, labelValue,
+					textFieldValue, hboxButtons);
+		}
+		layout.getChildren().addAll(labelNaam, textFieldNaam, hboxButtons);
 		layout.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(layout);
 		window.setScene(scene);

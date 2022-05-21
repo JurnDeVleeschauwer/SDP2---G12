@@ -21,7 +21,11 @@ import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.skin.TableHeaderRow;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderImage;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
@@ -38,7 +42,9 @@ public class CategorieenHBox extends HBox {
 	private ListView<String> listview;
 
 	public CategorieenHBox(CategoryController categoryController, HoofdPaneel hoofdPaneel) {
-
+		this.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
+		this.setFillHeight(true);
+//		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.categoryController = categoryController;
 		this.hoofdPaneel = hoofdPaneel;
 		this.setSpacing(40);
@@ -52,21 +58,29 @@ public class CategorieenHBox extends HBox {
 		VBox categorieVBox = new VBox();
 		categorieVBox.setBorder(new Border(
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		categorieVBox.setPadding(new Insets(5, 10, 20, 10));
-		categorieVBox.setSpacing(40);
-		categorieVBox.setMaxHeight(90);
+		categorieVBox.setPadding(new Insets(0, 0, 20, 0));
+		categorieVBox.setMaxHeight(Double.MAX_VALUE);
+		categorieVBox.setId("categorieVBox_id");
 		Button verwijderCategorieButton = new Button("Verwijder categorie");
+		verwijderCategorieButton.setId("verwijdercatbtn_id");
 
 		verwijderCategorieButton.setOnAction(this::verwijderCategorie);
 		Button categorieAanmakenButton = new Button("Nieuwe categorie maken");
+		categorieAanmakenButton.setId("aanmakencatbtn_id");
 
 		categorieVBox.getChildren().addAll(categorieAanmakenButton, verwijderCategorieButton);
 		this.getChildren().add(categorieVBox);
 
 		categorieAanmakenButton.setOnAction(this::categorieAanmaken);
+		
+		HBox hbox = new HBox();
+		hbox.setSpacing(50);
 
-		maakTableView(categoryController);
-		maakListView();
+		hbox.getChildren().addAll(maakTableView(categoryController), maakListView());
+		
+		hbox.setPadding(new Insets(20,0,20,0));
+		
+		this.getChildren().add(hbox);  
 	}
 
 	public void verwijderCategorie(ActionEvent event) {
@@ -119,15 +133,23 @@ public class CategorieenHBox extends HBox {
 
 	}
 
-	private void maakTableView(CategoryController categoryController) {
-
+	private TableView<Category> maakTableView(CategoryController categoryController) {
+		
 		tableView = new TableView<Category>();
+		tableView.setId("tableviewcat_id");
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		tableView.setEditable(true);
+		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+		tableView.setPrefWidth(400);
+		tableView.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+		
 		TableColumn<Category, String> columnId = new TableColumn<>("Id");
 		columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		columnId.setEditable(false);
+		columnId.setMinWidth(30);
+		columnId.setMaxWidth(30);
 
 		TableColumn<Category, String> columnNaam = new TableColumn<>("Naam");
 		columnNaam.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -168,8 +190,8 @@ public class CategorieenHBox extends HBox {
 		for (Category category : categoryController.getAll()) {
 			tableView.getItems().add(category);
 		}
-
-		this.getChildren().add(tableView);
+		
+		return tableView;
 
 	}
 
@@ -182,11 +204,14 @@ public class CategorieenHBox extends HBox {
 
 	}
 
-	private void maakListView() {
+	private ListView<String> maakListView() {
 
-		listview = new ListView<>();
+		listview = new ListView<String>();
+		
+		listview.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-		this.getChildren().add(listview);
+		return listview;
+		
 
 	}
 

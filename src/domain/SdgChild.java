@@ -2,170 +2,187 @@ package domain;
 
 import java.io.Serializable;
 
-
-import javax.annotation.processing.Generated;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 import exceptions.SdgException;
 
-
 @Entity
-public class SdgChild extends SdgAbstract implements Serializable{
+public class SdgChild extends SdgAbstract implements Serializable {
 
-	
-	
 	/**
 	 * 
 	 */
-	
-	
+
 	private static final long serialVersionUID = 1L;
-	private String description;
-	private String icon;
-	
+	private final String description;
+	private final String icon;
 
-	
+	private final int target;
 
-	private int target;
-
-	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	private MvoGoalAbstract mvoGoal; 
+	private final MvoGoalAbstract mvoGoal;
 
-	
-	public SdgChild(String name, String icon, MvoGoalAbstract mvoGoal, SdgComp sdgComp, int target) {
-		setName(name);
-		setDescription(description);
-		setTarget(target); 
-		setMvoGoalAbstract(mvoGoal);
+	public static class Builder {
+
+		private String description;
+		private String name;
+		private String icon;
+		private int target;
+		private MvoGoalAbstract mvoGoal;
+		private SdgComp sdgComp;
+
+		public Builder description(String description) {
+			this.description = description;
+			return this;
+		}
+
+		public Builder name(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Builder icon(String icon) {
+			this.icon = icon;
+			return this;
+		}
+
+		public Builder target(int target) {
+			this.target = target;
+			return this;
+		}
+
+		public Builder mvoGoal(MvoGoalAbstract mvoGoal) {
+			this.mvoGoal = mvoGoal;
+			return this;
+		}
+
+		public Builder sdgComp(SdgComp sdgComp) {
+			this.sdgComp = sdgComp;
+			return this;
+		}
+
+		public Builder setDescription(String description) {
+			this.description = description;
+			return this;
+		}
+
+		public Builder setName(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public Builder setIcon(String icon) {
+			this.icon = icon;
+			return this;
+		}
+
+		public Builder setTarget(int target) {
+			this.target = target;
+			return this;
+
+		}
+
+		public Builder setMvoGoal(MvoGoalAbstract mvoGoal) {
+			this.mvoGoal = mvoGoal;
+			return this;
+
+		}
+
+		public Builder setSdgComp(SdgComp sdgComp) {
+			this.sdgComp = sdgComp;
+			return this;
+		}
+
+		public SdgChild build() {
+			return new SdgChild(Builder.this);
+
+		}
 	}
 
-
 	protected SdgChild() {
-		
+		this.description = "";
+		this.icon = "";
+		this.target = 0;
+		this.mvoGoal = new MvoGoalComp();
+
+	}
+
+	public SdgChild(Builder builder) {
+		this.description = builder.description;
+		this.name = builder.name;
+		this.icon = builder.icon;
+		this.target = 0;
+		this.mvoGoal = new MvoGoalComp();
 	}
 
 	public String getName() {
 		return name;
 	}
 
-
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-
-
-
-
-
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-
-
 	public String getIcon() {
 		return icon;
 	}
-
-
-
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
-
-
-
 
 	public int getTarget() {
 		return target;
 	}
 
-
-
-	public void setTarget(int target) {
-		this.target = target;
-	}
-	
-	
-	public void setMvoGoalAbstract(MvoGoalAbstract mvoGoal) {
-		
-		
-		if(mvoGoal instanceof MvoGoalChild) {
-			this.mvoGoal = (MvoGoalChild) mvoGoal;
-
-		} else {
-			this.mvoGoal = (MvoGoalComp) mvoGoal; 
-		}
-		
-	}
-	
-	
 	@Override
 	public String toString() {
 		return String.format("id: %s, icon: %s, description: %s", getId(), getIcon(), getDescription());
 	}
-	
+
 	public void get() {
-		throw new UnsupportedOperationException(); 
+		throw new UnsupportedOperationException();
 
-		
 	}
-	
+
 	public void getChild() {
-		throw new UnsupportedOperationException(); 
+		throw new UnsupportedOperationException();
 
 	}
-	
+
 	public void add(SdgAbstract sdg) throws SdgException {
-		throw new UnsupportedOperationException(); 
+		throw new UnsupportedOperationException();
 
-		
 	}
+
 	public void remove(SdgAbstract sdg) throws SdgException {
-		throw new UnsupportedOperationException(); 
+		throw new UnsupportedOperationException();
 
 	}
 
-	
 	public SdgChild getChild(SdgAbstract sdg) throws SdgException {
-		throw new UnsupportedOperationException(); 
+		throw new UnsupportedOperationException();
 	}
-	
+
 	public void addSdgJpa(SdgAbstract comp) {
-		throw new UnsupportedOperationException(); 
+		throw new UnsupportedOperationException();
 
 	}
-	
+
 	public void removeSdgJpa(SdgComp comp) {
-		throw new UnsupportedOperationException(); 
+		throw new UnsupportedOperationException();
 
 	}
-	
+
 	public SdgComp getSdgJpa(int id) {
-		throw new UnsupportedOperationException(); 
-		
+		throw new UnsupportedOperationException();
+
 	}
 
 	public void updateSdg(SdgComp sdgCompToUpdate) {
-		throw new UnsupportedOperationException(); 
+		throw new UnsupportedOperationException();
 	}
 
 }

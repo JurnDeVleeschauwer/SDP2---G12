@@ -33,7 +33,7 @@ public class ListMvoGoalPaneel extends GridPane {
 	private final MvoGoalController mvoGoalController;
 	private final HoofdPaneel hoofdPaneel;
 	private DatasourceController datasourceController;
-	private TableView<MvoGoalComp> tableView;
+	private TableView<MvoGoalAbstract> tableView;
 
 	public ListMvoGoalPaneel(HoofdPaneel hoofdPaneel, MvoGoalController mvoGoalController,DatasourceController datasourceController) {
 		this.hoofdPaneel = hoofdPaneel;
@@ -59,23 +59,29 @@ public class ListMvoGoalPaneel extends GridPane {
 
 	private void maakGrid() {
 		getChildren().clear();
-		tableView = new TableView<MvoGoalComp>();
+		tableView = new TableView<MvoGoalAbstract>();
+		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-		TableColumn<MvoGoalComp, String> column1 = new TableColumn<>("id");
+		TableColumn<MvoGoalAbstract, String> column1 = new TableColumn<>("id");
 		column1.setCellValueFactory(new PropertyValueFactory<>("id"));
+		
+		TableColumn<MvoGoalAbstract, String> column2 = new TableColumn<>("name");
+		column2.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-		TableColumn<MvoGoalComp, String> column2 = new TableColumn<>("value");
+		TableColumn<MvoGoalAbstract, String> column3 = new TableColumn<>("mvoName");
+		column2.setCellValueFactory(new PropertyValueFactory<>("mvoName"));
+		
+		TableColumn<MvoGoalAbstract, String> column4 = new TableColumn<>("value");
 		column2.setCellValueFactory(new PropertyValueFactory<>("value"));
 
-		TableColumn<MvoGoalComp, String> column3 = new TableColumn<>("mvoName");
-		column2.setCellValueFactory(new PropertyValueFactory<>("mvoName"));
 
 		tableView.getColumns().add(column1);
 		tableView.getColumns().add(column2);
 		tableView.getColumns().add(column3);
+		tableView.getColumns().add(column4);
 
 		for (MvoGoalAbstract mvoGoalChild : mvoGoalController.getAll()) {
-			tableView.getItems().add((MvoGoalComp) mvoGoalChild);
+			tableView.getItems().add((MvoGoalAbstract) mvoGoalChild);
 		}
 		add(tableView, 2, 4);
 
@@ -100,7 +106,7 @@ public class ListMvoGoalPaneel extends GridPane {
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
-			mvoGoalController.deleteMvoGoal(mvoGoalController.getMvoGoal(tableView.getSelectionModel().getSelectedItem().getId())); 
+			mvoGoalController.deleteMvoGoal(mvoGoalController.getMvoGoal(tableView.getSelectionModel().getSelectedItem().getId()-1)); 
 																									
 			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
 

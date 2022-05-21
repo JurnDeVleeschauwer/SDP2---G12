@@ -12,21 +12,20 @@ public class MvoGoalController {
 	}
 	
 	public void addMvoGoalChild( int value, Datasource datasource, String icon, String mvoName) {
-		MvoGoalChild goal = new MvoGoalChild(value, datasource,  icon,  mvoName); 
+		MvoGoalChild goal = new MvoGoalChild.Builder().value(value).datasource(datasource).icon(icon).mvoName(mvoName).build(); 
+		
 		System.out.println(goal.toString());
 		mvoGoalManager.addMvoGoal(goal);
 	}
 	
 	public void addMvoGoalComp(String name) {
 		
-		MvoGoalAbstract goal = new MvoGoalComp(name); 
+		MvoGoalAbstract goal = new MvoGoalComp.Builder().setName(name).build(); 
 		//System.out.println(goal.getId());
 		mvoGoalManager.addMvoGoal(goal);
 	}
 	
-	public void updateMvoGoal(int mvoGoalId) {
-		
-		MvoGoalAbstract MvoGoalToUpdate = getMvoGoal(mvoGoalId); 
+	public void updateMvoGoal(MvoGoalAbstract MvoGoalToUpdate) {
 		
 		mvoGoalManager.updateMvoGoal(MvoGoalToUpdate);
 	}
@@ -48,8 +47,8 @@ public class MvoGoalController {
 	
 	
 	public void addSubMvoGoal(int mvoGoalCompId, int value, Datasource datasource, String icon, String mvoName) {
-		
-		MvoGoalChild mvoGoalChild = new MvoGoalChild( value,  datasource,  icon,  mvoName);
+		MvoGoalChild mvoGoalChild = new MvoGoalChild.Builder().value(value).datasource(datasource).icon(icon).mvoName(mvoName).build(); 
+
 		
 		mvoGoalManager.addSubMvoGoal(mvoGoalChild, mvoGoalCompId);
 		mvoGoalManager.updateMvoGoal(mvoGoalManager.getMvoGoal(mvoGoalCompId) );

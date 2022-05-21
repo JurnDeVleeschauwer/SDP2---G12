@@ -19,8 +19,7 @@ public class DatasourceManager {
 	public void addDatasource(Datasource d) {
 		datasourceMapper.insert(d);
 		populateList();
-		
-	}
+	} 
 	
 	public void addDataFromFile(File f) {
 		
@@ -34,7 +33,7 @@ public class DatasourceManager {
 	}
 	
 	public Datasource getDatasource(int index) {
-		return datasources.get(0);
+		return datasources.get(index);
 	}
 	
 	public void updateDatasource(Datasource datasource) {
@@ -52,6 +51,7 @@ public class DatasourceManager {
 	
 	
 	public void populateList() {
+		datasources.clear();
 		datasources.addAll(datasourceMapper.findAll()); 
 
 	}
