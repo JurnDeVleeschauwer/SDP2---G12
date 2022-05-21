@@ -104,6 +104,9 @@ public abstract class MvoGoalAbstract implements Serializable {
 		return false;
 	}
 	
+	public Integer getValue() {
+		return null;
+	}
 	
 
 }

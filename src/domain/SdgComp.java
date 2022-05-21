@@ -117,6 +117,15 @@ public class SdgComp extends SdgAbstract implements Serializable {
 
 	@Override
 	public String toString() {
+		return "SdgComp [description=" + description + ", sdgs=" + sdgs + ", id=" + id + ", name=" + name
+				+ ", getDescription()=" + getDescription() + ", getName()=" + getName() + ", getSdgs()=" + getSdgs()
+				+ ", getId()=" + getId() + ", getTarget()=" + getTarget() + ", isBlad()=" + isBlad() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+
+
+	/*@Override
+	public String toString() {
 		String res = "";
 
 		res += String.format("Id: %d, name: %s%n, Category: %s%n", getName());
@@ -127,6 +136,6 @@ public class SdgComp extends SdgAbstract implements Serializable {
 
 		}
 		return res;
-	}
+	}*/
 
 }

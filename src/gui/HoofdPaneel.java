@@ -31,6 +31,7 @@ public class HoofdPaneel extends BorderPane {
 	private MvoCoordinatorController mcc;
 	private MvoGoalController mgc;
 	private SdgController sc;
+	private ListSdgPaneel listSdgPaneel;
 
 	
 	/**
@@ -84,6 +85,7 @@ public class HoofdPaneel extends BorderPane {
 		this.sdgPaneel = new SdgPaneel(this, sc);
 		this.dashboard = new Dashboard(this,mcc);
 		this.listMvoGoalPaneel = new ListMvoGoalPaneel(this, mgc, dc);
+		this.listSdgPaneel = new ListSdgPaneel(this, sc);
 
 	}
 
@@ -115,6 +117,10 @@ public class HoofdPaneel extends BorderPane {
 
 	public void toonListMvoGoalPaneel() {
 		setCenter(listMvoGoalPaneel);
+	}
+	
+	public void toonListSdgPaneel() {
+		setCenter(listSdgPaneel);
 	}
 
 	public void toonDatasource() {

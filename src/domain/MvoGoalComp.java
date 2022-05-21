@@ -109,9 +109,6 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable {
 		return name;
 	}
 	
-	public String getValue() {
-		return null;
-	}
 
 	public List<MvoGoalChild> getSdgs() {
 		return mvoGoals;
@@ -145,6 +142,8 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable {
 		MvoGoalComp other = (MvoGoalComp) obj;
 		return Objects.equals(mvoGoals, other.mvoGoals) && Objects.equals(name, other.name);
 	}
+
+
 
 	@Override
 	public String toString() {

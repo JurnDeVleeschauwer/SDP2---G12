@@ -84,6 +84,10 @@ public abstract class SdgAbstract implements Serializable{
 		return id; 
 	}
 	
+	public Integer getTarget() {
+		return null;
+	}
+	
 	public boolean isBlad() {
 		return false;
 	}

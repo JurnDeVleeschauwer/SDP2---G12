@@ -63,20 +63,25 @@ public class ListSdgPaneel extends GridPane {
 		tableView = new TableView<SdgAbstract>();
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-		TableColumn<SdgAbstract, String> column1 = new TableColumn<>("sdgCompId");
-		column1.setCellValueFactory(new PropertyValueFactory<>("sdgCompId"));
+		TableColumn<SdgAbstract, String> column1 = new TableColumn<>("id");
+		column1.setCellValueFactory(new PropertyValueFactory<>("id"));
 
 		TableColumn<SdgAbstract, String> column2 = new TableColumn<>("target");
 		column2.setCellValueFactory(new PropertyValueFactory<>("target"));
 
 		TableColumn<SdgAbstract, String> column3 = new TableColumn<>("name");
-		column2.setCellValueFactory(new PropertyValueFactory<>("name"));
+		column3.setCellValueFactory(new PropertyValueFactory<>("name"));
+		
+		TableColumn<SdgAbstract, String> column4 = new TableColumn<>("description");
+		column4.setCellValueFactory(new PropertyValueFactory<>("description"));
 
 		tableView.getColumns().add(column1);
 		tableView.getColumns().add(column2);
 		tableView.getColumns().add(column3);
+		tableView.getColumns().add(column4);
 		
 		for (SdgAbstract sdgChild : sdgController.getAll()) {
+			System.out.println(sdgChild);
 			tableView.getItems().add((SdgAbstract) sdgChild);
 		}
 		add(tableView, 2, 4);

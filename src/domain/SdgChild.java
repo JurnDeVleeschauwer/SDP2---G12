@@ -29,7 +29,7 @@ public class SdgChild extends SdgAbstract implements Serializable {
 		private String description;
 		private String name;
 		private String icon;
-		private int target;
+		private Integer target;
 		private MvoGoalAbstract mvoGoal;
 		private SdgComp sdgComp;
 
@@ -133,7 +133,8 @@ public class SdgChild extends SdgAbstract implements Serializable {
 		return icon;
 	}
 
-	public int getTarget() {
+	@Override
+	public Integer getTarget() {
 		return target;
 	}
 

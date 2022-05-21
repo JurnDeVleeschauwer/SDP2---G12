@@ -38,7 +38,7 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 
 
 	public static class Builder {
-		private int value;
+		private Integer value;
 		private Datasource datasource;
 
 		private int counter = 1;
@@ -135,8 +135,8 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 		return counter;
 	}
 
-
-	public int getValue() {
+	@Override
+	public Integer getValue() {
 		return value;
 	}
 

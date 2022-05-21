@@ -58,21 +58,21 @@ public class ListMvoGoalPaneel extends GridPane {
 	}
 
 	private void maakGrid() {
-		getChildren().clear();
+		this.getChildren().clear();
 		tableView = new TableView<MvoGoalAbstract>();
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-		TableColumn<MvoGoalAbstract, String> column1 = new TableColumn<>("id");
-		column1.setCellValueFactory(new PropertyValueFactory<>("id"));
+		TableColumn<MvoGoalAbstract, Number> column1 = new TableColumn<>("Id");
+		column1.setCellValueFactory(new PropertyValueFactory<MvoGoalAbstract, Number>("id"));
 		
-		TableColumn<MvoGoalAbstract, String> column2 = new TableColumn<>("name");
-		column2.setCellValueFactory(new PropertyValueFactory<>("name"));
+		TableColumn<MvoGoalAbstract, String> column2 = new TableColumn<>("Naam");
+		column2.setCellValueFactory(new PropertyValueFactory<MvoGoalAbstract, String>("name"));
 
-		TableColumn<MvoGoalAbstract, String> column3 = new TableColumn<>("mvoName");
-		column2.setCellValueFactory(new PropertyValueFactory<>("mvoName"));
+		TableColumn<MvoGoalAbstract, String> column3 = new TableColumn<>("Mvoname");
+		column3.setCellValueFactory(new PropertyValueFactory<MvoGoalAbstract, String>("MvoName"));
 		
-		TableColumn<MvoGoalAbstract, String> column4 = new TableColumn<>("value");
-		column2.setCellValueFactory(new PropertyValueFactory<>("value"));
+		TableColumn<MvoGoalAbstract, Number> column4 = new TableColumn<>("Waarde");
+		column4.setCellValueFactory(new PropertyValueFactory<MvoGoalAbstract, Number>("value"));
 
 
 		tableView.getColumns().add(column1);
@@ -81,6 +81,7 @@ public class ListMvoGoalPaneel extends GridPane {
 		tableView.getColumns().add(column4);
 
 		for (MvoGoalAbstract mvoGoalChild : mvoGoalController.getAll()) {
+			System.out.println(mvoGoalChild);
 			tableView.getItems().add((MvoGoalAbstract) mvoGoalChild);
 		}
 		add(tableView, 2, 4);
@@ -111,6 +112,7 @@ public class ListMvoGoalPaneel extends GridPane {
 			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
 
 		}
+		maakGrid();
 		
 	}
 	
