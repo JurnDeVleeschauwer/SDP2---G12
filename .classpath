@@ -35,5 +35,10 @@
 	<classpathentry kind="lib" path="C:/Users/wimva/Downloads/jpaJARS (1)/org.eclipse.persistence.jpars.source_2.7.10.v20211216-fe64cd39c3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/wimva/Downloads/jpaJARS (1)/org.eclipse.persistence.jpars_2.7.10.v20211216-fe64cd39c3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/wimva/OneDrive/Bureaublad/mysql-connector-java-8.0.27 (1).jar"/>
+	<classpathentry kind="lib" path="C:/Users/wimva/OneDrive/Bureaublad/JARS_Mockito (2)/byte-buddy-1.11.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wimva/OneDrive/Bureaublad/JARS_Mockito (2)/mockito-core-3.12.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wimva/OneDrive/Bureaublad/JARS_Mockito (2)/mockito-junit-jupiter-3.12.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/wimva/OneDrive/Bureaublad/JARS_Mockito (2)/objenesis-3.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

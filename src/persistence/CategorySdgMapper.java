@@ -14,6 +14,8 @@ public class CategorySdgMapper<T> extends GenericMapperJpa<T>{
 
 	private Class<T> type;
 
+	
+	
 	public CategorySdgMapper(Class<T> type) {
 		super(type);
 		this.type = type;

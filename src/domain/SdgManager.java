@@ -7,13 +7,24 @@ import persistence.GenericMapperJpa;
 
 public class SdgManager {
 	
-	private GenericMapperJpa<SdgAbstract> sdgMapper = new GenericMapperJpa<>(SdgAbstract.class); 
+	private GenericMapperJpa<SdgAbstract> sdgMapper; 
 	private List<SdgAbstract> sdgs;
 	
 	public SdgManager() {
+		
+		sdgMapper = new GenericMapperJpa<>(SdgAbstract.class);
 		sdgs = new ArrayList<SdgAbstract>();
 		populateList(); 
 	}
+	
+	
+		//Mock Constructor voor testen//
+	public SdgManager(GenericMapperJpa<SdgAbstract> sdgMapper) {
+		this.sdgMapper = sdgMapper; 
+		sdgs = new ArrayList<SdgAbstract>();
+		populateList(); 
+	}
+	
 	
 	public void populateList() {
 		
