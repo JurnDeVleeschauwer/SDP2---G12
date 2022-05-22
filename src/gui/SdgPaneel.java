@@ -57,22 +57,6 @@ public class SdgPaneel extends GridPane {
 		maakGrid();
 	}
 
-	private void deleteButtonAction(ActionEvent event) {
-
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Confirmeer verwijdering");
-		alert.setHeaderText("Bent u zeker dat u deze categorie wilt verwijderen?");
-		alert.setGraphic(null);
-
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.isPresent() && result.get() == ButtonType.OK) {
-			sdgController.deleteSdg(sdgController.getSdg(tableView.getSelectionModel().getSelectedItem().getId()));
-
-			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
-
-		}
-	}
-
 	private void maakGrid() {
 		this.gridLinesVisibleProperty().set(true);
 
@@ -113,6 +97,10 @@ public class SdgPaneel extends GridPane {
 		Button createButton = new Button("Aanmaken");
 		createButton.setOnAction(this::createButton);
 		add(createButton, 1, 12);
+		
+		Button listMvoGoalButton = new Button("Back naar Sdg lijst");
+		listMvoGoalButton.setOnAction(this::listMvoGoalButton);
+		add(listMvoGoalButton, 1, 13);
 
 	}
 
@@ -137,6 +125,26 @@ public class SdgPaneel extends GridPane {
 
 		}
 		;
+	}
+	
+	private void deleteButtonAction(ActionEvent event) {
+
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmeer verwijdering");
+		alert.setHeaderText("Bent u zeker dat u deze categorie wilt verwijderen?");
+		alert.setGraphic(null);
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.isPresent() && result.get() == ButtonType.OK) {
+			sdgController.deleteSdg(sdgController.getSdg(tableView.getSelectionModel().getSelectedItem().getId()));
+
+			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
+
+		}
+	}
+	
+	private void listMvoGoalButton(ActionEvent event) {
+		hoofdPaneel.toonListSdgPaneel();
 	}
 
 	private void maakTableView(SdgComp sdgGoal) {
