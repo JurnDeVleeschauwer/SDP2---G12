@@ -2,6 +2,7 @@ package domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,28 +26,50 @@ public class SdgComp extends SdgAbstract implements Serializable {
 	@OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private final List<SdgChild> sdgs;
 
+	private HashMap<String, Exception> errorsMap = new HashMap<String, Exception>();
+
+	
 	public static class Builder {
 
 		private String description;
 		private String name;
 		private List<SdgChild> sdgs = new ArrayList<>();
 
+		private HashMap<String, Exception> errorsMap = new HashMap<String, Exception>();
+
+		
 		public Builder description(String description) {
-			this.description = description;
+			try {
+				this.description = description;
+				
+			} catch (Exception e) {
+				errorsMap.put("description", e);
+			}
 			return this;
 		}
 
 		public Builder name(String name) {
-			this.name = name;
+			try {
+				this.name = name;
+				
+			} catch (Exception e) {
+				errorsMap.put("name", e);
+			}
 			return this;
 		}
 
 		public Builder sdgs(List<SdgChild> sdgs) {
-			this.sdgs = sdgs;
+			try {
+				this.sdgs = sdgs;
+				
+			} catch (Exception e) {
+				errorsMap.put("sdgs", e);
+			}
 			return this;
 		}
 
 		public Builder setDescription(String description) {
+
 			this.description = description;
 			return this;
 		}
@@ -74,6 +97,7 @@ public class SdgComp extends SdgAbstract implements Serializable {
 		this.description = builder.description;
 		this.name = builder.name;
 		this.sdgs = builder.sdgs;
+		this.errorsMap=builder.errorsMap;
 
 	}
 
@@ -81,6 +105,10 @@ public class SdgComp extends SdgAbstract implements Serializable {
 		this.description = "";
 		this.sdgs = null;
 
+	}
+
+	public HashMap<String, Exception> getErrorsMap() {
+		return errorsMap;
 	}
 
 	@Override

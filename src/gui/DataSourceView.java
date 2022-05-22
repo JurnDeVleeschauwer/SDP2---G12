@@ -35,6 +35,9 @@ public class DataSourceView extends GridPane {
 		tableView = new TableView<Datasource>();
 		listViewX=new ListView<>();
 		listViewY=new ListView<>();
+		listViewX.setPrefWidth(70);
+
+		listViewY.setPrefWidth(70);
 		
 		tableView.getItems().add(datasource);
 		tableView.setEditable(true);

@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -76,11 +77,22 @@ public class CategorieenHBox extends HBox {
 		HBox hbox = new HBox();
 		hbox.setSpacing(50);
 
-		hbox.getChildren().addAll(maakTableView(categoryController), maakListView());
+		VBox vbox1 = new VBox();
+		vbox1.getChildren().addAll(new Label("Categorieëen"),maakTableView(categoryController));
+		
+		
+		VBox vbox2 = new VBox();
+		vbox2.getChildren().addAll(new Label("Sdg's"),maakListView());
+		
+		
+		hbox.getChildren().addAll(vbox1, vbox2);
+		
 		
 		hbox.setPadding(new Insets(20,0,20,0));
 		
 		this.getChildren().add(hbox);  
+	
+		
 	}
 
 	public void verwijderCategorie(ActionEvent event) {
@@ -199,6 +211,7 @@ public class CategorieenHBox extends HBox {
 		listview.getItems().clear();
 		for (SdgAbstract sdg : sdgAbstract) {
 			SdgComp sdgComp = (SdgComp) sdg;
+				
 			listview.getItems().add(sdgComp.getName());
 		}
 

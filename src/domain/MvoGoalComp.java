@@ -2,7 +2,9 @@ package domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -28,11 +30,14 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable {
 
 	@OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private final List<MvoGoalChild> mvoGoals;
+	private HashMap<String, Exception> errorsMap = new HashMap<String, Exception>();
 
+	
 	public static class Builder {
 		private GenericMapperJpa<MvoGoalAbstract> mvoGoalMapper = new GenericMapperJpa<>(MvoGoalAbstract.class);
 		private String name;
 		private List<MvoGoalChild> mvoGoals = new ArrayList<>();
+		private HashMap<String, Exception> errorsMap = new HashMap<String, Exception>();
 
 		public Builder mvoGoalMapper(GenericMapperJpa<MvoGoalAbstract> mvoGoalMapper) {
 			this.mvoGoalMapper = mvoGoalMapper;
@@ -40,12 +45,24 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable {
 		}
 
 		public Builder name(String name) {
-			this.name = name;
+
+			try {
+				this.name = name;
+
+			} catch (Exception e) {
+				errorsMap.put("name", e);
+			}
 			return this;
 		}
 
 		public Builder mvoGoals(List<MvoGoalChild> mvoGoals) {
-			this.mvoGoals = mvoGoals;
+			try {
+
+				this.mvoGoals = mvoGoals;
+			} catch (Exception e) {
+				errorsMap.put("mvoGoals", e);
+			}
+
 			return this;
 		}
 
@@ -74,6 +91,7 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable {
 		this.mvoGoalMapper = builder.mvoGoalMapper;
 		this.mvoGoals = builder.mvoGoals;
 		this.name = builder.name;
+		this.errorsMap=builder.errorsMap;
 
 	}
 
@@ -108,10 +126,17 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable {
 	public String getName() {
 		return name;
 	}
-	
+
+	public Integer getValue() {
+		return null;
+	}
 
 	public List<MvoGoalChild> getSdgs() {
 		return mvoGoals;
+	}
+
+	public HashMap<String, Exception> getErrorsMap() {
+		return errorsMap;
 	}
 
 	public GenericMapperJpa<MvoGoalAbstract> getMvoGoalMapper() {
@@ -121,7 +146,7 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable {
 	public List<MvoGoalChild> getMvoGoals() {
 		return mvoGoals;
 	}
-	
+
 	public String getMvoName() {
 		return null;
 	}
@@ -142,8 +167,6 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable {
 		MvoGoalComp other = (MvoGoalComp) obj;
 		return Objects.equals(mvoGoals, other.mvoGoals) && Objects.equals(name, other.name);
 	}
-
-
 
 	@Override
 	public String toString() {

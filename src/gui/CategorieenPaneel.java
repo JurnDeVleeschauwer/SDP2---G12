@@ -53,7 +53,9 @@ public class CategorieenPaneel extends GridPane {
 		HBox categorieenHBox = new CategorieenHBox(categoryController, hoofdPaneel);
 		
 		categorieenHBox.setFillHeight(true);
+
 		add(categorieenHBox,0,0);
+		
 		
 		
 		
