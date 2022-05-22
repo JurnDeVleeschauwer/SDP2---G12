@@ -83,11 +83,14 @@ public class MvoGoalPaneel extends GridPane {
 		if (resultaat != null) {
 			MvoGoalAbstract mvoGoal = mvoGoalController.getMvoGoal(this.id);
 			if (mvoGoal.getClass() == MvoGoalChild.class) {
-				/*mvoGoalController.updateMvoGoal(new MvoGoalChild(Integer.valueOf((String) resultaat.get(0)),
-						((MvoGoalChild)mvoGoalController.getMvoGoal(this.id)).getDatasource(), (String) resultaat.get(1),
-						(String) resultaat.get(2)));*/
-			}else {
-				//mvoGoalController.updateMvoGoal(new MvoGoalComp((String) resultaat.get(0)));
+				/*
+				 * mvoGoalController.updateMvoGoal(new MvoGoalChild(Integer.valueOf((String)
+				 * resultaat.get(0)),
+				 * ((MvoGoalChild)mvoGoalController.getMvoGoal(this.id)).getDatasource(),
+				 * (String) resultaat.get(1), (String) resultaat.get(2)));
+				 */
+			} else {
+				// mvoGoalController.updateMvoGoal(new MvoGoalComp((String) resultaat.get(0)));
 			}
 		}
 
@@ -101,6 +104,10 @@ public class MvoGoalPaneel extends GridPane {
 
 		}
 		;
+	}
+
+	private void listMvoGoalButton(ActionEvent event) {
+		hoofdPaneel.toonListMvoGoalPaneel();
 	}
 
 	private void maakGrid() {
@@ -141,6 +148,10 @@ public class MvoGoalPaneel extends GridPane {
 		Button createButton = new Button("Aanmaken");
 		createButton.setOnAction(this::createButton);
 		add(createButton, 1, 12);
+
+		Button listMvoGoalButton = new Button("Back naar Mvo Doesstellingen lijst");
+		listMvoGoalButton.setOnAction(this::listMvoGoalButton);
+		add(listMvoGoalButton, 1, 13);
 
 	}
 
