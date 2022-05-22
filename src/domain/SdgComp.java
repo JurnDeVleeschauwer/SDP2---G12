@@ -89,6 +89,7 @@ public class SdgComp extends SdgAbstract implements Serializable {
 		}
 	}
 
+	@Override
 	public String getDescription() {
 		return description;
 	}

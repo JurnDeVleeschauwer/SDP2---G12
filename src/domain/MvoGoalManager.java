@@ -19,13 +19,14 @@ public class MvoGoalManager {
 	
 	public void populateList() {
 	
-		
+		mvoGoals.clear();
 		mvoGoals.addAll(mvoGoalMapper.findAll()); 
 	}
 	
 	
 	public void updateMvoGoal(MvoGoalAbstract comp) {
-		mvoGoalMapper.update(comp); 
+		System.out.println( mvoGoalMapper.update(comp)); 
+		populateList();
 	}
 	
 	public void addMvoGoal(MvoGoalAbstract comp) {
@@ -37,6 +38,7 @@ public class MvoGoalManager {
 	
 	public void deleteMvoGoal(MvoGoalAbstract comp) {
 		mvoGoalMapper.delete(comp);
+		populateList();
 		
 	}
 	
@@ -57,6 +59,7 @@ public class MvoGoalManager {
 		MvoGoalComp comp = (MvoGoalComp) mvoGoals.get(mvoCompIndex);
 
 		comp.add(mvoGoalChild);
+		populateList();
 		
 	}
 

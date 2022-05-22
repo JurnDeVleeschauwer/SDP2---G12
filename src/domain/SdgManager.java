@@ -16,7 +16,7 @@ public class SdgManager {
 	}
 	
 	public void populateList() {
-		
+		sdgs.clear();
 		sdgs.addAll(sdgMapper.findAll()); 
 	}
 	
@@ -30,18 +30,18 @@ public class SdgManager {
 	
 	public void deleteSdg(SdgAbstract sdg) {
 		sdgMapper.delete(sdg);
-		
+		populateList();
 	}
 	
-	public SdgComp getSdg(int sdgId) {
+	public SdgAbstract getSdg(int sdgId) {
 	
-		return (SdgComp) sdgs.stream().filter(category->category.getId()==sdgId).findAny().get(); 
+		return sdgs.get(sdgId); 
 		
 	}
 	
 	public void updateSdg(SdgAbstract sdg) {
 		sdgMapper.update(sdg); 
-		
+		populateList();
 	}
 	
 	public List<SdgAbstract> getAll() {
@@ -53,6 +53,7 @@ public class SdgManager {
 		SdgComp comp = (SdgComp)  sdgs.stream().filter(category->category.getId()==sdgCompId).findAny().get();
 
 		comp.add(sdgChild);
+		populateList();
 	}
 	
 }

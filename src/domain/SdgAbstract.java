@@ -44,6 +44,10 @@ public abstract class SdgAbstract implements Serializable{
 		this.name=name;
 	}
 	
+	public String getDescription() {
+		return null;
+	}
+	
 	public void add(SdgAbstract sdg) throws SdgException {
 
 		

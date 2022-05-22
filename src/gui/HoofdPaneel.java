@@ -82,10 +82,10 @@ public class HoofdPaneel extends BorderPane {
 
 		this.categoriePaneel = new CategorieenPaneel(this, cc);
 		this.mvoGoalPaneel = new MvoGoalPaneel(this, mgc, dc);
-		this.sdgPaneel = new SdgPaneel(this, sc);
+		this.sdgPaneel = new SdgPaneel(this, sc, mgc);
 		this.dashboard = new Dashboard(this,mcc);
 		this.listMvoGoalPaneel = new ListMvoGoalPaneel(this, mgc, dc);
-		this.listSdgPaneel = new ListSdgPaneel(this, sc);
+		this.listSdgPaneel = new ListSdgPaneel(this, sc, mgc);
 
 	}
 

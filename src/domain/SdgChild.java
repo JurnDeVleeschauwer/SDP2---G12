@@ -155,6 +155,10 @@ public class SdgChild extends SdgAbstract implements Serializable {
 		this.errorsMap=builder.errorsMap;
 	}
 
+	public MvoGoalAbstract getMvoGoal() {
+		return mvoGoal;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -166,7 +170,7 @@ public class SdgChild extends SdgAbstract implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -179,6 +183,7 @@ public class SdgChild extends SdgAbstract implements Serializable {
 	public Integer getTarget() {
 		return target;
 	}
+	
 
 	@Override
 	public String toString() {

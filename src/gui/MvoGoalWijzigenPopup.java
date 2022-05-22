@@ -24,6 +24,7 @@ public class MvoGoalWijzigenPopup {
 
 	static List<Object> mvo;
 	static MvoGoalAbstract mvoGoal;
+	static Label foutbericht = new Label();
 
 	public static List<Object> display(MvoGoalAbstract mvoGoalToUpdate) {
 		mvoGoal = mvoGoalToUpdate;
@@ -37,27 +38,64 @@ public class MvoGoalWijzigenPopup {
 
 		Label labelNaam = new Label("Naam:");
 		TextField textFieldNaam = new TextField();
-		textFieldNaam.setText(((MvoGoalComp) mvoGoalToUpdate).getName());
 
-		Label labelMvoNaam = new Label("Foto:");
+		Label labelMvoNaam = new Label("MvoNaam:");
 		TextField textFieldMvoNaam = new TextField();
+
+		Label labelFoto = new Label("Foto:");
+		TextField textFieldFoto = new TextField();
 
 		Label labelValue = new Label("Value:");
 		TextField textFieldValue = new TextField();
 
 		if (mvoGoalToUpdate.isBlad()) {
 			textFieldValue.setPromptText(Integer.toString(((MvoGoalChild) mvoGoalToUpdate).getValue()));
-			textFieldMvoNaam.setPromptText(((MvoGoalChild) mvoGoalToUpdate).getIcon());
+			textFieldFoto.setPromptText(((MvoGoalChild) mvoGoalToUpdate).getIcon());
+			textFieldMvoNaam.setPromptText(((MvoGoalChild) mvoGoalToUpdate).getMvoName());
+		} else {
+			textFieldNaam.setPromptText(((MvoGoalComp) mvoGoalToUpdate).getName());
 		}
 
 		Button wijzigenButton = new Button("Wijzigen");
 		wijzigenButton.setOnAction(e -> {
-			if (mvoGoalToUpdate.getClass() == MvoGoalChild.class) {
-				mvo.add(textFieldValue.getText());
-				mvo.add(textFieldMvoNaam.getText());
+			boolean finish = true;
+			foutbericht.setText("");
+			if (!(textFieldValue.getText().isEmpty())) {
+				try {
+					Integer.parseInt(textFieldValue.getText());
+				} catch (NumberFormatException ex) {
+					foutbericht.setText(foutbericht.getText() + "Value moet een nummer zijn\n");
+					finish = false;
+				}
 			}
-			mvo.add(textFieldNaam.getText());
-			window.close();
+
+			if (finish) {
+				if (mvoGoalToUpdate.isBlad()) {
+					if (textFieldValue.getText().trim().isEmpty()) {
+						mvo.add(String.valueOf(mvoGoalToUpdate.getValue()));
+					} else {
+						mvo.add(textFieldValue.getText());
+					}
+					if (textFieldFoto.getText().trim().isEmpty()) {
+						mvo.add(((MvoGoalChild) mvoGoalToUpdate).getIcon());
+					} else {
+						mvo.add(textFieldFoto.getText());
+					}
+					if (textFieldMvoNaam.getText().trim().isEmpty()) {
+						mvo.add(((MvoGoalChild) mvoGoalToUpdate).getMvoName());
+					} else {
+						mvo.add(textFieldMvoNaam.getText());
+					}
+				} else {
+					if (textFieldNaam.getText().trim().isEmpty()) {
+						mvo.add(((MvoGoalComp) mvoGoalToUpdate).getName());
+					} else {
+						mvo.add(textFieldNaam.getText());
+					}
+				}
+				foutbericht.setText(null);
+				window.close();
+			}
 		});
 		wijzigenButton.setDefaultButton(true);
 
@@ -73,10 +111,11 @@ public class MvoGoalWijzigenPopup {
 		hboxButtons.setAlignment(Pos.CENTER);
 		VBox layout = new VBox(10);
 		if (mvoGoalToUpdate.isBlad()) {
-			layout.getChildren().addAll(labelNaam, textFieldNaam, labelMvoNaam, textFieldMvoNaam, labelValue,
-					textFieldValue, hboxButtons);
+			layout.getChildren().addAll(labelNaam, textFieldNaam, labelFoto, textFieldFoto, labelValue, textFieldValue,
+					labelMvoNaam, textFieldMvoNaam, hboxButtons, foutbericht);
+		} else {
+			layout.getChildren().addAll(labelNaam, textFieldNaam, hboxButtons, foutbericht);
 		}
-		layout.getChildren().addAll(labelNaam, textFieldNaam, hboxButtons);
 		layout.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(layout);
 		window.setScene(scene);

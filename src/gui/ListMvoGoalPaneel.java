@@ -130,12 +130,13 @@ public class ListMvoGoalPaneel extends GridPane {
 	
 	private void createButtonAction(ActionEvent event) {
 		
-		List<Object> resultaat = MvoGoalAanmakenPopup.display(datasourceController.getDatasources());
+		List<Object> resultaat = MvoGoalAanmakenPopup.display(datasourceController.getDatasources(), false);
 		if (!resultaat.isEmpty()) {
 			mvoGoalController.addMvoGoalChild(Integer.valueOf((String) resultaat.get(0)), (Datasource) resultaat.get(1),
 					(String) resultaat.get(2), (String) resultaat.get(3));
 
 		};
+		maakGrid();
 		
 	}
 }

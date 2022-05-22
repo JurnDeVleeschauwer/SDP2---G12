@@ -34,7 +34,7 @@ public class SdgController {
 	}
 	
 	
-	public SdgComp getSdg(int sdgCompId) {
+	public SdgAbstract getSdg(int sdgCompId) {
 		
 		return sdgManager.getSdg(sdgCompId);
 	}
@@ -44,15 +44,15 @@ public class SdgController {
 		return sdgManager;
 	}
 
-	public void addSubSdg(String name, String icon, MvoGoalAbstract mvoGoal, SdgComp sdgComp, int target, int sdgCompId) {
+	public void addSubSdg(String name, String icon, MvoGoalAbstract mvoGoal, SdgComp sdgComp, int target) {
 		SdgChild sdgChild = new SdgChild.Builder().name(name).icon(icon).mvoGoal(mvoGoal).sdgComp(sdgComp).target(target).build();
 
-		sdgManager.addSubSdg(sdgChild, sdgCompId);
+		sdgManager.addSubSdg(sdgChild, sdgComp.getId());
 		sdgManager.updateSdg(sdgComp);
 	}
 	
-	public void deleteSdg(SdgComp sdgComp) {
-		 sdgManager.deleteSdg(sdgComp); 
+	public void deleteSdg(SdgAbstract sdgAbstract) {
+		 sdgManager.deleteSdg(sdgAbstract); 
 	}
 	
 	public List<SdgAbstract> getAll() {
