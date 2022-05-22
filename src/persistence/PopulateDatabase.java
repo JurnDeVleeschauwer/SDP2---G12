@@ -37,12 +37,12 @@ public class PopulateDatabase {
 
 		
 		sc.addSdg("No Poverty", "End poverty in all its forms everywhere");
-		sc.addSubSdg("Eradicate Extreme Poverty", "sdgGoal1.png", mgc.getMvoGoal(0), sc.getSdg(1) , 60,  1);
-		sc.addSubSdg("Ensure equal income", "sdgGoal1.png", mgc.getMvoGoal(0), sc.getSdg(1) , 60,  1);
+		sc.addSubSdg("Eradicate Extreme Poverty", "sdgGoal1.png", mgc.getMvoGoal(0),(SdgComp) sc.getSdg(0) , 60);
+		sc.addSubSdg("Ensure equal income", "sdgGoal1.png", mgc.getMvoGoal(0), (SdgComp)sc.getSdg(0) , 60);
 
 		sc.addSdg("Zero hunger", "Eliminate food insecurity globally");
-		sc.addSubSdg("Ensure food supply access", "sdgGoal2.png", mgc.getMvoGoal(0), sc.getSdg(5) , 60,  5);
-		sc.addSubSdg("Increase agricultural production", "sdgGoal2.png", mgc.getMvoGoal(0), sc.getSdg(5) , 60,  5);
+		sc.addSubSdg("Ensure food supply access", "sdgGoal2.png", mgc.getMvoGoal(0), (SdgComp)sc.getSdg(3) , 60);
+		sc.addSubSdg("Increase agricultural production", "sdgGoal2.png", mgc.getMvoGoal(0),(SdgComp) sc.getSdg(3) , 60);
 
 		cc.addSdgToCategory(0, 1);
 		cc.addSdgToCategory(0, 5);
