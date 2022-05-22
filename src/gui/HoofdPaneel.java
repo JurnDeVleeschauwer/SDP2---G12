@@ -102,6 +102,7 @@ public class HoofdPaneel extends BorderPane {
 		setTop(null);
 	}
 	public void toonCategoriePaneell() {
+
 		setCenter(categoriePaneel);
 	}
 	

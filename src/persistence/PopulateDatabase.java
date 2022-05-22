@@ -2,6 +2,7 @@ package persistence;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import domain.CategoryController;
 import domain.Datasource;
@@ -19,8 +20,15 @@ public class PopulateDatabase {
 		cc.addCategory("Electricity", "Electricity.png");
 		cc.addCategory("Climate", "Climate.png");
 
-		mcc.insertMvoCoordinator("Yorben", "123456789");
+		ArrayList<String> rolesYorben = new ArrayList<>();
+		rolesYorben.add("MVO coördinator");
+		rolesYorben.add("User");
+		mcc.insertMvoCoordinator("Yorben", "123456789", rolesYorben);
 
+		ArrayList<String> rolesEddy = new ArrayList<>();
+		rolesEddy.add("User");
+		mcc.insertMvoCoordinator("Eddy", "123456789", rolesEddy);
+		
 		dc.addDatasource("Electricity Consuption", "Watt", "Month", 2022, 50, new File("src/maandenTest.txt")); 
 
 		dc.addDatasource("Tree Consumption", "Watt", "Month", 2022, 35, new File("src/gemiddeldeTest.txt"));

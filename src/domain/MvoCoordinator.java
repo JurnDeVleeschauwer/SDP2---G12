@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -25,14 +26,23 @@ public class MvoCoordinator implements Serializable {
 	private int id; 
 	private String username;
 	private String password;
-
+	private ArrayList<String> roles;
 	
-	public MvoCoordinator(String username, String password) {
+	public MvoCoordinator(String username, String password,ArrayList<String> roles) {
 		
 		setPassword(password);
 		setUsername(username);
+		setRoles(roles);
 	}
 	
+	public ArrayList<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(ArrayList<String> roles) {
+		this.roles = roles;
+	}
+
 	protected MvoCoordinator() {
 		
 	}

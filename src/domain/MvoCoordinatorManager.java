@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.relation.InvalidRoleValueException;
 import javax.security.sasl.AuthenticationException;
 
 import persistence.GenericMapperJpa;
@@ -32,16 +33,19 @@ public class MvoCoordinatorManager {
 		return (MvoCoordinator) mvoCoordinatorMapper.get(mvoCoordinatorId);
 	}
 
-	public MvoCoordinator getMvoCoordinator(String username, String password) throws AuthenticationException {
+	public MvoCoordinator getMvoCoordinator(String username, String password) throws AuthenticationException, InvalidRoleValueException {
 		mvoCoordinator=mvoCoordinatorMapper.get(username, password);
-		
+		if(!mvoCoordinator.getRoles().contains("MVO coördinator")) {
+			mvoCoordinator=null;
+			throw new InvalidRoleValueException();
+		}
 		return mvoCoordinator; 
 	}
 	
 	public void createMvoCoordinator(MvoCoordinator mvoCoordinator) {
 	
 		mvoCoordinatorMapper.insert(mvoCoordinator); 
-
+		
 	}
 	
 	public void afmelden() {
