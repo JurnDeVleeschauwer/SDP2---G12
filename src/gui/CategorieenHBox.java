@@ -210,9 +210,9 @@ public class CategorieenHBox extends HBox {
 	private void updateListView(List<SdgAbstract> sdgAbstract) {
 		listview.getItems().clear();
 		for (SdgAbstract sdg : sdgAbstract) {
-			SdgComp sdgComp = (SdgComp) sdg;
+
 				
-			listview.getItems().add(sdgComp.getName());
+			listview.getItems().add(sdg.getName());
 		}
 
 	}
