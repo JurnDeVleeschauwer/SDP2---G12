@@ -172,6 +172,28 @@ public class MvoGoalPaneel extends GridPane {
 		listMvoGoalButton.setOnAction(this::listMvoGoalButton);
 		add(listMvoGoalButton, 1, 13);
 
+		
+		Button datasourceButton = new Button("Bekijk datasource");
+		datasourceButton.setOnAction( this::datasourceButtonAction );
+		add(datasourceButton,1,14);
+		
+		
+	}
+	private void datasourceButtonAction(ActionEvent event) {
+		try {
+			
+			MvoGoalChild mvogoal = (MvoGoalChild) mvoGoalController.getMvoGoal(id);
+			
+			hoofdPaneel.toonDatasource(mvogoal.getDatasource(), id);
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.WARNING);
+			
+			alert.setTitle("Waarschuwing!");
+			alert.setHeaderText("Deze MvoGoal bevat geen datasource");
+			
+			alert.show();
+		}
+		
 	}
 
 	private void maakTableView(MvoGoalAbstract mvoGoal) {

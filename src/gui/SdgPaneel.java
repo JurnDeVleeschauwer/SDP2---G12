@@ -109,8 +109,10 @@ public class SdgPaneel extends GridPane {
 		Button listSdgButton = new Button("Back naar Sdg lijst");
 		listSdgButton.setOnAction(this::listSdgButton);
 		add(listSdgButton, 1, 13);
-
+		
 	}
+	
+
 
 	private void editButton(ActionEvent event) {
 

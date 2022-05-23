@@ -6,6 +6,7 @@ import javafx.scene.layout.BorderPane;
 import java.util.*;
 
 import domain.CategoryController;
+import domain.Datasource;
 import domain.DatasourceController;
 import domain.DatasourceReader;
 import domain.DomeinController;
@@ -93,7 +94,6 @@ public class HoofdPaneel extends BorderPane {
 	 * toon AanmeldPaneel
 	 */
 	public void toonAanmeldPaneel() {
-		System.out.println(dc.getDatasource(0).getData().getDataSet());
 		setCenter(aanmelden);
 	}
 	public void toonNewAanmeldPaneel() {
@@ -126,8 +126,8 @@ public class HoofdPaneel extends BorderPane {
 		setCenter(listSdgPaneel);
 	}
 
-	public void toonDatasource() {
-		setCenter(new DataSourceView(this, dc));
+	public void toonDatasource(Datasource datasource,int mvoId) {
+		setCenter(new DataSourceView(this, dc,datasource,mvoId));
 	}
 
 }

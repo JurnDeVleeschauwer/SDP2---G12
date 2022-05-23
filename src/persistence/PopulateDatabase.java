@@ -29,11 +29,12 @@ public class PopulateDatabase {
 		rolesEddy.add("User");
 		mcc.insertMvoCoordinator("Eddy", "123456789", rolesEddy);
 		
-		dc.addDatasource("Electricity Consuption", "Watt", "Month", 2022, 50, new File("src/maandenTest.txt")); 
+		dc.addDatasource("Electricity Consumption", "Watt", "Month", 2022, 50, new File("src/maandenTest.txt")); 
 
 		dc.addDatasource("Tree Consumption", "Watt", "Month", 2022, 35, new File("src/gemiddeldeTest.txt"));
 		mgc.addMvoGoalComp("Eradicate poverty by 2030 everywhere");
 		mgc.addSubMvoGoal(0, 60, dc.getDatasource(1), "electricity.png", "Poverty");
+		mgc.addSubMvoGoal(0, 60, dc.getDatasource(2), "electricity.png", "Living standards");
 
 		
 		sc.addSdg("No Poverty", "End poverty in all its forms everywhere");

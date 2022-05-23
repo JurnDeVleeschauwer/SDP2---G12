@@ -131,19 +131,7 @@ public class CategorieenHBox extends HBox {
 
 	}
 
-	public void wijzigCategorie(ActionEvent event) {
 
-		List<String> resultaat = CategorieWijzigenPopup.display(
-				tableView.getSelectionModel().getSelectedItem().getName(),
-				tableView.getSelectionModel().getSelectedItem().getIcon());
-		if (resultaat != null) {
-
-			categoryController.updateCategory(tableView.getSelectionModel().getSelectedItem().getId(), resultaat.get(0),
-					resultaat.get(1));
-
-		}
-
-	}
 
 	private TableView<Category> maakTableView(CategoryController categoryController) {
 		
@@ -173,6 +161,7 @@ public class CategorieenHBox extends HBox {
 
 				Category category = event.getRowValue();
 				categoryController.updateCategoryName(category, event.getNewValue());
+				
 
 			}
 		});
