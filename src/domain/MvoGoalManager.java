@@ -7,9 +7,9 @@ import persistence.GenericMapperJpa;
 
 public class MvoGoalManager {
 	
-	private List<MvoGoalAbstract> mvoGoals;
+	
 	private GenericMapperJpa<MvoGoalAbstract> mvoGoalMapper = new GenericMapperJpa<MvoGoalAbstract>(MvoGoalAbstract.class); 
-
+	private List<MvoGoalAbstract> mvoGoals;
 	
 	public MvoGoalManager() {
 		mvoGoals = new ArrayList<MvoGoalAbstract>(); 
@@ -18,13 +18,13 @@ public class MvoGoalManager {
 	
 	
 	public void populateList() {
-	
 		mvoGoals.clear();
 		mvoGoals.addAll(mvoGoalMapper.findAll()); 
 	}
 	
 	
 	public void updateMvoGoal(MvoGoalAbstract comp) {
+		System.out.println( comp); 
 		System.out.println( mvoGoalMapper.update(comp)); 
 		populateList();
 	}
@@ -59,7 +59,7 @@ public class MvoGoalManager {
 		MvoGoalComp comp = (MvoGoalComp) mvoGoals.get(mvoCompIndex);
 
 		comp.add(mvoGoalChild);
-		populateList();
+		//populateList();
 		
 	}
 

@@ -83,7 +83,7 @@ public class ListSdgPaneel extends GridPane {
 		tableView.getColumns().add(column4);
 
 		for (SdgAbstract sdgChild : sdgController.getAll()) {
-			System.out.println(sdgChild);
+			// System.out.println(sdgChild);
 			tableView.getItems().add((SdgAbstract) sdgChild);
 		}
 		add(tableView, 2, 4);
@@ -129,7 +129,7 @@ public class ListSdgPaneel extends GridPane {
 
 	private void createButtonAction(ActionEvent event) {
 
-		List<Object> resultaat = SdgAanmakenPopup.display(mvoGoalController.getAll() ,false);
+		List<Object> resultaat = SdgAanmakenPopup.display(mvoGoalController.getAll(), false);
 		if (!resultaat.isEmpty()) {
 			sdgController.addSdg((String) resultaat.get(0), (String) resultaat.get(1));
 

@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -33,6 +34,12 @@ public class SdgAanmakenPopup {
 		window.setTitle("Sdg maken");
 		window.setMinWidth(350);
 		window.setMinHeight(300);
+		
+		foutbericht.setStyle("-fx-font: normal 18px 'system'");
+		foutbericht.setTextFill(Color.color(1, 0, 0));
+		foutbericht.setMaxWidth(300.0);
+		foutbericht.setWrapText(true);
+		
 		Label labeltitel = new Label("Nieuwe Sdg maken");
 		labeltitel.setStyle("-fx-text-fill: #B2D235; -fx-font: normal bold 25px 'system'");
 		labeltitel.setPadding(new Insets(0, 0, 25, 0));

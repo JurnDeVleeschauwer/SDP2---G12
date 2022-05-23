@@ -117,10 +117,12 @@ public class HoofdPaneel extends BorderPane {
 	}
 
 	public void toonListMvoGoalPaneel() {
+		listMvoGoalPaneel.voegComponentenToe();
 		setCenter(listMvoGoalPaneel);
 	}
 	
 	public void toonListSdgPaneel() {
+		listSdgPaneel.voegComponentenToe();
 		setCenter(listSdgPaneel);
 	}
 

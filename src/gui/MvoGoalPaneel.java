@@ -69,7 +69,7 @@ public class MvoGoalPaneel extends GridPane {
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
 			mvoGoalController.deleteMvoGoal(
-					mvoGoalController.getMvoGoal(tableView.getSelectionModel().getSelectedItem().getId()-1));
+					mvoGoalController.getMvoGoal(tableView.getSelectionModel().getSelectedItem().getId() - 1));
 
 			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
 
@@ -89,13 +89,15 @@ public class MvoGoalPaneel extends GridPane {
 						.icon((String) resultaat.get(1)).mvoName((String) resultaat.get(2))
 						.counter(((MvoGoalChild) mvoGoalController.getMvoGoal(this.id)).getCounter()).build();
 
+				mvoGoalChild.setId(this.id+1);
 				mvoGoalController.updateMvoGoal(mvoGoalChild);
 			} else {
 				MvoGoalComp mvoGoalComp = new MvoGoalComp.Builder().name((String) resultaat.get(0))
 						.mvoGoals(((MvoGoalComp) mvoGoalController.getMvoGoal(this.id)).getMvoGoals())
 						.mvoGoalMapper(((MvoGoalComp) mvoGoalController.getMvoGoal(this.id)).getMvoGoalMapper())
 						.build();
-
+				;
+				mvoGoalComp.setId(this.id+1);
 				mvoGoalController.updateMvoGoal(mvoGoalComp);
 			}
 		}

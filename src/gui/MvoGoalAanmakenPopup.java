@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -33,6 +34,11 @@ public class MvoGoalAanmakenPopup {
 		window.setTitle("Mvo Doelstelling maken");
 		window.setMinWidth(350);
 		window.setMinHeight(300);
+		
+		foutbericht.setStyle("-fx-font: normal 18px 'system'");
+		foutbericht.setTextFill(Color.color(1, 0, 0));
+		foutbericht.setMaxWidth(300.0);
+		foutbericht.setWrapText(true);
 		Label labeltitel = new Label("Nieuwe Mvo maken");
 		labeltitel.setPadding(new Insets(0, 0, 25, 0));
 		Label labelNaam = new Label("Naam:");

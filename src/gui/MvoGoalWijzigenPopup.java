@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -35,6 +36,11 @@ public class MvoGoalWijzigenPopup {
 		window.setTitle("Mvo Doelstelling wijzigen");
 		window.setMinWidth(350);
 		window.setMinHeight(300);
+		
+		foutbericht.setStyle("-fx-font: normal 18px 'system'");
+		foutbericht.setTextFill(Color.color(1, 0, 0));
+		foutbericht.setMaxWidth(300.0);
+		foutbericht.setWrapText(true);
 
 		Label labelNaam = new Label("Naam:");
 		TextField textFieldNaam = new TextField();

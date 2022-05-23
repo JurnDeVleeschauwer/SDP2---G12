@@ -53,7 +53,7 @@ public class SdgManager {
 		SdgComp comp = (SdgComp)  sdgs.stream().filter(category->category.getId()==sdgCompId).findAny().get();
 
 		comp.add(sdgChild);
-		populateList();
+		//populateList();
 	}
 	
 }

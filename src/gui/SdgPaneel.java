@@ -122,10 +122,14 @@ public class SdgPaneel extends GridPane {
 						.name((String) resultaat.get(1)).icon((String) resultaat.get(2))
 						.target(Integer.valueOf((String) resultaat.get(3))).mvoGoal(((SdgChild) sdg).getMvoGoal())
 						.build();
+
+				sdgChild.setId(this.id + 1);
 				sdgController.updateSdg(sdgChild);
 			} else {
 				SdgComp sdgComp = new SdgComp.Builder().description((String) resultaat.get(0))
-						.name((String) resultaat.get(1)).build();
+						.name((String) resultaat.get(1)).sdgs(((SdgComp) sdg).getSdgs()).build();
+
+				sdgComp.setId(this.id + 1);
 				sdgController.updateSdg(sdgComp);
 			}
 		}
