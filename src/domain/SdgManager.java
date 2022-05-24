@@ -38,6 +38,15 @@ public class SdgManager {
 		return sdgs.get(sdgId); 
 		
 	}
+	public int getIndexFromId(int sdgId) {
+		for(SdgAbstract sdg : sdgs) {
+			if(sdg.getId()==sdgId) {
+				return sdgs.indexOf(sdg);
+			}
+		}
+		
+		return 0;
+	}
 	
 	public void updateSdg(SdgAbstract sdg) {
 		sdgMapper.update(sdg); 

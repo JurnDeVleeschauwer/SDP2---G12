@@ -38,6 +38,9 @@ public class SdgController {
 		
 		return sdgManager.getSdg(sdgCompId);
 	}
+	public int getIndexFromId(int sdgId) {
+		return sdgManager.getIndexFromId(sdgId);
+	}
 	
 	
 	public SdgManager getSdgManager() {

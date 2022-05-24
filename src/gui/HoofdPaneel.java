@@ -81,7 +81,7 @@ public class HoofdPaneel extends BorderPane {
 	public void createPanelen() {
 		this.aanmelden = new AanmeldPaneel(this, mcc);
 
-		this.categoriePaneel = new CategorieenPaneel(this, cc);
+		this.categoriePaneel = new CategorieenPaneel(this, cc,sc);
 		this.mvoGoalPaneel = new MvoGoalPaneel(this, mgc, dc);
 		this.sdgPaneel = new SdgPaneel(this, sc, mgc);
 		this.dashboard = new Dashboard(this,mcc);
