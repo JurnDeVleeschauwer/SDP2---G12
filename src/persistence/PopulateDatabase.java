@@ -2,6 +2,7 @@ package persistence;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import domain.CategoryController;
 import domain.Datasource;
@@ -19,22 +20,30 @@ public class PopulateDatabase {
 		cc.addCategory("Electricity", "Electricity.png");
 		cc.addCategory("Climate", "Climate.png");
 
-		mcc.insertMvoCoordinator("Yorben", "123456789");
+		ArrayList<String> rolesYorben = new ArrayList<>();
+		rolesYorben.add("MVO coördinator");
+		rolesYorben.add("User");
+		mcc.insertMvoCoordinator("Yorben", "123456789", rolesYorben);
 
-		dc.addDatasource("Electricity Consuption", "Watt", "Month", 2022, 50, new File("src/maandenTest.txt")); 
+		ArrayList<String> rolesEddy = new ArrayList<>();
+		rolesEddy.add("User");
+		mcc.insertMvoCoordinator("Eddy", "123456789", rolesEddy);
+		
+		dc.addDatasource("Electricity Consumption", "Watt", "Month", 2022, 50, new File("src/maandenTest.txt")); 
 
 		dc.addDatasource("Tree Consumption", "Watt", "Month", 2022, 35, new File("src/gemiddeldeTest.txt"));
 		mgc.addMvoGoalComp("Eradicate poverty by 2030 everywhere");
 		mgc.addSubMvoGoal(0, 60, dc.getDatasource(1), "electricity.png", "Poverty");
+		mgc.addSubMvoGoal(0, 60, dc.getDatasource(2), "electricity.png", "Living standards");
 
 		
 		sc.addSdg("No Poverty", "End poverty in all its forms everywhere");
-		sc.addSubSdg("Eradicate Extreme Poverty", "sdgGoal1.png", mgc.getMvoGoal(0), sc.getSdg(1) , 60,  1);
-		sc.addSubSdg("Ensure equal income", "sdgGoal1.png", mgc.getMvoGoal(0), sc.getSdg(1) , 60,  1);
+		sc.addSubSdg("Eradicate Extreme Poverty", "sdgGoal1.png", mgc.getMvoGoal(0),(SdgComp) sc.getSdg(0) , 60);
+		sc.addSubSdg("Ensure equal income", "sdgGoal1.png", mgc.getMvoGoal(0), (SdgComp)sc.getSdg(0) , 60);
 
 		sc.addSdg("Zero hunger", "Eliminate food insecurity globally");
-		sc.addSubSdg("Ensure food supply access", "sdgGoal2.png", mgc.getMvoGoal(0), sc.getSdg(5) , 60,  5);
-		sc.addSubSdg("Increase agricultural production", "sdgGoal2.png", mgc.getMvoGoal(0), sc.getSdg(5) , 60,  5);
+		sc.addSubSdg("Ensure food supply access", "sdgGoal2.png", mgc.getMvoGoal(0), (SdgComp)sc.getSdg(3) , 60);
+		sc.addSubSdg("Increase agricultural production", "sdgGoal2.png", mgc.getMvoGoal(0),(SdgComp) sc.getSdg(3) , 60);
 
 		cc.addSdgToCategory(0, 1);
 		cc.addSdgToCategory(0, 5);

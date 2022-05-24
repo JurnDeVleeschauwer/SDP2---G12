@@ -1,7 +1,9 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.relation.InvalidRoleValueException;
 import javax.security.sasl.AuthenticationException;
 
 public class MvoCoordinatorController {
@@ -33,16 +35,16 @@ public class MvoCoordinatorController {
 	}
 	
 	
-	private MvoCoordinator getMvoCoordinator(String username, String password) throws AuthenticationException {
+	private MvoCoordinator getMvoCoordinator(String username, String password) throws AuthenticationException, InvalidRoleValueException {
 		
 		return mvoCoord.getMvoCoordinator(username, password);
 		
 	}
 	
-	public MvoCoordinator login(String username, String password) throws AuthenticationException /*throws exception*/ { 
+	public MvoCoordinator login(String username, String password) throws AuthenticationException /*throws exception*/, InvalidRoleValueException { 
 	
 			MvoCoordinator mvoCoordDB = mvoCoord.getMvoCoordinator(username, password);
-
+			
 		
 			
 			return mvoCoordDB; 
@@ -53,9 +55,9 @@ public class MvoCoordinatorController {
 	}
 	
 		
-	public void insertMvoCoordinator(String username, String password) {
+	public void insertMvoCoordinator(String username, String password,ArrayList<String> roles) {
 		
-		MvoCoordinator mvoCoordinator = new MvoCoordinator(username, password);
+		MvoCoordinator mvoCoordinator = new MvoCoordinator(username, password,roles);
 		
 		System.out.println(mvoCoordinator.getUsername() + " " + mvoCoordinator.getPassword()); 
 		

@@ -2,6 +2,7 @@ package domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,15 +31,14 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 	private final Datasource datasource;
 
 	@Transient
-	private final int counter ;
+	private final int counter;
 
 	private final String icon;
 	private final String mvoName;
-
-
+	private HashMap<String, Exception> errorsMap = new HashMap<String, Exception>();
 
 	public static class Builder {
-		private int value;
+		private Integer value;
 		private Datasource datasource;
 
 		private int counter = 1;
@@ -46,55 +46,90 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 		private String icon;
 		private String mvoName;
 
+		private HashMap<String, Exception> errorsMap = new HashMap<String, Exception>();
 
 		public Builder value(int value) {
-			this.value=value;
+
+			try {
+				this.value = value;
+
+			} catch (Exception e) {
+				errorsMap.put("value", e);
+			}
+
 			return this;
 		}
 
 		public Builder datasource(Datasource datasource) {
-			this.datasource=datasource;
+			try {
+
+				this.datasource = datasource;
+			} catch (Exception e) {
+				errorsMap.put("datasource", e);
+			}
+
 			return this;
 		}
 
 		public Builder counter(int counter) {
-			this.counter=counter;
+			try {
+				this.counter = counter;
+
+			} catch (Exception e) {
+				errorsMap.put("counter", e);
+			}
+
 			return this;
 		}
-		public Builder icon (String icon) {
-			this.icon=icon;
-					return this;
+
+		public Builder icon(String icon) {
+			try {
+				this.icon = icon;
+
+			} catch (Exception e) {
+				errorsMap.put("icon", e);
+			}
+
+			return this;
 		}
+
 		public Builder mvoName(String mvoName) {
-			this.mvoName=mvoName;
+			try {
+				this.mvoName = mvoName;
+
+			} catch (Exception e) {
+				errorsMap.put("mvoName", e);
+			}
+
 			return this;
 		}
 
 		public void setValue(int value) {
 			this.value = value;
 		}
+
 		public void setDatasource(Datasource datasource) {
 			this.datasource = datasource;
 		}
+
 		public void setCounter(int counter) {
 			this.counter = counter;
 		}
+
 		public void setIcon(String icon) {
 			this.icon = icon;
 		}
+
 		public void setMvoName(String mvoName) {
 			this.mvoName = mvoName;
 		}
+
 		public MvoGoalChild build() {
 			return new MvoGoalChild(Builder.this);
 
 		}
 
-
 	}
-
-
-
 
 	protected MvoGoalChild() {
 		this.value = 0;
@@ -105,47 +140,42 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 
 	}
 
-
-
-
 	public MvoGoalChild(Builder builder) {
-		this.counter=builder.counter;
-		this.datasource=builder.datasource;
-		this.icon=builder.icon;
-		this.mvoName=builder.mvoName;
-		this.value=builder.value;
+		this.counter = builder.counter;
+		this.datasource = builder.datasource;
+		this.icon = builder.icon;
+		this.mvoName = builder.mvoName;
+		this.value = builder.value;
+		this.errorsMap = builder.errorsMap;
 	}
-
-
-
 
 	public int getId() {
 		return id;
 	}
 
-
-	/*@Override
-	public void setId(int id) {
-		 String childId = Integer.toString(super.id) + Integer.toString(id);
-
-		this.id = Integer.parseInt(childId);
-	} */
+	/*
+	 * @Override public void setId(int id) { String childId =
+	 * Integer.toString(super.id) + Integer.toString(id);
+	 * 
+	 * this.id = Integer.parseInt(childId); }
+	 */
 
 	public int getCounter() {
 		return counter;
 	}
 
-
-	public int getValue() {
-		return value;
+	public HashMap<String, Exception> getErrorsMap() {
+		return errorsMap;
 	}
 
+	@Override
+	public Integer getValue() {
+		return value;
+	}
 
 	public Datasource getDatasource() {
 		return datasource;
 	}
-
-
 
 	public String getIcon() {
 		return icon;
@@ -159,9 +189,10 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 		return null;
 	}
 
-
-
-
+	@Override
+	public boolean isBlad() {
+		return true;
+	}
 
 	@Override
 	public int hashCode() {
@@ -178,19 +209,17 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 			return false;
 		MvoGoalChild other = (MvoGoalChild) obj;
 		return Objects.equals(datasource, other.datasource) && Objects.equals(icon, other.icon)
-				&& Objects.equals(mvoName, other.mvoName)
-				&& value == other.value;
+				&& Objects.equals(mvoName, other.mvoName) && value == other.value;
 	}
-
 
 	@Override
 	public String toString() {
 
-		//int id, int value, SdgComp sdgComp, Datasource datasource, String icon, String mvoName
-		return String.format("id: %d, value: %d%n,  Datasource: %s, Icon: %s, MvoName: %s",
-				getId(), getValue(), getDatasource().toString(), getIcon(), getMvoName() );
+		// int id, int value, SdgComp sdgComp, Datasource datasource, String icon,
+		// String mvoName
+		return String.format("id: %d, value: %d%n,  Datasource: %s, Icon: %s, MvoName: %s", getId(), getValue(),
+				getDatasource().toString(), getIcon(), getMvoName());
 	}
-
 
 	public void get() {
 		throw new UnsupportedOperationException();
@@ -205,13 +234,12 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 	public void add(MvoGoalAbstract sdg) throws MvoGoalException {
 		throw new UnsupportedOperationException();
 
-
 	}
+
 	public void remove(MvoGoalAbstract sdg) throws MvoGoalException {
 		throw new UnsupportedOperationException();
 
 	}
-
 
 	public MvoGoalChild getChild(MvoGoalAbstract sdg) throws MvoGoalException {
 		throw new UnsupportedOperationException();

@@ -7,6 +7,7 @@ import domain.Category;
 import domain.CategoryController;
 import domain.SdgAbstract;
 import domain.SdgComp;
+import domain.SdgController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -14,14 +15,23 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Control;
+import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
+
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.skin.ListViewSkin;
 import javafx.scene.control.skin.TableHeaderRow;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -38,15 +48,18 @@ public class CategorieenHBox extends HBox {
 
 	private final CategoryController categoryController;
 	private final HoofdPaneel hoofdPaneel;
+	private final SdgController sdgController;
 	private TableView<Category> tableView;
 	private ListView<String> listview;
 
-	public CategorieenHBox(CategoryController categoryController, HoofdPaneel hoofdPaneel) {
+	public CategorieenHBox(CategoryController categoryController, HoofdPaneel hoofdPaneel,
+			SdgController sdgController) {
 		this.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
 		this.setFillHeight(true);
 //		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 		this.categoryController = categoryController;
 		this.hoofdPaneel = hoofdPaneel;
+		this.sdgController = sdgController;
 		this.setSpacing(40);
 		update();
 
@@ -72,26 +85,57 @@ public class CategorieenHBox extends HBox {
 		this.getChildren().add(categorieVBox);
 
 		categorieAanmakenButton.setOnAction(this::categorieAanmaken);
-		
+
 		HBox hbox = new HBox();
 		hbox.setSpacing(50);
 
-		hbox.getChildren().addAll(maakTableView(categoryController), maakListView());
-		
-		hbox.setPadding(new Insets(20,0,20,0));
-		
-		this.getChildren().add(hbox);  
+		VBox vbox1 = new VBox();
+		vbox1.getChildren().addAll(new Label("Categorieëen"), maakTableView(categoryController));
+
+		VBox vbox2 = new VBox();
+		vbox2.getChildren().addAll(new Label("Sdg's"), maakListView());
+
+		hbox.getChildren().addAll(vbox1, vbox2);
+
+		hbox.setPadding(new Insets(20, 0, 20, 0));
+
+		this.getChildren().add(hbox);
+
+		listview.setCellFactory(lv -> {
+			ListCell<String> cell = new ListCell<String>() {
+				@Override
+				protected void updateItem(String item, boolean empty) {
+					super.updateItem(item, empty);
+					setText(item);
+				}
+			};
+			cell.setOnMouseClicked(event -> {
+				if (!cell.isEmpty() && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+
+					System.out.println(tableView.getSelectionModel().getSelectedItem().getSdgAbstracts()
+							.get(listview.getSelectionModel().getSelectedIndex()).getId());
+
+					hoofdPaneel
+							.toonSdgPaneel(sdgController.getIndexFromId(tableView.getSelectionModel().getSelectedItem()
+									.getSdgAbstracts().get(listview.getSelectionModel().getSelectedIndex()).getId()));
+					event.consume();
+				}
+			});
+			return cell;
+		});
+
 	}
 
 	public void verwijderCategorie(ActionEvent event) {
-		System.out.println(categoryController.getCategory(tableView.getSelectionModel().getSelectedItem().getId()).getName());
+		System.out.println(
+				categoryController.getCategory(tableView.getSelectionModel().getSelectedItem().getId()).getName());
 		System.out.println(categoryController.heeftSdgs(tableView.getSelectionModel().getSelectedItem().getId()));
 
 		if (categoryController.heeftSdgs(tableView.getSelectionModel().getSelectedItem().getId())) {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Waarschuwing!");
 			alert.setHeaderText("Deze categorie bevat nog Sdgs, gelieve deze eerst aan te passen.");
-			
+
 			alert.show();
 		} else {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -119,22 +163,8 @@ public class CategorieenHBox extends HBox {
 
 	}
 
-	public void wijzigCategorie(ActionEvent event) {
-
-		List<String> resultaat = CategorieWijzigenPopup.display(
-				tableView.getSelectionModel().getSelectedItem().getName(),
-				tableView.getSelectionModel().getSelectedItem().getIcon());
-		if (resultaat != null) {
-
-			categoryController.updateCategory(tableView.getSelectionModel().getSelectedItem().getId(), resultaat.get(0),
-					resultaat.get(1));
-
-		}
-
-	}
-
 	private TableView<Category> maakTableView(CategoryController categoryController) {
-		
+
 		tableView = new TableView<Category>();
 		tableView.setId("tableviewcat_id");
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -142,9 +172,9 @@ public class CategorieenHBox extends HBox {
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 		tableView.setPrefWidth(400);
-		tableView.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		tableView.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-		
 		TableColumn<Category, String> columnId = new TableColumn<>("Id");
 		columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		columnId.setEditable(false);
@@ -190,7 +220,7 @@ public class CategorieenHBox extends HBox {
 		for (Category category : categoryController.getAll()) {
 			tableView.getItems().add(category);
 		}
-		
+
 		return tableView;
 
 	}
@@ -198,8 +228,9 @@ public class CategorieenHBox extends HBox {
 	private void updateListView(List<SdgAbstract> sdgAbstract) {
 		listview.getItems().clear();
 		for (SdgAbstract sdg : sdgAbstract) {
-			SdgComp sdgComp = (SdgComp) sdg;
-			listview.getItems().add(sdgComp.getName());
+
+			listview.getItems().add(sdg.getName());
+
 		}
 
 	}
@@ -207,11 +238,11 @@ public class CategorieenHBox extends HBox {
 	private ListView<String> maakListView() {
 
 		listview = new ListView<String>();
-		
-		listview.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+		listview.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		return listview;
-		
 
 	}
 

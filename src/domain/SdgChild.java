@@ -1,6 +1,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -20,6 +21,9 @@ public class SdgChild extends SdgAbstract implements Serializable {
 	private final String icon;
 
 	private final int target;
+	
+	private HashMap<String, Exception> errorsMap = new HashMap<String, Exception>();
+
 
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private final MvoGoalAbstract mvoGoal;
@@ -29,37 +33,70 @@ public class SdgChild extends SdgAbstract implements Serializable {
 		private String description;
 		private String name;
 		private String icon;
-		private int target;
+		private Integer target;
 		private MvoGoalAbstract mvoGoal;
 		private SdgComp sdgComp;
 
+		private HashMap<String, Exception> errorsMap = new HashMap<String, Exception>();
+
+		
 		public Builder description(String description) {
-			this.description = description;
+			try {
+				this.description = description;
+				
+			} catch (Exception e) {
+				errorsMap.put("description", e);
+			}
 			return this;
 		}
 
 		public Builder name(String name) {
-			this.name = name;
+			try {
+				this.name = name;
+				
+			} catch (Exception e) {
+				errorsMap.put("name", e);
+			}
 			return this;
 		}
 
 		public Builder icon(String icon) {
-			this.icon = icon;
+			try {
+				this.icon = icon;
+				
+			} catch (Exception e) {
+				errorsMap.put("icon", e);
+			}
 			return this;
 		}
 
 		public Builder target(int target) {
-			this.target = target;
+			try {
+				this.target = target;
+				
+			} catch (Exception e) {
+				errorsMap.put("target", e);
+			}
 			return this;
 		}
 
 		public Builder mvoGoal(MvoGoalAbstract mvoGoal) {
-			this.mvoGoal = mvoGoal;
+			try {
+				this.mvoGoal = mvoGoal;
+				
+			} catch (Exception e) {
+				errorsMap.put("mvoGoal", e);
+			}
 			return this;
 		}
 
 		public Builder sdgComp(SdgComp sdgComp) {
-			this.sdgComp = sdgComp;
+			try {
+				this.sdgComp = sdgComp;
+				
+			} catch (Exception e) {
+				errorsMap.put("sdgComp", e);
+			}
 			return this;
 		}
 
@@ -115,16 +152,25 @@ public class SdgChild extends SdgAbstract implements Serializable {
 		this.icon = builder.icon;
 		this.target = 0;
 		this.mvoGoal = new MvoGoalComp();
+		this.errorsMap=builder.errorsMap;
+	}
+
+	public MvoGoalAbstract getMvoGoal() {
+		return mvoGoal;
 	}
 
 	public String getName() {
 		return name;
 	}
 
+	public HashMap<String, Exception> getErrorsMap() {
+		return errorsMap;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -133,9 +179,11 @@ public class SdgChild extends SdgAbstract implements Serializable {
 		return icon;
 	}
 
-	public int getTarget() {
+	@Override
+	public Integer getTarget() {
 		return target;
 	}
+	
 
 	@Override
 	public String toString() {
@@ -185,4 +233,7 @@ public class SdgChild extends SdgAbstract implements Serializable {
 		throw new UnsupportedOperationException();
 	}
 
+	public boolean isBlad() {
+		return true;
+	}
 }

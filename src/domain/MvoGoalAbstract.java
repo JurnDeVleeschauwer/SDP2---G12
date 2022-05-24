@@ -100,6 +100,13 @@ public abstract class MvoGoalAbstract implements Serializable {
 		
 	}
 	
+	public boolean isBlad() {
+		return false;
+	}
+	
+	public Integer getValue() {
+		return null;
+	}
 	
 
 }

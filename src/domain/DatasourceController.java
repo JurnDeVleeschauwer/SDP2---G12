@@ -24,11 +24,10 @@ public class DatasourceController {
 	}
 
 
-	public void updateDatasource(int DatasourceId) {
+	public void updateDatasource(Datasource datasource) {
 
-		Datasource datasourceToUpdate = getDatasource(DatasourceId);
 
-		datasourceManager.updateDatasource(datasourceToUpdate);
+		datasourceManager.updateDatasource(datasource);
 	}
 
 	public Datasource getDatasource(int DatasourceId) {

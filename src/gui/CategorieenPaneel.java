@@ -1,6 +1,7 @@
 package gui;
 
 import domain.CategoryController;
+import domain.SdgController;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -25,8 +26,10 @@ public class CategorieenPaneel extends GridPane {
 
 	private final HoofdPaneel hoofdPaneel;
 	private final CategoryController categoryController;
+	private final SdgController sdgController;
 
-	public CategorieenPaneel(HoofdPaneel hoofdPaneel , CategoryController categoryController ) {
+	public CategorieenPaneel(HoofdPaneel hoofdPaneel , CategoryController categoryController,SdgController sdgController ) {
+		this.sdgController = sdgController;
 		this.hoofdPaneel = hoofdPaneel;
 		 this.categoryController=categoryController;
 		configureerGrid();
@@ -50,10 +53,12 @@ public class CategorieenPaneel extends GridPane {
 		this.getChildren().clear();
 
 
-		HBox categorieenHBox = new CategorieenHBox(categoryController, hoofdPaneel);
+		HBox categorieenHBox = new CategorieenHBox(categoryController, hoofdPaneel, sdgController);
 		
 		categorieenHBox.setFillHeight(true);
+
 		add(categorieenHBox,0,0);
+		
 		
 		
 		

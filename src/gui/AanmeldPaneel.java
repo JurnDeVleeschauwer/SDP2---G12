@@ -1,5 +1,6 @@
 package gui;
 
+import javax.management.relation.InvalidRoleValueException;
 import javax.security.sasl.AuthenticationException;
 
 import domain.MvoCoordinatorController;
@@ -30,38 +31,38 @@ public class AanmeldPaneel extends StackPane {
 
 		this.hoofdPaneel = hoofdPaneel;
 		this.mvoCoordinatorController = mvoCoordinatorController;
-		
-		//this.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
-		
-		//this.setStyle("-fx-background-color: #004C6A");
-		
+
+		// this.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
+
+		// this.setStyle("-fx-background-color: #004C6A");
+
 		this.setId("aanmeldpanneel_id");
 
 		this.setAlignment(Pos.CENTER);
-		
-		vbox= new VBox();
+
+		vbox = new VBox();
 		hbox = new HBox();
-		
+
 		vbox.setAlignment(Pos.CENTER);
 		hbox.setAlignment(Pos.CENTER);
-		
+
 		getChildren().add(vbox);
 		vbox.getChildren().add(hbox);
-		
+
 		configureerGrid();
 		voegComponentenToe();
 	}
-	
+
 	private void configureerGrid() {
 		grid = new GridPane();
 		grid.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
-		//grid.gridLinesVisibleProperty().set(true);
-		
+		// grid.gridLinesVisibleProperty().set(true);
+
 		grid.setPadding(new Insets(10));
 		grid.setHgap(10);
 		grid.setVgap(10);
 		hbox.getChildren().add(grid);
-	 	StackPane.setAlignment(grid, Pos.CENTER);
+		StackPane.setAlignment(grid, Pos.CENTER);
 	}
 
 	private final TextField gebruikersnaam = new TextField();
@@ -69,32 +70,36 @@ public class AanmeldPaneel extends StackPane {
 	private final Label foutbericht = new Label();
 
 	private void voegComponentenToe() {
-		//Label aanmelden
+		// Label aanmelden
 		Label header = new Label("Aanmelden");
 		header.setId("header_id");
-		//header.setStyle("-fx-text-fill: #B2D235; -fx-font: normal bold 47px 'system'");
+		// header.setStyle("-fx-text-fill: #B2D235; -fx-font: normal bold 47px
+		// 'system'");
 		grid.add(header, 0, 0, 1, 1);
-		
-		
-		//label gebruikersnaam + inputbox
+
+		// label gebruikersnaam + inputbox
 		Label gebruikersnaamLbl = new Label("Gebruikersnaam");
 		gebruikersnaamLbl.setId("gebruikersnaamlbl_id");
 		gebruikersnaam.setId("gebruikersnaambtn_id");
-		//gebruikersnaamLbl.setStyle("-fx-text-fill: #B2D235; -fx-font: normal 18px 'system'");
-		//gebruikersnaam.setStyle("-fx-font: normal 18px 'system';");
+		// gebruikersnaamLbl.setStyle("-fx-text-fill: #B2D235; -fx-font: normal 18px
+		// 'system'");
+		// gebruikersnaam.setStyle("-fx-font: normal 18px 'system';");
 		gebruikersnaam.setPrefWidth(300.0);
 		gebruikersnaam.setMaxWidth(300.0);
 		foutbericht.setStyle("-fx-font: normal 18px 'system'");
 		foutbericht.setTextFill(Color.color(1, 0, 0));
+		foutbericht.setMaxWidth(300.0);
+		foutbericht.setWrapText(true);
 		grid.add(gebruikersnaamLbl, 0, 1, 1, 1);
 		grid.add(gebruikersnaam, 0, 2, 1, 1);
 
-		//label wachtwoord + inputbox
+		// label wachtwoord + inputbox
 		Label wachtwoordLbl = new Label("Wachtwoord");
 		wachtwoordLbl.setId("wachtwoordlbl_id");
 		wachtwoord.setId("wachtwoordbtn_id");
-		//wachtwoordLbl.setStyle("-fx-text-fill: #B2D235; -fx-font: normal 18px 'system'");
-		//wachtwoord.setStyle("-fx-font: normal 18px 'system';");
+		// wachtwoordLbl.setStyle("-fx-text-fill: #B2D235; -fx-font: normal 18px
+		// 'system'");
+		// wachtwoord.setStyle("-fx-font: normal 18px 'system';");
 		wachtwoord.setPrefWidth(300.0);
 		wachtwoord.setMaxWidth(300.0);
 		grid.add(wachtwoordLbl, 0, 3, 1, 1);
@@ -105,10 +110,10 @@ public class AanmeldPaneel extends StackPane {
 		aanmelden.setOnAction(this::aanmelden);
 		aanmelden.setDefaultButton(true);
 		aanmelden.setPrefWidth(300.0);
-		//aanmelden.setStyle("-fx-background-color: #0A759D; -fx-text-fill: #B2D235; -fx-font: normal 18px 'system'");
+		// aanmelden.setStyle("-fx-background-color: #0A759D; -fx-text-fill: #B2D235;
+		// -fx-font: normal 18px 'system'");
 		grid.add(foutbericht, 0, 5, 1, 1);
 		grid.add(aanmelden, 0, 6, 1, 1);
-		
 
 	}
 
@@ -131,7 +136,9 @@ public class AanmeldPaneel extends StackPane {
 		} catch (AuthenticationException e) {
 			foutbericht.setText("Ongeldige combinatie, gelieve opnieuw te proberen.");
 			return;
-
+		} catch (InvalidRoleValueException e) {
+			foutbericht.setText("U heeft niet de vereiste privileges om deze applicatie te gebruiken");
+			return;
 		}
 		;
 		foutbericht.setText(null);

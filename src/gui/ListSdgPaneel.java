@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -36,15 +37,16 @@ public class ListSdgPaneel extends GridPane {
 	private final SdgController sdgController;
 	private final HoofdPaneel hoofdPaneel;
 	private TableView<SdgAbstract> tableView;
+	private MvoGoalController mvoGoalController;
 
-	public ListSdgPaneel(HoofdPaneel hoofdPaneel, SdgController sdgController) {
-			this.hoofdPaneel = hoofdPaneel;
-			this.sdgController = sdgController;
+	public ListSdgPaneel(HoofdPaneel hoofdPaneel, SdgController sdgController, MvoGoalController mvoGoalController) {
+		this.hoofdPaneel = hoofdPaneel;
+		this.sdgController = sdgController;
+		this.mvoGoalController = mvoGoalController;
 
-			configureerGrid();
+		configureerGrid();
 
-
-		}
+	}
 
 	private void configureerGrid() {
 		setPadding(new Insets(10));
@@ -59,24 +61,29 @@ public class ListSdgPaneel extends GridPane {
 	}
 
 	private void maakGrid() {
-		getChildren().clear();
+		this.getChildren().clear();
 		tableView = new TableView<SdgAbstract>();
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-		TableColumn<SdgAbstract, String> column1 = new TableColumn<>("sdgCompId");
-		column1.setCellValueFactory(new PropertyValueFactory<>("sdgCompId"));
+		TableColumn<SdgAbstract, String> column1 = new TableColumn<>("id");
+		column1.setCellValueFactory(new PropertyValueFactory<>("id"));
 
 		TableColumn<SdgAbstract, String> column2 = new TableColumn<>("target");
 		column2.setCellValueFactory(new PropertyValueFactory<>("target"));
 
 		TableColumn<SdgAbstract, String> column3 = new TableColumn<>("name");
-		column2.setCellValueFactory(new PropertyValueFactory<>("name"));
+		column3.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+		TableColumn<SdgAbstract, String> column4 = new TableColumn<>("description");
+		column4.setCellValueFactory(new PropertyValueFactory<>("description"));
 
 		tableView.getColumns().add(column1);
 		tableView.getColumns().add(column2);
 		tableView.getColumns().add(column3);
-		
+		tableView.getColumns().add(column4);
+
 		for (SdgAbstract sdgChild : sdgController.getAll()) {
+			// System.out.println(sdgChild);
 			tableView.getItems().add((SdgAbstract) sdgChild);
 		}
 		add(tableView, 2, 4);
@@ -89,6 +96,17 @@ public class ListSdgPaneel extends GridPane {
 		createButtonAction.setOnAction(this::createButtonAction);
 		add(createButtonAction, 13, 11);
 
+		tableView.setRowFactory(tv -> {
+			TableRow<SdgAbstract> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					SdgAbstract rowData = row.getItem();
+					hoofdPaneel.toonSdgPaneel(rowData.getId() - 1);
+				}
+			});
+			return row;
+		});
+
 	}
 
 	private void deleteButtonAction(ActionEvent event) {
@@ -100,23 +118,23 @@ public class ListSdgPaneel extends GridPane {
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.isPresent() && result.get() == ButtonType.OK) {
-			sdgController.deleteSdg(
-					sdgController.getSdg(tableView.getSelectionModel().getSelectedItem().getId()));
+			sdgController.deleteSdg(sdgController.getSdg(tableView.getSelectionModel().getSelectedItem().getId()));
 
 			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
 
 		}
+		maakGrid();
 
 	}
 
 	private void createButtonAction(ActionEvent event) {
 
-		List<Object> resultaat = SdgAanmakenPopup.display();
+		List<Object> resultaat = SdgAanmakenPopup.display(mvoGoalController.getAll(), false);
 		if (!resultaat.isEmpty()) {
 			sdgController.addSdg((String) resultaat.get(0), (String) resultaat.get(1));
 
 		}
-		;
+		maakGrid();
 
 	}
 }

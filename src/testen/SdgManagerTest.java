@@ -28,7 +28,7 @@ class SdgManagerTest {
 		
 		GenericMapperJpa<SdgAbstract> sdgMapperMock = (GenericMapperJpa<SdgAbstract>) mock(GenericMapperJpa.class);
 		SdgManager manager = new SdgManager(sdgMapperMock); 
-		SdgAbstract comp = new SdgComp("TESTNAME", "TESTDESCRIPTION"); 
+		SdgAbstract comp = new SdgComp.Builder().name("TESTNAME").description("TESTDESCRIPTION").build(); 
 		
 		
 		manager.addSdgJpa(comp);
@@ -44,7 +44,7 @@ class SdgManagerTest {
 		
 		GenericMapperJpa<SdgAbstract> sdgMapperMock = (GenericMapperJpa<SdgAbstract>) mock(GenericMapperJpa.class);
 		SdgManager manager = new SdgManager(sdgMapperMock); 
-		SdgAbstract comp = new SdgComp("TESTNAME", "TESTDESCRIPTION"); 
+		SdgAbstract comp = new SdgComp.Builder().name("TESTNAME").description("TESTDESCRIPTION").build(); 
 		
 		
 		manager.getAll();
@@ -58,7 +58,7 @@ class SdgManagerTest {
 		
 		GenericMapperJpa<SdgAbstract> sdgMapperMock = (GenericMapperJpa<SdgAbstract>) mock(GenericMapperJpa.class);
 		SdgManager manager = new SdgManager(sdgMapperMock); 
-		SdgAbstract comp = new SdgComp("TESTNAME", "TESTDESCRIPTION"); 
+		SdgAbstract comp = new SdgComp.Builder().name("TESTNAME").description("TESTDESCRIPTION").build(); 
 		
 		
 		manager.deleteSdg(comp);
@@ -72,7 +72,7 @@ class SdgManagerTest {
 		
 		GenericMapperJpa<SdgAbstract> sdgMapperMock = (GenericMapperJpa<SdgAbstract>) mock(GenericMapperJpa.class);
 		SdgManager manager = new SdgManager(sdgMapperMock); 
-		SdgAbstract comp = new SdgComp("TESTNAME", "TESTDESCRIPTION"); 
+		SdgAbstract comp = new SdgComp.Builder().name("TESTNAME").description("TESTDESCRIPTION").build(); 
 		
 		
 		manager.updateSdg(comp);
@@ -87,16 +87,14 @@ class SdgManagerTest {
 		GenericMapperJpa<SdgAbstract> sdgMapperMock = (GenericMapperJpa<SdgAbstract>) mock(GenericMapperJpa.class);
 		List<SdgAbstract> list = new ArrayList<SdgAbstract>(); 
 		when(sdgMapperMock.findAll()).thenReturn(list); 
-		SdgAbstract comp = new SdgComp("TESTNAME", "TESTDESCRIPTION"); 
+		SdgAbstract comp = new SdgComp.Builder().name("TESTNAME").description("TESTDESCRIPTION").build(); 
 
 		list.add(comp); 		
 		SdgManager manager = new SdgManager(sdgMapperMock); 
 		comp.setId(1);
 		
 		
-		SdgComp toTest = manager.getSdg(1);
-		
-		
+		SdgComp toTest = (SdgComp) manager.getSdg(1);
 		
 		assertEquals(comp,toTest);
 		
@@ -109,8 +107,11 @@ class SdgManagerTest {
 		
 		
 		GenericMapperJpa<SdgAbstract> sdgMapperMock = (GenericMapperJpa<SdgAbstract>) mock(GenericMapperJpa.class);
-		SdgAbstract comp = new SdgComp("TESTNAME", "TESTDESCRIPTION"); 
-		SdgAbstract child = new SdgChild("TEST", "TESTICON", null, (SdgComp) comp, 500); 
+
+		SdgAbstract comp = new SdgComp.Builder().name("TESTNAME").description("TESTDESCRIPTION").build(); 
+		
+		SdgAbstract child = new SdgChild.Builder().name("TEST").icon("TESTICON").sdgComp((SdgComp) comp).target(500).build(); 
+		
 		List<SdgAbstract> list = new ArrayList<SdgAbstract>(); 
 		
 		

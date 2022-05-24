@@ -38,6 +38,25 @@ public class CategorySdgMapper<T> extends GenericMapperJpa<T>{
 		em.close();
 
 	}
+
+	public void deleteFromSdgToCategory(int catId) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+
+	
+			em
+					.createNativeQuery("DELETE FROM category_sdgabstract WHERE Category_ID = #catId" )
+					.setParameter("catId", catId).executeUpdate();
+		
+			
+		
+
+		em.getTransaction().commit();
+		em.close();
+
+	}
+
+	
 	@SuppressWarnings("unchecked")
 	public List<SdgAbstract> getSdgsFromCategory(int catId) {
 		em = emf.createEntityManager();

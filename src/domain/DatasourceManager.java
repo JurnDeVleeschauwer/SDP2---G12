@@ -32,8 +32,9 @@ public class DatasourceManager {
 		datasourceMapper.delete(d);
 	}
 	
-	public Datasource getDatasource(int index) {
-		return datasources.get(index);
+	public Datasource getDatasource(int id) {
+		
+		return datasources.stream().filter(category->category.getId()==id).findAny().get();
 	}
 	
 	public void updateDatasource(Datasource datasource) {

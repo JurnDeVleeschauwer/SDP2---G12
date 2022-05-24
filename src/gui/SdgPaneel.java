@@ -37,10 +37,12 @@ public class SdgPaneel extends GridPane {
 	private final HoofdPaneel hoofdPaneel;
 	private int id;
 	private TableView<SdgAbstract> tableView;
+	private MvoGoalController mvoGoalController;
 
-	public SdgPaneel(HoofdPaneel hoofdPaneel, SdgController sdgController) {
+	public SdgPaneel(HoofdPaneel hoofdPaneel, SdgController sdgController, MvoGoalController mvoGoalController) {
 		this.hoofdPaneel = hoofdPaneel;
 		this.sdgController = sdgController;
+		this.mvoGoalController = mvoGoalController;
 
 		configureerGrid();
 	}
@@ -57,22 +59,6 @@ public class SdgPaneel extends GridPane {
 		maakGrid();
 	}
 
-	private void deleteButtonAction(ActionEvent event) {
-
-		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Confirmeer verwijdering");
-		alert.setHeaderText("Bent u zeker dat u deze categorie wilt verwijderen?");
-		alert.setGraphic(null);
-
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.isPresent() && result.get() == ButtonType.OK) {
-			sdgController.deleteSdg(sdgController.getSdg(tableView.getSelectionModel().getSelectedItem().getId()));
-
-			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
-
-		}
-	}
-
 	private void maakGrid() {
 		this.gridLinesVisibleProperty().set(true);
 
@@ -81,8 +67,12 @@ public class SdgPaneel extends GridPane {
 		Label title = new Label("SDG");
 		title.setFont(new Font("Arial", 30));
 		add(title, 5, 0);
-
-		SdgComp sdg = (SdgComp) sdgController.getSdg(this.id);
+		SdgAbstract sdg;
+		if (sdgController.getSdg(this.id).isBlad()) {
+			sdg = (SdgChild) sdgController.getSdg(this.id);
+		} else {
+			sdg = (SdgComp) sdgController.getSdg(this.id);
+		}
 
 		Label id = new Label("ID:");
 		id.setFont(new Font("Arial", 15));
@@ -102,48 +92,89 @@ public class SdgPaneel extends GridPane {
 		add(SDGs, 1, 4);
 		maakTableView(sdg);
 
-		Button deleteButtonAction = new Button("Verwijderen");
-		deleteButtonAction.setOnAction(this::deleteButtonAction);
-		add(deleteButtonAction, 1, 11);
-
 		Button editButton = new Button("Wijzigen");
 		editButton.setOnAction(this::editButton);
 		add(editButton, 7, 0);
 
-		Button createButton = new Button("Aanmaken");
-		createButton.setOnAction(this::createButton);
-		add(createButton, 1, 12);
+		if (!(sdg.isBlad())) {
 
+			Button deleteButtonAction = new Button("Verwijderen");
+			deleteButtonAction.setOnAction(this::deleteButtonAction);
+			add(deleteButtonAction, 1, 11);
+
+			Button createButton = new Button("Aanmaken");
+			createButton.setOnAction(this::createButton);
+			add(createButton, 1, 12);
+		}
+		Button listSdgButton = new Button("Back naar Sdg lijst");
+		listSdgButton.setOnAction(this::listSdgButton);
+		add(listSdgButton, 1, 13);
+		
 	}
+	
+
 
 	private void editButton(ActionEvent event) {
 
 		List<Object> resultaat = SdgWijzigenPopup.display(sdgController.getSdg(this.id));
 		if (resultaat != null) {
+			SdgAbstract sdg = sdgController.getSdg(this.id);
+			if (sdg.isBlad()) {
+				SdgChild sdgChild = new SdgChild.Builder().description((String) resultaat.get(0))
+						.name((String) resultaat.get(1)).icon((String) resultaat.get(2))
+						.target(Integer.valueOf((String) resultaat.get(3))).mvoGoal(((SdgChild) sdg).getMvoGoal())
+						.build();
 
-			/*sdgController.updateSdg(new SdgChild((String) resultaat.get(0), (String) resultaat.get(1),
-					(MvoGoalAbstract) resultaat.get(2), (SdgComp) resultaat.get(3),
-					Integer.valueOf((String) resultaat.get(4))));*/
+				sdgChild.setId(this.id + 1);
+				sdgController.updateSdg(sdgChild);
+			} else {
+				SdgComp sdgComp = new SdgComp.Builder().description((String) resultaat.get(0))
+						.name((String) resultaat.get(1)).sdgs(((SdgComp) sdg).getSdgs()).build();
+
+				sdgComp.setId(this.id + 1);
+				sdgController.updateSdg(sdgComp);
+			}
 		}
-
+		maakGrid();
 	}
 
 	private void createButton(ActionEvent event) {
-		List<Object> resultaat = SdgAanmakenPopup.display();
+		List<Object> resultaat = SdgAanmakenPopup.display(mvoGoalController.getAll(), true);
 		if (!resultaat.isEmpty()) {
-			sdgController.addSdg((String) resultaat.get(0), (String) resultaat.get(1),
-					(MvoGoalAbstract) resultaat.get(2), (SdgComp) resultaat.get(3),
-					Integer.valueOf((String) resultaat.get(4)));
+			sdgController.addSubSdg((String) resultaat.get(0), (String) resultaat.get(1),
+					(MvoGoalAbstract) resultaat.get(2), (SdgComp) sdgController.getSdg(id),
+					Integer.valueOf((String) resultaat.get(3)));
 
 		}
-		;
+		maakGrid();
 	}
 
-	private void maakTableView(SdgComp sdgGoal) {
+	private void deleteButtonAction(ActionEvent event) {
+
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmeer verwijdering");
+		alert.setHeaderText("Bent u zeker dat u deze categorie wilt verwijderen?");
+		alert.setGraphic(null);
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.isPresent() && result.get() == ButtonType.OK) {
+			sdgController.deleteSdg(sdgController.getSdg(tableView.getSelectionModel().getSelectedItem().getId()));
+
+			tableView.getItems().removeAll(tableView.getSelectionModel().getSelectedItem());
+
+		}
+		maakGrid();
+	}
+
+	private void listSdgButton(ActionEvent event) {
+		hoofdPaneel.toonListSdgPaneel();
+	}
+
+	private void maakTableView(SdgAbstract sdg) {
 		// getChildren().clear();
 		tableView = new TableView<SdgAbstract>();
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-		
+
 		TableColumn<SdgAbstract, Integer> column1 = new TableColumn<>("id");
 		column1.setCellValueFactory(new PropertyValueFactory<>("id"));
 
@@ -156,11 +187,11 @@ public class SdgPaneel extends GridPane {
 		tableView.getColumns().add(column1);
 		tableView.getColumns().add(column2);
 		tableView.getColumns().add(column3);
-
-		for (SdgAbstract mvoGoalChild : sdgGoal.getSdgs()) {
-			tableView.getItems().add(mvoGoalChild);
+		if (!(sdg.isBlad())) {
+			for (SdgAbstract mvoGoalChild : ((SdgComp) sdg).getSdgs()) {
+				tableView.getItems().add(mvoGoalChild);
+			}
 		}
-
 		add(tableView, 1, 5);
 
 	}

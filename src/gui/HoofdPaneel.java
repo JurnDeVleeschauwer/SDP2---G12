@@ -6,6 +6,7 @@ import javafx.scene.layout.BorderPane;
 import java.util.*;
 
 import domain.CategoryController;
+import domain.Datasource;
 import domain.DatasourceController;
 import domain.DatasourceReader;
 import domain.DomeinController;
@@ -31,6 +32,7 @@ public class HoofdPaneel extends BorderPane {
 	private MvoCoordinatorController mcc;
 	private MvoGoalController mgc;
 	private SdgController sc;
+	private ListSdgPaneel listSdgPaneel;
 
 	
 	/**
@@ -79,11 +81,12 @@ public class HoofdPaneel extends BorderPane {
 	public void createPanelen() {
 		this.aanmelden = new AanmeldPaneel(this, mcc);
 
-		this.categoriePaneel = new CategorieenPaneel(this, cc);
+		this.categoriePaneel = new CategorieenPaneel(this, cc,sc);
 		this.mvoGoalPaneel = new MvoGoalPaneel(this, mgc, dc);
-		this.sdgPaneel = new SdgPaneel(this, sc);
+		this.sdgPaneel = new SdgPaneel(this, sc, mgc);
 		this.dashboard = new Dashboard(this,mcc);
 		this.listMvoGoalPaneel = new ListMvoGoalPaneel(this, mgc, dc);
+		this.listSdgPaneel = new ListSdgPaneel(this, sc, mgc);
 
 	}
 
@@ -91,7 +94,6 @@ public class HoofdPaneel extends BorderPane {
 	 * toon AanmeldPaneel
 	 */
 	public void toonAanmeldPaneel() {
-		System.out.println(dc.getDatasource(0).getData().getDataSet());
 		setCenter(aanmelden);
 	}
 	public void toonNewAanmeldPaneel() {
@@ -100,6 +102,7 @@ public class HoofdPaneel extends BorderPane {
 		setTop(null);
 	}
 	public void toonCategoriePaneell() {
+
 		setCenter(categoriePaneel);
 	}
 	
@@ -114,11 +117,17 @@ public class HoofdPaneel extends BorderPane {
 	}
 
 	public void toonListMvoGoalPaneel() {
+		listMvoGoalPaneel.voegComponentenToe();
 		setCenter(listMvoGoalPaneel);
 	}
+	
+	public void toonListSdgPaneel() {
+		listSdgPaneel.voegComponentenToe();
+		setCenter(listSdgPaneel);
+	}
 
-	public void toonDatasource() {
-		setCenter(new DataSourceView(this, dc));
+	public void toonDatasource(Datasource datasource,int mvoId) {
+		setCenter(new DataSourceView(this, dc,datasource,mvoId));
 	}
 
 }

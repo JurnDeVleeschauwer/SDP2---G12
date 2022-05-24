@@ -36,26 +36,22 @@ public class Dashboard extends GridPane {
 		buttonCategoryPaneel.setId("categorybtn_id");
 		add(buttonCategoryPaneel, 0, 0);
 
-		Button buttonSdg = new Button("Sdg 1");
-		buttonSdg.setOnAction(e -> {
-			hoofdPaneel.toonSdgPaneel(1);
+		Button buttonListSdg = new Button("List Sdg");
+		buttonListSdg.setOnAction(e -> {
+			hoofdPaneel.toonListSdgPaneel();
 		});
-		buttonSdg.setId("sdgbtn_id");
-		add(buttonSdg, 1, 0);
-
-		Button buttonMvogoal = new Button("MvoGoal 1");
-		buttonMvogoal.setOnAction(e -> {
-			hoofdPaneel.toonMvoGoalPaneel(0);
-		});
-		buttonMvogoal.setId("mvogoalbtn_id");
-		add(buttonMvogoal, 2, 0);
-
+		buttonListSdg.setId("listsdgbtn_id");
+		add(buttonListSdg, 1, 0);
+		
+		
 		Button buttonListMVO = new Button("List Mvo");
 		buttonListMVO.setOnAction(e -> {
 			hoofdPaneel.toonListMvoGoalPaneel();
 		});
 		buttonListMVO.setId("listmvobtn_id");
-		add(buttonListMVO, 3, 0);
+		add(buttonListMVO, 2, 0);
+		
+		
 		
 		Button buttonAanmelden = new Button("Afmelden");
 		buttonAanmelden.setOnAction(e -> {

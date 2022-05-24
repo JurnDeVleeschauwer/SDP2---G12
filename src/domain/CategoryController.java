@@ -46,7 +46,7 @@ public class CategoryController {
 	public void addSdgToCategory(int categoryId, int sdgId) {
 
 
-		SdgAbstract sdg = sdgManager.getSdg(sdgId);
+		SdgAbstract sdg = sdgManager.getSdg(sdgId-1);
 
 		cm.addSdgToCategory(categoryId, sdg);
 		
