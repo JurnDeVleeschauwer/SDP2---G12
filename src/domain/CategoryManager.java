@@ -32,7 +32,8 @@ public class CategoryManager {
 		return categories.get(index);
 	}
 	public void updateCategory(Category category) {
-		categoryMapper.update(category); 
+
+categoryMapper.update(category); 
 		updateList();
 	}
 
@@ -90,13 +91,17 @@ public class CategoryManager {
 
 	public  void updateCategoryName(Category category, String newValue) {
 		Category categorySelected= categories.stream().filter(categoryFromList->categoryFromList.getId()==category.getId()).findAny().get();
+	
 		categorySelected.setName(newValue);
+		catSdgMapper.deleteFromSdgToCategory(categorySelected.getId());
 		categoryMapper.update(categorySelected);
 	}
 
 	public void updateCategoryIcoon(Category category, String newValue) {
 		Category categorySelected= categories.stream().filter(categoryFromList->categoryFromList.getId()==category.getId()).findAny().get();
 		categorySelected.setIcon(newValue);
+		catSdgMapper.deleteFromSdgToCategory(categorySelected.getId());
+
 		categoryMapper.update(categorySelected);		
 	}
 

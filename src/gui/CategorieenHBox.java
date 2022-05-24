@@ -52,7 +52,8 @@ public class CategorieenHBox extends HBox {
 	private TableView<Category> tableView;
 	private ListView<String> listview;
 
-	public CategorieenHBox(CategoryController categoryController, HoofdPaneel hoofdPaneel, SdgController sdgController) {
+	public CategorieenHBox(CategoryController categoryController, HoofdPaneel hoofdPaneel,
+			SdgController sdgController) {
 		this.getStylesheets().add(getClass().getResource("css.css").toExternalForm());
 		this.setFillHeight(true);
 //		this.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -113,13 +114,10 @@ public class CategorieenHBox extends HBox {
 
 					System.out.println(tableView.getSelectionModel().getSelectedItem().getSdgAbstracts()
 							.get(listview.getSelectionModel().getSelectedIndex()).getId());
-					
-					
-					
-					
-					hoofdPaneel.toonSdgPaneel( sdgController.getIndexFromId(
-							tableView.getSelectionModel().getSelectedItem().getSdgAbstracts()
-							.get(listview.getSelectionModel().getSelectedIndex()).getId()));
+
+					hoofdPaneel
+							.toonSdgPaneel(sdgController.getIndexFromId(tableView.getSelectionModel().getSelectedItem()
+									.getSdgAbstracts().get(listview.getSelectionModel().getSelectedIndex()).getId()));
 					event.consume();
 				}
 			});

@@ -42,7 +42,8 @@ public class Dashboard extends GridPane {
 		});
 		buttonListSdg.setId("listsdgbtn_id");
 		add(buttonListSdg, 1, 0);
-
+		
+		
 		Button buttonListMVO = new Button("List Mvo");
 		buttonListMVO.setOnAction(e -> {
 			hoofdPaneel.toonListMvoGoalPaneel();
@@ -51,12 +52,6 @@ public class Dashboard extends GridPane {
 		add(buttonListMVO, 2, 0);
 		
 		
-		Button buttonListDatasource = new Button("List Datasources");
-		/*buttonListDatasource.setOnAction(e -> {
-			hoofdPaneel.toonListDatasourcePaneel(0);
-		});
-		buttonListDatasource.setId("listdatasourcebtn_id");*/
-		add(buttonListDatasource, 3, 0);
 		
 		Button buttonAanmelden = new Button("Afmelden");
 		buttonAanmelden.setOnAction(e -> {
