@@ -16,6 +16,7 @@ import domain.SdgComp;
 import domain.SdgController;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -24,15 +25,26 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * 
  * @author Jurn
  *
  */
-public class SdgPaneel extends GridPane {
+public class SdgPaneel extends HBox {
 	private final SdgController sdgController;
 	private final HoofdPaneel hoofdPaneel;
 	private int id;
@@ -48,10 +60,7 @@ public class SdgPaneel extends GridPane {
 	}
 
 	private void configureerGrid() {
-		setPadding(new Insets(10));
-		setHgap(2);
-		setVgap(2);
-
+		this.setSpacing(20);
 	}
 
 	public void voegComponentenToe(int id) {
@@ -60,56 +69,90 @@ public class SdgPaneel extends GridPane {
 	}
 
 	private void maakGrid() {
-		this.gridLinesVisibleProperty().set(true);
-
 		getChildren().clear();
-
-		Label title = new Label("SDG");
-		title.setFont(new Font("Arial", 30));
-		add(title, 5, 0);
 		SdgAbstract sdg;
 		if (sdgController.getSdg(this.id).isBlad()) {
 			sdg = (SdgChild) sdgController.getSdg(this.id);
 		} else {
 			sdg = (SdgComp) sdgController.getSdg(this.id);
 		}
-
-		Label id = new Label("ID:");
-		id.setFont(new Font("Arial", 15));
-		add(id, 1, 1);
-		add(new Label(Integer.toString(sdg.getId())), 2, 1);
-		Label description = new Label("Description:");
-		description.setFont(new Font("Arial", 15));
-		add(description, 1, 2);
-		add(new Label(sdg.getDescription()), 2, 2);
-		Label name = new Label("Name:");
-		name.setFont(new Font("Arial", 15));
-		add(name, 1, 3);
-		add(new Label(sdg.getName()), 2, 3);
-
-		Label SDGs = new Label("Sub Sdgs:");
-		SDGs.setFont(new Font("Arial", 15));
-		add(SDGs, 1, 4);
-		maakTableView(sdg);
-
-		Button editButton = new Button("Wijzigen");
+		
+		VBox vbox = new VBox();
+		vbox.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		vbox.setId("sdgpaneelvbox_id");
+		
+		if (!(sdg.isBlad())) {
+			Button createButton = new Button("Nieuwe sub-SDG maken");
+			createButton.setOnAction(this::createButton);
+			createButton.setId("createsdgpaneelbtn_id");
+			vbox.getChildren().add(createButton);
+		}
+		
+		Button editButton = new Button("SDG wijzigen");
 		editButton.setOnAction(this::editButton);
-		add(editButton, 7, 0);
+		editButton.setId("wijzigsdgpaneelbtn_id");
+		vbox.getChildren().add(editButton);
 
 		if (!(sdg.isBlad())) {
-
-			Button deleteButtonAction = new Button("Verwijderen");
+			Button deleteButtonAction = new Button("Sub-SDG Verwijderen");
 			deleteButtonAction.setOnAction(this::deleteButtonAction);
-			add(deleteButtonAction, 1, 11);
-
-			Button createButton = new Button("Aanmaken");
-			createButton.setOnAction(this::createButton);
-			add(createButton, 1, 12);
+			deleteButtonAction.setId("deletesdgpaneelbtn_id");
+			vbox.getChildren().add(deleteButtonAction);
 		}
+		
 		Button listSdgButton = new Button("Back naar Sdg lijst");
 		listSdgButton.setOnAction(this::listSdgButton);
-		add(listSdgButton, 1, 13);
+		listSdgButton.setId("retoursdgpaneelbtn_id");
+		vbox.getChildren().add(listSdgButton);
+
+		VBox newVbox = new VBox();
+		newVbox.setAlignment(Pos.TOP_CENTER);
+		newVbox.setPadding(new Insets(0,0,20,0));
 		
+		Label title = new Label("SDG");
+		title.setId("titleSDG_id");
+		newVbox.getChildren().add(title);
+		
+		GridPane grid = new GridPane();
+		grid.setAlignment(Pos.BOTTOM_LEFT);
+		
+		for(int i = 0; i < 3; i++) {
+			ColumnConstraints col = new ColumnConstraints();
+			col.setMinWidth(20);
+			grid.getColumnConstraints().add(col);
+		}
+		
+		for(int i = 0; i<5; i++) {
+			RowConstraints row = new RowConstraints();
+			row.setMinHeight(20);
+			grid.getRowConstraints().add(row);
+		}
+		
+		Font font = Font.font("Arial", FontWeight.BOLD, 15);
+		
+		Label id = new Label("ID:");
+		id.setFont(font);
+		grid.add(id, 1, 1);
+		grid.add(new Label(Integer.toString(sdg.getId())), 3, 1);
+		Label description = new Label("Description:");
+		description.setFont(font);
+		grid.add(description, 1, 2);
+		grid.add(new Label(sdg.getDescription()), 3, 2);
+		Label name = new Label("Name:");
+		name.setFont(font);
+		grid.add(name, 1, 3);
+		grid.add(new Label(sdg.getName()), 3, 3);
+
+		Label SDGs = new Label("Sub Sdgs:");
+		SDGs.setFont(font);
+		grid.add(SDGs, 1, 5, 3,1);
+		
+
+		grid.add(maakTableView(sdg), 1, 6, 3, 1);
+		newVbox.getChildren().add(grid);
+		
+		this.getChildren().addAll(vbox, newVbox);
 	}
 	
 
@@ -170,13 +213,19 @@ public class SdgPaneel extends GridPane {
 		hoofdPaneel.toonListSdgPaneel();
 	}
 
-	private void maakTableView(SdgAbstract sdg) {
+	private TableView<SdgAbstract> maakTableView(SdgAbstract sdg) {
 		// getChildren().clear();
 		tableView = new TableView<SdgAbstract>();
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+		tableView.setPrefWidth(400);
+		tableView.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
 		TableColumn<SdgAbstract, Integer> column1 = new TableColumn<>("id");
 		column1.setCellValueFactory(new PropertyValueFactory<>("id"));
+		column1.setMinWidth(30);
+		column1.setMaxWidth(30);
 
 		TableColumn<SdgAbstract, String> column2 = new TableColumn<>("target");
 		column1.setCellValueFactory(new PropertyValueFactory<>("target"));
@@ -192,7 +241,9 @@ public class SdgPaneel extends GridPane {
 				tableView.getItems().add(mvoGoalChild);
 			}
 		}
-		add(tableView, 1, 5);
+		
+		return tableView;
+//		add(tableView, 1, 5);
 
 	}
 

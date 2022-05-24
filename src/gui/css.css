@@ -69,7 +69,7 @@
 }
 
 //dashboard
-#categorybtn_id, #sdgbtn_id, #mvogoalbtn_id, #listmvobtn_id, #btnaanmelden_id {
+#categorybtn_id, #listsdgbtn_id, #listmvobtn_id, #btnaanmelden_id {
     -fx-background-color: -fx-fblue;
     -fx-text-fill: -fx-fgreen;
 
@@ -81,28 +81,37 @@
     -fx-pref-width: 200px;
 }
 
-#categorybtn_id:hover, #sdgbtn_id:hover, #mvogoalbtn_id:hover, #listmvobtn_id:hover, #btnaanmelden_id:hover {
+#categorybtn_id:hover, #listsdgbtn_id:hover, #listmvobtn_id:hover, #btnaanmelden_id:hover {
     -fx-background-color: -fx-fbluelight;
     -fx-text-fill: black; 
 }
 
 //Categorieën
-#categorieVBox_id{
+#categorieVBox_id, #sdglistVbox_id, #mvolistVbox_id, #sdgvbox_id, #sdgpaneelvbox_id{
     -fx-background-color: #D3D3D3;
 }
 
 
-#verwijdercatbtn_id, #aanmakencatbtn_id {
+#verwijdercatbtn_id, #aanmakencatbtn_id, 
+#createsdgbtn_id, #deletesdgbtn_id, 
+#createmvobtn_id, #deletemvobtn_id, 
+#createsdgpaneelbtn_id, #wijzigsdgpaneelbtn_id, #deletesdgpaneelbtn_id, #retoursdgpaneelbtn_id,
+#createMVOGoalbtn_id, #editMVOGoalbtn_id, #deleteMVOGoalbtn_id, #listMVOGoalbtn_id, #datasourceMVOGoalbtn_id {
     -fx-background-color: -fx-fbluelight;
     -fx-text-fill: -fx-fgreen;
     -fx-font: normal 15px 'system';
     -fx-min-width: 200px;
+    -fx-alignment:center
 
     /* -fx-border-color: black;
     -fx-border-width: 1; */
 }
 
-#verwijdercatbtn_id:hover, #aanmakencatbtn_id:hover {
+#verwijdercatbtn_id:hover, #aanmakencatbtn_id:hover, 
+#createsdgbtn_id:hover, #deletesdgbtn_id:hover, 
+#createmvobtn_id:hover, #deletemvobtn_id:hover, 
+#createsdgpaneelbtn_id:hover, #wijzigsdgpaneelbtn_id:hover, #deletesdgpaneelbtn_id:hover, #retoursdgpaneelbtn_id:hover,
+#createMVOGoalbtn_id:hover, #editMVOGoalbtn_id:hover, #deleteMVOGoalbtn_id:hover, #listMVOGoalbtn_id:hover, #datasourceMVOGoalbtn_id:hover {
     -fx-background-color: -fx-fgreen;
     -fx-text-fill: black; 
 }
@@ -125,6 +134,9 @@
 .table-view .virtual-flow .scroll-bar:horizontal .track,
 .table-view .virtual-flow .scroll-bar:horizontal .track-background {
     -fx-background-color: transparent;
+    
+    -fx-border-color: black;
+    -fx-border-width: 1; 
 }
 
 .table-view .virtual-flow .scroll-bar .increment-button,
@@ -142,4 +154,11 @@
 
 .table-row-cell: highlighted {
     -fx-background-color: -fx-fgreen;
+}
+
+#titleSDG_id, #mvogoaltitle_id{
+    -fx-font-family: "Arial";
+    -fx-font-size: 30px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
 }

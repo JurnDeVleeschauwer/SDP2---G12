@@ -28,9 +28,11 @@ public class CategorieAanmakenPopup {
 		window.setTitle("Categorie maken");
 		window.setMinWidth(350);
 		window.setMinHeight(300);
+		
+		
+		
 		Label labeltitel = new Label("Nieuwe Categorie maken");
 		labeltitel.setStyle("-fx-text-fill: #B2D235; -fx-font: normal bold 25px 'system'");
-		labeltitel.setPadding(new Insets(0, 0, 0, 0));
 		Label labelNaam = new Label("Naam:");
 		labelNaam.setStyle("-fx-font: normal 18px 'system'");
 		TextField textFieldNaam = new TextField();

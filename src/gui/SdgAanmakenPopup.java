@@ -15,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -24,49 +26,78 @@ import javafx.stage.Stage;
 public class SdgAanmakenPopup {
 
 	static List<Object> sdg;
-	static Label foutbericht = new Label();
 
 	public static List<Object> display(List<MvoGoalAbstract> mvoGoals, boolean child) {
 		sdg = new ArrayList<>();
+		
+		ColumnConstraints col1 = new ColumnConstraints();
+		col1.setPrefWidth(150);
+		
+		String foutstyle = "-fx-font: normal 18px 'system'; -fx-text-fill: #FF0000; -fx-max-width: 300px; -fx-wrap-text: true";
 
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Sdg maken");
-		window.setMinWidth(350);
-		window.setMinHeight(300);
-		
-		foutbericht.setStyle("-fx-font: normal 18px 'system'");
-		foutbericht.setTextFill(Color.color(1, 0, 0));
-		foutbericht.setMaxWidth(300.0);
-		foutbericht.setWrapText(true);
 		
 		Label labeltitel = new Label("Nieuwe Sdg maken");
 		labeltitel.setStyle("-fx-text-fill: #B2D235; -fx-font: normal bold 25px 'system'");
-		labeltitel.setPadding(new Insets(0, 0, 25, 0));
-		Label labelNaam = new Label("Naam:");
+		
+		Label labelNaam = new Label("SDG naam:");
 		labelNaam.setStyle("-fx-font: normal 18px 'system'");
+		Label lblNaamFout = new Label();
+		lblNaamFout.setStyle(foutstyle);
+		GridPane gridnaam = new GridPane();
+		gridnaam.getColumnConstraints().add(col1);
+		gridnaam.add(labelNaam, 0, 0);
+		gridnaam.add(lblNaamFout, 1, 0);
 		TextField textFieldNaam = new TextField();
 		textFieldNaam.setPromptText("Sdg naam");
 		textFieldNaam.setStyle("-fx-font: normal 18px 'system'");
 
 		Label labelDescription = new Label("Description:");
 		labelDescription.setStyle("-fx-font: normal 18px 'system'");
+		Label lblDescriptionFout = new Label();
+		lblDescriptionFout.setStyle(foutstyle);
+		GridPane griddescription = new GridPane();
+		griddescription.getColumnConstraints().add(col1);
+		griddescription.add(labelDescription, 0, 0);
+		griddescription.add(lblDescriptionFout, 1, 0);
 		TextField textFieldDescription = new TextField();
 		textFieldDescription.setPromptText("Sdg description");
 		textFieldDescription.setStyle("-fx-font: normal 18px 'system'");
 
 		Label labelIcon = new Label("Icon:");
 		labelIcon.setStyle("-fx-font: normal 18px 'system'");
+		Label lblIconFout = new Label();
+		lblIconFout.setStyle(foutstyle);
+		GridPane gridicon = new GridPane();
+		gridicon.getColumnConstraints().add(col1);
+		gridicon.add(labelIcon, 0, 0);
+		gridicon.add(lblIconFout, 1, 0);
 		TextField textFieldIcon = new TextField();
 		textFieldIcon.setPromptText("Sdg icon");
 		textFieldIcon.setStyle("-fx-font: normal 18px 'system'");
 
 		Label labelTarget = new Label("Target:");
 		labelTarget.setStyle("-fx-font: normal 18px 'system'");
+		Label lblTargetFout = new Label();
+		lblIconFout.setStyle(foutstyle);
+		GridPane gridtarget = new GridPane();
+		gridtarget.getColumnConstraints().add(col1);
+		gridtarget.add(labelTarget, 0, 0);
+		gridtarget.add(lblTargetFout, 1, 0);
 		TextField textFieldTarget = new TextField();
 		textFieldTarget.setPromptText("Sdg target");
 		textFieldTarget.setStyle("-fx-font: normal 18px 'system'");
 
+		Label labelMvoGoal = new Label("MVO goal:");
+		labelMvoGoal.setStyle("-fx-font: normal 18px 'system'");
+		Label lblMvoGoalFout = new Label();
+		lblMvoGoalFout.setStyle(foutstyle);
+		GridPane gridmvogoal = new GridPane();
+		gridmvogoal.getColumnConstraints().add(col1);
+		gridmvogoal.add(labelMvoGoal, 0, 0);
+		gridmvogoal.add(lblMvoGoalFout, 1, 0);
 		ChoiceBox<MvoGoalAbstract> cbMvoGoals = new ChoiceBox<>();
 		ObservableList<MvoGoalAbstract> mvoGoalList = FXCollections.observableArrayList();
 
@@ -77,34 +108,33 @@ public class SdgAanmakenPopup {
 		Button aanmakenButton = new Button("Aanmaken");
 		aanmakenButton.setOnAction(e -> {
 			boolean finish = true;
-			foutbericht.setText("");
 			if (textFieldDescription.getText().trim().isEmpty()) {
-				foutbericht.setText(foutbericht.getText() + "Naam moet ingvult zijn\n");
+				lblDescriptionFout.setText("Naam moet ingvult zijn\n");
 				finish = false;
 			}
 			if (textFieldNaam.getText().trim().isEmpty()) {
-				foutbericht.setText(foutbericht.getText() + "MvoNaam moet ingvult zijn\n");
+				lblNaamFout.setText("SDG naam moet ingvult zijn\n");
 				finish = false;
 			}
 			if (child) {
 				if (textFieldTarget.getText().trim().isEmpty()) {
-					foutbericht.setText(foutbericht.getText() + "Value moet ingvult zijn\n");
+					lblTargetFout.setText("Value moet ingvult zijn\n");
 					finish = false;
 				} else {
 					try {
 						Integer.parseInt(textFieldTarget.getText());
 					} catch (NumberFormatException ex) {
-						foutbericht.setText(foutbericht.getText() + "Value moet een nummer zijn\n");
+						lblTargetFout.setText("Value moet een nummer zijn\n");
 						finish = false;
 					}
 				}
 				if (textFieldIcon.getText().trim().isEmpty()) {
-					foutbericht.setText(foutbericht.getText() + "Foto moet ingvult zijn\n");
+					lblIconFout.setText("Foto moet ingvult zijn\n");
 					finish = false;
 				}
 
 				if (cbMvoGoals.getSelectionModel().getSelectedItem() == null) {
-					foutbericht.setText(foutbericht.getText() + "DataSource moet gekozen zijn\n");
+					lblMvoGoalFout.setText("DataSource moet gekozen zijn\n");
 					finish = false;
 				}
 
@@ -119,7 +149,6 @@ public class SdgAanmakenPopup {
 				} else {
 					sdg.add(textFieldDescription.getText());
 				}
-				foutbericht.setText(null);
 				window.close();
 			}
 		});
@@ -144,14 +173,15 @@ public class SdgAanmakenPopup {
 		hboxButtons.getChildren().addAll(aanmakenButton, annulerenButton);
 		hboxButtons.setAlignment(Pos.CENTER);
 		VBox layout = new VBox(10);
+		layout.setPadding(new Insets(10, 10, 10, 10));
 		if (child) {
-			layout.getChildren().addAll(labeltitel, labelNaam, textFieldNaam, labelDescription, textFieldDescription,
-					labelIcon, textFieldIcon, labelTarget, textFieldTarget, cbMvoGoals, hboxButtons, foutbericht);
+			layout.getChildren().addAll(labeltitel, gridnaam, textFieldNaam, griddescription, textFieldDescription,
+					gridicon, textFieldIcon, gridtarget, textFieldTarget,gridmvogoal, cbMvoGoals, hboxButtons);
 		} else {
-			layout.getChildren().addAll(labeltitel, labelNaam, textFieldNaam, labelDescription, textFieldDescription,
-					hboxButtons, foutbericht);
+			layout.getChildren().addAll(labeltitel, gridnaam, textFieldNaam, griddescription, textFieldDescription,
+					hboxButtons);
 		}
-		layout.setAlignment(Pos.CENTER);
+		layout.setAlignment(Pos.TOP_LEFT);
 		Scene scene = new Scene(layout);
 		window.setScene(scene);
 		window.showAndWait();

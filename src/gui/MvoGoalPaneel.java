@@ -14,6 +14,7 @@ import domain.MvoGoalComp;
 import domain.MvoGoalController;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -23,15 +24,27 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 
 /**
  *
  * @author Jurn
  *
  */
-public class MvoGoalPaneel extends GridPane {
+public class MvoGoalPaneel extends HBox {
 	private final MvoGoalController mvoGoalController;
 	private final HoofdPaneel hoofdPaneel;
 	private DatasourceController datasourceController;
@@ -48,9 +61,7 @@ public class MvoGoalPaneel extends GridPane {
 	}
 
 	private void configureerGrid() {
-		setPadding(new Insets(10));
-		setHgap(2);
-		setVgap(2);
+		this.setSpacing(40);
 
 	}
 
@@ -121,63 +132,101 @@ public class MvoGoalPaneel extends GridPane {
 
 	private void maakGrid() {
 		this.getChildren().clear();
-
-		Label title = new Label("MVO Doelstelling");
-		title.setFont(new Font("Arial", 30));
-		add(title, 5, 0);
+		
+		VBox vbox = new VBox();
+		vbox.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		vbox.setPadding(new Insets(0, 0, 20, 0));
+		vbox.setMaxHeight(Double.MAX_VALUE);
+		vbox.setId("MvoGoalVbox_id");
+		
 		MvoGoalAbstract mvoGoal;
 		if (mvoGoalController.getMvoGoal(this.id).isBlad()) {
 			mvoGoal = (MvoGoalChild) mvoGoalController.getMvoGoal(this.id);
 		} else {
 			mvoGoal = (MvoGoalComp) mvoGoalController.getMvoGoal(this.id);
 		}
-
-		Label id = new Label("ID:");
-		id.setFont(new Font("Arial", 15));
-		add(id, 1, 1);
-		add(new Label(Integer.toString(mvoGoal.getId())), 2, 1);
-
-		if (mvoGoal.isBlad()) {
-			Label name = new Label("Mvo name:");
-			name.setFont(new Font("Arial", 15));
-			add(name, 1, 3);
-			add(new Label(((MvoGoalChild) mvoGoal).getMvoName()), 2, 3);
-		} else {
-			Label name = new Label("Name:");
-			name.setFont(new Font("Arial", 15));
-			add(name, 1, 3);
-			add(new Label(((MvoGoalComp) mvoGoal).getName()), 2, 3);
+		
+		if (!(mvoGoal.isBlad())) {
+			Button createButton = new Button("Nieuwe Sub-MVO maken");
+			createButton.setOnAction(this::createButton);
+			vbox.getChildren().add(createButton);
+			createButton.setId("createMVOGoalbtn_id");
 		}
-
-		Label SDGs = new Label("SubMvo Doelstelligen:");
-		SDGs.setFont(new Font("Arial", 15));
-		add(SDGs, 1, 4);
-		maakTableView(mvoGoal);
-
-		Button editButton = new Button("Wijzigen");
+		
+		Button editButton = new Button("MVO wijzigen");
 		editButton.setOnAction(this::editButton);
-		add(editButton, 7, 0);
+		vbox.getChildren().add(editButton);
+		editButton.setId("editMVOGoalbtn_id");
 
 		if (!(mvoGoal.isBlad())) {
-			Button createButton = new Button("Aanmaken");
-			createButton.setOnAction(this::createButton);
-			add(createButton, 1, 12);
-
-			Button deleteButtonAction = new Button("Verwijderen");
+			Button deleteButtonAction = new Button("Sub-MVO verwijderen");
 			deleteButtonAction.setOnAction(this::deleteButtonAction);
-			add(deleteButtonAction, 1, 11);
+			vbox.getChildren().add(deleteButtonAction);
+			deleteButtonAction.setId("deleteMVOGoalbtn_id");
 		}
 
-		Button listMvoGoalButton = new Button("Back naar Mvo Doesstellingen lijst");
+		Button listMvoGoalButton = new Button("MVO doelstelling lijst");
 		listMvoGoalButton.setOnAction(this::listMvoGoalButton);
-		add(listMvoGoalButton, 1, 13);
+		vbox.getChildren().add(listMvoGoalButton);
+		listMvoGoalButton.setId("listMVOGoalbtn_id");
 
 		
 		Button datasourceButton = new Button("Bekijk datasource");
 		datasourceButton.setOnAction( this::datasourceButtonAction );
-		add(datasourceButton,1,14);
+		vbox.getChildren().add(datasourceButton);
+		datasourceButton.setId("datasourceMVOGoalbtn_id");
 		
+		VBox newVbox = new VBox();
+		newVbox.setAlignment(Pos.TOP_CENTER);
+		newVbox.setPadding(new Insets(0,0,20,0));
+
+		Label title = new Label("MVO Doelstelling");
+		title.setFont(new Font("Arial", 30));
+		newVbox.getChildren().add(title);
 		
+		GridPane grid = new GridPane();
+		grid.setAlignment(Pos.BOTTOM_LEFT);
+		
+		for(int i = 0; i < 3; i++) {
+			ColumnConstraints col = new ColumnConstraints();
+			col.setMinWidth(20);
+			grid.getColumnConstraints().add(col);
+		}
+		
+		for(int i = 0; i<5; i++) {
+			RowConstraints row = new RowConstraints();
+			row.setMinHeight(20);
+			grid.getRowConstraints().add(row);
+		}
+		
+		Font font = Font.font("Arial", FontWeight.BOLD, 15);
+
+		Label id = new Label("ID:");
+		id.setFont(font);
+		grid.add(id, 1, 1);
+		grid.add(new Label(Integer.toString(mvoGoal.getId())), 3, 1);
+
+		if (mvoGoal.isBlad()) {
+			Label name = new Label("Mvo name:");
+			name.setFont(font);
+			grid.add(name, 1, 2);
+			grid.add(new Label(((MvoGoalChild) mvoGoal).getMvoName()), 3, 2);
+		} else {
+			Label name = new Label("Name:");
+			name.setFont(font);
+			grid.add(name, 1, 2);
+			grid.add(new Label(((MvoGoalComp) mvoGoal).getName()), 3, 2);
+		}
+
+		Label SDGs = new Label("SubMvo Doelstelligen:");
+		SDGs.setFont(font);
+		grid.add(SDGs, 1, 4, 3, 1);
+		grid.add(maakTableView(mvoGoal), 1, 5, 3, 1); 
+		
+		newVbox.getChildren().add(grid);
+		
+		this.getChildren().addAll(vbox, newVbox);
 	}
 	private void datasourceButtonAction(ActionEvent event) {
 		try {
@@ -196,11 +245,15 @@ public class MvoGoalPaneel extends GridPane {
 		
 	}
 
-	private void maakTableView(MvoGoalAbstract mvoGoal) {
+	private TableView<MvoGoalChild> maakTableView(MvoGoalAbstract mvoGoal) {
 		// getChildren().clear();
 		tableView = new TableView<MvoGoalChild>();
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+		tableView.setPrefWidth(400);
+		tableView.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		
 		TableColumn<MvoGoalChild, String> column1 = new TableColumn<>("id");
 		column1.setCellValueFactory(new PropertyValueFactory<>("id"));
 
@@ -220,7 +273,8 @@ public class MvoGoalPaneel extends GridPane {
 			}
 		}
 
-		add(tableView, 1, 5);
+		return tableView;
+//		add(tableView, 1, 5);
 
 	}
 

@@ -28,25 +28,42 @@ public class Dashboard extends GridPane {
 	}
 
 	private void voegComponentenToe() {
-		Button buttonCategoryPaneel = new Button("Categories");
+		String normalStyle = "";
+		String clickedStyle = "-fx-background-color: -fx-fbluelight; -fx-text-fill: black;";
+		
+		Button buttonCategoryPaneel = new Button("Categorieën");
+		Button buttonListSdg = new Button("SDG's");
+		Button buttonListMVO = new Button("MVO doelstellingen");
+		
+		
 		buttonCategoryPaneel.setOnAction(e -> {
 			hoofdPaneel.toonCategoriePaneell();
+			
+			buttonCategoryPaneel.setStyle(clickedStyle);
+			buttonListSdg.setStyle(normalStyle);
+			buttonListMVO.setStyle(normalStyle);
 
 		});
 		buttonCategoryPaneel.setId("categorybtn_id");
 		add(buttonCategoryPaneel, 0, 0);
-
-		Button buttonListSdg = new Button("List Sdg");
+		buttonCategoryPaneel.setStyle(clickedStyle);
+		
 		buttonListSdg.setOnAction(e -> {
 			hoofdPaneel.toonListSdgPaneel();
+			
+			buttonCategoryPaneel.setStyle(normalStyle);
+			buttonListSdg.setStyle(clickedStyle);
+			buttonListMVO.setStyle(normalStyle);
 		});
 		buttonListSdg.setId("listsdgbtn_id");
 		add(buttonListSdg, 1, 0);
 		
-		
-		Button buttonListMVO = new Button("List Mvo");
 		buttonListMVO.setOnAction(e -> {
 			hoofdPaneel.toonListMvoGoalPaneel();
+			
+			buttonCategoryPaneel.setStyle(normalStyle);
+			buttonListSdg.setStyle(normalStyle);
+			buttonListMVO.setStyle(clickedStyle);
 		});
 		buttonListMVO.setId("listmvobtn_id");
 		add(buttonListMVO, 2, 0);

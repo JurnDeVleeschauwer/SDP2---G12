@@ -27,13 +27,19 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class ListSdgPaneel extends GridPane {
+public class ListSdgPaneel extends HBox {
 	private final SdgController sdgController;
 	private final HoofdPaneel hoofdPaneel;
 	private TableView<SdgAbstract> tableView;
@@ -49,9 +55,7 @@ public class ListSdgPaneel extends GridPane {
 	}
 
 	private void configureerGrid() {
-		setPadding(new Insets(10));
-		setHgap(2);
-		setVgap(2);
+		this.setSpacing(40);
 		voegComponentenToe();
 
 	}
@@ -62,12 +66,40 @@ public class ListSdgPaneel extends GridPane {
 
 	private void maakGrid() {
 		this.getChildren().clear();
+		
+		VBox vbox = new VBox();
+		vbox.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		vbox.setPadding(new Insets(0, 0, 20, 0));
+		vbox.setMaxHeight(Double.MAX_VALUE);
+		vbox.setId("sdglistVbox_id");
+		
+		Button createButtonAction = new Button("Nieuwe SDG aanmaken");
+		createButtonAction.setOnAction(this::createButtonAction);
+		createButtonAction.setId("createsdgbtn_id");
+		
+		Button deleteButtonAction = new Button("Verwijder SDG");
+		deleteButtonAction.setOnAction(this::deleteButtonAction);
+		deleteButtonAction.setId("deletesdgbtn_id");
+		
+		vbox.getChildren().addAll(createButtonAction, deleteButtonAction);
+		
+		VBox newVbox = new VBox();
+		newVbox.setPadding(new Insets(20,0,20,0));
+		
 		tableView = new TableView<SdgAbstract>();
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+		tableView.setPrefWidth(400);
+		tableView.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
+		
 		TableColumn<SdgAbstract, String> column1 = new TableColumn<>("id");
 		column1.setCellValueFactory(new PropertyValueFactory<>("id"));
-
+		column1.setMinWidth(30);
+		column1.setMaxWidth(30);
+		
 		TableColumn<SdgAbstract, String> column2 = new TableColumn<>("target");
 		column2.setCellValueFactory(new PropertyValueFactory<>("target"));
 
@@ -86,15 +118,9 @@ public class ListSdgPaneel extends GridPane {
 			// System.out.println(sdgChild);
 			tableView.getItems().add((SdgAbstract) sdgChild);
 		}
-		add(tableView, 2, 4);
-
-		Button deleteButtonAction = new Button("Verwijderen");
-		deleteButtonAction.setOnAction(this::deleteButtonAction);
-		add(deleteButtonAction, 12, 11);
-
-		Button createButtonAction = new Button("Aanmaken");
-		createButtonAction.setOnAction(this::createButtonAction);
-		add(createButtonAction, 13, 11);
+		newVbox.getChildren().addAll(new Label("SDG's"), tableView);
+		
+		this.getChildren().addAll(vbox, newVbox);
 
 		tableView.setRowFactory(tv -> {
 			TableRow<SdgAbstract> row = new TableRow<>();

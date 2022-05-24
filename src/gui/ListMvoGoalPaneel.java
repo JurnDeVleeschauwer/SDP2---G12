@@ -24,13 +24,19 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class ListMvoGoalPaneel extends GridPane {
+public class ListMvoGoalPaneel extends HBox {
 	private final MvoGoalController mvoGoalController;
 	private final HoofdPaneel hoofdPaneel;
 	private DatasourceController datasourceController;
@@ -47,9 +53,7 @@ public class ListMvoGoalPaneel extends GridPane {
 	}
 
 	private void configureerGrid() {
-		setPadding(new Insets(10));
-		setHgap(2);
-		setVgap(2);
+		this.setSpacing(40);
 		voegComponentenToe();
 
 	}
@@ -60,8 +64,31 @@ public class ListMvoGoalPaneel extends GridPane {
 
 	private void maakGrid() {
 		this.getChildren().clear();
+		
+		VBox vbox = new VBox();
+		vbox.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		vbox.setPadding(new Insets(0, 0, 20, 0));
+		vbox.setMaxHeight(Double.MAX_VALUE);
+		vbox.setId("mvolistVbox_id");
+		
+		Button createButtonAction = new Button("Nieuwe MVO maken");
+		createButtonAction.setOnAction(this::createButtonAction);
+		createButtonAction.setId("createmvobtn_id");
+		
+		Button deleteButtonAction = new Button("Verwijder MVO");
+		deleteButtonAction.setOnAction(this::deleteButtonAction);
+		deleteButtonAction.setId("deletemvobtn_id");
+		
+		vbox.getChildren().addAll(createButtonAction, deleteButtonAction);
+		
+		VBox newVbox = new VBox();
+		newVbox.setPadding(new Insets(20,0,20,0));
+		
 		tableView = new TableView<MvoGoalAbstract>();
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		tableView.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		TableColumn<MvoGoalAbstract, Number> column1 = new TableColumn<>("Id");
 		column1.setCellValueFactory(new PropertyValueFactory<MvoGoalAbstract, Number>("id"));
@@ -84,15 +111,7 @@ public class ListMvoGoalPaneel extends GridPane {
 			// System.out.println(mvoGoalChild);
 			tableView.getItems().add((MvoGoalAbstract) mvoGoalChild);
 		}
-		add(tableView, 2, 4);
-
-		Button deleteButtonAction = new Button("Verwijderen");
-		deleteButtonAction.setOnAction(this::deleteButtonAction);
-		add(deleteButtonAction, 12, 11);
-
-		Button createButtonAction = new Button("Aanmaken");
-		createButtonAction.setOnAction(this::createButtonAction);
-		add(createButtonAction, 13, 11);
+		newVbox.getChildren().addAll(new Label("MVO's"), tableView);
 
 		tableView.setRowFactory(tv -> {
 			TableRow<MvoGoalAbstract> row = new TableRow<>();
@@ -104,7 +123,8 @@ public class ListMvoGoalPaneel extends GridPane {
 			});
 			return row;
 		});
-
+		
+		this.getChildren().addAll(vbox, newVbox);
 	}
 
 	private void deleteButtonAction(ActionEvent event) {
