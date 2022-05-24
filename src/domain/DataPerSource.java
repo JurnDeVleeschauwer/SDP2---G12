@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -153,10 +152,10 @@ public class DataPerSource implements Serializable {
 				if(line.matches(langMatchMonths)) {
 					monthCount++;
 					
-					//if(monthCount >= 2) {
-					//	monthCheck = true;
-					//	break; 
-					//}
+					if(monthCount >= 2) {
+						monthCheck = true;
+						break; 
+					}
 					
 					
 				}
@@ -171,11 +170,11 @@ public class DataPerSource implements Serializable {
 					System.out.println("DAYCHECK");
 					monthValueMap = dayFunc(data, langMatchDays, langMatchMonths, daysOfWeek, months, avg); 
 					
-				} /*else if(monthCheck == true)  {
+				} else if(monthCheck == true)  {
 					System.out.println("MONTHCHECK");
-					monthValueMap = monthFunc(data, langMatchMonths, daysOfWeek, months, true);
+					monthValueMap = monthFunc(data, langMatchMonths, daysOfWeek, months);
 					
-				}*/else if(dayCheck == false && monthCheck == false) {
+				}else if(dayCheck == false && monthCheck == false) {
 					System.out.println("WEEKCHECK");
 					monthValueMap = weekFunc(data, langMatchMonths, daysOfWeek, months, avg); 
 					
@@ -193,13 +192,11 @@ public class DataPerSource implements Serializable {
 		return monthValueMap; 
 	}
 	
-	private Map<String, Integer> monthFunc(List<String> data, String langMatchMonths, List<String> daysOfWeek, List<String> months, boolean avg) {
+	private Map<String, Integer> monthFunc(List<String> data, String langMatchMonths, List<String> daysOfWeek, List<String> months) {
 		
 
 		String currentMonth = ""; 
-		String prevMonth = ""; 
 		Map<String, Integer> monthValueMap = new LinkedHashMap<>(); 
-
 		
 		for(int i = 0; i < data.size(); i++) {
 					if(data.get(i).matches(langMatchMonths)) {
@@ -207,53 +204,24 @@ public class DataPerSource implements Serializable {
 						
 						int monthValue = Integer.parseInt(data.get(i).replaceAll(" ", "").split(":")[1]); 
 						
-						if(avg == true) {
-							System.out.println("MONTHAVG");
-							for(int iMonth = 0; i < months.size(); i++) {
-								if(currentMonth == months.get(iMonth)) {
-									
-									
-									if(iMonth == 0) {
-										monthValue /= 31; 
-									}else if(iMonth == 1) {
-										monthValue /= 29; 
-									} else if(iMonth == 7 ) {
-										monthValue /= 31; 
-									} else if(iMonth % 2 == 0) {
-										monthValue /= 31;
-									} else if(iMonth % 2 != 0) {
-										monthValue /= 30;
-									}
-									
-									
-								}
-							
-								
-								
-								
-							}
-							
-							
-							
+						
+						
+						monthValueMap.put(currentMonth, monthValue );
+
 							
 						}
 						
-						monthValueMap.put(currentMonth, monthValue );
-				}
-		}
-	
-		
+				}		
 		
 	return monthValueMap; 
 	
 	}
 	
-		
+
 	private Map<String, Integer> weekFunc(List<String> data, String langMatchMonths, List<String> daysOfWeek, List<String> months, boolean avg) {
 		
 		String currentMonth = ""; 
 		String prevMonth = ""; 
-		int weeksPerMonth = 0;
 		Map<String, Integer> monthValueMap = new LinkedHashMap<>(); 
 		List<Integer> valueOfWeeks = new ArrayList<>(); 
 		int monthsPerYear = 0; 
@@ -271,7 +239,6 @@ public class DataPerSource implements Serializable {
 									monthValueMap.put(prevMonth, monthValue ); 
 									
 									prevMonth = currentMonth; 
-									weeksPerMonth = 0;
 									valueOfWeeks.clear();
 								}
 								
@@ -311,7 +278,6 @@ public class DataPerSource implements Serializable {
 									
 									monthValueMap.put(currentMonth, monthValue);
 									currentMonth = "";  
-									weeksPerMonth = 0;
 									valueOfWeeks.clear();
 									}
 								}
@@ -339,7 +305,6 @@ public class DataPerSource implements Serializable {
 		List<Integer> valueOfDay = new ArrayList<>(); 
 		List<Integer> valueOfWeeks = new ArrayList<>(); 
 		List<Boolean> isInList = new ArrayList<>(); 
-		int tempDay = -1; 
 		int currentDay = 0; 
 		int monthsPerYear = 0; 
 		
