@@ -1,12 +1,5 @@
-/META-INF/
-/domain/
-/exceptions/
-/gemiddeldeTest.txt
 /gui/
-/maandenTest.txt
-/optellingTest.txt
-/optellingWekenTest.txt
 /persistence/
 /testen/
-/translations/
 /ui/
+/domain/

@@ -11,6 +11,8 @@ import domain.DatasourceController;
 import domain.DatasourceReader;
 import domain.DomeinController;
 import domain.MvoCoordinatorController;
+import domain.MvoGoalAbstract;
+import domain.MvoGoalChild;
 import domain.MvoGoalController;
 import domain.SdgController;
 import domain.CategoryController;
@@ -126,8 +128,8 @@ public class HoofdPaneel extends BorderPane {
 		setCenter(listSdgPaneel);
 	}
 
-	public void toonDatasource(Datasource datasource,int mvoId) {
-		setCenter(new DataSourceView(this, dc,datasource,mvoId));
+	public void toonDatasource(MvoGoalChild mvoGoal,Datasource datasource,int mvoId) {
+		setCenter(new DataSourceView(mgc,mvoGoal,this, dc,datasource,mvoId));
 	}
 
 }

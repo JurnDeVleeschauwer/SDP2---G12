@@ -170,17 +170,17 @@ public class MvoGoalComp extends MvoGoalAbstract implements Serializable {
 
 	@Override
 	public String toString() {
-		String res = "";
-
-		res += String.format(" Name: %s%n", getName());
-
-		for (MvoGoalChild child : mvoGoals) {
-			res += child.toString();
-
-		}
-
-		return res;
-
+//		String res = "";
+//
+//		res += String.format(" Name: %s%n", getName());
+//
+//		for (MvoGoalChild child : mvoGoals) {
+//			res += child.toString();
+//
+//		}
+//
+//		return res;
+		return name;
 	}
 
 }

@@ -28,7 +28,7 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 
 	private final int value;
 	@OneToOne(cascade = CascadeType.PERSIST)
-	private final Datasource datasource;
+	private Datasource datasource;
 
 	@Transient
 	private final int counter;
@@ -217,8 +217,9 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 
 		// int id, int value, SdgComp sdgComp, Datasource datasource, String icon,
 		// String mvoName
-		return String.format("id: %d, value: %d%n,  Datasource: %s, Icon: %s, MvoName: %s", getId(), getValue(),
-				getDatasource().toString(), getIcon(), getMvoName());
+//		return String.format("id: %d, value: %d%n,  Datasource: %s, Icon: %s, MvoName: %s", getId(), getValue(),
+//				getDatasource().toString(), getIcon(), getMvoName());
+		return mvoName;
 	}
 
 	public void get() {
@@ -253,6 +254,9 @@ public class MvoGoalChild extends MvoGoalAbstract implements Serializable {
 	public void removeMvoGoalJpa(MvoGoalComp comp) {
 		throw new UnsupportedOperationException();
 
+	}
+	public void removeDatasource() {
+		datasource=null;
 	}
 
 	public MvoGoalAbstract getMvoGoalJpa(int id) {

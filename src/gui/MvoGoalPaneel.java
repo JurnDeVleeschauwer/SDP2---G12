@@ -234,7 +234,7 @@ public class MvoGoalPaneel extends HBox {
 			
 			MvoGoalChild mvogoal = (MvoGoalChild) mvoGoalController.getMvoGoal(id);
 			
-			hoofdPaneel.toonDatasource(mvogoal.getDatasource(), id);
+			hoofdPaneel.toonDatasource(mvogoal,mvogoal.getDatasource(), id);
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.WARNING);
 			

@@ -24,8 +24,8 @@ public class MvoGoalManager {
 	
 	
 	public void updateMvoGoal(MvoGoalAbstract comp) {
-		System.out.println( comp); 
-		System.out.println( mvoGoalMapper.update(comp)); 
+
+		mvoGoalMapper.update(comp); 
 		populateList();
 	}
 	
