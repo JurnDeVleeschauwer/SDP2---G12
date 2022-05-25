@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -49,7 +50,7 @@ public class MvoGoalPaneel extends HBox {
 	private final HoofdPaneel hoofdPaneel;
 	private DatasourceController datasourceController;
 	private int id;
-	private TableView<MvoGoalChild> tableView;
+	private TableView<MvoGoalAbstract> tableView;
 
 	public MvoGoalPaneel(HoofdPaneel hoofdPaneel, MvoGoalController mvoGoalController,
 			DatasourceController datasourceController) {
@@ -245,24 +246,24 @@ public class MvoGoalPaneel extends HBox {
 		
 	}
 
-	private TableView<MvoGoalChild> maakTableView(MvoGoalAbstract mvoGoal) {
+	private TableView<MvoGoalAbstract> maakTableView(MvoGoalAbstract mvoGoal) {
 		// getChildren().clear();
-		tableView = new TableView<MvoGoalChild>();
+		tableView = new TableView<MvoGoalAbstract>();
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 		tableView.setPrefWidth(400);
 		tableView.setBorder(new Border(
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		
-		TableColumn<MvoGoalChild, String> column1 = new TableColumn<>("id");
+		TableColumn<MvoGoalAbstract, String> column1 = new TableColumn<>("id");
 		column1.setCellValueFactory(new PropertyValueFactory<>("id"));
 		column1.setMinWidth(30);
 		column1.setMaxWidth(30);
 
-		TableColumn<MvoGoalChild, String> column2 = new TableColumn<>("value");
+		TableColumn<MvoGoalAbstract, String> column2 = new TableColumn<>("value");
 		column2.setCellValueFactory(new PropertyValueFactory<>("value"));
 
-		TableColumn<MvoGoalChild, String> column3 = new TableColumn<>("mvoName");
+		TableColumn<MvoGoalAbstract, String> column3 = new TableColumn<>("mvoName");
 		column3.setCellValueFactory(new PropertyValueFactory<>("mvoName"));
 
 		tableView.getColumns().add(column1);
@@ -270,10 +271,21 @@ public class MvoGoalPaneel extends HBox {
 		tableView.getColumns().add(column3);
 
 		if (!(mvoGoal.isBlad())) {
-			for (MvoGoalChild mvoGoalChild : ((MvoGoalComp) mvoGoal).getSdgs()) {
+			for (MvoGoalAbstract mvoGoalChild : ((MvoGoalComp) mvoGoal).getSdgs()) {
 				tableView.getItems().add(mvoGoalChild);
 			}
 		}
+		
+		tableView.setRowFactory(tv -> {
+			TableRow<MvoGoalAbstract> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (!row.isEmpty())) {
+					MvoGoalAbstract rowData = row.getItem();
+					hoofdPaneel.toonMvoGoalPaneel(rowData.getId() - 1);
+				}
+			});
+			return row;
+		});
 
 		return tableView;
 //		add(tableView, 1, 5);
