@@ -39,7 +39,7 @@ public class MvoGoalAanmakenPopup {
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setTitle("Sdg maken");
 		
-		Label labeltitel = new Label("Nieuwe Mvo maken");
+		Label labeltitel = new Label("Nieuwe MVO maken");
 		labeltitel.setStyle("-fx-text-fill: #B2D235; -fx-font: normal bold 25px 'system'");
 		
 		Label labelNaam = new Label("MVO naam:");

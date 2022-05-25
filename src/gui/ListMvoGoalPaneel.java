@@ -92,6 +92,8 @@ public class ListMvoGoalPaneel extends HBox {
 
 		TableColumn<MvoGoalAbstract, Number> column1 = new TableColumn<>("Id");
 		column1.setCellValueFactory(new PropertyValueFactory<MvoGoalAbstract, Number>("id"));
+		column1.setMinWidth(30);
+		column1.setMaxWidth(30);
 
 		TableColumn<MvoGoalAbstract, String> column2 = new TableColumn<>("Naam");
 		column2.setCellValueFactory(new PropertyValueFactory<MvoGoalAbstract, String>("name"));
@@ -131,7 +133,7 @@ public class ListMvoGoalPaneel extends HBox {
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmeer verwijdering");
-		alert.setHeaderText("Bent u zeker dat u deze categorie wilt verwijderen?");
+		alert.setHeaderText("Bent u zeker dat u deze MVO doelstelling wilt verwijderen?");
 		alert.setGraphic(null);
 
 		Optional<ButtonType> result = alert.showAndWait();

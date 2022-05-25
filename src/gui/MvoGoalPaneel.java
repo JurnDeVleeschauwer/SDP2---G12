@@ -74,7 +74,7 @@ public class MvoGoalPaneel extends HBox {
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmeer verwijdering");
-		alert.setHeaderText("Bent u zeker dat u deze categorie wilt verwijderen?");
+		alert.setHeaderText("Bent u zeker dat u deze MVO doelstelling wilt verwijderen?");
 		alert.setGraphic(null);
 
 		Optional<ButtonType> result = alert.showAndWait();
@@ -256,6 +256,8 @@ public class MvoGoalPaneel extends HBox {
 		
 		TableColumn<MvoGoalChild, String> column1 = new TableColumn<>("id");
 		column1.setCellValueFactory(new PropertyValueFactory<>("id"));
+		column1.setMinWidth(30);
+		column1.setMaxWidth(30);
 
 		TableColumn<MvoGoalChild, String> column2 = new TableColumn<>("value");
 		column2.setCellValueFactory(new PropertyValueFactory<>("value"));

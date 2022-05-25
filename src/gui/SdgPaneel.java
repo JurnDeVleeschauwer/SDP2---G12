@@ -196,7 +196,7 @@ public class SdgPaneel extends HBox {
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmeer verwijdering");
-		alert.setHeaderText("Bent u zeker dat u deze categorie wilt verwijderen?");
+		alert.setHeaderText("Bent u zeker dat u deze SDG wilt verwijderen?");
 		alert.setGraphic(null);
 
 		Optional<ButtonType> result = alert.showAndWait();

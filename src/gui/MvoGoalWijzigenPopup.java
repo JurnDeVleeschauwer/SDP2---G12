@@ -54,7 +54,7 @@ public class MvoGoalWijzigenPopup {
 		gridnaam.add(labelNaam, 0, 0);
 		gridnaam.add(lblNaamFout, 1, 0);
 		TextField textFieldNaam = new TextField();
-		textFieldNaam.setText("Nog in te vullen");
+		textFieldNaam.setText(((MvoGoalComp) mvoGoalToUpdate).getName());
 		textFieldNaam.setStyle("-fx-font: normal 18px 'system'");
 
 		Label labelFoto = new Label("Foto:");

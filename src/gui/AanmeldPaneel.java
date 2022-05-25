@@ -43,11 +43,12 @@ public class AanmeldPaneel extends StackPane {
 		vbox = new VBox();
 		hbox = new HBox();
 
-		vbox.setAlignment(Pos.CENTER);
 		hbox.setAlignment(Pos.CENTER);
+		vbox.setAlignment(Pos.CENTER_LEFT);
+		
 
-		getChildren().add(vbox);
-		vbox.getChildren().add(hbox);
+		getChildren().add(hbox);
+		hbox.getChildren().add(vbox);
 
 		configureerGrid();
 		voegComponentenToe();
@@ -61,89 +62,111 @@ public class AanmeldPaneel extends StackPane {
 		grid.setPadding(new Insets(10));
 		grid.setHgap(10);
 		grid.setVgap(10);
-		hbox.getChildren().add(grid);
+		vbox.getChildren().add(grid);
 		StackPane.setAlignment(grid, Pos.CENTER);
 	}
 
 	private final TextField gebruikersnaam = new TextField();
 	private final PasswordField wachtwoord = new PasswordField();
-	private final Label foutbericht = new Label();
+	private Label lblGebruikersnaamFout = new Label();
+	private Label lblWachtwoordFout = new Label();
+	private Label foutbericht = new Label();
 
 	private void voegComponentenToe() {
+		ColumnConstraints col1 = new ColumnConstraints();
+		col1.setPrefWidth(150);
+		
+		String foutstyle = "-fx-font: normal 18px 'system'; -fx-text-fill: #FF0000; -fx-wrap-text: true";
+
+		
 		// Label aanmelden
 		Label header = new Label("Aanmelden");
 		header.setId("header_id");
+		HBox headerhbox = new HBox();
+		headerhbox.setAlignment(Pos.CENTER);
+		headerhbox.getChildren().add(header);
 		// header.setStyle("-fx-text-fill: #B2D235; -fx-font: normal bold 47px
 		// 'system'");
-		grid.add(header, 0, 0, 1, 1);
+		vbox.getChildren().add(headerhbox);
 
 		// label gebruikersnaam + inputbox
-		Label gebruikersnaamLbl = new Label("Gebruikersnaam");
+		Label gebruikersnaamLbl = new Label("Gebruikersnaam:");
 		gebruikersnaamLbl.setId("gebruikersnaamlbl_id");
+		lblGebruikersnaamFout.setStyle(foutstyle);
+		GridPane gridgebruikersnaam = new GridPane();
+		gridgebruikersnaam.getColumnConstraints().add(col1);
+		gridgebruikersnaam.add(gebruikersnaamLbl, 0, 0);
+		gridgebruikersnaam.add(lblGebruikersnaamFout, 1, 0);
 		gebruikersnaam.setId("gebruikersnaambtn_id");
 		// gebruikersnaamLbl.setStyle("-fx-text-fill: #B2D235; -fx-font: normal 18px
 		// 'system'");
 		// gebruikersnaam.setStyle("-fx-font: normal 18px 'system';");
-		gebruikersnaam.setPrefWidth(300.0);
-		gebruikersnaam.setMaxWidth(300.0);
-		foutbericht.setStyle("-fx-font: normal 18px 'system'");
-		foutbericht.setTextFill(Color.color(1, 0, 0));
-		foutbericht.setMaxWidth(300.0);
-		foutbericht.setWrapText(true);
-		grid.add(gebruikersnaamLbl, 0, 1, 1, 1);
-		grid.add(gebruikersnaam, 0, 2, 1, 1);
+		gebruikersnaam.setPrefWidth(525.0);
+//		gebruikersnaam.setMaxWidth(300.0);
+		vbox.getChildren().add(gridgebruikersnaam);
+		vbox.getChildren().add(gebruikersnaam);
 
 		// label wachtwoord + inputbox
 		Label wachtwoordLbl = new Label("Wachtwoord");
 		wachtwoordLbl.setId("wachtwoordlbl_id");
+		lblWachtwoordFout.setStyle(foutstyle);
+		GridPane gridwachtwoord = new GridPane();
+		gridwachtwoord.getColumnConstraints().add(col1);
+		gridwachtwoord.add(wachtwoordLbl, 0, 0);
+		gridwachtwoord.add(lblWachtwoordFout, 1, 0);
 		wachtwoord.setId("wachtwoordbtn_id");
 		// wachtwoordLbl.setStyle("-fx-text-fill: #B2D235; -fx-font: normal 18px
 		// 'system'");
 		// wachtwoord.setStyle("-fx-font: normal 18px 'system';");
-		wachtwoord.setPrefWidth(300.0);
-		wachtwoord.setMaxWidth(300.0);
-		grid.add(wachtwoordLbl, 0, 3, 1, 1);
-		grid.add(wachtwoord, 0, 4, 1, 1);
+		wachtwoord.setPrefWidth(525.0);
+//		wachtwoord.setMaxWidth(300.0);
+		vbox.getChildren().add(gridwachtwoord);
+		vbox.getChildren().add(wachtwoord);
 
 		Button aanmelden = new Button("Aanmelden");
 		aanmelden.setId("aanmeldenbtn_id");
 		aanmelden.setOnAction(this::aanmelden);
 		aanmelden.setDefaultButton(true);
-		aanmelden.setPrefWidth(300.0);
+		aanmelden.setPrefWidth(525.0);
 		// aanmelden.setStyle("-fx-background-color: #0A759D; -fx-text-fill: #B2D235;
 		// -fx-font: normal 18px 'system'");
-		grid.add(foutbericht, 0, 5, 1, 1);
-		grid.add(aanmelden, 0, 6, 1, 1);
+		foutbericht.setStyle(foutstyle);
+		vbox.getChildren().add(foutbericht);
+		vbox.getChildren().add(aanmelden);
 
 	}
 
 	private void aanmelden(ActionEvent event) {
+		boolean finish = true;
+		lblGebruikersnaamFout.setText("");
+		lblWachtwoordFout.setText("");
+		foutbericht.setText("");
 
 		if (gebruikersnaam.getText().trim().isEmpty()) {
-
-			foutbericht.setText("Gelieve uw gebruikersnaam op te geven");
-			if (wachtwoord.getText().trim().isEmpty()) {
-				foutbericht.setText("Gelieve uw gebruikersnaam en wachtwoord op te geven");
+			lblGebruikersnaamFout.setText("Gelieve uw gebruikersnaam op te geven");
+			finish = false;
+		} 
+		if (wachtwoord.getText().trim().isEmpty()) {
+			lblWachtwoordFout.setText("Gelieve uw wachtwoord op te geven");
+			finish = false;
+			
+		}
+		if(finish) {
+			try {
+				mvoCoordinatorController.login(gebruikersnaam.getText().trim(), wachtwoord.getText().trim());
+			} catch (AuthenticationException e) {
+				foutbericht.setText("Ongeldige combinatie, gelieve opnieuw te proberen.");
+				return;
+			} catch (InvalidRoleValueException e) {
+				foutbericht.setText("U heeft niet de vereiste privileges om deze applicatie te gebruiken");
 				return;
 			}
-			return;
-		} else if (wachtwoord.getText().trim().isEmpty()) {
-			foutbericht.setText("Gelieve uw wachtwoord op te geven");
-			return;
+
+			foutbericht.setText(null);
+			hoofdPaneel.enableDashboard();
+			hoofdPaneel.toonCategoriePaneell();
 		}
-		try {
-			mvoCoordinatorController.login(gebruikersnaam.getText().trim(), wachtwoord.getText().trim());
-		} catch (AuthenticationException e) {
-			foutbericht.setText("Ongeldige combinatie, gelieve opnieuw te proberen.");
-			return;
-		} catch (InvalidRoleValueException e) {
-			foutbericht.setText("U heeft niet de vereiste privileges om deze applicatie te gebruiken");
-			return;
-		}
-		;
-		foutbericht.setText(null);
-		hoofdPaneel.enableDashboard();
-		hoofdPaneel.toonCategoriePaneell();
+		
 
 	}
 

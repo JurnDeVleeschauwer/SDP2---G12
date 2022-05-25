@@ -25,10 +25,10 @@ import javafx.stage.Stage;
 
 public class SdgAanmakenPopup {
 
-	static List<Object> sdg;
+	static List<Object> SDG;
 
 	public static List<Object> display(List<MvoGoalAbstract> mvoGoals, boolean child) {
-		sdg = new ArrayList<>();
+		SDG = new ArrayList<>();
 		
 		ColumnConstraints col1 = new ColumnConstraints();
 		col1.setPrefWidth(150);
@@ -37,9 +37,9 @@ public class SdgAanmakenPopup {
 
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
-		window.setTitle("Sdg maken");
+		window.setTitle("SDG maken");
 		
-		Label labeltitel = new Label("Nieuwe Sdg maken");
+		Label labeltitel = new Label("Nieuwe SDG maken");
 		labeltitel.setStyle("-fx-text-fill: #B2D235; -fx-font: normal bold 25px 'system'");
 		
 		Label labelNaam = new Label("SDG naam:");
@@ -51,10 +51,11 @@ public class SdgAanmakenPopup {
 		gridnaam.add(labelNaam, 0, 0);
 		gridnaam.add(lblNaamFout, 1, 0);
 		TextField textFieldNaam = new TextField();
-		textFieldNaam.setPromptText("Sdg naam");
+		textFieldNaam.setMaxWidth(450);
+		textFieldNaam.setPromptText("SDG naam");
 		textFieldNaam.setStyle("-fx-font: normal 18px 'system'");
 
-		Label labelDescription = new Label("Description:");
+		Label labelDescription = new Label("Omschrijving:");
 		labelDescription.setStyle("-fx-font: normal 18px 'system'");
 		Label lblDescriptionFout = new Label();
 		lblDescriptionFout.setStyle(foutstyle);
@@ -63,7 +64,8 @@ public class SdgAanmakenPopup {
 		griddescription.add(labelDescription, 0, 0);
 		griddescription.add(lblDescriptionFout, 1, 0);
 		TextField textFieldDescription = new TextField();
-		textFieldDescription.setPromptText("Sdg description");
+		textFieldDescription.setPromptText("SDG omschrijving");
+		textFieldDescription.setMaxWidth(450);
 		textFieldDescription.setStyle("-fx-font: normal 18px 'system'");
 
 		Label labelIcon = new Label("Icon:");
@@ -75,7 +77,8 @@ public class SdgAanmakenPopup {
 		gridicon.add(labelIcon, 0, 0);
 		gridicon.add(lblIconFout, 1, 0);
 		TextField textFieldIcon = new TextField();
-		textFieldIcon.setPromptText("Sdg icon");
+		textFieldIcon.setMaxWidth(450);
+		textFieldIcon.setPromptText("SDG icon");
 		textFieldIcon.setStyle("-fx-font: normal 18px 'system'");
 
 		Label labelTarget = new Label("Target:");
@@ -87,7 +90,8 @@ public class SdgAanmakenPopup {
 		gridtarget.add(labelTarget, 0, 0);
 		gridtarget.add(lblTargetFout, 1, 0);
 		TextField textFieldTarget = new TextField();
-		textFieldTarget.setPromptText("Sdg target");
+		textFieldTarget.setMaxWidth(450);
+		textFieldTarget.setPromptText("SDG target");
 		textFieldTarget.setStyle("-fx-font: normal 18px 'system'");
 
 		Label labelMvoGoal = new Label("MVO goal:");
@@ -99,6 +103,8 @@ public class SdgAanmakenPopup {
 		gridmvogoal.add(labelMvoGoal, 0, 0);
 		gridmvogoal.add(lblMvoGoalFout, 1, 0);
 		ChoiceBox<MvoGoalAbstract> cbMvoGoals = new ChoiceBox<>();
+		cbMvoGoals.setStyle("-fx-font: normal 18px 'system'");
+		cbMvoGoals.setMaxWidth(450);
 		ObservableList<MvoGoalAbstract> mvoGoalList = FXCollections.observableArrayList();
 
 		mvoGoals.stream().forEach(a -> mvoGoalList.add(a));
@@ -140,14 +146,14 @@ public class SdgAanmakenPopup {
 
 			}
 			if (finish) {
-				sdg.add(textFieldNaam.getText());
+				SDG.add(textFieldNaam.getText());
 				if (child) {
-					sdg.add(textFieldIcon.getText());
-					sdg.add(cbMvoGoals.getSelectionModel().getSelectedItem());
-					sdg.add(textFieldTarget.getText());
+					SDG.add(textFieldIcon.getText());
+					SDG.add(cbMvoGoals.getSelectionModel().getSelectedItem());
+					SDG.add(textFieldTarget.getText());
 					window.close();
 				} else {
-					sdg.add(textFieldDescription.getText());
+					SDG.add(textFieldDescription.getText());
 				}
 				window.close();
 			}
@@ -186,7 +192,7 @@ public class SdgAanmakenPopup {
 		window.setScene(scene);
 		window.showAndWait();
 
-		return sdg;
+		return SDG;
 
 	}
 

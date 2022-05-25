@@ -24,11 +24,13 @@ import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.NumberStringConverter;
 
-public class DataSourceView extends GridPane {
+public class DataSourceView extends HBox {
 
 	private final HoofdPaneel hoofdPaneel;
 	private final DatasourceController datasourceController;
@@ -48,18 +50,22 @@ public class DataSourceView extends GridPane {
 		this.mvoId=mvoId;
 		maakTableView(datasource);
 		
-		add(labelTable,1,1);
-		add(labelY,2,1);
-		add(labelX,3,1);
-		add(tableView, 1, 2);
-		add(listViewY,2,2);
-		add(listViewX,3,2);
-		add(buttonMvo,1,3);
-		this.setVgap(10);
-		this.setHgap(5);
+		this.setSpacing(20);
 	}
 
 	public void maakTableView(Datasource datasource) {
+		
+		VBox vbox= new VBox();
+		vbox.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		vbox.setId("datasourcevbox_id");
+		buttonMvo=new Button("Terug naar MvoGoal");
+		buttonMvo.setId("terugmvobtn_id");
+		buttonMvo.setOnAction(e->{
+			hoofdPaneel.toonMvoGoalPaneel(mvoId);
+		});
+		
+		vbox.getChildren().add(buttonMvo);
 
 		tableView = new TableView<Datasource>();
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -126,10 +132,7 @@ public class DataSourceView extends GridPane {
 		labelTable = new Label("Datasource kenmerken");
 		labelX = new Label("X-as waarden");
 		labelY = new Label("Y-as waarden");
-		buttonMvo=new Button("Terug naar MvoGoal");
-		buttonMvo.setOnAction(e->{
-			hoofdPaneel.toonMvoGoalPaneel(mvoId);
-		});
+		
 		
 		tableView.getItems().add(datasource);
 		tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -138,6 +141,8 @@ public class DataSourceView extends GridPane {
 		
 		TableColumn<Datasource, Integer> idColumn = new TableColumn<>("Id");
 		idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+		idColumn.setMinWidth(30);
+		idColumn.setMaxWidth(30);
 		
 		
 		TableColumn<Datasource, String> nameColumn = new TableColumn<>("Name");
@@ -222,6 +227,23 @@ yearColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Datasource
 		tableView.getColumns().add(yearColumn);
 		tableView.getColumns().add(xAxisColumn);
 		tableView.getColumns().add(yAxisColumn);
+		
+		Insets ins = new Insets(20,0,0,0);
+		
+		VBox vboxtable = new VBox();
+		vboxtable.setPadding(ins);
+		vboxtable.getChildren().addAll(labelTable, tableView);
+		
+		VBox vboxtabley = new VBox();
+		vboxtabley.setPadding(ins);
+		vboxtabley.getChildren().addAll(labelY, listViewY);
+		
+		VBox vboxtablex = new VBox();
+		vboxtablex.setPadding(ins);
+		vboxtablex.getChildren().addAll(labelX, listViewX);
+		
+		
+		this.getChildren().addAll(vbox, vboxtable,vboxtabley, vboxtablex);
 
 	}
 
