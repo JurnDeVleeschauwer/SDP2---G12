@@ -94,7 +94,7 @@ class SdgManagerTest {
 		comp.setId(1);
 		
 		
-		SdgComp toTest = (SdgComp) manager.getSdg(1);
+		SdgComp toTest = (SdgComp) manager.getSdgById(1);
 		
 		assertEquals(comp,toTest);
 		

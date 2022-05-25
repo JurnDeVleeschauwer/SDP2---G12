@@ -58,6 +58,11 @@ public class SdgManager {
 		
 		return 0;
 	}
+	public SdgAbstract getSdgById(int id) {
+		return sdgs.stream().filter(category->category.getId()==id).findAny().get();
+
+	}
+	
 	
 	public void updateSdg(SdgAbstract sdg) {
 		sdgMapper.update(sdg); 
